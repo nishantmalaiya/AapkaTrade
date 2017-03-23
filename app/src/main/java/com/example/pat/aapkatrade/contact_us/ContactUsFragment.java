@@ -2,7 +2,9 @@ package com.example.pat.aapkatrade.contact_us;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +66,8 @@ public class ContactUsFragment extends Fragment
         etQuery = (EditText) v.findViewById(R.id.etQuery);
 
         buttonSave = (Button)v.findViewById(R.id.buttonSave);
+
+
 
         buttonSave.setOnClickListener(new View.OnClickListener()
         {
@@ -158,7 +162,10 @@ public class ContactUsFragment extends Fragment
         });
 
 
+
     }
+
+
 
 
     private void callAddCompanyWebService(String subject, String username , String mobile, String email, String query)

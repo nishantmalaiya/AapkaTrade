@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
@@ -53,6 +54,7 @@ public class HomeActivity extends AppCompatActivity
     private Toolbar toolbar;
     private DashboardFragment homeFragment;
     private AboutUsFragment aboutUsFragment;
+
     Context context;
     public static String shared_pref_name = "aapkatrade";
     App_config aa;
@@ -84,6 +86,9 @@ ProgressBarHandler progressBarHandler;
         app_sharedpreference = new AppSharedPreference(HomeActivity.this);
 
         App_config.set_defaultfont(HomeActivity.this);
+        aboutUsFragment= new AboutUsFragment();
+        contactUsFragment=new ContactUsFragment();
+        user_dashboardFragment=new User_DashboardFragment();
 
         if(!(app_sharedpreference.getsharedpref("usertype", "-1").equals("3") && app_sharedpreference.getsharedpref("term_accepted", "-1").equals("0"))) {
             loadLocale();
@@ -183,7 +188,7 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
     private void replaceFragment(Fragment newFragment, String tag) {
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.drawer_layout, newFragment, tag).addToBackStack(null);
+        transaction.replace(R.id.drawer_layout, newFragment, tag).addToBackStack(tag);
         transaction.commit();
     }
 
@@ -264,11 +269,54 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+
+        FragmentManager fm = getSupportFragmentManager();
+        DashboardFragment dashboardFragment = (DashboardFragment) fm.findFragmentByTag(homeFragment.getClass().getName());
+        ContactUsFragment showcontactUsFragment = (ContactUsFragment) fm.findFragmentByTag(contactUsFragment.getClass().getName());
+        AboutUsFragment showaboutUsFragment = (AboutUsFragment) fm.findFragmentByTag(aboutUsFragment.getClass().getName());
+
+        User_DashboardFragment showuserdashboardfragment = (User_DashboardFragment) fm.findFragmentByTag(user_dashboardFragment.getClass().getName());
+
+
+        if(dashboardFragment.isVisible())
+        {
             finish();
-        } else {
+
+            Log.e("myfragment_visible","myfragment visible");
+        }
+        else if(showcontactUsFragment!=null && showcontactUsFragment.isVisible())
+        {
+            finish();
+            Log.e("contact us visible","contact us visible");
+
+        }
+        else if (showaboutUsFragment!=null && showaboutUsFragment.isVisible())
+        {
+            finish();
+            Log.e("showabout visible","showaboutUsFragment visible");
+        }
+        else if(showuserdashboardfragment!=null&&showuserdashboardfragment.isVisible())
+        {
+            finish();
+            Log.e("userdashboard visible","userdashboard visible");
+        }
+        else {
             super.onBackPressed();
         }
+
+
+
+
+
+//        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+//
+//
+//            Log.e("condition_one",getSupportFragmentManager().getBackStackEntryCount()+"");
+//            finish();
+//        } else {
+//            Log.e("condition_else",getSupportFragmentManager().getBackStackEntryCount()+"");
+//            super.onBackPressed();
+//        }
 
 
     }
