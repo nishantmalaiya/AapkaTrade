@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_add_address"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F5F8">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_without_image_layout"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/buttonSave"
+            >
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardViewAddress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardElevation="4dp"
+                android:layout_margin="10dp"
+                >
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayoutAddresss"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="40dp"
+                    >
+
+
+
+                    <EditText
+                        android:id="@+id/etFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="First Name"
+                        android:background="@drawable/edit_text_green_back"
+                        android:padding="10dp"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textColorHint="@color/hint_color"
+                        android:textSize="14sp"
+                        />
+
+                    <EditText
+                        android:id="@+id/etLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="Last Name"
+                        android:background="@drawable/edit_text_green_back"
+                        android:padding="10dp"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textColorHint="@color/hint_color"
+                        android:textSize="14sp"
+                        android:layout_below="@+id/etFirstName"
+                        android:layout_marginTop="20dp"
+                        />
+
+
+                    <EditText
+                        android:id="@+id/etMobileNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="Mobile No"
+                        android:background="@drawable/edit_text_green_back"
+                        android:padding="10dp"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:textColorHint="@color/hint_color"
+                        android:textSize="14sp"
+                        android:layout_below="@+id/etLastName"
+                        android:layout_marginTop="20dp"
+                        android:editable="false"
+                        />
+
+
+                    <EditText
+                        android:id="@+id/etPincode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:hint="Pincode"
+                        android:background="@drawable/edit_text_green_back"
+                        android:padding="10dp"
+                        android:inputType="number"
+                        android:layout_below="@+id/etMobileNo"
+                        android:maxLines="1"
+                        android:textColorHint="@color/hint_color"
+                        android:textSize="14sp"
+                        android:maxLength="6"
+                        />
+
+
+                <RelativeLayout
+                    android:id="@+id/spBussinessCategoryLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/five_dip"
+                    android:layout_below="@+id/etPincode"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    >
+
+                    <Spinner
+                        android:id="@+id/spStateCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:background="@drawable/simple_spinner_back"
+                        android:gravity="center_horizontal" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_arrow" />
+
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/etAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="Address"
+                        android:background="@drawable/edit_text_green_back"
+                        android:padding="10dp"
+                        android:inputType="text"
+                        android:layout_below="@+id/spBussinessCategoryLayout"
+                        android:maxLines="1"
+                        android:textColorHint="@color/hint_color"
+                        android:textSize="14sp"
+                        android:layout_marginTop="20dp"
+                        />
+
+
+
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+
+
+        </RelativeLayout>
+
+
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="20dp"
+            android:text="Submit"
+            android:background="@drawable/orange_back"
+            android:textColor="@color/white"
+            />
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+</RelativeLayout>

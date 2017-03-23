@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header_busi_assoc"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal|center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/twenty_dip"
+        android:layout_marginTop="@dimen/ten_dip"
+        android:layout_marginBottom="@dimen/ten_dip"
+        android:gravity="center_horizontal|center_vertical">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/twenty_dip"
+            android:gravity="left"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/twenty_dip"
+                    android:layout_height="@dimen/twenty_dip"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_marginLeft="@dimen/ten_dip"
+                    android:layout_marginTop="@dimen/ten_dip">
+
+                    <TextView
+                        android:id="@+id/step1Circle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/green_circle_border"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="@string/one" />
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:background="@drawable/green_line" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/step1HeaderText"
+                android:layout_width="@dimen/hundred_dip"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green"
+                android:textSize="@dimen/textsize"
+                android:gravity="left"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginTop="@dimen/ten_dip"
+                android:text="@string/personalInfo" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/twenty_dip"
+            android:gravity="left"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/twenty_dip"
+                    android:layout_height="@dimen/twenty_dip"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_marginLeft="@dimen/ten_dip"
+                    android:layout_marginTop="@dimen/ten_dip">
+
+                    <TextView
+                        android:id="@+id/step2Circle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/green_circle_border"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="@string/two" />
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:background="@drawable/green_line" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/step2HeaderText"
+                android:layout_width="@dimen/hundred_dip"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green"
+                android:textSize="@dimen/textsize"
+                android:gravity="left"
+                android:layout_gravity="center_vertical|center_horizontal"
+
+                android:layout_marginTop="@dimen/ten_dip"
+                android:text="@string/professionalDetails" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/twenty_dip"
+                    android:layout_height="@dimen/twenty_dip"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_marginLeft="@dimen/ten_dip"
+                    android:layout_marginTop="@dimen/ten_dip">
+
+                    <TextView
+                        android:id="@+id/step3Circle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/green_circle_border"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="@string/three" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/ten_dip"
+                    android:layout_marginRight="@dimen/ten_dip"
+                    android:background="@drawable/green_line"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/step3HeaderText"
+                android:layout_width="@dimen/hundred_dip"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green"
+                android:textSize="@dimen/textsize"
+                android:gravity="left"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginTop="@dimen/ten_dip"
+                android:text="@string/bankDetails" />
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

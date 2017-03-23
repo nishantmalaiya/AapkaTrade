@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="search_suggestion" >
+
+        <item>Android</item>
+        <item>iOS</item>
+        <item>SCALA</item>
+        <item>Ruby</item>
+        <item>JavaScript</item>
+
+    </string-array>
+
+
+
+    <string-array name="state_list" >
+        <item>Andaman and Nicobar Islands</item>
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chandigarh</item>
+        <item>Chhattisgarh</item>
+        <item>Dadra and Nagar Haveli</item>
+        <item>Daman and Diu</item>
+        <item>Delhi</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kenmore</item>
+        <item>Kerala</item>
+        <item>Lakshadweep</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Narora</item>
+        <item>Natwar</item>
+        <item>Odisha</item>
+        <item>Paschim Medinipur</item>
+        <item>Pondicherry</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim</item>
+        <item>Tamil Nadu</item>
+        <item>Telangana</item>
+        <item>Tripura</item>
+        <item>Uttar Pradesh</item>
+        <item>Uttarakhand</item>
+        <item>West Bengal</item>
+
+    </string-array>
+
+
+
+
+    <array name="category_icon_background">
+
+
+
+
+        <item>@drawable/circle_teal</item>
+        <item>@drawable/circle_purple</item>
+        <item>@drawable/circle_voilet</item>
+
+        <item>@drawable/circle_sienna</item>
+        <item>@drawable/circle_slate_gray</item>
+        <item>@drawable/circle_turquoise</item>
+        <item>@drawable/circle_deep_pink</item>
+        <item>@drawable/circle_cherry_red</item>
+
+
+
+
+    </array>
+
+</resources>

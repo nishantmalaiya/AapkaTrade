@@ -1,0 +1,81 @@
+<resources>
+    <string name="app_name">आपका ट्रेड </string>
+
+    <string name="my_profile_heading">मेरी प्रोफाइल</string>
+    <string name="my_profile_detail_heading">नमस्ते,<font color="#0000FF">
+अरविंद </font>- अपने खाते की जानकारी अद्यतन करने के लिए।</string>
+    <string name="save">बचाना</string>
+    <string name="aapka_data">आपका <font color='white'>ट्रेड</font></string>
+    <string name="login">लॉग इन करें</string>
+    <string name="my_company_profile_heading">मेरे कंपनी प्रोफाइल</string>
+    <string name="change_password_heading">पासवर्ड बदलें</string>
+    <string name="add_company_heading">कंपनी जोड़ें</string>
+    <string name="user_name"></string>
+    <string name="date">31-2-2016</string>
+    <string name="edit">संपादित करें</string>
+    <string name="compant_list_heading">कंपनी सूची</string>
+    <string name="company_name_heading">कंपनी का नाम</string>
+    <string name="dateheading">तारीख</string>
+    <string name="some">आपका डेटा</string>
+    <string name="some2">Aapka data</string>
+
+    <string name="action_heading">कार्य</string>
+    <string name="dashboard_heading">मेरे कंपनी प्रोफाइल</string>
+
+
+    <string name="forgotpassword">पासवर्ड भूल गए?</string>
+    <string name="new_user">नया उपयोगकर्ता?</string>
+    <string name="title_activity_login_dashboard">लॉग इन डैशबोर्ड</string>
+
+    <string name="title_activity_logindashboard">लॉग इन डैशबोर्ड</string>
+    <string name="dummy_button">डमी बटन</string>
+    <string name="dummy_content">डमी</string>
+    <string name="seller">विक्रेता</string>
+    <string name="buyer">खरीदार</string>
+    <string name="businessassociate">व्यापार सहयोगी</string>
+
+
+    <string name="drawer_open">
+दराज खुला</string>
+    <string name="drawer_close">
+दराज बंद</string>
+    <string name="language">भाषा</string>
+
+
+    <string name="product_list_heading">सूची उत्पाद</string>
+    <string name="add_product_heading">उत्पादों को जोड़ने</string>
+
+
+    <string name="near_by_you">आप के पास से</string>
+    <string name="availability">उपलब्धता</string>
+    <string name="product_name">एलईडी टीवी</string>
+    <string name="product_name1">कैम्पस जूते</string>
+
+    <string name="offer_price">$74.0</string>
+
+    <string name="mrp_price">$122.0</string>
+    <string name="item_details">आइटम विवरण</string>
+    <string name="brand">ब्रांड: एप्पल</string>
+    <string name="product_code">उत्पाद कोड: उत्पाद 15</string>
+    <string name="quantity">मात्रा</string>
+    <string name="buy">अभी खरीदें!</string>
+    <string name="title_activity_product_list">प्रोडक्टलिस्टेक्टिविटी </string>
+    <string name="category">श्रेणी</string>
+    <string name="phone_number">+91 9696969696</string>
+    <string name="loginregisterfooter">कृपया लॉग इन / पंजीकरण के लिए एक क्लिक</string>
+    <string name="tab_1">घर</string>
+    <string name="tab_2">हमारे बारे में</string>
+    <string name="tab_3">हमें रेटिंग दें</string>
+    <string name="tab_4">लेखा</string>
+    <string name="welcomeguest">इच्छित</string>
+    <string name="nointernetconnection">कोई इंटरनेट कनेक्शन मिल गया।</string>
+    <string name="nointernetconnection2">अपने कनेक्शन की जाँच करें।</string>
+    <string name="retry">पुनः प्रयास करें</string>
+    <string name="viewall">सभी को देखें</string>
+    <string name="latest_product">नवीनतम उत्पाद</string>
+    <string name="latest_deals">नवीनतम सौदा</string>
+    <string name="new_arrival">नया आगमन</string>
+    <string name="hot_deals">फायदेमंद सौदे</string>
+
+
+</resources>

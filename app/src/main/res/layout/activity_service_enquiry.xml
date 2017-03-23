@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F5F8"
+    >
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_without_image_layout" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe">
+    <include
+        layout="@layout/content_company_list"
+        />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>

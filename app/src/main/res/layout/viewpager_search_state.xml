@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tv_pager_search_state"
+
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:text="Haryana"
+            android:layout_marginTop="@dimen/five_dip"
+            android:layout_marginBottom="@dimen/five_dip"
+            android:layout_marginLeft="@dimen/ten_dip"
+            android:layout_marginRight="@dimen/ten_dip"
+            android:paddingTop="@dimen/five_dip"
+            android:paddingBottom="@dimen/five_dip"
+            android:paddingLeft="@dimen/twenty_dip"
+            android:paddingRight="@dimen/twenty_dip"
+
+
+            />
+
+
+
+
+
+
+</LinearLayout>

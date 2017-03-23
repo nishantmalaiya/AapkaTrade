@@ -1,0 +1,95 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        applicationId "com.example.ppc09.aapkatrade"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+    }
+
+    repositories {
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        jcenter()
+        maven {
+            url "https://jitpack.io"
+        }
+        maven {
+            url "http://dl.bintray.com/lukaville/maven"
+        }
+
+    }
+    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/menu'] } }
+}
+
+dependencies {
+
+
+    compile('com.github.florent37:androidparallax:1.0.1@aar')
+            {
+                transitive = true
+            }
+
+
+    compile 'com.google.android.gms:play-services-places:10.0.1'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.iarcuschin:simpleratingbar:0.1.5'
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:cardview-v7:25.1.0'
+    compile 'com.android.support:recyclerview-v7:25.1.0'
+    compile 'com.jaredrummler:material-spinner:1.1.0'
+    compile 'com.github.ganfra:material-spinner:1.1.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:support-v4:25.1.0'
+    compile 'com.mikhaellopez:circularimageview:3.0.2'
+    compile 'io.github.francoiscampbell:circlelayout:0.3.0'
+    compile 'com.mikepenz:iconics-core:2.6.6@aar'
+    compile 'com.mikepenz:actionitembadge:3.2.6@aar'
+    compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
+    compile 'me.relex:circleindicator:1.2.2@aar'
+    compile 'com.aurelhubert:ahbottomnavigation:2.0.4'
+    compile 'com.koushikdutta.ion:ion:2.+'
+    compile 'com.appyvet:materialrangebar:1.3'
+    compile 'com.afollestad.material-dialogs:core:0.9.2.3'
+    compile 'com.balysv:material-ripple:1.0.2'
+    compile 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
+    compile 'com.github.carlonzo.stikkyheader:core:0.0.3-SNAPSHOT'
+    compile 'com.github.stfalcon:smsverifycatcher:0.2'
+    compile 'me.zhanghai.android.materialratingbar:library:1.0.2'
+    compile 'com.aurelhubert:simpleratingbar:0.1.5'
+    compile 'com.github.techery:properratingbar:0.0.5'
+    compile 'com.github.kanytu:android-parallax-recyclerview:v1.2'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.4'
+    compile 'com.github.nisrulz:stackedhorizontalprogressbar:1.0.3'
+    compile 'com.wdullaer:materialdatetimepicker:3.1.1'
+    compile 'it.sephiroth.android.library.bottomnavigation:bottom-navigation:2.0.1-rc1'
+    compile 'com.nbsp:library:1.2'
+    compile 'com.google.android.gms:play-services-location:10.0.1'
+    compile 'com.google.android.gms:play-services-maps:10.0.1'
+    compile 'com.google.android.gms:play-services-gcm:10.0.1'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.github.jd-alexander:library:1.1.0'
+    compile 'com.github.Aspsine:IRecyclerView:0.0.5'
+    compile 'com.github.badoualy:stepper-indicator:1.0.6'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    compile 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.0'
+}

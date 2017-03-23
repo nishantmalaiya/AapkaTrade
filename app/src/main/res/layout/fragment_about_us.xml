@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            >
+
+
+            <TextView
+                android:id="@+id/tvHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AAPKA TRADE"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                />
+
+
+            <TextView
+                android:id="@+id/tvAbout_us_data1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_us_data1"
+                android:textColor="@color/black"
+                android:layout_below="@+id/tvHeading"
+                android:layout_marginTop="5dp"
+                />
+
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvAbout_us_data1"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:background="@drawable/edit_text_green_back"
+                >
+
+
+                <TextView
+                    android:id="@+id/tvAbout_us_data2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_us_data2"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/dark_green_color"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tvAbout_us_data3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_us_data3"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/dark_green_color"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_below="@+id/tvAbout_us_data2"
+                    />
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvBuyer_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relativeLayout1"
+                android:layout_marginTop="20dp"
+                android:text="@string/about_us_data4"
+                android:textSize="16sp"
+                android:textColor="@color/orange"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/tvBuyer_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_us_data5"
+                android:layout_below="@+id/tvBuyer_heading"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                />
+
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvBuyer_data"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_green_back"
+                android:padding="10dp"
+                >
+
+                <TextView
+                    android:id="@+id/tvAbout_us_data6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_us_data6"
+                    android:textColor="@color/dark_green_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvAbout_us_data7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relativeLayout2"
+                android:layout_marginTop="20dp"
+                android:text="@string/about_us_data7"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/orange"
+                />
+
+
+            <TextView
+                android:id="@+id/tvAbout_us_data8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvAbout_us_data7"
+                android:layout_marginTop="10dp"
+                android:text="@string/about_us_data8"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/black"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvAbout_us_data8"
+                >
+
+
+                <TextView
+                    android:id="@+id/tvAbout_us_data9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_us_data9"
+                    android:textColor="@color/dark_green_color"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+
+
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+
+
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

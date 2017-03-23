@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">AapkaTrade</string>
+
+    <string name="my_profile_heading">My Profile</string>
+    <string name="my_profile_detail_heading">Hello,<font color="#0000FF"> Arvind </font> - To Update your account information.</string>
+    <string name="save">Save</string>
+    <string name="aapka_data">AAPKA <font color='white'>TRADE</font></string>
+    <string name="login">LOGIN</string>
+    <string name="my_company_profile_heading">My Company Profile</string>
+    <string name="change_password_heading">Change Password</string>
+    <string name="add_company_heading">Add Company</string>
+    <string name="user_name">Pawan</string>
+    <string name="date">31-2-2016</string>
+    <string name="edit">Edit</string>
+    <string name="compant_list_heading">Company List</string>
+    <string name="company_name_heading">Company Name*</string>
+    <string name="dateheading">Date</string>
+    <string name="some">Aapka data</string>
+    <string name="some2">Aapka data</string>
+
+    <string name="action_heading">Action</string>
+    <string name="dashboard_heading">My Company Profile</string>
+
+
+    <string name="forgotpassword">Forget Password?</string>
+    <string name="new_user">New User?</string>
+    <string name="title_activity_login_dashboard">Login_dashboard</string>
+
+    <string name="title_activity_logindashboard">logindashboard</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="seller">SELLER</string>
+    <string name="buyer">BUYER</string>
+    <string name="businessassociate">BUSINESS ASSOCIATE</string>
+
+
+    <string name="drawer_open">draweropen</string>
+    <string name="drawer_close">drawerclose</string>
+    <string name="language">language</string>
+
+
+    <string name="product_list_heading">List Product</string>
+    <string name="add_product_heading">Add Products</string>
+
+
+    <string name="near_by_you">Near by you</string>
+    <string name="availability">Availability</string>
+    <string name="product_name">LED TV</string>
+    <string name="product_name1">Campus Shoes</string>
+
+    <string name="offer_price">$74.0</string>
+
+    <string name="mrp_price">$122.0</string>
+    <string name="item_details">Item Details</string>
+    <string name="brand">Brand : Apple</string>
+    <string name="product_code">Product Code : Product15</string>
+    <string name="quantity">Quantity</string>
+    <string name="buy">Buy Now!</string>
+    <string name="title_activity_product_list">ProductListActivity</string>
+    <string name="category">Category</string>
+    <string name="phone_number">+91 9696969696</string>
+    <string name="loginregisterfooter">Please Click one for Login/Register</string>
+    <string name="tab_1">Home</string>
+    <string name="tab_2">About Us</string>
+    <string name="tab_3">Rate Us</string>
+    <string name="tab_4">Account</string>
+    <string name="welcomeguest">Welcome Guest</string>
+    <string name="nointernetconnection">No Internet connection found.</string>
+    <string name="nointernetconnection2">Check your connection.</string>
+    <string name="retry">RETRY</string>
+    <string name="viewall">View All</string>
+    <string name="latest_product">LATEST PRODUCTS</string>
+    <string name="latest_deals">LATEST DEALS</string>
+    <string name="new_arrival">NEW ARRIVAL</string>
+    <string name="hot_deals">HOT DEALS</string>
+
+
+</resources>

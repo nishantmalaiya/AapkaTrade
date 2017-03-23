@@ -1,0 +1,56 @@
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/green"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    app:contentInsetStartWithNavigation="0dp"
+    android:elevation="4dp"
+    android:minHeight="?attr/actionBarSize"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+
+            android:layout_width="@dimen/twenty_five_dip"
+            android:layout_height="@dimen/twenty_five_dip"
+            android:layout_centerVertical="true"
+            android:adjustViewBounds="true"
+            android:id="@+id/iconHome"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="@dimen/ten_dip"
+            android:src="@drawable/ic_navigation_home" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+
+            android:layout_marginLeft="@dimen/ten_dip"
+            android:layout_toRightOf="@+id/iconHome"
+            android:src="@drawable/logo_word" />
+
+        <TextView
+            android:id="@+id/toolbarRightText"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/thirty_five_dip"
+            android:layout_alignParentRight = "true"
+            android:layout_marginRight="@dimen/twenty_dip"
+            android:textColor="@color/orange"
+            android:textSize="@dimen/textsize_medium"
+            android:visibility="gone"
+            />
+
+
+
+    </RelativeLayout>
+</android.support.v7.widget.Toolbar>

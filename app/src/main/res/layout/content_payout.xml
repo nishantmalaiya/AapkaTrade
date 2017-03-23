@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten_dip"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:padding="@dimen/ten_dip">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/twenty_dip" />
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_start_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twenty_dip"
+                android:layout_marginRight="@dimen/twenty_dip"
+                android:layout_marginTop="@dimen/ten_dip"
+                android:clickable="false"
+                android:focusable="true"
+                android:textColorHint="@color/hint_color">
+
+                <RelativeLayout
+                    android:id="@+id/startDateLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <EditText
+                        android:id="@+id/etStartDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/startDate"
+                        android:inputType="text"
+                        android:paddingLeft="@dimen/ten_dip"
+                        android:theme="@style/nofocus_edittext_theme" />
+
+
+                    <ImageView
+                        android:id="@+id/openStartDateCal"
+                        android:layout_width="@dimen/thirty_five_dip"
+                        android:layout_height="@dimen/thirty_five_dip"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/five_dip"
+                        android:src="@drawable/ic_calendar" />
+
+
+                </RelativeLayout>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ten_dip" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_end_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/twenty_dip"
+                android:layout_marginRight="@dimen/twenty_dip"
+                android:layout_marginTop="@dimen/ten_dip"
+                android:clickable="false"
+                android:focusable="true"
+                android:textColorHint="@color/hint_color">
+
+                <RelativeLayout
+                    android:id="@+id/endDateLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <EditText
+                        android:id="@+id/etEndDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/endDate"
+                        android:inputType="text"
+                        android:paddingLeft="@dimen/ten_dip"
+                        android:theme="@style/nofocus_edittext_theme" />
+
+
+                    <ImageView
+                        android:id="@+id/openEndDateCal"
+                        android:layout_width="@dimen/thirty_five_dip"
+                        android:layout_height="@dimen/thirty_five_dip"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/five_dip"
+                        android:src="@drawable/ic_calendar" />
+
+
+                </RelativeLayout>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/twenty_dip" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/ten_dip"
+        android:layout_marginRight="@dimen/ten_dip"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#D2D2D2"
+
+                ></View>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/grey__more_light"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:id="@+id/ll_payout"
+                android:padding="@dimen/ten_dip">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginRight="@dimen/ten_dip"
+                    android:layout_weight="2"
+                    android:text="@string/complete_date"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/textsize_medium" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginRight="@dimen/ten_dip"
+                    android:layout_weight="1"
+                    android:text="@string/payout"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/textsize_medium" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#D2D2D2"
+
+                ></View>
+
+
+
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/ten_dip"
+        android:layout_marginLeft="@dimen/ten_dip"
+        android:layout_marginRight="@dimen/ten_dip"
+        android:padding="@dimen/ten_dip">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+           >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/payoutList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+</LinearLayout>

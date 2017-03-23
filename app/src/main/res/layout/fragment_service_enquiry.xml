@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/transparent"
+    android:layout_marginBottom="@dimen/ten_dip"
+
+    >
+
+    <Button
+        android:id="@+id/imgCLose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:paddingBottom="@dimen/five_dip"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center_vertical"
+        android:foregroundGravity="center_horizontal|center_vertical"
+        android:background="@drawable/bt_dialog_close"
+        android:textSize="@dimen/twenty_five_dip"
+        android:textStyle="bold"
+        android:text="x"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/ten_dip"
+        android:layout_marginRight="@dimen/ten_dip"
+        android:layout_marginTop="@dimen/ten_dip"
+        android:background="@drawable/bg_dialog" >
+
+        <RelativeLayout
+            android:id="@+id/dialogue_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fifty_dip">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center_vertical"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_large"
+                android:text="@string/setvice_enquiry"/>
+
+        </RelativeLayout>
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/activity_associate_agreement"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/fifty_dip"
+            android:orientation="vertical"
+            android:weightSum="15"
+            tools:context="com.example.pat.aapkatrade.user_dashboard.associateagreement.AssociateAgreementDialog">
+
+
+            <LinearLayout
+                android:id="@+id/activity_my_profile"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="14"
+                android:orientation="vertical">
+
+                <android.support.v4.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/ten_dip"
+                        android:layout_marginRight="@dimen/ten_dip"
+                        android:layout_marginTop="@dimen/ten_dip"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:orientation="vertical"
+
+
+                        >
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/step1aLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/ten_dip"
+                            android:layout_marginRight="@dimen/ten_dip"
+                            android:layout_marginTop="@dimen/ten_dip"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:id="@+id/imgServiceEnquiry"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_gravity="center_horizontal|center_vertical"
+                                    android:layout_margin="@dimen/ten_dip"
+                                    android:background="@drawable/circle_green_back"
+                                    android:src="@drawable/ic_svr_enquiry"  />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/twenty_dip"
+                                    android:layout_marginTop="@dimen/ten_dip"
+                                    android:orientation="vertical">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+
+                                        <TextView
+                                            android:id="@+id/tvCategoryName"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/textsize_medium"/>
+
+                                        <TextView
+                                            android:id="@+id/tvProductname"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_marginTop="@dimen/twenty_dip"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/textsize_medium" />
+
+                                    </RelativeLayout>
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/ten_dip"
+                            />
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/step1bLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/ten_dip"
+                            android:layout_marginRight="@dimen/ten_dip"
+                            android:layout_marginTop="@dimen/ten_dip"
+                            android:layout_marginBottom="@dimen/twenty_dip"
+                            android:padding="@dimen/twenty_dip">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <android.support.design.widget.TextInputLayout
+                                    android:id="@+id/input_layout_first_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/twenty_dip"
+                                    android:layout_marginRight="@dimen/twenty_dip"
+                                    android:layout_marginTop="@dimen/ten_dip"
+                                    android:textColorHint="@color/hint_color">
+
+                                    <EditText
+                                        android:id="@+id/etFirstName"
+                                        style="@style/myedittext"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:hint="@string/first_name"
+                                        android:inputType="text"
+                                        android:paddingLeft="@dimen/ten_dip"
+                                        android:textColorHint="@color/green"
+                                        android:theme="@style/myedittext" />
+
+
+                                </android.support.design.widget.TextInputLayout>
+
+
+                                <android.support.design.widget.TextInputLayout
+                                    android:id="@+id/input_layout_quantity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/twenty_dip"
+                                    android:layout_marginRight="@dimen/twenty_dip"
+                                    android:layout_marginTop="@dimen/ten_dip"
+                                    android:textColorHint="@color/hint_color">
+
+                                    <EditText
+                                        android:id="@+id/et_layout_quantity"
+                                        style="@style/myedittext"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:hint="@string/first_name"
+                                        android:inputType="text"
+                                        android:paddingLeft="@dimen/ten_dip"
+                                        android:textColorHint="@color/green"
+                                        android:theme="@style/myedittext" />
+
+
+                                </android.support.design.widget.TextInputLayout>
+
+
+                                <android.support.design.widget.TextInputLayout
+                                    android:id="@+id/input_layout_price"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/twenty_dip"
+                                    android:layout_marginRight="@dimen/twenty_dip"
+                                    android:layout_marginTop="@dimen/ten_dip"
+                                    android:textColorHint="@color/hint_color">
+
+                                    <EditText
+                                        android:id="@+id/et_layout_price"
+                                        style="@style/myedittext"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:hint="@string/price1"
+                                        android:inputType="numberDecimal"
+                                        android:paddingLeft="@dimen/ten_dip"
+                                        android:textColorHint="@color/green"
+                                        android:theme="@style/myedittext" />
+
+
+                                </android.support.design.widget.TextInputLayout>
+
+                                <android.support.design.widget.TextInputLayout
+                                    android:id="@+id/input_layout_mobile"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/twenty_dip"
+                                    android:layout_marginRight="@dimen/twenty_dip"
+                                    android:layout_marginTop="@dimen/ten_dip"
+                                    android:textColorHint="@color/hint_color">
+
+                                    <EditText
+                                        android:id="@+id/et_layout_mobile"
+                                        style="@style/myedittext"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:hint="@string/mobile"
+                                        android:inputType="number"
+                                        android:paddingLeft="@dimen/ten_dip"
+                                        android:textColorHint="@color/green"
+                                        android:theme="@style/myedittext" />
+
+
+                                </android.support.design.widget.TextInputLayout>
+
+
+
+                                <android.support.design.widget.TextInputLayout
+                                    android:id="@+id/input_layout_email"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/twenty_dip"
+                                    android:layout_marginRight="@dimen/twenty_dip"
+                                    android:layout_marginTop="@dimen/ten_dip"
+                                    android:textColorHint="@color/hint_color">
+
+                                    <EditText
+                                        android:id="@+id/et_layout_email"
+                                        style="@style/myedittext"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:hint="@string/emailId"
+                                        android:inputType="textEmailAddress"
+                                        android:paddingLeft="@dimen/ten_dip"
+                                        android:textColorHint="@color/green"
+                                        android:theme="@style/myedittext" />
+
+
+                                </android.support.design.widget.TextInputLayout>
+
+                                <android.support.design.widget.TextInputLayout
+                                    android:id="@+id/input_layout_start_date"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/twenty_dip"
+                                    android:layout_marginRight="@dimen/twenty_dip"
+                                    android:layout_marginTop="@dimen/ten_dip"
+                                    android:clickable="false"
+                                    android:focusable="true"
+                                    android:textColorHint="@color/hint_color"
+                                    app:hintAnimationEnabled="true"
+                                    app:hintEnabled="true"
+                                    app:hintTextAppearance="@style/nofocus_edittext_theme">
+
+                                    <RelativeLayout
+                                        android:id="@+id/startDateLayout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical|center_horizontal">
+
+                                        <EditText
+                                            android:id="@+id/etStartDate"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:enabled="false"
+                                            android:focusableInTouchMode="true"
+                                            android:hint="@string/startDate"
+                                            android:inputType="text"
+                                            android:paddingLeft="@dimen/ten_dip"
+                                            android:theme="@style/nofocus_edittext_theme" />
+
+
+                                        <ImageView
+                                            android:id="@+id/openStartDateCal"
+                                            android:layout_width="@dimen/thirty_five_dip"
+                                            android:layout_height="@dimen/thirty_five_dip"
+                                            android:layout_alignParentRight="true"
+                                            android:padding="@dimen/five_dip"
+                                            android:src="@drawable/ic_calendar" />
+
+
+                                    </RelativeLayout>
+
+                                </android.support.design.widget.TextInputLayout>
+                                <android.support.design.widget.TextInputLayout
+                                    android:id="@+id/input_layout_end_date"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/twenty_dip"
+                                    android:layout_marginRight="@dimen/twenty_dip"
+                                    android:layout_marginTop="@dimen/ten_dip"
+                                    android:clickable="false"
+                                    android:focusable="true"
+                                    android:textColorHint="@color/hint_color"
+                                    app:hintAnimationEnabled="true"
+                                    app:hintEnabled="true"
+                                    app:hintTextAppearance="@style/nofocus_edittext_theme">
+
+                                    <RelativeLayout
+                                        android:id="@+id/endDateLayout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical|center_horizontal">
+
+                                        <EditText
+                                            android:id="@+id/etEndDate"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:enabled="false"
+                                            android:focusableInTouchMode="true"
+                                            android:hint="@string/endDate"
+                                            android:inputType="text"
+                                            android:paddingLeft="@dimen/ten_dip"
+                                            android:theme="@style/nofocus_edittext_theme" />
+
+
+                                        <ImageView
+                                            android:id="@+id/openEndDateCal"
+                                            android:layout_width="@dimen/thirty_five_dip"
+                                            android:layout_height="@dimen/thirty_five_dip"
+                                            android:layout_alignParentRight="true"
+                                            android:padding="@dimen/five_dip"
+                                            android:src="@drawable/ic_calendar" />
+
+
+                                    </RelativeLayout>
+
+                                </android.support.design.widget.TextInputLayout>
+
+
+                                <android.support.design.widget.TextInputLayout
+                                    android:id="@+id/input_layout_description"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/twenty_dip"
+                                    android:layout_marginRight="@dimen/twenty_dip"
+                                    android:layout_marginTop="@dimen/ten_dip"
+                                    android:textColorHint="@color/hint_color">
+
+                                    <EditText
+                                        android:id="@+id/et_layout_description"
+                                        style="@style/myedittext"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:hint="@string/description_heading"
+                                        android:inputType="number"
+                                        android:paddingLeft="@dimen/ten_dip"
+                                        android:textColorHint="@color/green"
+                                        android:theme="@style/myedittext" />
+
+
+                                </android.support.design.widget.TextInputLayout>
+
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+
+                </android.support.v4.widget.NestedScrollView>
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/input_layout_agreement"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/three_dip"
+                android:layout_marginLeft="@dimen/three_dip"
+                android:layout_marginRight="@dimen/three_dip"
+                android:layout_marginTop="@dimen/three_dip"
+                android:layout_weight="1"
+                android:background="@drawable/orange_background">
+
+
+                <TextView
+                    android:id="@+id/buttonSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/submit"
+                    android:textColor="@color/white" />
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</RelativeLayout>

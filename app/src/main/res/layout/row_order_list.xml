@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeOrderlist"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        >
+
+
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aspire Ultrabook Laptop"
+            android:textColor="@color/black"
+            android:layout_alignParentLeft="true"
+            android:textStyle="bold"
+            />
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_prod_arw"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/tvOrderId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#214521"
+            android:textColor="@color/green"
+            android:layout_below="@+id/tvProductName"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentLeft="true"
+            />
+
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.1dp"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_marginTop="5dp"
+        android:background="#D6D6D6"
+        ></View>
+
+</RelativeLayout>

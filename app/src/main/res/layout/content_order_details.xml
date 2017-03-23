@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#EEEEEE">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            >
+
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+                android:orientation="vertical"
+              >
+
+
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="4dp"
+                        android:layout_margin="10dp"
+
+                        >
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="220dp"
+                                 android:src="@drawable/banner"
+                                android:scaleType="fitXY"
+                                />
+
+
+                        </RelativeLayout>
+
+
+                    </android.support.v7.widget.CardView>
+
+
+
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="5dp"
+                        android:layout_margin="10dp"
+                        >
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            >
+
+                            <TextView
+                                android:id="@+id/tvProductname"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Xitefun Casual"
+                                android:textColor="@color/orange"
+                                android:layout_marginTop="5dp"
+                                />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="5dp"
+                                >
+
+                                <TextView
+                                    android:id="@+id/tvQtyHeading"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:textColor="@color/black"
+                                    android:text="Qty:"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@+id/tvQtyHeading"
+                                    android:textColor="@color/orange"
+                                    android:text="5"
+                                    android:layout_marginLeft="5dp"
+                                    />
+
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tvOrderIdHeading"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Order ID:"
+                                android:textColor="@color/black"
+                                android:layout_below="@+id/tvProductname"
+                                android:layout_marginTop="5dp"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvOrderId"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="4156454"
+                                android:layout_toRightOf="@+id/tvOrderIdHeading"
+                                android:layout_below="@+id/tvProductname"
+                                android:textColor="@color/orange"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginLeft="5dp"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvDateHeading"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Date and Time:"
+                                android:textColor="@color/black"
+                                android:layout_below="@+id/tvOrderIdHeading"
+                                android:layout_marginTop="5dp"
+                                />
+
+
+                            <TextView
+                                android:id="@+id/tvDateTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tvOrderIdHeading"
+                                android:layout_toRightOf="@+id/tvDateHeading"
+                                android:layout_marginLeft="5dp"
+                                android:text="12/10/2017"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/orange"
+                                />
+
+
+                            <TextView
+                                android:id="@+id/tvStatusHeading"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Status:"
+                                android:textColor="@color/black"
+                                android:layout_below="@+id/tvDateHeading"
+                                android:layout_marginTop="5dp"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Available"
+                                android:textColor="@color/orange"
+                                android:layout_toRightOf="@+id/tvStatusHeading"
+                                android:layout_below="@+id/tvDateHeading"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginLeft="5dp"
+                                />
+
+
+                        </RelativeLayout>
+
+
+                    </android.support.v7.widget.CardView>
+
+
+
+
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="5dp"
+                        android:layout_margin="10dp"
+                        >
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            >
+
+
+                            <ImageView
+                                android:id="@+id/imageAddress"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/location_green" />
+
+                            <TextView
+                                style="@style/myAddress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="Shipping Address"
+                                android:layout_toRightOf="@+id/imageAddress"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/textView1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="JMD Megapolis Sohna road"
+                                android:layout_below="@+id/imageAddress"
+                                android:layout_marginTop="5dp"
+                                />
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="JMD Megapolis Sohna road"
+                                android:layout_below="@+id/textView1"
+                                />
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PinCode 201301"
+                                android:layout_below="@+id/textView2"
+
+                                />
+
+
+                        </RelativeLayout>
+
+
+
+                        </android.support.v7.widget.CardView>
+
+
+          </LinearLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+
+
+
+
+

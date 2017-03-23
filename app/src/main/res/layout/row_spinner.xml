@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/white"
+
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tvSpCategory"
+        android:background="@color/grey"
+
+        />
+
+    <TextView
+        android:id="@+id/tvSpCategory"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/thirty_five_dip"
+        android:paddingLeft="@dimen/ten_dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:text="Electronics"
+        android:textColor="@color/hint_color"
+        android:textSize="@dimen/textsize_medium" />
+
+
+</RelativeLayout>

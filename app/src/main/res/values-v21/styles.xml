@@ -1,0 +1,27 @@
+<resources>
+    <style name="AppTheme" parent="AppTheme.Base">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/green</item>
+        <!--<item name="colorPrimaryDark">@color/green</item>-->
+        <item name="colorAccent">@color/grey</item>
+        <item name="textAllCaps">false</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:alertDialogStyle">@style/CustomDialogTheme</item>
+        <item name="android:colorPrimary">@color/green_shad</item>
+        <item name="android:colorPrimaryDark">@color/green_shad</item>
+        <item name="android:navigationBarColor">@color/green_shad</item>
+        <item name="android:editTextStyle">@style/myedittext</item>
+        <item name="android:editTextPreferenceStyle">@style/myedittext</item>
+        <item name="android:checkboxStyle">@style/customCheckBoxStyle</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+
+
+    </style>
+
+
+
+
+</resources>

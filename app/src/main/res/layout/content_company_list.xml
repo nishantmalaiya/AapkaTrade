@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F5F8"
+    >
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/relativeCompanylist"
+        android:layout_below="@+id/relativeCompanyListheader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        >
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/companylist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeCompanyDetailsList"
+            android:layout_marginTop="10dp"
+
+           />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

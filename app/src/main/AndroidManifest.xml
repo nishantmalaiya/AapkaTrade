@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.pat.aapkatrade">
+
+    <uses-permission android:name="com.example.pat.aapkatrade.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CLEAR_APP_CACHE"/>
+
+    <permission
+        android:name="com.example.pat.aapkatrade.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_app_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_api" />
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".user_dashboard.my_profile.MyProfileActivity" />
+        <activity android:name=".user_dashboard.my_company_profile.MyCompanyProfile" />
+        <activity android:name=".user_dashboard.changepassword.ChangePassword" />
+        <activity
+            android:name=".user_dashboard.addcompany.AddCompany"
+            android:windowSoftInputMode="adjustResize|adjustPan" />
+        <activity android:name=".user_dashboard.companylist.CompanyList" />
+        <activity android:name=".user_dashboard.product_list.ProductListActivity" />
+        <activity
+            android:name=".login.LoginDashboard"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_logindashboard"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Home.HomeActivity" />
+        <activity android:name=".user_dashboard.add_product.AddProductActivity" />
+        <activity android:name=".productdetail.ProductDetail" />
+        <activity
+            android:name=".Home.registration.RegistrationActivity"
+
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".login.ActivityOTPVerify" />
+        <activity android:name=".general.ConnectivityNotFound" />
+        <activity android:name=".user_dashboard.order_list.OrderActivity" />
+        <activity android:name=".user_dashboard.order_list.order_details.OrderDetailsActivity" />
+        <activity android:name=".categories_tab.CategoriesTabActivity" />
+        <activity
+            android:name=".Home.registration.RegistrationBusinessAssociateActivity"
+            />
+        <activity
+            android:name=".login.ForgotPassword" />
+        <activity android:name=".categories_tab.CategoryListActivity" />
+        <activity android:name=".categories_tab.FilterActivity" />
+        <activity android:name=".user_dashboard.address.AddressActivity" />
+        <activity android:name=".user_dashboard.address.viewpager.CartCheckoutActivity" />
+        <activity android:name=".user_dashboard.companylist.compant_details.CompanyDetailActivity" />
+        <activity android:name=".user_dashboard.product_list.listproduct_detail.ListProductDetailActivity" />
+
+        <receiver
+            android:name=".general.IncomingSms"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter android:priority="1000">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".parallax_recyclerview.ParallaxActivity" />
+        <activity android:name=".user_dashboard.address.add_address.AddAddressActivity" />
+        <activity android:name=".user_dashboard.my_profile.ProfilePreviewActivity" />
+        <activity android:name=".productdetail.ImageViewActivity" />
+        <activity android:name=".search.Search" />
+        <activity android:name=".user_dashboard.vender_detail.VendorActivity" />
+        <activity android:name=".map.GoogleMapActivity" />
+        <activity android:name=".user_dashboard.order_list.OrderManagementActivity" />
+        <activity
+            android:name=".user_dashboard.bankmanagement.BankManagementActivity"
+            android:label="@string/title_activity_bank_management"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".user_dashboard.my_profile.MyProfileForBusinessAssociates" />
+        <activity android:name=".user_dashboard.associateagreement.AssociateAgreementDialog" />
+        <activity android:name=".user_dashboard.network.NetworkActivity" />
+        <activity
+            android:name=".user_dashboard.payout.PayoutActivity"
+            android:label="@string/title_activity_payout"
+            />
+        <activity android:name=".user_dashboard.editcompany.EditCompanyActivity" />
+        <activity android:name=".user_dashboard.edit_product.EditProductActivity" />
+        <activity android:name=".user_dashboard.service_enquirylist.ServiceEnquiryActivity"></activity>
+    </application>
+
+</manifest>

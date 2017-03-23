@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="#F1F5F8"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.example.pat.aapkatrade.productdetail.ProductDetail"
+        >
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_layout" />
+
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:background="#F1F5F8"
+            >
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:orientation="vertical">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        >
+
+
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/viewpager_custom"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            />
+
+                        <LinearLayout
+                            android:id="@+id/viewpagerindicator"
+                            android:layout_width="40dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal">
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+
+                        <RelativeLayout
+                            android:id="@+id/relativeProductDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true">
+
+                            <TextView
+                                android:id="@+id/tvProductName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:text="Laxmi Auto World"
+                                android:textColor="@color/black"
+                                android:layout_toLeftOf="@+id/relativeUnitDetail"
+                                android:textStyle="bold"
+                                />
+
+
+                            <TextView
+                                android:id="@+id/tvCategoryName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Groceries"
+                                android:layout_below="@+id/tvProductName"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvProPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tvCategoryName"
+                                android:text="@string/rupees_deatils"
+                                android:textColor="@color/orange"
+                                android:layout_marginTop="5dp"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                />
+
+                            <RelativeLayout
+                                android:id="@+id/relativeUnitDetail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                >
+
+
+                                <TextView
+                                    android:id="@+id/tvUnitHeading"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Unit:"
+                                    android:textColor="@color/orange"
+                                    />
+
+
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@+id/tvUnitHeading"
+                                    android:layout_marginLeft="5dp"
+
+                                    >
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Pieces"
+                                        android:textColor="@color/black"
+                                        />
+
+
+                                </RelativeLayout>
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tvDeliveryDaysHeading"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tvProPrice"
+                                android:text="Delivery Days:"
+                                android:layout_marginTop="5dp"
+                                />
+
+
+
+                            <TextView
+                                android:id="@+id/tvDeliveryDays"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tvProPrice"
+                                android:text="10 days"
+                                android:layout_marginTop="5dp"
+                                android:layout_toRightOf="@+id/tvDeliveryDaysHeading"
+                                android:textColor="@color/orange"
+                                android:layout_marginLeft="5dp"
+                                />
+
+
+                            <TextView
+                                android:id="@+id/tvDuration"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/duration"
+                                android:layout_marginTop="5dp"
+                                android:visibility="gone"
+                                />
+
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    >
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/tvDeliveryAreaHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/delivery_area_heading"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            />
+
+
+                        <TextView
+                            android:id="@+id/tvDeliveryArea"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/deliveryArea"
+                            android:textColor="@color/black"
+                            android:layout_below="@+id/tvDeliveryAreaHeading"
+                            android:layout_marginTop="10dp"
+                            />
+
+
+                    </RelativeLayout>
+
+
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    >
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/tvDiscriptionHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/description_heading"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            />
+
+
+                        <TextView
+                            android:id="@+id/tvDiscription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/description"
+                            android:textColor="@color/black"
+                            android:layout_below="@+id/tvDiscriptionHeading"
+                            android:layout_marginTop="10dp"
+                            />
+
+
+                    </RelativeLayout>
+
+
+
+                </android.support.v7.widget.CardView>
+
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content">
+
+
+                    <RelativeLayout
+                        android:id="@+id/relativeSpecification"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/tvSpecificationHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/specification_heading"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            />
+                        <TextView
+                            android:id="@+id/tvSpecification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/description"
+                            android:textColor="@color/black"
+                            android:layout_below="@+id/tvSpecificationHeading"
+                            android:layout_marginTop="10dp"
+                            />
+
+
+                    </RelativeLayout>
+
+
+
+                </android.support.v7.widget.CardView>
+
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="2"
+                    android:orientation="horizontal"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="2dp"
+                    android:visibility="gone"
+                    >
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="7dp"
+                        android:background="@drawable/row_company_white_black_border"
+                        android:weightSum="1"
+                        android:orientation="horizontal"
+                        >
+
+
+                        <ImageView
+                            android:id="@+id/imgEdtCompanyName"
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
+                            android:layout_weight="0.4"
+                            android:src="@drawable/ic_edit"
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Edit"
+                            android:layout_weight="0.6"
+                            android:layout_gravity="center_vertical"
+                            android:layout_toRightOf="@+id/imgEdtCompanyName"
+                            android:textColor="@color/black"
+
+                            />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/row_company_white_black_border"
+                        android:padding="7dp"
+                        android:weightSum="1"
+                        android:orientation="horizontal"
+                        >
+
+
+                        <ImageView
+                            android:id="@+id/imgDeleteCompany"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.4"
+                            android:layout_height="25dp"
+                            android:src="@drawable/ic_delete"
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.6"
+                            android:layout_height="wrap_content"
+                            android:text="Delete"
+                            android:layout_gravity="center_vertical"
+                            android:layout_toRightOf="@+id/imgDeleteCompany"
+                            android:textColor="@color/black"
+
+                            />
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/uploadViewRoot"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/uploadView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="30dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/uploadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_upload" />
+
+        <TextView
+            android:id="@+id/uploadMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:layout_marginLeft="@dimen/ten_dip"
+            android:layout_marginRight="@dimen/ten_dip"
+            android:layout_weight="1"
+            android:text="@string/comp_doc"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/previewImageLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/cancelImage"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right|top"
+                android:layout_alignRight="@+id/previewImage"
+                android:scaleType="fitXY"
+                android:src="@drawable/cross" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/previewImage"
+                android:layout_width="@dimen/hundred_dip"
+                android:layout_height="@dimen/hundred_dip"
+                android:layout_gravity="center"
+                android:paddingLeft="@dimen/ten_dip"
+                android:paddingRight="@dimen/ten_dip"
+                android:src="@drawable/flower"
+                app:civ_border_color="@color/green"
+                app:civ_border_width="2dp" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

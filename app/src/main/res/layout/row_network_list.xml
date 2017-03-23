@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content_product_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginBottom="10dp"
+    >
+    <RelativeLayout
+        android:id="@+id/relativeServiceEnquairy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        >
+
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Flower Shop"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            />
+
+
+
+        <ImageView
+            android:id="@+id/imgEmail"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tvUserName"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_email_orange"
+            />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvUserName"
+            android:text="arvindkumaryadav937@gmail.com"
+            android:layout_toRightOf="@+id/imgEmail"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="5dp"
+            />
+
+
+        <ImageView
+            android:id="@+id/imgMobile"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/imgEmail"
+            android:src="@drawable/ic_phone_orange"
+            />
+
+        <TextView
+            android:id="@+id/tvMobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgEmail"
+            android:text="98115311065"
+            android:layout_toRightOf="@+id/imgMobile"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/black"
+
+            />
+
+
+        <TextView
+            android:id="@+id/tvCreatedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="01-03-17"
+            android:layout_below="@+id/imgEmail"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/black"
+            />
+
+
+    </RelativeLayout>
+
+
+
+</android.support.v7.widget.CardView>

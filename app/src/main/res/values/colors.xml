@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="hint_color">#606060</color>
+    <color name="color_voilet">#FF6600</color>
+   <color name="green">#63BEAC</color>
+    <color name="green_line">#05DB61</color>
+    <color name="green_transparent">#8063BEAC</color>
+    <color name="teal">#008080</color>
+    <color name="purple">#800080</color>
+    <color name="cherry_red">#C24641</color>
+    <color name="deep_pink">#FF1493</color>
+    <color name="turquoise">#40E0D0</color>
+    <color name="slate_gray">#708090</color>
+    <color name="sienna">#A0522D</color>
+    <color name="orange">#FF6600</color>
+    <color name="white">#FFFFFF</color>
+    <color name="screen_back">#F8EEE5</color>
+    <color name="black">#000000</color>
+   <color name="order_detail_back">#313131</color>
+<color name="blue_gradient">#415673</color>
+    <color name="blue_gradient_dark">#FF212B39</color>
+    <color name="aquamarine">#7AE1CC</color>
+    <color name="bg_product_title">#DAD7CC</color>
+    <color name="bg_product_title_separator">#333333</color>
+    <color name="grey">#B0B0B0</color>
+    <color name="grey_light">#EEEEEE</color>
+    <color name="grey__more_light">#faf8f8</color>
+    <color name="grey_gradient">#415673</color>
+    <color name="grey_gradient2">#737C7A</color>
+    <color name="item_details_color">#585858</color>
+    <color name="green_gradient2">#1C7B67</color>
+    <color name="transparent">#40d1cece</color>
+
+    <color name="brown_light">#F1EEE4</color>
+    <color name="cardview_background">#EEEEEE</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="navigation_child_color">#919191</color>
+    <color name="dark_green">#52A090</color>
+    <color name="green_shad">#069f80</color>
+    <color name="dark_green_black">#387266</color>
+    <color name="list_strip">#E1E1E1</color>
+    <color name="slaty_gradient">#7991A8</color>
+    <color name="blue_gradient_sky">#0D9DAD</color>
+    <color name="polyline_color">#43a047</color>
+    <color name="white_shade">#E9E9E9</color>
+    <color name="text_order_tab">#066C57</color>
+    <color name="sky_blue_color">#6EB9F0</color>
+
+    <color name="yellow">#FEF200</color>
+
+    <color name="red">#FA2B33</color>
+
+    <color name="black_line">#4B4B4B</color>
+    <color name="dark_green_color">#3c763d</color>
+
+    <array name="tab_colors">
+        <item name="tab_1">#455C65</item>
+        <item name="tab_2">#00886A</item>
+        <item name="tab_3">#8B6B62</item>
+        <item name="tab_4">#6C4A42</item>
+        <item name="tab_5">#F63D2B</item>
+    </array>
+
+
+</resources>

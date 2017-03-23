@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_my_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="15"
+    android:background="#F1F5F8">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="13.7"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardElevation="4dp"
+                android:layout_margin="10dp"
+
+                >
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_centerVertical="true"
+                            >
+
+
+                            <EditText
+                                android:id="@+id/etCompanyName"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/fifty_dip"
+                                android:layout_marginRight="30dp"
+                                android:layout_marginLeft="30dp"
+                                android:hint="Company Name"
+                                android:background="@drawable/edit_text_green_back"
+                                android:padding="10dp"
+                                android:textColorHint="@color/hint_color"
+                                android:inputType="text"
+                                android:textSize="@dimen/textsize"
+                                android:ellipsize="end"
+                                android:maxLines="5"
+                                android:singleLine="false"
+                                android:layout_marginTop="20dp"
+                                />
+
+
+
+                            <EditText
+                                android:id="@+id/etPEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/fifty_dip"
+                                android:layout_marginRight="30dp"
+                                android:layout_marginLeft="30dp"
+                                android:hint="Primary Email"
+                                android:background="@drawable/edit_text_green_back"
+                                android:padding="10dp"
+                                android:maxLines="1"
+                                android:textSize="@dimen/textsize"
+                                android:textColorHint="@color/hint_color"
+                                android:inputType="textEmailAddress"
+                                android:layout_marginTop="20dp"
+                                android:textIsSelectable="false"
+                                android:editable="false"
+                                android:focusable="false"
+                                />
+
+
+                            <EditText
+                                android:id="@+id/etSEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/fifty_dip"
+                                android:layout_marginRight="30dp"
+                                android:layout_marginLeft="30dp"
+                                android:hint="Secondary Email"
+                                android:background="@drawable/edit_text_green_back"
+                                android:padding="10dp"
+                                android:textColorHint="@color/hint_color"
+                                android:maxLines="1"
+                                android:textSize="@dimen/textsize"
+                                android:inputType="textEmailAddress"
+                                android:layout_marginTop="20dp"
+                                />
+
+
+
+                            <EditText
+                                android:id="@+id/etAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/fifty_dip"
+                                android:layout_marginRight="30dp"
+                                android:layout_marginLeft="30dp"
+                                android:hint="Address"
+                                android:background="@drawable/edit_text_green_back"
+                                android:padding="10dp"
+                                android:textSize="@dimen/textsize"
+                                android:inputType="text"
+                                android:textColorHint="@color/hint_color"
+                                android:layout_marginTop="20dp"
+                                />
+
+
+
+
+                            <EditText
+                                android:id="@+id/etDiscription"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/fifty_dip"
+                                android:layout_marginRight="30dp"
+                                android:layout_marginLeft="30dp"
+                                android:hint="Description"
+                                android:background="@drawable/edit_text_green_back"
+                                android:padding="10dp"
+                                android:textColorHint="@color/hint_color"
+                                android:imeOptions="actionDone"
+                                android:inputType="text"
+                                android:textSize="@dimen/textsize"
+                                android:layout_marginTop="20dp"
+                                />
+
+
+
+
+
+                        </LinearLayout>
+
+
+
+                    </RelativeLayout>
+
+
+
+                </ScrollView>
+
+
+            </android.support.v7.widget.CardView>
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.3"
+        android:background="@color/orange"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/buttonSave"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_medium" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

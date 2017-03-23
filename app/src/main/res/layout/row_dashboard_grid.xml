@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+android:id="@+id/rl_grid_row_parent"
+
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+
+
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="@dimen/imageview_weight"
+        android:layout_height="@dimen/imageview_height"
+        android:id="@+id/img_product_image"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+
+        android:layout_width="100dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:text="Smartphone"
+        android:maxLines="2"
+        android:layout_marginTop="5dp"
+        android:minLines="2"
+        android:id="@+id/tv_productname"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:text="$250"
+        android:visibility="gone"
+        android:textColor="@color/color_voilet"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_productprize" />
+        <io.techery.properratingbar.ProperRatingBar
+            android:id="@+id/lowerRatingBar"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_centerHorizontal="true"
+            app:prb_defaultRating="3"
+            app:prb_tickNormalDrawable="@drawable/ic_white_star"
+            app:prb_tickSelectedDrawable="@drawable/ic_orange_star"
+            app:prb_totalTicks="5"
+            app:prb_clickable="false"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            app:prb_tickSpacing="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/grey_light"
+        android:layout_alignParentBottom="true"
+        android:layout_height="1dp">
+
+
+
+
+
+    </View>
+    <View
+        android:layout_width="1dp"
+        android:background="@color/grey_light"
+        android:id="@+id/view_left"
+      android:layout_alignParentLeft="true"
+        android:layout_height="225dp"/>
+
+    <View
+        android:layout_width="1dp"
+        android:background="@color/grey_light"
+        android:id="@+id/view_right"
+        android:layout_alignParentRight="true"
+        android:layout_height="225dp"/>
+</RelativeLayout>

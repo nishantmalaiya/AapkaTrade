@@ -1,0 +1,254 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_parent_scrollview"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+
+    android:scrollbars="none">
+
+    <requestFocus/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/orange"
+
+        android:orientation="vertical">
+
+        <requestFocus/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/orange">
+
+        </View>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/navigation_profile_bg"
+
+            android:padding="10dp">
+
+
+            <requestFocus />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/circular_profile_image_home"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_profile_user"></android.support.v7.widget.AppCompatImageView>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/circular_profile_image_home"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/welcome_guest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/welcomeguest"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/welcome_guest"
+
+
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_name"
+
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/navigation_close"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_navigation_prev" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+
+            <RelativeLayout
+                android:id="@+id/rl_category"
+                android:layout_width="match_parent"
+
+                android:layout_height="45dp"
+                android:background="@color/blue_gradient">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="26dp"
+                    android:text="Categories"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="26dp"
+                    android:src="@drawable/ic_chevron_grey"
+                    android:text="Categories"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+                <View
+                    android:id="@+id/footer_categories"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/dark_green"></View>
+            </RelativeLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_view_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_category"
+                android:background="@color/white"
+                android:nestedScrollingEnabled="false"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            </android.support.v7.widget.RecyclerView>
+
+
+            <ExpandableListView
+                android:id="@+id/lvExp"
+                android:layout_width="match_parent"
+                android:layout_height="1000dp"
+                android:layout_below="@+id/rl_category"
+                android:background="@color/white"
+                android:groupIndicator="@null"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+            <RelativeLayout
+                android:id="@+id/rl_terms"
+                android:layout_width="match_parent"
+
+                android:layout_height="45dp"
+                android:layout_below="@+id/recycle_view_navigation"
+                android:background="@color/blue_gradient">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="26dp"
+                    android:text="@string/terms"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+
+                <View
+                    android:id="@+id/footer_categorie2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/blue_gradient_dark"></View>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_invite"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+
+                android:layout_below="@+id/rl_terms"
+                android:background="@color/blue_gradient">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="26dp"
+                    android:text="@string/invite"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/footer_categorie3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/blue_gradient_dark"></View>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_logout"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@+id/rl_invite"
+                android:background="@color/blue_gradient"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="26dp"
+                    android:text="@string/logout"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/footer_categorie4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/blue_gradient_dark"></View>
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+        <View
+            android:id="@+id/snakBar1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/orange"></View>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

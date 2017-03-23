@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:card_view="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+
+
+        <RelativeLayout
+            android:id="@+id/relativecompanyList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            >
+
+            <TextView
+                android:id="@+id/tvCompanyname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_name"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="11dp"
+                />
+
+
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="24jun2017"
+                android:layout_below="@+id/tvCompanyname"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/green"
+                android:textStyle="bold"
+                android:layout_toLeftOf="@+id/imgNext"
+                />
+
+
+
+            <ImageView
+                android:id="@+id/imgNext"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tvCompanyname"
+                android:src="@drawable/ic_red_arw"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                />
+
+            <ImageView
+                android:id="@+id/imgEmail"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tvDate"
+                android:src="@drawable/ic_email"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                />
+
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDate"
+                android:text="Info@aapkatrade.com"
+                android:layout_toRightOf="@+id/imgEmail"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:layout_below="@+id/tvEmail"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone"
+                />
+
+
+            <View
+                android:id="@+id/View1"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/tvEmail"
+                android:background="@color/black"
+                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone"
+                ></View>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayoutDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:orientation="horizontal"
+                android:layout_below="@+id/View1"
+                android:layout_margin="10dp"
+                android:visibility="gone"
+                >
+
+
+              <LinearLayout
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="7"
+                  android:orientation="vertical"
+                  android:layout_marginRight="10dp"
+                  >
+
+                  
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      >
+
+                      <ImageView
+                          android:layout_width="25dp"
+                          android:layout_height="25dp"
+                          android:src="@drawable/ic_location"
+                          />
+
+
+
+                      <TextView
+                          android:id="@+id/tvAddress"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="B-57 Pocket-1 Block-D Rohini New Delhi"
+                          android:layout_marginLeft="10dp"
+                          />
+                      
+                      
+                  </LinearLayout>
+
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:layout_marginTop="10dp"
+                      >
+
+                      <ImageView
+                          android:layout_width="25dp"
+                          android:layout_height="25dp"
+                          android:src="@drawable/ic_disc"
+                          />
+
+
+                      <TextView
+                          android:id="@+id/tvDescription"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="A dining table with two Chairs. Furniture refers to moveble objects intended to support...."
+                          android:layout_marginLeft="10dp"
+                          android:maxLines="1"
+                          android:ellipsize="end"
+                          />
+
+
+
+                  </LinearLayout>
+
+
+              </LinearLayout>
+                
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="horizontal"
+                    >
+
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#EEEEEE"
+                        ></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                       android:gravity="center_horizontal"
+                        android:weightSum="2"
+                        android:orientation="vertical"
+                        >
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+
+                            >
+                            <ImageView
+                                android:id="@+id/imgEdit"
+                                android:layout_width="25dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/ic_edit"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerHorizontal="true"
+                                />
+
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                             android:layout_height="0dp"
+                            android:layout_weight="1">
+
+
+                        <ImageView
+                            android:id="@+id/imgDelete"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_delete"
+
+                            />
+
+                    </RelativeLayout>
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+

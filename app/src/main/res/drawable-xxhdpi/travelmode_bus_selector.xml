@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_location_bus_white" android:state_pressed="true"/>
+    <!-- focused -->
+    <item android:drawable="@drawable/ic_location_bus_orange" android:state_focused="true"/>
+    <!-- default -->
+    <item android:drawable="@drawable/ic_location_bus_orange"/>
+</selector>

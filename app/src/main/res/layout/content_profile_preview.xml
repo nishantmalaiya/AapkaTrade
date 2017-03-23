@@ -1,0 +1,260 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <com.github.florent37.parallax.ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey"
+            android:orientation="vertical">
+
+            <include layout="@layout/my_profile_layout" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="#EEEEEE"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SHARE AAPKA TRADE /INVITE YOUR FRIENDS"
+                    android:textColor="@color/black"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/imageViewFacebook"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="6dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/facebook_icon" />
+
+                    <ImageView
+                        android:id="@+id/imageViewTwitter"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="6dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/twittericon" />
+
+                    <ImageView
+                        android:id="@+id/imageViewWhatsup"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="6dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/whatsapp_icon" />
+
+                    <ImageView
+                        android:id="@+id/imageViewGoogle"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="6dp"
+                        android:padding="3dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/google_plus_icon" />
+
+                    <ImageView
+                        android:id="@+id/imageViewSMS"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="6dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/sms_icon" />
+
+                    <ImageView
+                        android:id="@+id/imageViewEmail"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="6dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/email_icon" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:id="@+id/ripplePremium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:src="@drawable/ic_save_address" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Saved Address"
+                                android:textSize="16sp"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="Add Address"
+                                android:textSize="14sp"
+                                android:id="@+id/textView3" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.7dp"
+                    android:background="#E1E1E1"
+                    android:layout_below="@+id/relativedata"
+                    android:layout_marginLeft="65dp"
+                    ></View>
+
+
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:id="@+id/rippleReview"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutResetpassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:src="@drawable/ic_password_change" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Reset Password"
+                                android:textSize="16sp"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="Change Password"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.7dp"
+                    android:background="#E1E1E1"
+                    android:layout_below="@+id/relativedata"
+                    android:layout_marginLeft="65dp"
+                    ></View>
+
+
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:id="@+id/rippleSetting"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutLagout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+
+                            <ImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_logout" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Log out"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:id="@+id/textView5" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="Logout Your Account"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </com.github.florent37.parallax.ScrollView>
+</FrameLayout>

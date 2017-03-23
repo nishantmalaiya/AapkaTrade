@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:fitsSystemWindows="true"
+    android:id="@+id/coordinate_search"
+
+    >
+
+    <RelativeLayout
+        android:id="@+id/RelativeProductDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.example.pat.aapkatrade.search.Search"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_search_container"
+            android:background="@color/green"
+            android:layout_height="wrap_content">
+
+
+                <include
+                    android:id="@+id/toolbar"
+                    layout="@layout/toolbar_search" />
+
+
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:id="@+id/rl_autocomplete_textview2"
+                android:layout_margin="5dp"
+                android:visibility="gone"
+
+                android:layout_below="@+id/rl_autocomplete_textview"
+                android:background="@drawable/edit_text_grey_back"
+                android:layout_height="40dp">
+
+                <requestFocus />
+
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    app:srcCompat="@drawable/ic_pen"
+                    android:layout_marginRight="5dp"
+
+                    android:layout_height="15dp" />
+                <android.support.v7.widget.AppCompatAutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/search_autocompletetext_state"
+                    android:layout_height="match_parent"
+                    android:hint="@string/location_hint"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:textSize="@dimen/textsize_small"
+
+                    android:background="@android:color/transparent"
+
+                    >
+
+                    <requestFocus />
+                </android.support.v7.widget.AppCompatAutoCompleteTextView>
+
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="15dp"
+                    android:layout_alignParentLeft="true"
+
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_map"
+
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="15dp" />
+
+            </RelativeLayout>
+
+
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/rl_autocomplete_textview"
+        android:layout_margin="5dp"
+
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/edit_text_grey_back"
+        android:layout_height="40dp">
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/search_data"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+
+    android:visibility="gone"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            app:srcCompat="@drawable/ic_pen"
+            android:layout_marginRight="5dp"
+
+            android:layout_height="15dp" />
+    <android.support.v7.widget.AppCompatAutoCompleteTextView
+        android:layout_width="match_parent"
+        android:id="@+id/search_autocompletetext_products"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:hint="@string/search_data"
+android:textSize="@dimen/textsize_small"
+        android:imeOptions="actionSearch"
+        android:inputType="textAutoComplete|textAutoCorrect"
+        android:background="@android:color/transparent"
+
+        >
+
+        <requestFocus />
+    </android.support.v7.widget.AppCompatAutoCompleteTextView>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="15dp"
+
+                android:layout_alignParentLeft="true"
+
+                android:layout_centerVertical="true"
+
+                android:scaleType="fitCenter"
+                android:gravity="center_vertical"
+                app:srcCompat="@drawable/ic_at"
+                android:layout_marginLeft="10dp"
+                android:layout_height="15dp"
+             />
+        </RelativeLayout>
+
+
+
+
+
+        </LinearLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_below="@+id/ll_search_container"
+    android:id="@+id/search_category_state_container"
+android:visibility="gone"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:text="CATEGORIES"
+        android:textAllCaps="true"
+        android:id="@+id/tv_categories"
+        android:textColor="@color/color_voilet"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/category_names_recycler"
+        android:clipToPadding="false"
+        android:background="#FFFFFF"
+        android:layout_height="50dp"
+
+        android:layout_below="@+id/tv_categories"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        >
+
+
+
+    </android.support.v7.widget.RecyclerView>
+
+
+
+
+
+
+
+
+
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/green"
+        android:id="@+id/vew_line"
+        android:layout_below="@+id/category_names_recycler"
+        >
+
+    </View>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:text="LOCATION"
+        android:id="@+id/tv_state"
+        android:textColor="@color/color_voilet"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/category_names_recycler"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/state_names_recycler"
+        android:clipToPadding="false"
+        android:background="#FFFFFF"
+        android:layout_height="50dp"
+
+        android:layout_below="@+id/tv_state"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        >
+
+
+
+    </android.support.v7.widget.RecyclerView>
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/search_category_state_container"
+            android:layout_height="match_parent">
+
+
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleview_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:dividerHeight="5dp"
+
+
+            android:divider="#E6E6E6"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    >
+
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:weightSum="3"
+        android:orientation="horizontal"
+       >
+
+
+       <RelativeLayout
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:layout_weight="1"
+           android:layout_marginTop="15dp"
+           >
+
+           <TextView
+               android:id="@+id/tvFromDateHeading"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="From Date:"
+               android:textColor="@color/black"
+               android:layout_centerHorizontal="true"
+               />
+
+           <TextView
+               android:id="@+id/tvFromDate"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="02-03-2017"
+               android:textColor="@color/sky_blue_color"
+               android:layout_centerHorizontal="true"
+               android:layout_marginTop="15dp"
+               android:layout_below="@+id/tvFromDateHeading"
+               />
+
+
+       </RelativeLayout>
+       <RelativeLayout
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:layout_weight="1"
+           android:layout_marginTop="15dp"
+           >
+
+           <TextView
+               android:id="@+id/tvToDateHeading"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="To Date:"
+               android:textColor="@color/black"
+               android:layout_centerHorizontal="true"
+
+               />
+
+
+           <TextView
+               android:id="@+id/tvToDate"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="02-03-2017"
+               android:textColor="@color/sky_blue_color"
+               android:layout_centerHorizontal="true"
+               android:layout_marginTop="15dp"
+               android:layout_below="@+id/tvToDateHeading"
+               />
+
+
+       </RelativeLayout>
+
+       <RelativeLayout
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:layout_weight="1"
+           >
+
+           <View
+               android:id="@+id/viewBlack"
+               android:layout_width="1dp"
+               android:layout_height="wrap_content"
+               android:background="#D2D2D2"
+
+               ></View>
+
+          <View
+              android:layout_width="match_parent"
+              android:layout_height="5dp"
+              android:background="@color/orange"
+              android:layout_toRightOf="@+id/viewBlack"
+              ></View>
+
+           <TextView
+               android:id="@+id/tvRupeesHeading"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Rs."
+               android:textColor="@color/black"
+               android:layout_centerHorizontal="true"
+               android:layout_marginTop="15dp"
+               />
+
+
+           <TextView
+               android:id="@+id/tvRupees"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="500"
+               android:textColor="@color/orange"
+               android:layout_centerHorizontal="true"
+               android:layout_marginTop="15dp"
+               android:layout_below="@+id/tvRupeesHeading"
+               />
+
+
+       </RelativeLayout>
+
+
+
+
+   </LinearLayout>
+
+
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D2D2D2"
+        ></View>
+
+</LinearLayout>
