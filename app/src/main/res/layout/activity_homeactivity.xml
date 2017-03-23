@@ -37,21 +37,7 @@
 
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:focusable="false"
-            android:background="@color/green"
-            android:id="@+id/rl_searchview"
-            android:layout_height="wrap_content">
 
-            <include
-                android:id="@+id/home_search"
-                layout="@layout/search_view_dashbaord" />
-
-
-
-
-        </RelativeLayout>
 
 
 
@@ -144,6 +130,12 @@
 
 
 </android.support.v4.widget.DrawerLayout>
+
+
+
+
+
+
 
 
 
