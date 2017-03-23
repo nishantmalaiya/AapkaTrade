@@ -1,6 +1,7 @@
 package com.example.pat.aapkatrade.user_dashboard.my_profile;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -52,24 +53,26 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
     public static String shared_pref_name = "aapkatrade";
     AppSharedPreference app_sharedpreference;
     EditText etFName, etLName, etEmail, etMobileNo, etAddress;
-    ImageView imgCalender,backbutton;
+   // ImageView imgCalender,backbutton;
     ProgressBarHandler p_handler;
     TextView tvDate, tvMyProfileDetailHeading;
     CollapsingToolbarLayout collapsingToolbarLayout;
     Toolbar toolbar;
     AppBarLayout aapbar_layout_myprofile;
     CoordinatorLayout coordinatorlayout_myprofile;
+    private Context context;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        context =MyProfileActivity.this;
         setContentView(R.layout.activity_my_profile);
 
         app_sharedpreference = new AppSharedPreference(this);
         p_handler=new ProgressBarHandler(this);
-        setuptoolbar();
+        setUpToolBar();
 
         setup_layout();
 
@@ -80,7 +83,7 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
         coordinatorlayout_myprofile=(CoordinatorLayout)findViewById(R.id.coordinate_myprofile) ;
         setupnewlayout();
         //imgCalender = (ImageView) findViewById(R.id.imgCalender);
-        backbutton=(ImageView)findViewById(R.id.back_imagview) ;
+      //  backbutton=(ImageView)findViewById(R.id.back_imagview) ;
         tvMyProfileDetailHeading = (TextView) findViewById(R.id.tvMyProfileDetailHeading);
 
         etFName = (EditText) findViewById(R.id.etFName);
@@ -128,13 +131,13 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
         //  btnEdit = (Button) findViewById(R.id.btnEdit);
 
         //btnLogout = (Button) findViewById(R.id.btnlogout);
-        backbutton.setOnClickListener(new View.OnClickListener() {
+       /* backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
+*/
         /*   imgCalender.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -333,22 +336,32 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
 
     }
 
-    private void setuptoolbar()
-    {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+    private void setUpToolBar() {
+        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome) ;
+        findViewById(R.id.logoWord).setVisibility(View.GONE); ;
+        TextView header_name = (TextView) findViewById(R.id.header_name);
+        header_name.setVisibility(View.VISIBLE);
+        header_name.setText(getResources().getString(R.string.my_profile_heading));
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        AndroidUtils.setImageColor(homeIcon, context, R.color.white);
+        homeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
         setSupportActionBar(toolbar);
-        if(getSupportActionBar()!=null)
-        {
-            getSupportActionBar().setDisplayShowTitleEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Profile");
-            toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-
-            Log.e("working","working");
+            getSupportActionBar().setTitle(null);
+            getSupportActionBar().setElevation(0);
         }
-
-
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)

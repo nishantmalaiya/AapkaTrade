@@ -1,5 +1,7 @@
 package com.example.pat.aapkatrade.user_dashboard.vender_detail;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,9 +11,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
+import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.user_dashboard.companylist.CompanyData;
 import com.example.pat.aapkatrade.user_dashboard.companylist.CompanyList;
@@ -34,6 +40,7 @@ public class VendorActivity extends AppCompatActivity
     AppSharedPreference app_sharedpreference;
     String user_id;
     ProgressBarHandler progress_handler;
+    private Context context;
 
 
     @Override
@@ -41,15 +48,11 @@ public class VendorActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendor);
-
+        context = VendorActivity.this;
         progress_handler = new ProgressBarHandler(this);
-
         app_sharedpreference = new AppSharedPreference(getApplicationContext());
-
         user_id = app_sharedpreference.getsharedpref("userid", "");
-
-
-        setuptoolbar();
+        setUpToolBar();
 
         setup_layout();
 
@@ -138,14 +141,29 @@ public class VendorActivity extends AppCompatActivity
     }
 
 
-
-    private void setuptoolbar() {
+    private void setUpToolBar() {
+        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome) ;
+        findViewById(R.id.logoWord).setVisibility(View.GONE); ;
+        TextView header_name = (TextView) findViewById(R.id.header_name);
+        header_name.setVisibility(View.VISIBLE);
+        header_name.setText(getResources().getString(R.string.add_vender_heading));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        AndroidUtils.setImageColor(homeIcon, context, R.color.white);
+        homeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(null);
-        // getSupportActionBar().setIcon(R.drawable.home_logo);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(null);
+            getSupportActionBar().setElevation(0);
+        }
     }
 
     @Override
@@ -165,6 +183,5 @@ public class VendorActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 }

@@ -171,7 +171,9 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         homeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, HomeActivity.class));
+                Intent intent = new Intent(context, HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
         AndroidUtils.setBackgroundSolid(toolbar, context, R.color.transparent, 0);
@@ -201,5 +203,6 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 }

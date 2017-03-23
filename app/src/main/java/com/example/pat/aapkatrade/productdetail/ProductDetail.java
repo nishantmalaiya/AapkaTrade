@@ -419,7 +419,9 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         homeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, HomeActivity.class));
+                Intent intent = new Intent(context, HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
         setSupportActionBar(toolbar);
