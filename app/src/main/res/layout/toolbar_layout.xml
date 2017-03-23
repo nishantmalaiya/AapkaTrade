@@ -29,15 +29,28 @@
             android:src="@drawable/ic_navigation_home" />
 
         <ImageView
+            android:id="@+id/logoWord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-
-            android:layout_marginLeft="@dimen/ten_dip"
+            android:layout_marginLeft="@dimen/twenty_dip"
             android:layout_toRightOf="@+id/iconHome"
             android:src="@drawable/logo_word" />
+
+
+        <TextView
+            android:id="@+id/header_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iconHome"
+            android:layout_marginLeft="@dimen/thirty_five_dip"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_medium"
+            android:textStyle="bold"
+            android:visibility="gone"
+            />
 
         <TextView
             android:id="@+id/toolbarRightText"

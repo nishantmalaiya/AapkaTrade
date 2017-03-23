@@ -1,5 +1,6 @@
 package com.example.pat.aapkatrade.user_dashboard.changepassword;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,8 +40,7 @@ public class ChangePassword extends AppCompatActivity
     String user_id, user_type;
     ProgressBarHandler progress_handler;
     TextView tvTitle;
-
-
+    private Context context;
 
 
     @Override
@@ -47,10 +48,10 @@ public class ChangePassword extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_change_password);
-
+        context = ChangePassword.this;
         progress_handler = new ProgressBarHandler(this);
 
-        setuptoolbar();
+        setUpToolBar();
 
         app_sharedpreference = new AppSharedPreference(getApplicationContext());
 
@@ -160,19 +161,30 @@ public class ChangePassword extends AppCompatActivity
         });
     }
 
-    private void setuptoolbar() {
+    private void setUpToolBar() {
+        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome) ;
+        findViewById(R.id.logoWord).setVisibility(View.GONE); ;
+        TextView header_name = (TextView) findViewById(R.id.header_name);
+        header_name.setVisibility(View.VISIBLE);
+        header_name.setText(getResources().getString(R.string.change_password_heading));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        AndroidUtils.setImageColor(homeIcon, context, R.color.white);
+        homeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(null);
-
-        tvTitle = (TextView) findViewById(R.id.tvTitle);
-        tvTitle.setText("Change Password");
-
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(null);
+            getSupportActionBar().setElevation(0);
+        }
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -183,7 +195,6 @@ public class ChangePassword extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
             case android.R.id.home:
                 finish();
                 break;
