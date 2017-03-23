@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import com.example.pat.aapkatrade.R;
+import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Validation;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.google.gson.JsonObject;
@@ -23,6 +25,7 @@ public class ContactUsFragment extends Fragment
     EditText etSubject,etUserName,etMobileNo,etEmail,etQuery;
     Button buttonSave;
     ProgressBarHandler progress_handler;
+    ImageView imgPhone,imgEmail;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -41,6 +44,14 @@ public class ContactUsFragment extends Fragment
 
     private void setup_layout(View v)
     {
+
+        imgPhone = (ImageView) v.findViewById(R.id.imgPhone);
+
+        imgEmail = (ImageView) v.findViewById(R.id.imgEmail);
+
+        AndroidUtils.setImageColor(imgEmail,getActivity(),R.color.black);
+
+        AndroidUtils.setImageColor(imgPhone,getActivity(),R.color.black);
 
         etSubject = (EditText) v.findViewById(R.id.etSubject);
 
@@ -62,86 +73,86 @@ public class ContactUsFragment extends Fragment
             {
 
 
-            String subject = etSubject.getText().toString();
-            String username = etUserName.getText().toString();
-            String mobileno = etMobileNo.getText().toString();
-            String email = etEmail.getText().toString();
-            String query = etQuery.getText().toString();
+                String subject = etSubject.getText().toString();
+                String username = etUserName.getText().toString();
+                String mobileno = etMobileNo.getText().toString();
+                String email = etEmail.getText().toString();
+                String query = etQuery.getText().toString();
 
-           if (!subject.toString().equals(""))
-           {
+                if (!subject.toString().equals(""))
+                {
 
-               if (!username.toString().equals(""))
-               {
+                    if (!username.toString().equals(""))
+                    {
 
-                   if (!mobileno.toString().equals(""))
-                   {
+                        if (!mobileno.toString().equals(""))
+                        {
 
-                       if (mobileno.toString().length()== 10)
-                       {
+                            if (mobileno.toString().length()== 10)
+                            {
 
-                           if (!email.toString().equals(""))
-                           {
+                                if (!email.toString().equals(""))
+                                {
 
-                               if (Validation.isValidEmail(email))
-                               {
-                                   if (!query.equals(""))
-                                   {
+                                    if (Validation.isValidEmail(email))
+                                    {
+                                        if (!query.equals(""))
+                                        {
 
-                                       callAddCompanyWebService(subject, username, mobileno, email, query);
+                                            callAddCompanyWebService(subject, username, mobileno, email, query);
 
-                                   }
-                                   else
-                                   {
+                                        }
+                                        else
+                                        {
 
-                                       Toast.makeText(getActivity(), "Please Enter Query", Toast.LENGTH_SHORT).show();
-                                   }
+                                            Toast.makeText(getActivity(), "Please Enter Query", Toast.LENGTH_SHORT).show();
+                                        }
 
-                               }
-                               else {
-                                   Toast.makeText(getActivity(), "Please Enter Valid Email Address", Toast.LENGTH_SHORT).show();
-
-
-                               }
-                           }
-                           else
-                           {
-
-                               Toast.makeText(getActivity(),"Please Enter Email Address",Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        Toast.makeText(getActivity(), "Please Enter Valid Email Address", Toast.LENGTH_SHORT).show();
 
 
-                           }
+                                    }
+                                }
+                                else
+                                {
 
-                       }
-                       else
-                       {
+                                    Toast.makeText(getActivity(),"Please Enter Email Address",Toast.LENGTH_SHORT).show();
 
-                           Toast.makeText(getActivity(),"Please Enter 10 digit Mobile Number",Toast.LENGTH_SHORT).show();
 
-                       }
+                                }
 
-                   }
-                   else
-                   {
-                       Toast.makeText(getActivity(),"Please Enter Mobile Number",Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
 
-                   }
+                                Toast.makeText(getActivity(),"Please Enter 10 digit Mobile Number",Toast.LENGTH_SHORT).show();
 
-               }
-               else
-               {
+                            }
 
-                   Toast.makeText(getActivity(),"Please Enter User Name",Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(),"Please Enter Mobile Number",Toast.LENGTH_SHORT).show();
 
-               }
+                        }
 
-           }
-           else
-           {
+                    }
+                    else
+                    {
 
-               Toast.makeText(getActivity(),"Please Enter Subject",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),"Please Enter User Name",Toast.LENGTH_SHORT).show();
 
-           }
+                    }
+
+                }
+                else
+                {
+
+                    Toast.makeText(getActivity(),"Please Enter Subject",Toast.LENGTH_SHORT).show();
+
+                }
 
             }
         });

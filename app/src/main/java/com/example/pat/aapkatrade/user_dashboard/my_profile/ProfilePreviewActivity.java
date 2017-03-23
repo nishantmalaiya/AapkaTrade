@@ -59,8 +59,8 @@ public class ProfilePreviewActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                  Intent profile_edit = new Intent(ProfilePreviewActivity.this, MyProfileActivity.class);
-                  startActivity(profile_edit);
+                Intent profile_edit = new Intent(ProfilePreviewActivity.this, MyProfileActivity.class);
+                startActivity(profile_edit);
             }
 
 
@@ -179,4 +179,41 @@ public class ProfilePreviewActivity extends AppCompatActivity
         app_sharedpreference.setsharedpref("emailid", email_id);
 
     }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        if (app_sharedpreference.getsharedpref("username", "notlogin") != null)
+        {
+            String Username = app_sharedpreference.getsharedpref("name", "not");
+            String Emailid = app_sharedpreference.getsharedpref("emailid", "not");
+
+            String userType = app_sharedpreference.getsharedpref("usertype","0");
+
+            System.out.println("UserName-----------"+Username);
+
+            textViewName.setText(Username);
+            tvEmail.setText(Emailid);
+
+            if (userType.equals("1"))
+            {
+                tvUserType.setText("Welcome Seller");
+
+            }
+            else if (userType.equals("2"))
+            {
+                tvUserType.setText("Welcome Buyer");
+
+            }
+            else if (userType.equals("3"))
+            {
+                tvUserType.setText("Welcome Bussiness Associate");
+
+            }
+        }
+    }
 }
+
+
