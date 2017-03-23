@@ -46,13 +46,14 @@ import java.util.Calendar;
 import it.carlom.stikkyheader.core.StikkyHeaderBuilder;
 
 
-public class MyProfileActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+public class MyProfileActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener
+{
 
     Button btnSave, btnEdit, btnLogout;
     public static String shared_pref_name = "aapkatrade";
     AppSharedPreference app_sharedpreference;
     EditText etFName, etLName, etEmail, etMobileNo, etAddress;
-//    ImageView imgCalender,backbutton;
+   // ImageView imgCalender,backbutton;
     ProgressBarHandler p_handler;
     TextView tvDate, tvMyProfileDetailHeading;
     CollapsingToolbarLayout collapsingToolbarLayout;
@@ -66,8 +67,9 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        context =MyProfileActivity.this;
         setContentView(R.layout.activity_my_profile);
-        context = MyProfileActivity.this;
+
         app_sharedpreference = new AppSharedPreference(this);
         p_handler=new ProgressBarHandler(this);
         setUpToolBar();
@@ -81,10 +83,14 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
         coordinatorlayout_myprofile=(CoordinatorLayout)findViewById(R.id.coordinate_myprofile) ;
         setupnewlayout();
         //imgCalender = (ImageView) findViewById(R.id.imgCalender);
-//        backbutton=(ImageView)findViewById(R.id.back_imagview) ;
+      //  backbutton=(ImageView)findViewById(R.id.back_imagview) ;
         tvMyProfileDetailHeading = (TextView) findViewById(R.id.tvMyProfileDetailHeading);
+
         etFName = (EditText) findViewById(R.id.etFName);
         String fname = app_sharedpreference.getsharedpref("name", "");
+
+
+
         tvMyProfileDetailHeading.setText("Hello, " + fname + " To Update your account information.");
         etFName.setText(fname);
         etFName.setSelection(etFName.getText().length());
@@ -107,7 +113,7 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
         etAddress = (EditText) findViewById(R.id.etAddress);
         String address = app_sharedpreference.getsharedpref("address", "");
         etAddress.setText(address);
-       // etAddress.setSelection(etAddress.getText().length());
+        // etAddress.setSelection(etAddress.getText().length());
 
         tvDate = (TextView) findViewById(R.id.tvDate);
         String dob = app_sharedpreference.getsharedpref("dob", "");
@@ -122,16 +128,16 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
 
         btnSave = (Button) findViewById(R.id.btnSave);
 
-      //  btnEdit = (Button) findViewById(R.id.btnEdit);
+        //  btnEdit = (Button) findViewById(R.id.btnEdit);
 
         //btnLogout = (Button) findViewById(R.id.btnlogout);
-//        backbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
-
+       /* backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+*/
         /*   imgCalender.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -218,9 +224,7 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
 
     private void setupnewlayout() {
 
-
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-
 
         collapsingToolbarLayout.setTitle("Motorcycle");
         collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.transparent)); // transperent color = #00000000
@@ -235,11 +239,9 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
 
     }
 
-    private void edit_profile_webservice() {
+    private void edit_profile_webservice()
+    {
         p_handler.show();
-
-
-
 
         Ion.with(MyProfileActivity.this)
                 .load((getResources().getString(R.string.webservice_base_url))+"/my_account")
@@ -257,23 +259,27 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
 
-                        System.out.println("dvgsgf"+result);
 
-                        if (result == null) {
+                        if (result == null)
+                        {
                             p_handler.hide();
                             System.out.println("result-----------NULLLLLLL");
 
 
                         }
                         else
+                        {
+                            String error = result.get("error").getAsString();
+                            if(error.contains("false"))
                             {
-                                String error = result.get("error").getAsString();
-                                if(error.contains("false"))
+
+                                JsonObject jsonObject = result.getAsJsonObject();
+
+                                String message = jsonObject.get("message").getAsString();
+
+                                if(message.equals("No any changes to update!"))
                                 {
 
-                                    JsonObject jsonObject = result.getAsJsonObject();
-
-                                    String message = jsonObject.get("message").getAsString();
                                     showmessage(message);
                                     p_handler.hide();
 
@@ -281,55 +287,41 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
                                 else
                                 {
 
-                                    JsonObject jsonObject = result.getAsJsonObject();
+                                    JsonArray jsonResultArray = jsonObject.getAsJsonArray("result");
 
-                                    String message = jsonObject.get("message").getAsString();
-
-                                    if(message.equals("No any changes to update!")){
-
-                                        showmessage(message);
-                                        p_handler.hide();
-
-
-                                    }
-                                    else
+                                    for (int i = 0; i < jsonResultArray.size(); i++)
                                     {
 
-                                        JsonArray jsonResultArray = jsonObject.getAsJsonArray("result");
+                                        JsonObject jsonObject1 = (JsonObject) jsonResultArray.get(i);
+                                        String update_name = jsonObject1.get("name").getAsString();
+                                        String update_lastname = jsonObject1.get("lastname").getAsString();
+                                        String update_mobile = jsonObject1.get("mobile").getAsString();
+                                        String update_address = jsonObject1.get("address").getAsString();
 
-                                        for (int i = 0; i < jsonResultArray.size(); i++) {
+                                        app_sharedpreference.setsharedpref("name",update_name);
+                                        app_sharedpreference.setsharedpref("lname",update_lastname);
+                                        app_sharedpreference.setsharedpref("mobile", update_mobile);
+                                        app_sharedpreference.setsharedpref("address",update_address);
 
-                                            JsonObject jsonObject1 = (JsonObject) jsonResultArray.get(i);
-                                            String update_name = jsonObject1.get("name").getAsString();
-                                            String update_lastname = jsonObject1.get("lastname").getAsString();
-                                            String update_mobile = jsonObject1.get("mobile").getAsString();
-                                            String update_address = jsonObject1.get("address").getAsString();
+                                        System.out.println("Username Data-----------"+update_name);
 
-
-                                            String Username = app_sharedpreference.getsharedpref("name", "");
-
-                                            System.out.println("Username Data-----------"+Username);
-
-
-                                            app_sharedpreference.setsharedpref("name",update_name);
-                                            app_sharedpreference.setsharedpref("lname",update_lastname);
-                                            app_sharedpreference.setsharedpref("mobile", update_mobile);
-                                            app_sharedpreference.setsharedpref("address",update_address);
-
-                                        }
                                         showmessage(message);
                                         p_handler.hide();
 
                                     }
-
 
 
                                 }
 
+                            }
+                            else
+                            {
+                                JsonObject jsonObject = result.getAsJsonObject();
+                                String message = jsonObject.get("message").getAsString();
+                                showmessage(message);
+                                p_handler.hide();
 
-
-
-
+                            }
 
                         }
                     }
@@ -337,7 +329,8 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
 
     }
 
-    private void showmessage(String message) {
+    private void showmessage(String message)
+    {
 
         AndroidUtils.showSnackBar(coordinatorlayout_myprofile,message);
 
@@ -368,15 +361,19 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
         }
     }
 
+
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_map, menu);
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.bottom_home_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 finish();
                 break;
@@ -387,9 +384,8 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
     }
 
 
-
-    public void save_shared_pref(String user_id, String user_name, String email_id, String lname, String dob, String address, String mobile, String order_quantity,
-                                 String product_quantity, String company_quantity, String vendor_quantity, String network_quantity) {
+    public void save_shared_pref(String user_id, String user_name, String email_id, String lname, String dob, String address, String mobile, String order_quantity, String product_quantity, String company_quantity, String vendor_quantity, String network_quantity)
+    {
 
         app_sharedpreference.setsharedpref("userid", user_id);
         app_sharedpreference.setsharedpref("username", user_name);
@@ -403,7 +399,6 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
         app_sharedpreference.setsharedpref("company_quantity", company_quantity);
         app_sharedpreference.setsharedpref("vendor_quantity", vendor_quantity);
         app_sharedpreference.setsharedpref("network_quantity", network_quantity);
-
 
     }
 
