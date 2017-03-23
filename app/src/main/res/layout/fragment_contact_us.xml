@@ -1,22 +1,330 @@
 <ScrollView android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:isScrollContainer="false"
+    android:background="#F1F5F8"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.pat.aapkatrade.contact_us.ContactUsFragment">
-
-
-
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.example.pat.aapkatrade.contact_us.ContactUsFragment">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    >
+
+
+                    <LinearLayout
+                        android:id="@+id/LinearlayoutImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+
+                        >
+
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_customer_care"
+                            />
+
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/LinearlayoutImage"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/tvCustomerCareHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Customer Care"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true" />
+
+
+                        <ImageView
+                            android:id="@+id/imgPhone"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_phone_orange"
+                            android:layout_below="@+id/tvCustomerCareHeading"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="9812345678"
+                            android:layout_below="@+id/tvCustomerCareHeading"
+                            android:layout_toRightOf="@+id/imgPhone"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="5dp"
+                            />
+
+
+                        <ImageView
+                            android:id="@+id/imgEmail"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_email"
+                            android:layout_below="@+id/imgPhone"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="info@aapkatrade.com"
+                            android:layout_below="@+id/imgPhone"
+                            android:layout_toRightOf="@+id/imgEmail"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="5dp"
+                            />
+
+
+                    </RelativeLayout>
+
+
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    >
+
+
+                    <LinearLayout
+                        android:id="@+id/LinearlayoutFollow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+
+                        >
+
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_follow_us" />
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/LinearlayoutFollow"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/tvFollowHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Follow us"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvFollowHeading"
+                            android:orientation="horizontal"
+                            >
+
+
+                            <ImageView
+                                android:id="@+id/imageViewFacebook"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="6dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/facebook_icon" />
+
+                            <ImageView
+                                android:id="@+id/imageViewTwitter"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_margin="6dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/twittericon" />
+
+                            <ImageView
+                                android:id="@+id/imageViewWhatsup"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_margin="6dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/whatsapp_icon" />
+
+                            <ImageView
+                                android:id="@+id/imageViewGoogle"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_margin="6dp"
+                                android:padding="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/google_plus_icon" />
+
+
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    >
+
+
+                    <LinearLayout
+                        android:id="@+id/LinearlayoutVisit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+
+                        >
+
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_visit_us"
+                            />
+
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/LinearlayoutVisit"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        >
+
+
+                        <TextView
+                            android:id="@+id/tvVisitHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Visit us"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="www.aapkatrade.com"
+                            android:layout_below="@+id/tvVisitHeading"
+                            android:textColor="@color/black"
+                            />
+
+
+
+                    </RelativeLayout>
+
+
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
 
 
         <android.support.v7.widget.CardView
@@ -27,315 +335,6 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
             >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                >
-
-
-                <LinearLayout
-                    android:id="@+id/LinearlayoutImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-
-                    >
-
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/ic_whislist"
-                        />
-
-
-
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/LinearlayoutImage"
-                    android:layout_marginLeft="5dp"
-                    >
-
-                    <TextView
-                        android:id="@+id/tvCustomerCareHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Customer Care"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        />
-
-
-                    <ImageView
-                        android:id="@+id/imgPhone"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_black_mobile"
-                        android:layout_below="@+id/tvCustomerCareHeading"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="9812345678"
-                        android:layout_below="@+id/tvCustomerCareHeading"
-                        android:layout_toRightOf="@+id/imgPhone"
-                        android:textColor="@color/black"
-                        android:layout_marginLeft="5dp"
-                        />
-
-
-                    <ImageView
-                        android:id="@+id/imgEmail"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_email"
-                        android:layout_below="@+id/imgPhone"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="info@aapkatrade.com"
-                        android:layout_below="@+id/imgPhone"
-                        android:layout_toRightOf="@+id/imgEmail"
-                        android:textColor="@color/black"
-                        android:layout_marginLeft="5dp"
-                        />
-
-
-
-                </RelativeLayout>
-
-
-
-            </RelativeLayout>
-
-
-            </android.support.v7.widget.CardView>
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                >
-
-
-                <LinearLayout
-                    android:id="@+id/LinearlayoutFollow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-
-                    >
-
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/ic_whislist"
-                        />
-
-
-
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/LinearlayoutFollow"
-                    android:layout_marginLeft="5dp"
-                    >
-
-                    <TextView
-                        android:id="@+id/tvFollowHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Follow us"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvFollowHeading"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal"
-                        >
-
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_whislist"
-                            android:layout_marginRight="5dp"
-                            />
-
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_whislist"
-                            android:layout_marginRight="5dp"
-                            />
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_whislist"
-                            android:layout_marginRight="5dp"
-                            />
-
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_whislist"
-                            android:layout_marginRight="5dp"
-                            />
-
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_whislist"
-                            android:layout_marginRight="5dp"
-                            />
-
-
-
-
-                    </LinearLayout>
-
-
-                </RelativeLayout>
-
-
-
-            </RelativeLayout>
-
-
-        </android.support.v7.widget.CardView>
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                >
-
-
-                <LinearLayout
-                    android:id="@+id/LinearlayoutVisit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-
-                    >
-
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/ic_whislist"
-                        />
-
-
-
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/LinearlayoutVisit"
-                    android:layout_marginLeft="5dp"
-                    >
-
-
-                    <TextView
-                        android:id="@+id/tvVisitHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Visit us"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="www.aapkatrade.com"
-                        android:layout_below="@+id/tvVisitHeading"
-                        android:textColor="@color/black"
-                        />
-
-
-
-                </RelativeLayout>
-
-
-
-            </RelativeLayout>
-
-
-        </android.support.v7.widget.CardView>
-
-
-    </LinearLayout>
-
-
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
-        >
 
 
 
@@ -376,34 +375,34 @@
 
 
 
-             <android.support.design.widget.TextInputLayout
-                 android:id="@+id/input_layout_UserName"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_below="@+id/input_layout_etSubject"
-                 android:layout_marginLeft="30dp"
-                 android:layout_marginRight="30dp"
-                 android:layout_marginTop="8dp"
-                 android:textColorHint="@color/hint_color"
-                 >
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_UserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/input_layout_etSubject"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="8dp"
+                    android:textColorHint="@color/hint_color"
+                    >
 
-                 <EditText
-                     android:id="@+id/etUserName"
-                     android:layout_width="match_parent"
-                     android:layout_height="@dimen/fifty_dip"
-                     android:hint="User Name"
-                     android:maxLines="1"
-                     android:paddingLeft="8dp"
-                     android:imeOptions="actionNext"
-                     android:layout_below="@+id/input_layout_etSubject"
-                     android:textColorHint="@color/green"
-                     android:textSize="@dimen/textsize"
-                     android:theme="@style/myedittext"
-                     style="@style/myedittext"
-                     />
+                    <EditText
+                        android:id="@+id/etUserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty_dip"
+                        android:hint="User Name"
+                        android:maxLines="1"
+                        android:paddingLeft="8dp"
+                        android:imeOptions="actionNext"
+                        android:layout_below="@+id/input_layout_etSubject"
+                        android:textColorHint="@color/green"
+                        android:textSize="@dimen/textsize"
+                        android:theme="@style/myedittext"
+                        style="@style/myedittext"
+                        />
 
 
-             </android.support.design.widget.TextInputLayout>
+                </android.support.design.widget.TextInputLayout>
 
 
 
@@ -441,67 +440,67 @@
                 </android.support.design.widget.TextInputLayout>
 
 
-               <android.support.design.widget.TextInputLayout
-                   android:id="@+id/input_layout_Email"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_below="@+id/input_layout_MobileNo"
-                   android:layout_marginLeft="30dp"
-                   android:layout_marginRight="30dp"
-                   android:layout_marginTop="8dp"
-                   android:textColorHint="@color/hint_color"
-                   >
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_Email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/input_layout_MobileNo"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="8dp"
+                    android:textColorHint="@color/hint_color"
+                    >
 
 
-                   <EditText
-                       android:id="@+id/etEmail"
-                       android:layout_width="match_parent"
-                       android:layout_height="@dimen/fifty_dip"
-                       android:hint="Email"
-                       android:maxLines="1"
-                       android:imeOptions="actionNext"
-                       android:paddingLeft="8dp"
-                       android:layout_below="@+id/etMobileNo"
-                       android:textColorHint="@color/green"
-                       android:textSize="@dimen/textsize"
-                       android:inputType="textEmailAddress"
-                       android:theme="@style/myedittext"
-                       style="@style/myedittext"
-                       />
+                    <EditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fifty_dip"
+                        android:hint="Email"
+                        android:maxLines="1"
+                        android:imeOptions="actionNext"
+                        android:paddingLeft="8dp"
+                        android:layout_below="@+id/etMobileNo"
+                        android:textColorHint="@color/green"
+                        android:textSize="@dimen/textsize"
+                        android:inputType="textEmailAddress"
+                        android:theme="@style/myedittext"
+                        style="@style/myedittext"
+                        />
 
 
-               </android.support.design.widget.TextInputLayout>
-
-
-
-
-               <android.support.design.widget.TextInputLayout
-                   android:id="@+id/input_layout_query"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_below="@+id/input_layout_Email"
-                   android:layout_marginLeft="30dp"
-                   android:layout_marginRight="30dp"
-                   android:layout_marginTop="8dp"
-                   android:textColorHint="@color/hint_color"
-                   >
-
-                   <EditText
-                       android:id="@+id/etQuery"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:hint="Query"
-                       android:imeOptions="actionDone"
-                       android:paddingLeft="8dp"
-                       android:textColorHint="@color/green"
-                       android:textSize="@dimen/textsize"
-                       android:theme="@style/myedittext"
-                       style="@style/myedittext"
-                       />
+                </android.support.design.widget.TextInputLayout>
 
 
 
-               </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_query"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/input_layout_Email"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="8dp"
+                    android:textColorHint="@color/hint_color"
+                    >
+
+                    <EditText
+                        android:id="@+id/etQuery"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Query"
+                        android:imeOptions="actionDone"
+                        android:paddingLeft="8dp"
+                        android:textColorHint="@color/green"
+                        android:textSize="@dimen/textsize"
+                        android:theme="@style/myedittext"
+                        style="@style/myedittext"
+                        />
+
+
+
+                </android.support.design.widget.TextInputLayout>
 
 
 
@@ -529,14 +528,14 @@
 
 
 
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
 
 
 
 
 
 
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>
 
 

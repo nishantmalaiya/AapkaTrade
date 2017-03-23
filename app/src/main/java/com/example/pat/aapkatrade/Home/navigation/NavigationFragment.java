@@ -162,9 +162,10 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
         //navigation_parent_scrollview=(NestedScrollView)this.view.findViewById(R.id.navigation_parent_scrollview);
 
-        if (app_sharedpreference.getsharedpref("username", "notlogin") != null) {
+        if (app_sharedpreference.getsharedpref("username", "notlogin") != null)
+        {
 
-            String Username = app_sharedpreference.getsharedpref("username", "notlogin");
+            String Username = app_sharedpreference.getsharedpref("name", "notlogin");
             String Emailid = app_sharedpreference.getsharedpref("emailid", "notlogin");
 
 
@@ -539,6 +540,54 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (app_sharedpreference.getsharedpref("username", "notlogin") != null)
+        {
+
+            String Username = app_sharedpreference.getsharedpref("name", "notlogin");
+            String Emailid = app_sharedpreference.getsharedpref("emailid", "notlogin");
+
+
+
+            if (Username.equals("notlogin")) {
+
+                rl_logout.setVisibility(View.GONE);
+
+                Log.e("Shared_pref2", "null" + Username);
+            } else {
+
+                set_visibility_logout();
+
+                setdata(Username, Emailid);
+
+                if (app_sharedpreference.getsharedpref("usertype", "0").equals("3")) {
+
+
+                    usertype.setText("Bussiness Associate");
+
+
+                } else if ((app_sharedpreference.getsharedpref("usertype", "0").equals("2"))) {
+
+                    usertype.setText("Buyer");
+
+
+                } else if ((app_sharedpreference.getsharedpref("usertype", "0").equals("1"))) {
+
+
+                    usertype.setText(" Seller");
+
+
+                }
+
+
+            }
+        } else {
+            Log.e("Shared_pref1", "null");
+        }
+    }
 }
 
 
