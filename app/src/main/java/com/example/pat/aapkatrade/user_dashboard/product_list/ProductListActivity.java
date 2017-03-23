@@ -69,7 +69,7 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
 
         layout_container = (LinearLayout) findViewById(R.id.layout_container);
 
-      //  get_web_data2(0);
+        //  get_web_data2(0);
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
@@ -218,7 +218,7 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
 
 
                             } else
-                                {
+                            {
                                 JsonArray jsonArray = jsonObject.getAsJsonArray("result");
 
 
@@ -280,12 +280,18 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
-                    public void onCompleted(Exception e, JsonObject result) {
+                    public void onCompleted(Exception e, JsonObject result)
+                    {
+
+                        System.out.println("result----------------"+result.toString());
+
                         if (result == null) {
                             //progress_handler.hide();
                             layout_container.setVisibility(View.INVISIBLE);
                             mSwipyRefreshLayout.setRefreshing(false);
-                        } else {
+                        }
+                        else
+                        {
 
 
                             System.out.println("message_data==================" + result);

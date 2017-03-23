@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 public class User_DashboardFragment extends Fragment {
 
+
     RecyclerView dashboardlist;
     DashboardAdapter dashboardAdapter;
     ArrayList<DashboardData> dashboardDatas = new ArrayList<>();
@@ -72,7 +73,7 @@ public class User_DashboardFragment extends Fragment {
         });
 
         if (app_sharedpreference.getsharedpref("username", "notlogin") != null) {
-            String Username = app_sharedpreference.getsharedpref("username", "not");
+            String Username = app_sharedpreference.getsharedpref("name", "not");
             String Emailid = app_sharedpreference.getsharedpref("emailid", "not");
             if (Username.equals("notlogin")) {
                 textViewName.setText("");
@@ -82,6 +83,8 @@ public class User_DashboardFragment extends Fragment {
                 tvEmail.setText(Emailid);
             }
         }
+
+
 
 
     }
@@ -233,4 +236,27 @@ public class User_DashboardFragment extends Fragment {
                 });
     }
 
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if (app_sharedpreference.getsharedpref("username", "notlogin") != null)
+        {
+            String Username = app_sharedpreference.getsharedpref("name", "not");
+            String Emailid = app_sharedpreference.getsharedpref("emailid", "not");
+            if (Username.equals("notlogin"))
+            {
+                textViewName.setText("");
+                tvEmail.setText("");
+            }
+            else
+            {
+                textViewName.setText(Username);
+                tvEmail.setText(Emailid);
+            }
+        }
+
+
+    }
 }
