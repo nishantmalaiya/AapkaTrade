@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -25,8 +27,10 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
@@ -38,6 +42,7 @@ import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.general.App_config;
 import com.example.pat.aapkatrade.general.CheckPermission;
 import com.example.pat.aapkatrade.general.ConnetivityCheck;
+import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.location.Mylocation;
 import com.example.pat.aapkatrade.login.LoginDashboard;
@@ -71,7 +76,8 @@ public class HomeActivity extends AppCompatActivity
     AppSharedPreference app_sharedpreference;
 
     Mylocation mylocation;
-
+    boolean doubleBackToExitPressedOnce = false;
+    LinearLayout linearlayout_home;
 ProgressBarHandler progressBarHandler;
 
     @Override
@@ -82,7 +88,7 @@ ProgressBarHandler progressBarHandler;
         rl_main_content=(RelativeLayout)findViewById(R.id.rl_main_content);
         progressBarHandler=new ProgressBarHandler(this);
 
-    
+        linearlayout_home=(LinearLayout)findViewById(R.id.ll_toolbar_container_home) ;
         app_sharedpreference = new AppSharedPreference(HomeActivity.this);
 
         App_config.set_defaultfont(HomeActivity.this);
@@ -280,28 +286,35 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
 
         if(dashboardFragment.isVisible())
         {
-            finish();
+
+            double_back_pressed("finish");
+            //finish();
 
             Log.e("myfragment_visible","myfragment visible");
         }
         else if(showcontactUsFragment!=null && showcontactUsFragment.isVisible())
         {
-            finish();
+            double_back_pressed("finish");
+           // finish();
             Log.e("contact us visible","contact us visible");
 
         }
         else if (showaboutUsFragment!=null && showaboutUsFragment.isVisible())
         {
-            finish();
+            double_back_pressed("finish");
+            //finish();
             Log.e("showabout visible","showaboutUsFragment visible");
         }
         else if(showuserdashboardfragment!=null&&showuserdashboardfragment.isVisible())
         {
-            finish();
+            double_back_pressed("finish");
+            //finish();
             Log.e("userdashboard visible","userdashboard visible");
         }
         else {
-            super.onBackPressed();
+
+            double_back_pressed("onbackpressed");
+           // super.onBackPressed();
         }
 
 
@@ -610,6 +623,60 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+public  void double_back_pressed(String type)
+{
+    if(type.contains("finish")) {
+        if (doubleBackToExitPressedOnce) {
+
+            finish();
+
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        //AndroidUtils.showSnackBar(linearlayout_home,"Please click BACK again to exit");
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+    }
+    else
+    {
+        if (doubleBackToExitPressedOnce) {
+
+
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+       // AndroidUtils.showSnackBar(linearlayout_home,"Please click BACK again to exit");
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+
+
+
+
+
+    }
+
+
+}
+
+
 
 
 }
