@@ -3,6 +3,7 @@ package com.example.pat.aapkatrade.Home;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
@@ -29,9 +30,13 @@ import android.widget.TextView;
 import com.example.pat.aapkatrade.Home.banner_home.viewpageradapter_home;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.categories_tab.PurticularDataActivity.PurticularActivity;
+import com.example.pat.aapkatrade.general.CheckPermission;
+import com.example.pat.aapkatrade.general.LocationManager_check;
 import com.example.pat.aapkatrade.general.Tabletsize;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
-
+import com.example.pat.aapkatrade.location.Geocoder;
+import com.example.pat.aapkatrade.location.Mylocation;
+import com.example.pat.aapkatrade.search.Search;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -77,6 +82,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     RelativeLayout rl_searchview_dashboard;
 
     View view;
+    Mylocation mylocation;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -206,6 +212,77 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 //                .setHeader(R.id.coordination_home, v2)
 //                .minHeightHeaderDim(R.dimen.min_header_height)
 //                .build();
+
+
+        rl_searchview_dashboard = (RelativeLayout)v.findViewById(R.id.rl_searchview);
+
+                rl_searchview_dashboard.setOnClickListener(new View.OnClickListener() {
+
+
+                    @Override
+                    public void onClick(View v) {
+
+                        boolean permission_status = CheckPermission.checkPermissions(getActivity());
+
+
+                        if (permission_status)
+
+                        {progress_handler.show();
+                            mylocation = new Mylocation(getActivity());
+                            LocationManager_check locationManagerCheck = new LocationManager_check(
+                                    getActivity());
+                            Location location = null;
+                            if (locationManagerCheck.isLocationServiceAvailable()) {
+
+                                Log.e("currenttime",""+System.currentTimeMillis()/1000.0);
+
+                                double latitude = mylocation.getLatitude();
+                                double longitude = mylocation.getLongitude();
+                                Geocoder geocoder_statename=new Geocoder(getActivity(),latitude,longitude);
+                                String state_name=geocoder_statename.get_state_name();
+                                Log.e("latitude",latitude+"****"+longitude+"****"+state_name);
+                                Log.e("currenttime2",""+System.currentTimeMillis()/1000.0);
+                                Intent goto_search = new Intent(getActivity(), Search.class);
+                                goto_search.putExtra("classname","homeactivity");
+                                goto_search.putExtra("state_name",state_name);
+                                startActivity(goto_search);
+                                getActivity().finish();
+                                progress_handler.hide();
+                                Log.e("currenttime3",""+System.currentTimeMillis()/ 1000.0);
+
+
+                            } else {
+                                locationManagerCheck.createLocationServiceError(getActivity());
+                            }
+
+
+
+
+
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    }
+
+
+                });
+
+
+
+
+
 
     }
 
@@ -470,3 +547,4 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
 
 }
+
