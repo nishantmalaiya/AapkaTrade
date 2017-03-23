@@ -21,7 +21,6 @@
             android:background="@color/colorPrimary">
 
             <include
-
                 layout="@layout/toolbar_layout" />
 
 

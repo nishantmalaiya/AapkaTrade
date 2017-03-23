@@ -8,10 +8,6 @@
     android:background="#EEEEEE"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar_without_image_layout"
-        android:visibility="gone" />
 
 
     <android.support.design.widget.AppBarLayout
@@ -33,93 +29,27 @@
 
 
 
-<RelativeLayout
-    android:layout_width="match_parent"
-
-    android:layout_height="192dp"
-    android:background="@drawable/navigation_profile_bg"
-    android:layout_marginTop="?attr/actionBarSize"
-    app:layout_collapseMode="parallax" >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:layout_gravity="center"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:gravity="center_horizontal|center_vertical"
-                android:src="@drawable/ic_profile_user"
-               />
-
-</RelativeLayout>
-            <android.support.v7.widget.Toolbar
-
-                android:id="@+id/toolbar"
+            <RelativeLayout
                 android:layout_width="match_parent"
 
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/green"
-                android:titleTextColor="@color/white"
-                app:layout_collapseMode="pin"
+                android:layout_height="192dp"
+                android:background="@drawable/navigation_profile_bg"
+                android:layout_marginTop="?attr/actionBarSize"
+                app:layout_collapseMode="parallax" >
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:src="@drawable/ic_profile_user"
+                    />
 
-
-
-                android:elevation="0dp"
-                android:minHeight="?attr/actionBarSize"
-
-
-
-
-                >
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                   >
-
-                    <TextView
-                        android:id="@+id/btnSave2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="SAVE"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
-                        android:textColor="@color/white"
-                        android:layout_centerInParent="true"
-                        android:visibility="gone"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvsave"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:text="My Profile"
-                        android:textColor="@color/white"
-                        android:layout_centerInParent="true"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <android.support.v7.widget.AppCompatImageView
-                        android:id="@+id/back_imagview"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerInParent="true"
-                        app:srcCompat="@drawable/ic_arrow_back_white_24dp"
-
-
-
-                       />
-                </RelativeLayout>
-
-            </android.support.v7.widget.Toolbar>
+            </RelativeLayout>
+            <include layout="@layout/toolbar_layout" />
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
@@ -130,24 +60,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffe5e5e5"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-     >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
-        <include layout="@layout/content_my_profile"
+            <include layout="@layout/content_my_profile"
 
-            />
-
-
-
-    </LinearLayout>
+                />
 
 
-</android.support.v4.widget.NestedScrollView>
+
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
 
 
     <RelativeLayout

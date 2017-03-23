@@ -244,5 +244,6 @@
 
 
     <string name="skip">Skip</string>
+    <string name="add_vender_heading">Add Vendor</string>
 
 </resources>
