@@ -61,7 +61,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Home.HomeActivity" />
+        <activity android:name=".Home.HomeActivity"
+            android:theme="@style/AppTheme"/>
         <activity android:name=".user_dashboard.add_product.AddProductActivity" />
         <activity android:name=".productdetail.ProductDetail" />
         <activity

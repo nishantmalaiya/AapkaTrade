@@ -184,6 +184,7 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle(null);
         ImageView home_link=(ImageView)toolbar.findViewById(R.id.iconHome);
+        AndroidUtils.setImageColor(home_link, context, R.color.white);
         home_link.setVisibility(View.GONE);
         // getSupportActionBar().setIcon(R.drawable.logo_word);
 

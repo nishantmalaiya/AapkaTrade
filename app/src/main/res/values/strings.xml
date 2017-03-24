@@ -217,6 +217,7 @@
     <string name="endDate">End Date</string>
     <string name="complete_date">COMPLETE DATE</string>
     <string name="payout">PAYOUT</string>
+    <string name="payout_report_heading">Payout Report</string>
     <string name="s_data">SData</string>
     <string name="bussiness_associate_details">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
     <string name="business_associate_heading">Business Associate and Term &amp; Conditions</string>
@@ -245,5 +246,8 @@
 
     <string name="skip">Skip</string>
     <string name="add_vender_heading">Add Vendor</string>
+    <string name="order_mgt_heading">Order Management</string>
+    <string name="service_enquiry_list_heading">Enquiry Service List</string>
+    <string name="my_network_list_heading">My Network List</string>
 
 </resources>

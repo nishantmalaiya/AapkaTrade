@@ -118,6 +118,14 @@ public class LoginDashboard extends AppCompatActivity {
         toolbarRightText.setVisibility(View.VISIBLE);
         toolbarRightText.setTextColor(ContextCompat.getColor(context, R.color.orange));
         toolbarRightText.setText(getResources().getString(R.string.skip));
+        toolbarRightText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
         AndroidUtils.setBackgroundSolid(toolbar, context, R.color.transparent, 0);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {

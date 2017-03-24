@@ -1,9 +1,11 @@
 package com.example.pat.aapkatrade.user_dashboard.product_list.listproduct_detail;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,8 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.Home.banner_home.viewpageradapter_home;
 import com.example.pat.aapkatrade.R;
+import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -35,7 +40,7 @@ public class ListProductDetailActivity extends AppCompatActivity
     String product_name, price,cross_price, product_image,category_name,description,delivery_distance,delivery_area_name;
     TextView tvProductName_d,tvCategoryName_d,tvProPrice_d,tvDeliveryDays_d,tvDeliveryArea_d,tvDiscription_d,tvSpecificationHeading,tvSpecification;
     RelativeLayout relativeSpecification;
-
+    private Context context;
 
 
     @Override
@@ -44,7 +49,7 @@ public class ListProductDetailActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_list_product_detail);
-
+        context = ListProductDetailActivity.this;
         Bundle p = getIntent().getExtras();
 
         product_name = p.getString("product_name","");
@@ -65,7 +70,7 @@ public class ListProductDetailActivity extends AppCompatActivity
 
         System.out.println("p--------------"+product_name+price+cross_price+product_image+category_name+description+delivery_distance+delivery_distance);
 
-        setuptoolbar();
+        setUpToolBar();
 
         setup_layout();
 
@@ -224,36 +229,54 @@ public class ListProductDetailActivity extends AppCompatActivity
 
 
 
-    private void setuptoolbar()
-    {
+    private void setUpToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
+        AppCompatImageView back_imagview = (AppCompatImageView) findViewById(R.id.back_imagview);
+        back_imagview.setVisibility(View.VISIBLE);
+        back_imagview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
+        ImageView logoWord = (ImageView) findViewById(R.id.logoWord);
+        TextView header_name = (TextView) findViewById(R.id.header_name);
+        header_name.setVisibility(View.VISIBLE);
+        header_name.setText(getResources().getString(R.string.product_list_heading));
+        logoWord.setVisibility(View.GONE);
+        AndroidUtils.setImageColor(homeIcon, context, R.color.white);
+        homeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
         setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setTitle(null);
+            getSupportActionBar().setElevation(0);
+        }
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        getSupportActionBar().setTitle(null);
-
-        // getSupportActionBar().setIcon(R.drawable.home_logo);
 
 
     }
-
 
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.empty_menu, menu);
+        getMenuInflater().inflate(R.menu.bottom_home_menu, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
             case android.R.id.home:
