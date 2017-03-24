@@ -43,12 +43,16 @@ public class ChangePassword extends AppCompatActivity
     private Context context;
 
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_change_password);
+
         context = ChangePassword.this;
+
         progress_handler = new ProgressBarHandler(this);
 
         setUpToolBar();
@@ -56,6 +60,7 @@ public class ChangePassword extends AppCompatActivity
         app_sharedpreference = new AppSharedPreference(getApplicationContext());
 
         user_id = app_sharedpreference.getsharedpref("userid", "");
+
         user_type = app_sharedpreference.getsharedpref("usertype","1");
 
         initView();
@@ -193,8 +198,10 @@ public class ChangePassword extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 finish();
                 break;

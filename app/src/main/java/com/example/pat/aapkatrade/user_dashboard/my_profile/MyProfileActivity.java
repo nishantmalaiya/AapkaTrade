@@ -230,8 +230,6 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
         collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.transparent)); // transperent color = #00000000
         collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.white));
 
-
-
 //        StikkyHeaderBuilder.stickTo(mRecyclerView)
 //                .setHeader(R.id.header_simple, view)
 //                .minHeightHeaderDim(R.dimen.min_header_height)

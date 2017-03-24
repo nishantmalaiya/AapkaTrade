@@ -101,7 +101,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
     private void setupviewpager(ArrayList<String> imageIdList) {
 
-
         viewpageradapter = new viewpageradapter_home(getActivity(), imageIdList);
         vp.setAdapter(viewpageradapter);
         vp.setCurrentItem(currentPage);
@@ -156,10 +155,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
     private void initializeview(View v, ViewGroup v2) {
 
-
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-
-
 
         progress_handler = new ProgressBarHandler(getActivity());
 
@@ -208,10 +204,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
 
         get_home_data();
-//        StikkyHeaderBuilder.stickTo(scrollView)
-//                .setHeader(R.id.coordination_home, v2)
-//                .minHeightHeaderDim(R.dimen.min_header_height)
-//                .build();
+        //        StikkyHeaderBuilder.stickTo(scrollView)
+       //                .setHeader(R.id.coordination_home, v2)
+       //                .minHeightHeaderDim(R.dimen.min_header_height)
+       //                .build();
 
 
         rl_searchview_dashboard = (RelativeLayout)v.findViewById(R.id.rl_searchview);
@@ -222,68 +218,15 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                     @Override
                     public void onClick(View v) {
 
-                        boolean permission_status = CheckPermission.checkPermissions(getActivity());
-
-
-                        if (permission_status)
-
-                        {progress_handler.show();
-                            mylocation = new Mylocation(getActivity());
-                            LocationManager_check locationManagerCheck = new LocationManager_check(
-                                    getActivity());
-                            Location location = null;
-                            if (locationManagerCheck.isLocationServiceAvailable()) {
-
-                                Log.e("currenttime",""+System.currentTimeMillis()/1000.0);
-
-                                double latitude = mylocation.getLatitude();
-                                double longitude = mylocation.getLongitude();
-                                Geocoder geocoder_statename=new Geocoder(getActivity(),latitude,longitude);
-                                String state_name=geocoder_statename.get_state_name();
-                                Log.e("latitude",latitude+"****"+longitude+"****"+state_name);
-                                Log.e("currenttime2",""+System.currentTimeMillis()/1000.0);
-                                Intent goto_search = new Intent(getActivity(), Search.class);
-                                goto_search.putExtra("classname","homeactivity");
-                                goto_search.putExtra("state_name",state_name);
-                                startActivity(goto_search);
-                                getActivity().finish();
-                                progress_handler.hide();
-                                Log.e("currenttime3",""+System.currentTimeMillis()/ 1000.0);
-
-
-                            } else {
-                                locationManagerCheck.createLocationServiceError(getActivity());
-                            }
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
+                        Intent new_intent = new Intent(getActivity(),Search.class);
+                        new_intent.putExtra("classname","homeactivity");
+                        startActivity(new_intent);
+                        getActivity().finish();
 
                     }
 
 
                 });
-
-
-
-
-
-
     }
 
     public void get_home_data()
@@ -303,8 +246,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-
-
 
                         if (result != null)
                         {
@@ -515,32 +456,14 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                         startActivity(intent);
                     }
                 });
-
-// Changing message text color
+        // Changing message text color
         snackbar.setActionTextColor(Color.RED);
 
-// Changing action button text color
+        // Changing action button text color
         View sbView = snackbar.getView();
         TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(Color.YELLOW);
         snackbar.show();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
