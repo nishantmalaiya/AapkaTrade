@@ -360,7 +360,6 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {

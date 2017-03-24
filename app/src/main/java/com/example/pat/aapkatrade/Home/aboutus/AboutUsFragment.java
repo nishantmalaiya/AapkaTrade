@@ -2,6 +2,7 @@ package com.example.pat.aapkatrade.Home.aboutus;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,9 @@ public class AboutUsFragment extends Fragment
     {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_about_us, container, false);
+
+        Log.e("time", String.valueOf(System.currentTimeMillis()));
+
 
         return v;
     }
