@@ -636,7 +636,6 @@ public  void double_back_pressed(String type)
         }
 
         this.doubleBackToExitPressedOnce = true;
-        //AndroidUtils.showSnackBar(linearlayout_home,"Please click BACK again to exit");
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
@@ -657,7 +656,7 @@ public  void double_back_pressed(String type)
         }
 
         this.doubleBackToExitPressedOnce = true;
-       // AndroidUtils.showSnackBar(linearlayout_home,"Please click BACK again to exit");
+     //   AndroidUtils.showSnackBar(linearlayout_home,"Please click BACK again to exit"));
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {

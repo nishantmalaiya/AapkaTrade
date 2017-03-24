@@ -20,19 +20,21 @@ public class Geocoder {
     Context c;
     public double latitude, longitude;
     String result ;
-    ProgressBarHandler progressBarHandler;
+   // ProgressBarHandler progressBarHandler;
     public Geocoder(Context c, double latitude, double longitude) {
         this.c = c;
         this.latitude = latitude;
         this.longitude = longitude;
-        progressBarHandler = new ProgressBarHandler(c);
+//        progressBarHandler = new ProgressBarHandler(c);
         get_state_name();
 
     }
 
 
+
+
     public String get_state_name() {
-        progressBarHandler.show();
+       // progressBarHandler.show();
         android.location.Geocoder geocoder = new android.location.Geocoder(c, Locale.getDefault());
 
 
@@ -46,14 +48,18 @@ public class Geocoder {
 
 //
                 result = address.getAdminArea();
-                progressBarHandler.hide();
+               // progressBarHandler.hide();
 
+            }
+            else {
+
+                Log.e("addressList_is_empty","addressList_is_empty");
             }
 
 
         } catch (IOException e) {
             e.printStackTrace();
-            progressBarHandler.hide();
+           // progressBarHandler.hide();
         }
         return result;
     }

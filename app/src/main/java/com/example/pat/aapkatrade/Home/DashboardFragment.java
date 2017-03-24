@@ -35,6 +35,7 @@ import com.example.pat.aapkatrade.general.LocationManager_check;
 import com.example.pat.aapkatrade.general.Tabletsize;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.location.Geocoder;
+import com.example.pat.aapkatrade.location.MyAsyncTask_location;
 import com.example.pat.aapkatrade.location.Mylocation;
 import com.example.pat.aapkatrade.search.Search;
 import com.google.gson.JsonArray;
@@ -218,10 +219,25 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                     @Override
                     public void onClick(View v) {
 
-                        Intent new_intent = new Intent(getActivity(),Search.class);
-                        new_intent.putExtra("classname","homeactivity");
-                        startActivity(new_intent);
-                        getActivity().finish();
+                        LocationManager_check locationManagerCheck = new LocationManager_check(
+                                getActivity());
+                        Location location = null;
+                        if (locationManagerCheck.isLocationServiceAvailable()) {
+
+                            MyAsyncTask_location myAsyncTask_location = new MyAsyncTask_location(getActivity(),"homeactivity");
+                            myAsyncTask_location.execute();
+
+
+                        }
+
+                        else {
+                            locationManagerCheck.createLocationServiceError(getActivity());
+                        }
+
+//                        Intent new_intent = new Intent(getActivity(),Search.class);
+//                        new_intent.putExtra("classname","homeactivity");
+//                        startActivity(new_intent);
+//                        getActivity().finish();
 
                     }
 

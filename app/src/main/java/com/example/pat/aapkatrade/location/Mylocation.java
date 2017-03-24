@@ -102,7 +102,7 @@ public class Mylocation implements LocationListener {
                             LocationManager.NETWORK_PROVIDER,
                             MIN_TIME_BW_UPDATES,
                             MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                        Log.d("Network", "Network");
+                        Log.e("Network", "Network");
                         if (locationManager != null) {
                             location = locationManager
                                     .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -119,7 +119,7 @@ public class Mylocation implements LocationListener {
                                     LocationManager.GPS_PROVIDER,
                                     MIN_TIME_BW_UPDATES,
                                     MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                            Log.d("GPS Enabled", "GPS Enabled");
+                            Log.e("GPS Enabled", "GPS Enabled");
                             if (locationManager != null) {
                                 location = locationManager
                                         .getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -129,11 +129,15 @@ public class Mylocation implements LocationListener {
                                 }
                             }
                         }
+                        else {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                        }
                     }
                 }
             progressBarHandler.hide();
             } catch (Exception e) {
-                e.printStackTrace();
+             Log.e("location_error",e.toString());
             progressBarHandler.hide();
             }
 
