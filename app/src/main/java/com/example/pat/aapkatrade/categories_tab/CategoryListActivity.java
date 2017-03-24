@@ -28,6 +28,7 @@ import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.general.recycleview_custom.MyRecyclerViewEffect;
 import com.example.pat.aapkatrade.location.Geocoder;
+import com.example.pat.aapkatrade.location.MyAsyncTask_location;
 import com.example.pat.aapkatrade.location.Mylocation;
 import com.example.pat.aapkatrade.map.GoogleMapActivity;
 import com.example.pat.aapkatrade.search.Search;
@@ -93,44 +94,21 @@ public class CategoryListActivity extends AppCompatActivity
             public void onClick(View v) {
 
 
-                boolean permission_status = CheckPermission.checkPermissions(CategoryListActivity.this);
+                LocationManager_check locationManagerCheck = new LocationManager_check(
+                        CategoryListActivity.this);
+                Location location = null;
+                if (locationManagerCheck.isLocationServiceAvailable()) {
 
+                    MyAsyncTask_location myAsyncTask_location = new MyAsyncTask_location(CategoryListActivity.this,"homeactivity");
+                    myAsyncTask_location.execute();
 
-                if (permission_status)
-
-                {
-                    mylocation = new Mylocation(context);
-                    LocationManager_check locationManagerCheck = new LocationManager_check(
-                            context);
-                    Location location = null;
-                    if (locationManagerCheck.isLocationServiceAvailable()) {
-                        double latitude = mylocation.getLatitude();
-                        double longitude = mylocation.getLongitude();
-                        Geocoder geocoder_statename = new Geocoder(CategoryListActivity.this, latitude, longitude);
-                        String state_name = geocoder_statename.get_state_name();
-
-
-                        if(state_name!=null) {
-                            Intent goto_search = new Intent(CategoryListActivity.this, Search.class);
-                            goto_search.putExtra("latitude", latitude);
-                            goto_search.putExtra("longitude", longitude);
-                            goto_search.putExtra("state_name", state_name);
-                            startActivity(goto_search);
-                            finish();
-
-                        }
-                        else{
-                            Log.e("statenotfound",""+"statenotfound");
-                        }
-
-
-                    }
-                    else
-                    {
-                        locationManagerCheck.createLocationServiceError(CategoryListActivity.this);
-                    }
 
                 }
+
+                else {
+                    locationManagerCheck.createLocationServiceError(CategoryListActivity.this);
+                }
+
 
 
 
