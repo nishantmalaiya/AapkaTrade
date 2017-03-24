@@ -293,6 +293,22 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
                 mDrawerToggle.syncState();
             }
         });
+       // mDrawerToggle.setDrawerIndicatorEnabled(true);
+       // mDrawerToggle.setHomeAsUpIndicator(R.drawable.menu_24dp);
+
+
+
+toolbar.setNavigationIcon(R.drawable.menu_24dp);
+
+
+
+
+
+
+
+
+
+
 
 
     }

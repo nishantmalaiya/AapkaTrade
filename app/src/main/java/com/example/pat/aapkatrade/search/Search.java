@@ -3,8 +3,8 @@ package com.example.pat.aapkatrade.search;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -41,16 +41,11 @@ import com.example.pat.aapkatrade.categories_tab.CategoryListActivity;
 import com.example.pat.aapkatrade.general.Adapter_callback_interface;
 import com.example.pat.aapkatrade.general.App_config;
 import com.example.pat.aapkatrade.general.Call_webservice;
-import com.example.pat.aapkatrade.general.CheckPermission;
-import com.example.pat.aapkatrade.general.LocationManager_check;
 import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomAutocompleteAdapter;
 import com.example.pat.aapkatrade.general.Utils.adapter.Webservice_search_autocompleteadapter;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
-import com.example.pat.aapkatrade.location.Geocoder;
-import com.example.pat.aapkatrade.location.Mylocation;
-import com.example.pat.aapkatrade.service_enquiry.ServiceEnquiry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -96,68 +91,28 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
     String selected_categoryid;
     ViewPager viewpager_state;
-    Mylocation mylocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+
         Intent i = getIntent();
+        currentlocation_statename = i.getStringExtra("state_name");
+        Log.e("current_statename_",currentlocation_statename);
 
         class_name = i.getStringExtra("classname");
+        Log.e("class_name",class_name);
 
-        progressBarHandler = new ProgressBarHandler(Search.this);
+
 
         setuptoolbar();
 
         initview();
+        call_state_webservice(currentlocation_statename);
 
 
-
-
-
-    }
-
-    private void get_location() {
-
-
-        progressBarHandler.show();
-        boolean permission_status = CheckPermission.checkPermissions(Search.this);
-
-        if (permission_status)
-        {
-
-            mylocation = new Mylocation(Search.this);
-            LocationManager_check locationManagerCheck = new LocationManager_check(Search.this);
-            Location location = null;
-            if (locationManagerCheck.isLocationServiceAvailable())
-            {
-                Log.e("currenttime",""+System.currentTimeMillis()/1000.0);
-
-                double latitude = mylocation.getLatitude();
-                double longitude = mylocation.getLongitude();
-                Geocoder geocoder_statename=new Geocoder(Search.this,latitude,longitude);
-                String state_name=geocoder_statename.get_state_name();
-
-
-                Log.e("latitude",latitude+"****"+longitude+"****"+state_name);
-                Log.e("currenttime2",""+System.currentTimeMillis()/1000.0);
-
-                Log.e("currenttime3",""+System.currentTimeMillis()/ 1000.0);
-                progressBarHandler.hide();
-                call_state_webservice(state_name);
-
-
-            }
-            else
-            {
-                locationManagerCheck.createLocationServiceError(Search.this);
-                progressBarHandler.hide();
-            }
-
-
-        }
     }
 
 
@@ -203,7 +158,7 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
                 String text = s.toString();
 
-                if (text.length() > 4) {
+                if (text.length() > 0) {
 
 
                     String product_search_url = (getResources().getString(R.string.webservice_base_url)) + "/product_search";
@@ -248,14 +203,12 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
             }
         });
 
-        get_location();
-
-
 
     }
 
 
-    private void call_state_webservice(String state_name) {
+    private void call_state_webservice( String a) {
+
         progressBarHandler.show();
         Log.e("statelist_state", stateList.toString() + "" + c);
 
@@ -266,13 +219,13 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
         for (int i = 0; i < stateList.size(); i++) {
 
-            if (state_name.equals(stateList.get(i))) {
+            if (a.equals(stateList.get(i))) {
 
                 current_state_index = i;
                 Log.e("current_state_index", current_state_index + "");
             }
         }
-
+        Log.e("current_state_index2", current_state_index + "");
         state_list_spinner.setSelection(current_state_index);
         progressBarHandler.hide();
 
@@ -286,7 +239,7 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
         String search_url = (getResources().getString(R.string.webservice_base_url)) + "/search";
         progressBarHandler.show();
-    if (type.contains("category")){
+        if (type.contains("category")){
 
             Ion.with(Search.this)
                     .load(search_url)
@@ -307,7 +260,7 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
                                 set_webservice_data(result,type);
 
                                 Log.e("call 2_sending",product_name1+"**"+id+"");
-                               // Log.e("call 2_receiving",result.toString());
+                                // Log.e("call 2_receiving",result.toString());
 
 
                             } else {
@@ -512,16 +465,16 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
             category_names_recycler.setLayoutManager(mLayoutManager_category);
 
             state_list_spinner.setSelection(current_state_index);
-        if (type.contains("category"))
-        {
+            if (type.contains("category"))
+            {
 
-        }
-        else{
-            Log.e("work2",type);
-            searchResults_category_Adapter = new SearchcategoryAdapter(Search.this, common_category_searchlist, state_list_spinner.getItemAtPosition(current_state_index).toString(),
-                    autocomplete_textview_product.getText().toString());
-            category_names_recycler.setAdapter(searchResults_category_Adapter);
-        }
+            }
+            else{
+                Log.e("work2",type);
+                searchResults_category_Adapter = new SearchcategoryAdapter(Search.this, common_category_searchlist, state_list_spinner.getItemAtPosition(current_state_index).toString(),
+                        autocomplete_textview_product.getText().toString());
+                category_names_recycler.setAdapter(searchResults_category_Adapter);
+            }
 
 
 
@@ -784,7 +737,7 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
     {
 
 
-            // Log.e("text_editor",autocomplete_textview_state.getText().toString()+"**********"+autocomplete_textview_state.getText().toString());
+        // Log.e("text_editor",autocomplete_textview_state.getText().toString()+"**********"+autocomplete_textview_state.getText().toString());
 
 
 
