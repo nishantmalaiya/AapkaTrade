@@ -3,6 +3,7 @@ package com.example.pat.aapkatrade.search;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
@@ -40,11 +41,16 @@ import com.example.pat.aapkatrade.categories_tab.CategoryListActivity;
 import com.example.pat.aapkatrade.general.Adapter_callback_interface;
 import com.example.pat.aapkatrade.general.App_config;
 import com.example.pat.aapkatrade.general.Call_webservice;
+import com.example.pat.aapkatrade.general.CheckPermission;
+import com.example.pat.aapkatrade.general.LocationManager_check;
 import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomAutocompleteAdapter;
 import com.example.pat.aapkatrade.general.Utils.adapter.Webservice_search_autocompleteadapter;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
+import com.example.pat.aapkatrade.location.Geocoder;
+import com.example.pat.aapkatrade.location.Mylocation;
+import com.example.pat.aapkatrade.service_enquiry.ServiceEnquiry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -88,8 +94,9 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
     int current_state_index;
     String class_name;
 
-String selected_categoryid;
+    String selected_categoryid;
     ViewPager viewpager_state;
+    Mylocation mylocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,16 +104,60 @@ String selected_categoryid;
         setContentView(R.layout.activity_search);
 
         Intent i = getIntent();
-        currentlocation_statename = i.getStringExtra("state_name");
+
         class_name = i.getStringExtra("classname");
 
-
+        progressBarHandler = new ProgressBarHandler(Search.this);
 
         setuptoolbar();
 
         initview();
-        call_state_webservice();
 
+
+
+
+
+    }
+
+    private void get_location() {
+
+
+        progressBarHandler.show();
+        boolean permission_status = CheckPermission.checkPermissions(Search.this);
+
+        if (permission_status)
+        {
+
+            mylocation = new Mylocation(Search.this);
+            LocationManager_check locationManagerCheck = new LocationManager_check(Search.this);
+            Location location = null;
+            if (locationManagerCheck.isLocationServiceAvailable())
+            {
+                Log.e("currenttime",""+System.currentTimeMillis()/1000.0);
+
+                double latitude = mylocation.getLatitude();
+                double longitude = mylocation.getLongitude();
+                Geocoder geocoder_statename=new Geocoder(Search.this,latitude,longitude);
+                String state_name=geocoder_statename.get_state_name();
+
+
+                Log.e("latitude",latitude+"****"+longitude+"****"+state_name);
+                Log.e("currenttime2",""+System.currentTimeMillis()/1000.0);
+
+                Log.e("currenttime3",""+System.currentTimeMillis()/ 1000.0);
+                progressBarHandler.hide();
+                call_state_webservice(state_name);
+
+
+            }
+            else
+            {
+                locationManagerCheck.createLocationServiceError(Search.this);
+                progressBarHandler.hide();
+            }
+
+
+        }
     }
 
 
@@ -197,11 +248,14 @@ String selected_categoryid;
             }
         });
 
+        get_location();
+
+
 
     }
 
 
-    private void call_state_webservice() {
+    private void call_state_webservice(String state_name) {
         progressBarHandler.show();
         Log.e("statelist_state", stateList.toString() + "" + c);
 
@@ -212,7 +266,7 @@ String selected_categoryid;
 
         for (int i = 0; i < stateList.size(); i++) {
 
-            if (currentlocation_statename.equals(stateList.get(i))) {
+            if (state_name.equals(stateList.get(i))) {
 
                 current_state_index = i;
                 Log.e("current_state_index", current_state_index + "");

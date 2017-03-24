@@ -26,6 +26,7 @@ android {
         }
     }
 
+
     repositories {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         jcenter()
@@ -92,4 +93,5 @@ dependencies {
     compile 'com.github.badoualy:stepper-indicator:1.0.6'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     compile 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.0'
+
 }
