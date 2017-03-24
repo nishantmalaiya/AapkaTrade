@@ -85,6 +85,8 @@ ProgressBarHandler progressBarHandler;
         super.onCreate(savedInstanceState);
 
 
+
+
         rl_main_content=(RelativeLayout)findViewById(R.id.rl_main_content);
         progressBarHandler=new ProgressBarHandler(this);
 
@@ -473,6 +475,9 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
 
                         break;
                     case 1:
+
+                        Log.e("time  fragment", String.valueOf(System.currentTimeMillis()));
+
                         if (aboutUsFragment == null) {
                             aboutUsFragment = new AboutUsFragment();
                         }

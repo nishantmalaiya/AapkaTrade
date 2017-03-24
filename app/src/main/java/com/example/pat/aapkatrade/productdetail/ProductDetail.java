@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
@@ -81,6 +82,9 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.e("time  Product Detail", String.valueOf(System.currentTimeMillis()));
+
         setContentView(R.layout.activity_product_detail);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         context = ProductDetail.this;
