@@ -146,7 +146,7 @@ public class VendorActivity extends AppCompatActivity
         findViewById(R.id.logoWord).setVisibility(View.GONE); ;
         TextView header_name = (TextView) findViewById(R.id.header_name);
         header_name.setVisibility(View.VISIBLE);
-        header_name.setText(getResources().getString(R.string.add_vender_heading));
+        header_name.setText(getResources().getString(R.string.vendor_list_heading));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         AndroidUtils.setImageColor(homeIcon, context, R.color.white);
         homeIcon.setOnClickListener(new View.OnClickListener() {

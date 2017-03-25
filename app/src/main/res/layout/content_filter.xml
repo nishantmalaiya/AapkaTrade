@@ -65,7 +65,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/relativeLayout1"
                 android:background="@color/black"
-                ></View>
+                />
 
 
             <RelativeLayout
@@ -107,7 +107,7 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/relativeLayout2"
                 android:background="@color/black"
-                ></View>
+                />
 
 
         </RelativeLayout>

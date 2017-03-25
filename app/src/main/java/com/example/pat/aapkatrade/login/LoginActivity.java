@@ -306,6 +306,7 @@ public class LoginActivity extends AppCompatActivity {
             JsonObject jsonObject = webservice_returndata.getAsJsonObject("all_info");
             Log.e("hi", jsonObject.toString());
             app_sharedpreference.setsharedpref("userid", webservice_returndata.get("user_id").getAsString());
+            app_sharedpreference.setsharedpref("business_id", webservice_returndata.get("user_id").getAsString());
             app_sharedpreference.setsharedpref("name", jsonObject.get("name").getAsString());
             app_sharedpreference.setsharedpref("username", jsonObject.get("name").getAsString());
             app_sharedpreference.setsharedpref("lname", jsonObject.get("lastname").getAsString());

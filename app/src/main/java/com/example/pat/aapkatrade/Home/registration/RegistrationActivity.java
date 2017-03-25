@@ -103,7 +103,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
     private CircleImageView circleImageView, previewPDF;
     private Bitmap imageForPreview;
     HashMap<String, String> webservice_header_type = new HashMap<>();
-    private String busiType = "", countryID = "101", stateID, cityID;
+    private String busiType = "", countryID = "101", stateID, cityID, isAddVendorCall = "false", business_id;
     private RelativeLayout spBussinessCategoryLayout, previewImageLayout, previewPDFLayout, dobLayout;
     private DatePickerDialog datePickerDialog;
     ProgressBarHandler progressBarHandler;
@@ -117,6 +117,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
         setContentView(R.layout.activity_registration);
         context = RegistrationActivity.this;
         app_sharedpreference = new AppSharedPreference(RegistrationActivity.this);
+        isAddVendorCall = app_sharedpreference.getsharedpref("isAddVendorCall");
         setUpToolBar();
         initView();
         saveUserTypeInSharedPreferences();
@@ -147,7 +148,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                     /*
                     Seller Registration
                      */
-                    if (app_sharedpreference.getsharedpref("usertype", "0").equals("1")) {
+                    if (app_sharedpreference.getsharedpref("usertype", "0").equals("1") || isAddVendorCall.equals("true")) {
 
                         Log.e("reach", "reach2");
                         setSellerFormData();
@@ -155,10 +156,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                         if (isAllFieldSet == 0) {
                             callWebServiceForSellerRegistration();
                         }
-                    } /*else {
-                        callWebServiceForSellerRegistration();
-                        Log.e("isAllFieldSet", isAllFieldSet + "");
-                    }*/
+                    }
 
                     /*
                     Buyer Registration
@@ -221,7 +219,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
 
     private void saveUserTypeInSharedPreferences() {
         if (app_sharedpreference != null) {
-            if (app_sharedpreference.getsharedpref("usertype", "0").equals("1")) {
+            if (app_sharedpreference.getsharedpref("usertype", "0").equals("1") || isAddVendorCall.equals("true")) {
                 etAddress.setVisibility(View.GONE);
 //                findViewById(R.id.height1).setVisibility(View.GONE);
                 Log.e("user", "user");
@@ -244,6 +242,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
 
 
     private void callWebServiceForSellerRegistration() {
+        String URL = isAddVendorCall.equals("true")?"https://aapkatrade.com/slim/vendorregister":"http://aapkatrade.com/slim/sellerregister";
 
         if (docFile.getAbsolutePath().equals("/")) {
             Log.e("reach", "NUL_______DOCCCCCCCLICENCE");
@@ -263,7 +262,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                     progressBarHandler.show();
 
                     Ion.with(RegistrationActivity.this)
-                            .load("http://aapkatrade.com/slim/sellerregister")
+                            .load(URL)
                             .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3").progress(new ProgressCallback() {
                         @Override
                         public void onProgress(long downloaded, long total) {
@@ -275,6 +274,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                             .setMultipartFile("comp_incorporation", "image*//*", compIncorpFile)
                             .setMultipartParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                             .setMultipartParameter("business_type", formSellerData.getBusinessType())
+                            .setMultipartParameter("business_id", business_id)
                             .setMultipartParameter("companyname", formSellerData.getCompanyName())
                             .setMultipartParameter("name", formSellerData.getFirstName())
                             .setMultipartParameter("lastname", formSellerData.getLastName())
@@ -323,7 +323,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                 progressBarHandler.show();
 
                 Ion.with(RegistrationActivity.this)
-                        .load("http://aapkatrade.com/slim/sellerregister")
+                        .load(URL)
                         .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3").progress(new ProgressCallback() {
                     @Override
                     public void onProgress(long downloaded, long total) {
@@ -335,6 +335,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
 
                         .setMultipartParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                         .setMultipartParameter("business_type", formSellerData.getBusinessType())
+                        .setMultipartParameter("business_id", business_id)
                         .setMultipartParameter("companyname", formSellerData.getCompanyName())
                         .setMultipartParameter("name", formSellerData.getFirstName())
                         .setMultipartParameter("lastname", formSellerData.getLastName())
@@ -764,6 +765,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
         cancelFile = (ImageView) findViewById(R.id.cancelFile);
         dobLayout = (RelativeLayout) findViewById(R.id.dobLayout);
         webservice_header_type.put("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3");
+        business_id = app_sharedpreference.getsharedpref("business_id")== null? "": app_sharedpreference.getsharedpref("business_id");
 
 
 //        Country countryEntity_init = new Country("-1", "Please Select Country");
@@ -787,7 +789,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
     private void validateFields(String userType) {
         isAllFieldSet = 0;
         Log.e("reach", "validateFiledsCalled");
-        if (userType.equals("1")) {
+        if (userType.equals("1") || isAddVendorCall.equals("true")) {
             if (formSellerData != null) {
 
                 Log.e("reach", formSellerData.toString() + "            DATAAAAAAAAA");
