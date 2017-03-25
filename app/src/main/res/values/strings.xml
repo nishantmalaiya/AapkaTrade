@@ -249,5 +249,12 @@
     <string name="order_mgt_heading">Order Management</string>
     <string name="service_enquiry_list_heading">Enquiry Service List</string>
     <string name="my_network_list_heading">My Network List</string>
+    <string name="title_activity_add_vendor">AddVendorActivity</string>
+    <string name="vendor_list_heading">Vendor List</string>
+    <string name="associate_aggrement_heading">Associate Aggrement</string>
+    <string name="filter_heading">Filter</string>
+    <string name="city">City</string>
+    <string name="clear_all">Clear All</string>
+    <string name="apply_filter">Apply Filter</string>
 
 </resources>
