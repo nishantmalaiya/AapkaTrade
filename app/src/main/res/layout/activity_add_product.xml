@@ -14,8 +14,7 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar_without_image_layout" />
+            layout="@layout/toolbar_layout" />
 
         <include
             layout="@layout/content_add_product" />

@@ -17,7 +17,7 @@
         >
 
         <include
-            android:id="@+id/toolbar"
+            android:id="@+id/tool_bar1"
             layout="@layout/toolbar_layout" />
 
 
@@ -25,7 +25,7 @@
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
+            android:layout_below="@+id/tool_bar1"
             android:background="#F1F5F8"
             >
 

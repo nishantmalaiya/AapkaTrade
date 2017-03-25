@@ -8,7 +8,7 @@
 
     <include
 
-        layout="@layout/toolbar_without_image_layout" />
+        layout="@layout/toolbar_layout" />
 
 
     <include

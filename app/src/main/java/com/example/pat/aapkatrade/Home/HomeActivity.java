@@ -87,6 +87,8 @@ ProgressBarHandler progressBarHandler;
         super.onCreate(savedInstanceState);
 
 
+
+
         rl_main_content=(RelativeLayout)findViewById(R.id.rl_main_content);
         progressBarHandler=new ProgressBarHandler(this);
 
@@ -186,6 +188,7 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle(null);
         ImageView home_link=(ImageView)toolbar.findViewById(R.id.iconHome);
+        AndroidUtils.setImageColor(home_link, context, R.color.white);
         home_link.setVisibility(View.GONE);
         // getSupportActionBar().setIcon(R.drawable.logo_word);
 
@@ -474,6 +477,9 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
 
                         break;
                     case 1:
+
+                        Log.e("time  fragment", String.valueOf(System.currentTimeMillis()));
+
                         if (aboutUsFragment == null) {
                             aboutUsFragment = new AboutUsFragment();
                         }

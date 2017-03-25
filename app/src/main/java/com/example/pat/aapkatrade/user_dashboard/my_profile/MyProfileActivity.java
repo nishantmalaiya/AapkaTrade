@@ -81,7 +81,7 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
     private void setup_layout() {
 
         coordinatorlayout_myprofile=(CoordinatorLayout)findViewById(R.id.coordinate_myprofile) ;
-        setupnewlayout();
+        //setupnewlayout();
         //imgCalender = (ImageView) findViewById(R.id.imgCalender);
       //  backbutton=(ImageView)findViewById(R.id.back_imagview) ;
         tvMyProfileDetailHeading = (TextView) findViewById(R.id.tvMyProfileDetailHeading);
@@ -335,11 +335,14 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
     }
 
     private void setUpToolBar() {
-        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome) ;
-        findViewById(R.id.logoWord).setVisibility(View.GONE); ;
-        TextView header_name = (TextView) findViewById(R.id.header_name);
-        header_name.setVisibility(View.VISIBLE);
-        header_name.setText(getResources().getString(R.string.my_profile_heading));
+        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
+        ImageView back_imagview = (ImageView) findViewById(R.id.back_imagview);
+        back_imagview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         AndroidUtils.setImageColor(homeIcon, context, R.color.white);
         homeIcon.setOnClickListener(new View.OnClickListener() {
@@ -357,8 +360,10 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
             getSupportActionBar().setTitle(null);
             getSupportActionBar().setElevation(0);
         }
-    }
 
+
+
+    }
 
 
     @Override

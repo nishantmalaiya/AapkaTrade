@@ -78,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setUpToolBar() {
         ImageView homeIcon = (ImageView) findViewById(R.id.iconHome) ;
-        TextView toolbarRightText = (TextView) findViewById(R.id.toolbarRightText);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         AndroidUtils.setImageColor(homeIcon, context, R.color.white);
         homeIcon.setOnClickListener(new View.OnClickListener() {
@@ -89,9 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        toolbarRightText.setVisibility(View.VISIBLE);
-        toolbarRightText.setTextColor(ContextCompat.getColor(context, R.color.orange));
-        toolbarRightText.setText(getResources().getString(R.string.skip));
         AndroidUtils.setBackgroundSolid(toolbar, context, R.color.transparent, 0);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {

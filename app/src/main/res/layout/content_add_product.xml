@@ -342,7 +342,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="@string/price"
-                            android:inputType="text"
+                            android:inputType="number"
                             android:maxLines="1"
                             android:paddingLeft="@dimen/ten_dip"
                             android:theme="@style/myedittext" />
@@ -364,7 +364,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="@string/cross_price"
-                            android:inputType="text"
+                            android:inputType="number"
                             android:maxLines="1"
                             android:paddingLeft="@dimen/ten_dip"
                             android:theme="@style/myedittext" />

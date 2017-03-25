@@ -131,6 +131,8 @@ public class CommomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 @Override
                 public void onClick(View view) {
 
+                    Log.e("time Adapter", String.valueOf(System.currentTimeMillis()));
+
                     Intent intent = new Intent(context, ProductDetail.class);
                     intent.putExtra("product_id", commomDatas.get(position).id);
                     context.startActivity(intent);

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="AppTheme.Base">
         <!-- Customize your theme here. -->
@@ -11,17 +11,21 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="android:typeface">serif</item>
         <item name="android:alertDialogStyle">@style/CustomDialogTheme</item>
-        <item name="android:colorPrimary">@color/green_shad</item>
-        <item name="android:colorPrimaryDark">@color/green_shad</item>
-        <item name="android:navigationBarColor">@color/green_shad</item>
+        <item name="android:colorPrimary" tools:targetApi="lollipop">@color/green_shad</item>
+        <item name="android:colorPrimaryDark" tools:targetApi="lollipop">@color/green_shad</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/green_shad</item>
         <item name="android:editTextStyle">@style/myedittext</item>
         <item name="android:editTextPreferenceStyle">@style/myedittext</item>
         <item name="android:checkboxStyle">@style/customCheckBoxStyle</item>
         <item name="android:textColorHint">@color/hint_color</item>
-
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
 
     </style>
 
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
 
     <style name="Theme.Transparent" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
@@ -69,7 +73,7 @@
         <item name="colorAccent">@color/green</item>
 
         <item name="android:textColorHint">@color/hint_color</item>
-        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlNormal">@color/grey</item>
         <item name="android:textSize">@dimen/textsize_medium</item>
         <item name="colorControlActivated">@color/grey</item>
         <item name="android:textColorPrimary">@color/hint_color</item>
@@ -182,7 +186,7 @@
     </style>
 
     <style name="TranslucentNavigation" parent="AppTheme">
-        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>
         <item name="android:fitsSystemWindows">true</item>
     </style>
 
