@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_without_image_layout"
+        layout="@layout/toolbar_layout"
         />
 
 

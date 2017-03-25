@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,9 +102,13 @@ public class CheckPermission {
 
     public static void show() {
         mProgressBar.setVisibility(View.VISIBLE);
+
+
+        Log.e("show_working","show_working");
     }
 
     public static  void hide() {
+        Log.e("hide_working","hide_working");
         mProgressBar.setVisibility(View.INVISIBLE);
     }
 
