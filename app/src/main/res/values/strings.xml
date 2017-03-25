@@ -246,6 +246,9 @@
 
     <string name="skip">Skip</string>
     <string name="add_vender_heading">Add Vendor</string>
+
+    <string name="add_address_heading">Add Address</string>
+
     <string name="order_mgt_heading">Order Management</string>
     <string name="service_enquiry_list_heading">Enquiry Service List</string>
     <string name="my_network_list_heading">My Network List</string>
@@ -256,5 +259,6 @@
     <string name="city">City</string>
     <string name="clear_all">Clear All</string>
     <string name="apply_filter">Apply Filter</string>
+
 
 </resources>

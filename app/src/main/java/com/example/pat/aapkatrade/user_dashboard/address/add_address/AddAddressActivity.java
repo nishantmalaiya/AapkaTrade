@@ -1,7 +1,5 @@
 package com.example.pat.aapkatrade.user_dashboard.address.add_address;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -44,7 +42,6 @@ public class AddAddressActivity extends AppCompatActivity
     Spinner spState;
     RelativeLayout activity_add_address;
     ProgressBarHandler progress_handler;
-    private Context context;
 
 
 
@@ -54,8 +51,8 @@ public class AddAddressActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add_address);
-        context = AddAddressActivity.this;
-        stateList =  new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.state_list)));
+
+        stateList =  new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.state_list)));
 
         progress_handler = new ProgressBarHandler(this);
 
@@ -73,7 +70,7 @@ public class AddAddressActivity extends AppCompatActivity
 
         state_id= app_sharedpreference.getsharedpref("state_id", "");
 
-        setUpToolBar();
+        setuptoolbar();
 
         setup_layout();
 
@@ -201,14 +198,20 @@ public class AddAddressActivity extends AppCompatActivity
     }
 
 
-    private void setUpToolBar() {
+    private void setuptoolbar()
+    {
+
         ImageView homeIcon = (ImageView) findViewById(R.id.iconHome) ;
+        findViewById(R.id.logoWord).setVisibility(View.GONE); ;
+        TextView header_name = (TextView) findViewById(R.id.header_name);
+        header_name.setVisibility(View.VISIBLE);
+        header_name.setText(getResources().getString(R.string.add_address_heading));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        AndroidUtils.setImageColor(homeIcon, context, R.color.white);
+        AndroidUtils.setImageColor(homeIcon, this, R.color.white);
         homeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, HomeActivity.class);
+                Intent intent = new Intent(AddAddressActivity.this, HomeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -220,7 +223,9 @@ public class AddAddressActivity extends AppCompatActivity
             getSupportActionBar().setTitle(null);
             getSupportActionBar().setElevation(0);
         }
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -229,8 +234,10 @@ public class AddAddressActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 finish();
                 break;

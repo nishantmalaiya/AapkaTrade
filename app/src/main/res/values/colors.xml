@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="hint_color">#606060</color>
     <color name="color_voilet">#FF6600</color>
+    <color name="color_voilet_transparent">#40FF6600</color>
    <color name="green">#63BEAC</color>
     <color name="green_line">#05DB61</color>
     <color name="green_transparent">#8063BEAC</color>
