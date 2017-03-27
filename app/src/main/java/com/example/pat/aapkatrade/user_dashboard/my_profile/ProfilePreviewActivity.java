@@ -35,7 +35,7 @@ public class ProfilePreviewActivity extends AppCompatActivity
     ImageView btnEdit;
     private Context context;
 
-    de.hdodenhof.circleimageview.CircleImageView userimage;
+    CircleImageView userimage;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -51,7 +51,7 @@ public class ProfilePreviewActivity extends AppCompatActivity
 
     private void setup_layout()
     {
-        userimage=(CircleImageView)findViewById(R.id.imageViewProfilePic);
+        userimage=(CircleImageView)findViewById(R.id.imageviewpp);
         btnEdit = (ImageView) findViewById(R.id.btnEdit);
 
         linearLayoutLagout = (LinearLayout) findViewById(R.id.linearLayoutLagout);
@@ -131,7 +131,14 @@ public class ProfilePreviewActivity extends AppCompatActivity
             {
                 Log.e("user_image",user_image);
 
+//                Ion.with(user_pic_img_vew)
+//                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .load(user_image);
+
+
                 Ion.with(userimage)
+
                         .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
                         .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
                         .load(user_image);
@@ -143,6 +150,7 @@ public class ProfilePreviewActivity extends AppCompatActivity
             }
             else if (userType.equals("2"))
             {
+                Log.e("user_image2",user_image);
                 Ion.with(userimage)
                         .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
                         .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
@@ -155,6 +163,7 @@ public class ProfilePreviewActivity extends AppCompatActivity
             }
             else if (userType.equals("3"))
             {
+                Log.e("user_image3",user_image);
                 Ion.with(userimage)
                         .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
                         .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))

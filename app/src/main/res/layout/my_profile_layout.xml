@@ -36,7 +36,7 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageViewProfilePic"
+                android:id="@+id/imageviewpp"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
@@ -45,7 +45,7 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imageViewProfilePic"
+                android:layout_below="@+id/imageviewpp"
                 android:orientation="vertical">
 
 
