@@ -69,7 +69,6 @@ public class User_DashboardFragment extends Fragment {
 
         user_image = app_sharedpreference.getsharedpref("profile_pic","");
         Picasso.with(getActivity()).load(user_image)
-
                 .error(R.drawable.ic_profile_user)
                 .into(imageviewpp);
         textViewName = (TextView) v.findViewById(R.id.textViewName);
