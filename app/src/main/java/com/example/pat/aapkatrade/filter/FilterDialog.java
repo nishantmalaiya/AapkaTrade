@@ -39,7 +39,7 @@ public class FilterDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        setContentView(R.layout.dialog_associate_agreement);
+        setContentView(R.layout.dialog_filter);
         initView();
         setUpData();
 
@@ -47,10 +47,7 @@ public class FilterDialog extends Dialog {
         imgCLose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getOwnerActivity().finish();
-                Intent intent = getOwnerActivity().getIntent();
-
-                context.startActivity(intent);
+                FilterDialog.this.hide();
             }
         });
     }
@@ -67,7 +64,7 @@ public class FilterDialog extends Dialog {
         app_sharedpreference = new AppSharedPreference(context);
         dialogue_toolbar = (RelativeLayout) findViewById(R.id.dialogue_toolbar);
 //        AndroidUtils.setBackgroundSolid(input_layout_agreement, context, R.color.orange, 10);
-//        AndroidUtils.setBackgroundSolid(dialogue_toolbar, context, R.color.green, 8);
+        AndroidUtils.setBackgroundSolid(dialogue_toolbar, context, R.color.green, 8);
         imgCLose = (Button) findViewById(R.id.imgCLose);
     }
 

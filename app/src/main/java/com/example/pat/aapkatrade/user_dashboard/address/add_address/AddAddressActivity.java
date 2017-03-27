@@ -52,7 +52,7 @@ public class AddAddressActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_add_address);
 
-        stateList =  new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.state_list)));
+        stateList =  new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.state_list)));
 
         progress_handler = new ProgressBarHandler(this);
 
