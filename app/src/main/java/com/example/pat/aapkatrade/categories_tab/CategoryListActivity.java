@@ -171,9 +171,6 @@ public class CategoryListActivity extends AppCompatActivity
                                 String message_data = message.replace("\"", "");
 
                                 Log.e("message_data 1",result.toString().substring(0, 4000));
-                                Log.e("message_data 2",result.toString().substring(4000, 8000));
-                                Log.e("message_data 2",result.toString().substring(8000, result.toString().length()-1));
-
 
                                 if (message_data.toString().equals("No record found"))
                                 {
