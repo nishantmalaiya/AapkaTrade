@@ -83,6 +83,7 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
     private void setup_layout() {
 
 getshared_pref_data();
+        Log.e("user_image_profile",user_image);
         coordinatorlayout_myprofile = (CoordinatorLayout) findViewById(R.id.coordinate_myprofile);
         //setupnewlayout();
         //imgCalender = (ImageView) findViewById(R.id.imgCalender);
@@ -230,7 +231,7 @@ getshared_pref_data();
     }
 
     private void getshared_pref_data() {
-        user_image = app_sharedpreference.getsharedpref("profile_pic", "");
+        user_image = app_sharedpreference.getsharedpref("profile_pic","");
         fname = app_sharedpreference.getsharedpref("name", "");
         lname = app_sharedpreference.getsharedpref("lname", "");
         email = app_sharedpreference.getsharedpref("emailid", "");
