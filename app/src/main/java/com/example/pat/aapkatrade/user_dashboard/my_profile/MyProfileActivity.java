@@ -38,6 +38,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.squareup.picasso.Picasso;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
@@ -93,11 +94,16 @@ getshared_pref_data();
         etFName = (EditText) findViewById(R.id.etFName);
 //        String fname = app_sharedpreference.getsharedpref("name", "");
 
+        Picasso.with(context).load(user_image)
 
-        Ion.with(userimageview)
-                .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                .load(user_image);
+                .error(R.drawable.ic_profile_user)
+                .into(userimageview);
+
+
+//        Ion.with(userimageview)
+//                .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                .load(user_image);
 
         tvMyProfileDetailHeading.setText("Hello, " + fname + " To Update your account information.");
         etFName.setText(fname);
