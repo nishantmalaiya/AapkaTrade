@@ -58,7 +58,7 @@
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/activity_associate_agreement"
+            android:id="@+id/dialog_filter_root"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
@@ -106,6 +106,7 @@
                             >
 
                             <LinearLayout
+                                android:id="@+id/categoryFilter"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
@@ -192,6 +193,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/stateFilter"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
@@ -271,9 +273,8 @@
 
                             </LinearLayout>
 
-
-
                             <LinearLayout
+                                android:id="@+id/cityFilter"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
@@ -345,7 +346,6 @@
 
                             </LinearLayout>
 
-
                         </LinearLayout>
 
 
@@ -373,10 +373,10 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/agreement_check"
+                    android:id="@+id/clearAll"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/clear_all"
                     android:layout_marginRight="0.5dp"
@@ -385,10 +385,10 @@
                     android:textColor="@color/white" />
 
                 <TextView
-                    android:id="@+id/tv_agreement"
+                    android:id="@+id/applyFilter"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/apply_filter"
                     android:layout_marginLeft="0.5dp"
