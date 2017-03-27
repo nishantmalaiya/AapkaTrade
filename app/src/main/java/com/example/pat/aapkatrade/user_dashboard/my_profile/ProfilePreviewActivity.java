@@ -143,6 +143,7 @@ public class ProfilePreviewActivity extends AppCompatActivity
             }
             else if (userType.equals("2"))
             {
+                Log.e("user_image2",user_image);
                 Ion.with(userimage)
                         .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
                         .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
@@ -155,6 +156,7 @@ public class ProfilePreviewActivity extends AppCompatActivity
             }
             else if (userType.equals("3"))
             {
+                Log.e("user_image3",user_image);
                 Ion.with(userimage)
                         .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
                         .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
