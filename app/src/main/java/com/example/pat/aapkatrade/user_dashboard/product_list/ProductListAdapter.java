@@ -2,6 +2,7 @@ package com.example.pat.aapkatrade.user_dashboard.product_list;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.user_dashboard.edit_product.EditProductActivity;
@@ -28,12 +30,16 @@ import java.util.List;
 public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
 
+
     final LayoutInflater inflater;
     List<ProductListData> itemList;
     Context context;
     ProductListHolder viewHolder;
     ProgressBarHandler progress_handler;
     int p;
+    ProductListHolder homeHolder;
+     final ViewBinderHelper binderHelper = new ViewBinderHelper();
+
 
 
     public ProductListAdapter(Context context, List<ProductListData> itemList)
@@ -43,6 +49,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.context = context;
         inflater = LayoutInflater.from(context);
 
+
     }
 
     @Override
@@ -50,6 +57,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     {
         View view = inflater.inflate(R.layout.row_productlist, parent, false);
         viewHolder = new ProductListHolder(view);
+
+
         return viewHolder;
     }
 
@@ -57,7 +66,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position)
     {
 
-        ProductListHolder homeHolder = (ProductListHolder) holder;
+         homeHolder = (ProductListHolder) holder;
+
+        binderHelper.bind(homeHolder.swipeReavelLayout, itemList.toString());
 
         homeHolder.tvProductName.setText(itemList.get(position).product_name);
 
@@ -68,6 +79,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         homeHolder.tvProductCity.setText(itemList.get(position).state);
 
         Ion.with(homeHolder.imgProduct).load(itemList.get(position).product_image);
+
+
 
         homeHolder.linearlayout1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +98,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 product_detail.putExtra("delivery_area_name", itemList.get(position).delivery_area_name);
                 product_detail.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(product_detail);
-*/
+             */
+
             }
         });
 
@@ -107,13 +121,25 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 product_detail.putExtra("product_name", itemList.get(position).product_name);
                 product_detail.putExtra("product_price", itemList.get(position).product_price);
                 product_detail.putExtra("product_cross_price", itemList.get(position).product_cross_price);
-                product_detail.putExtra("product_image", itemList.get(position).product_image);
-                product_detail.putExtra("category_name", itemList.get(position).category_name);
+                product_detail.putExtra("description", itemList.get(position).description);
+               // product_detail.putExtra("product_image", itemList.get(position).product_image);
+               /* product_detail.putExtra("category_name", itemList.get(position).category_name);
                 product_detail.putExtra("description", itemList.get(position).description);
                 product_detail.putExtra("delivery_distance", itemList.get(position).delivery_distance);
                 product_detail.putExtra("delivery_area_name", itemList.get(position).delivery_area_name);
+*/
+                product_detail.putExtra("company_id",itemList.get(position).company_id);
+                product_detail.putExtra("distanec_id",itemList.get(position).distance_id);
+                product_detail.putExtra("country_id",itemList.get(position).country_id);
+                product_detail.putExtra("state_id",itemList.get(position).state_id);
+                product_detail.putExtra("city_id",itemList.get(position).city_id);
+                product_detail.putExtra("category_id",itemList.get(position).category_id);
+                product_detail.putExtra("sub_category_id",itemList.get(position).sub_category_id);
+                product_detail.putExtra("unit_id",itemList.get(position).unit_id);
                 product_detail.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(product_detail);
+
+
 /*
                 Ion.with(context)
                         .load("https://aapkatrade.com/slim/add_product\n")
@@ -151,6 +177,15 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     }
 
+
+    public void saveStates(Bundle outState) {
+        binderHelper.saveStates(outState);
+    }
+
+    public void restoreStates(Bundle inState) {
+        binderHelper.restoreStates(inState);
+    }
+
     private void showMessage(String s) {
         Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
     }
@@ -161,6 +196,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return itemList.size();
         // return itemList.size();
     }
+
+
 
     public String getCurrentTimeStamp() {
         return new SimpleDateFormat("dd MMM yyyy HH:mm").format(new Date());
@@ -205,7 +242,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                             }
                         }
                     }
-
                 });
     }
 

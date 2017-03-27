@@ -44,6 +44,7 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
     private Context context;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -93,9 +94,7 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
 
             public void onScrollStateChanged(RecyclerView view, int scrollState)
             {
-
                 super.onScrollStateChanged(product_list, scrollState);
-
             }
 
             @Override
@@ -113,7 +112,6 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
                 {
                     if ((totalItemCount - 1) == lastVisibleItemCount)
                     {
-
                         page = page + 1;
                         get_web_data2(page);
                     }
@@ -121,9 +119,7 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
                     {
                         //loadingProgress.setVisibility(View.GONE);
                     }
-
                 }
-
             }
 
         });
@@ -169,7 +165,8 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
     }
 
 
-    private void setUpToolBar() {
+    private void setUpToolBar()
+    {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         AppCompatImageView back_imagview = (AppCompatImageView) findViewById(R.id.back_imagview);
         back_imagview.setVisibility(View.VISIBLE);
@@ -195,6 +192,9 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
             }
         });
         setSupportActionBar(toolbar);
+
+
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -207,7 +207,6 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -216,7 +215,8 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         switch (item.getItemId())
         {
             case android.R.id.home:
@@ -270,13 +270,15 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
 
                                 // layout_container.setVisibility(View.INVISIBLE);
 
-
-                            } else
+                            }
+                            else
                             {
+
                                 JsonArray jsonArray = jsonObject.getAsJsonArray("result");
 
+                                for (int i = 0; i < jsonArray.size(); i++)
+                                {
 
-                                for (int i = 0; i < jsonArray.size(); i++) {
                                     JsonObject jsonObject2 = (JsonObject) jsonArray.get(i);
 
                                     String product_id = jsonObject2.get("id").getAsString();
@@ -299,7 +301,25 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
 
                                     String delivery_area_name = jsonObject2.get("deliveryArea").getAsString();
 
-                                    productListDatas.add(new ProductListData(app_sharedpreference.getsharedpref("userid"), product_id, product_name, product_price, product_cross_price, product_image, category_name, state, description, delivery_distance, delivery_area_name));
+                                    String company_id = jsonObject2.get("company_id").getAsString();
+
+                                    String distanec_id = jsonObject2.get("distance_id").getAsString();
+
+                                    String country_id= jsonObject2.get("country_id").getAsString();
+
+                                    String state_id = jsonObject2.get("state_id").getAsString();
+
+                                    String city_id = jsonObject2.get("city_id").getAsString();
+
+                                    String category_id =jsonObject2.get("category_id").getAsString();
+
+                                    String sub_category_id = jsonObject2.get("sub_cat_id").getAsString();
+
+                                    String unit_id = jsonObject2.get("unit_id").getAsString();
+
+                                    productListDatas.add(new ProductListData(app_sharedpreference.getsharedpref("userid"), product_id, product_name, product_price, product_cross_price, product_image, category_name, state, description, delivery_distance, delivery_area_name,company_id,distanec_id,country_id,state_id,city_id,category_id,sub_category_id,unit_id));
+
+
                                 }
 
                                 productListAdapter.notifyDataSetChanged();
@@ -322,6 +342,7 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
     {
         // layout_container.setVisibility(View.INVISIBLE);
         mSwipyRefreshLayout.setRefreshing(true);
+
         productListDatas.clear();
 
         Ion.with(ProductListActivity.this)
@@ -332,7 +353,9 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
                 .setBodyParameter("seller_id", user_id)
                 .setBodyParameter("page", "0")
                 .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
+                .setCallback(new FutureCallback<JsonObject>()
+                {
+
                     @Override
                     public void onCompleted(Exception e, JsonObject result)
                     {
@@ -346,8 +369,6 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
                         }
                         else
                         {
-
-
                             System.out.println("message_data==================" + result);
                             JsonObject jsonObject = result.getAsJsonObject();
 
@@ -362,7 +383,9 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
                                 layout_container.setVisibility(View.INVISIBLE);
                                 mSwipyRefreshLayout.setRefreshing(false);
 
-                            } else {
+                            }
+                            else
+                            {
 
                                 JsonArray jsonArray = jsonObject.getAsJsonArray("result");
 
@@ -371,6 +394,7 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
                                 for (int i = 0; i < jsonArray.size(); i++)
                                 {
                                     JsonObject jsonObject2 = (JsonObject) jsonArray.get(i);
+
                                     String product_id = jsonObject2.get("id").getAsString();
 
                                     String product_name = jsonObject2.get("name").getAsString();
@@ -391,7 +415,24 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
 
                                     String delivery_area_name = jsonObject2.get("deliveryArea").getAsString();
 
-                                    productListDatas.add(new ProductListData(app_sharedpreference.getsharedpref("userid"), product_id, product_name, product_price, product_cross_price, product_image, category_name, state, description, delivery_distance, delivery_area_name));
+                                    String company_id = jsonObject2.get("company_id").getAsString();
+
+                                    String distanec_id = jsonObject2.get("distance_id").getAsString();
+
+                                    String country_id= jsonObject2.get("country_id").getAsString();
+
+                                    String state_id = jsonObject2.get("state_id").getAsString();
+
+                                    String city_id = jsonObject2.get("city_id").getAsString();
+
+                                    String category_id =jsonObject2.get("category_id").getAsString();
+
+                                    String sub_category_id = jsonObject2.get("sub_cat_id").getAsString();
+
+                                    String unit_id = jsonObject2.get("unit_id").getAsString();
+
+                                    productListDatas.add(new ProductListData(app_sharedpreference.getsharedpref("userid"), product_id, product_name, product_price, product_cross_price, product_image, category_name, state, description, delivery_distance, delivery_area_name,company_id,distanec_id,country_id,state_id,city_id,category_id,sub_category_id,unit_id));
+
                                 }
 
                                 productListAdapter.notifyDataSetChanged();
@@ -407,6 +448,31 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
     public void onRefresh()
     {
         get_web_data();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        // Only if you need to restore open/close state when
+        // the orientation is changed
+        if (productListAdapter != null)
+        {
+            productListAdapter.saveStates(outState);
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        // Only if you need to restore open/close state when
+        // the orientation is changed
+        if (productListAdapter != null)
+        {
+            productListAdapter.restoreStates(savedInstanceState);
+        }
+
     }
 
 

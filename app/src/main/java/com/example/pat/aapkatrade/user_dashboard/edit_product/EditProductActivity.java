@@ -65,14 +65,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class EditProductActivity extends AppCompatActivity {
+public class EditProductActivity extends AppCompatActivity
+{
+
+    
     private Context context;
     private LinearLayout contentAddProduct, add_product_root_container;
     private Spinner spCompanyName, spSubCategory, spCategory, spState, spCity, spdeliverydistance, spUnit;
     private String countryID = "101", stateID, cityID, companyID, categoryID, subCategoryID, deliveryDistanceID, unit;
     private HashMap<String, String> webservice_header_type = new HashMap<>();
-    private ArrayList<CategoryHome> listDataHeader = new ArrayList<>();
-    private ArrayList<SubCategory> listDataChild = new ArrayList<>();
+    private ArrayList<CategoryHome> categoryList = new ArrayList<>();
+    private ArrayList<SubCategory> subCategoryList = new ArrayList<>();
     private ArrayList<State> stateList = new ArrayList<>();
     private ArrayList<City> cityList = new ArrayList<>(), unitList = new ArrayList<>();
     private ArrayList<String> deliveryDistanceList = new ArrayList<>();
@@ -91,15 +94,52 @@ public class EditProductActivity extends AppCompatActivity {
     Bitmap imageForPreview;
     List<Part> files_image = new ArrayList();
     TextView tvTitle;
+    String user_id,product_name,price,cross_price,description,company_id,distance_id,
+    country_id,state_id,city_id,category_id,sub_category_id,unit_id;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+
         setuptoolbar();
 
+        Intent i = getIntent();
+
+        user_id = i.getStringExtra("user_id");
+
+        product_name= i.getStringExtra("product_name");
+
+        price = i.getStringExtra("product_price");
+
+        cross_price = i.getStringExtra("product_cross_price");
+
+        description = i.getStringExtra("description");
+
+        company_id = i.getStringExtra("company_id");
+
+        distance_id = i.getStringExtra("distance_id");
+
+        country_id = i.getStringExtra("country_id");
+
+        state_id = i.getStringExtra("state_id");
+
+        city_id = i.getStringExtra("city_id");
+
+        category_id = i.getStringExtra("category_id");
+
+        sub_category_id = i.getStringExtra("sub_category_id");
+
+        unit_id = i.getStringExtra("unit_id");
+
+
+        System.out.println("product_name-"+product_name+"price-"+price+"cross_price-"+cross_price+"description-"+description+"company_id-"+company_id+"distance_id-"+distance_id+"country_id-"+country_id+"state_id-"+state_id+"city_id-"+city_id+"category_id"+category_id+"sub_category_id-"+sub_category_id+"unit_id-"+unit_id);
+
+        Log.e("unit_id",unit_id);
 
         initView();
+
 
         setupRecyclerView();
 
@@ -139,12 +179,14 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
 
-    private void callEditProductWebService() {
+    private void callEditProductWebService()
+    {
         progressBar.show();
 
         for (int i = 0; i < productImagesDatas.size(); i++) {
             files_image.add(new FilePart("image[]", savebitmap(productImagesDatas.get(i).image_path)));
         }
+
 
         Log.e("files_image", "  ==>   " + productImagesDatas.size());
 
@@ -205,7 +247,6 @@ public class EditProductActivity extends AppCompatActivity {
 
         uploadButton = (ImageView) findViewById(R.id.uploadButton);
 
-
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -221,7 +262,16 @@ public class EditProductActivity extends AppCompatActivity {
         app_sharedpreference = new AppSharedPreference(context);
 
         spCompanyName = (Spinner) findViewById(R.id.spCompanyName);
+
+        int company_position = companyNames.indexOf(company_id);
+
+        Log.e("company_position",company_id);
+
+        spCompanyName.setSelection(company_position);
+
         spSubCategory = (Spinner) findViewById(R.id.spSubCategory);
+
+
         spCategory = (Spinner) findViewById(R.id.spCategory);
         spState = (Spinner) findViewById(R.id.spState);
         spCity = (Spinner) findViewById(R.id.spCity);
@@ -232,10 +282,19 @@ public class EditProductActivity extends AppCompatActivity {
         btnUpload.setText("Add");
 
         etProductName = (EditText) findViewById(R.id.etProductName);
+
+        etProductName.setText(product_name);
+
         etDeliverLocation = (EditText) findViewById(R.id.etDeliverLocation);
+
         etPrice = (EditText) findViewById(R.id.etPrice);
+        etPrice.setText(price);
+
         etCrossedPrice = (EditText) findViewById(R.id.etCrossedPrice);
+        etCrossedPrice.setText(cross_price);
+
         etDescription = (EditText) findViewById(R.id.etDescription);
+        etDescription.setText(description);
 
         initSpinner();
         getCompany();
@@ -287,6 +346,7 @@ public class EditProductActivity extends AppCompatActivity {
 
                         if (result != null) {
 
+                            int selectedIndex =0;
                             JsonArray jsonResultArray = result.getAsJsonArray("result");
                             if (jsonResultArray != null) {
 //                                companyNames = new ArrayList<>();
@@ -294,10 +354,14 @@ public class EditProductActivity extends AppCompatActivity {
                                     JsonObject jsonObject = (JsonObject) jsonResultArray.get(i);
                                     CompanyData companyData = new CompanyData(jsonObject.get("name").getAsString(), jsonObject.get("id").getAsString());
                                     companyNames.add(companyData);
+                                    if (company_id.equals(companyData.getCompanyId())) {
+                                        selectedIndex = i + 1;
+
+                                    }
                                 }
                                 CustomSimpleListAdapter adapter = new CustomSimpleListAdapter(context, companyNames);
                                 spCompanyName.setAdapter(adapter);
-
+                                spCompanyName.setSelection(selectedIndex);
 
                                 spCompanyName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
@@ -350,6 +414,7 @@ public class EditProductActivity extends AppCompatActivity {
 
                         if (result != null) {
 
+                            int selectedIndex=0;
                             JsonArray jsonResultArray = result.getAsJsonArray("result");
                             stateList = new ArrayList<>();
                             State stateEntity_init = new State("-1", "Please Select State");
@@ -359,17 +424,27 @@ public class EditProductActivity extends AppCompatActivity {
                                 JsonObject jsonObject1 = (JsonObject) jsonResultArray.get(i);
                                 State stateEntity = new State(jsonObject1.get("id").getAsString(), jsonObject1.get("name").getAsString());
                                 stateList.add(stateEntity);
+                                if (state_id.equals(stateEntity.stateId)) {
+                                    selectedIndex = i + 1;
+
+                                }
+
+
                             }
                             SpStateAdapter spStateAdapter = new SpStateAdapter(context, stateList);
                             spState.setAdapter(spStateAdapter);
+                            spState.setSelection(selectedIndex);
+
                             spStateAdapter.notifyDataSetChanged();
                             spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                                 @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                                {
                                     stateID = stateList.get(position).stateId;
                                     cityList = new ArrayList<>();
-                                    if (position > 0) {
+                                    if (position > 0)
+                                    {
                                         getCity(stateList.get(position).stateId);
                                     }
                                 }
@@ -407,6 +482,7 @@ public class EditProductActivity extends AppCompatActivity {
                         Log.e("city result ", result == null ? "null" : result.toString());
 
                         if (result != null) {
+                            int selectedIndex = 0;
                             JsonArray jsonResultArray = result.getAsJsonArray("result");
 
                             City cityEntity_init = new City("-1", "Please Select City");
@@ -416,11 +492,18 @@ public class EditProductActivity extends AppCompatActivity {
                                 JsonObject jsonObject1 = (JsonObject) jsonResultArray.get(i);
                                 City cityEntity = new City(jsonObject1.get("id").getAsString(), jsonObject1.get("name").getAsString());
                                 cityList.add(cityEntity);
+
+                                if (city_id.equals(cityEntity.cityId)) {
+                                    selectedIndex = i + 1;
+                                    Log.e("HOooo434oooooo", jsonObject1.get("id").getAsString() + "  State Found  " + jsonObject1.get("name").getAsString());
+
+                                }
+
                             }
 
                             SpCityAdapter spCityAdapter = new SpCityAdapter(context, cityList);
                             spCity.setAdapter(spCityAdapter);
-
+                            spCity.setSelection(selectedIndex);
                             spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -445,8 +528,8 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
     private void getCategory() {
-        listDataChild.clear();
-        listDataHeader.clear();
+        subCategoryList.clear();
+        categoryList.clear();
         progressBar.show();
         Log.e("data", "getCategory Entered");
         Ion.with(context)
@@ -462,57 +545,88 @@ public class EditProductActivity extends AppCompatActivity {
                         progressBar.hide();
 //                        Log.e("data", "getCategory result" + data.toString());
                         if (data != null) {
+
+                            int selectedIndex=0;
                             JsonObject jsonObject = data.getAsJsonObject();
                             JsonArray jsonResultArray = jsonObject.getAsJsonArray("result");
 
-                            listDataHeader = new ArrayList<>();
-                            listDataChild.add(new SubCategory("-1", "Please Select SubCategory"));
+                            categoryList = new ArrayList<>();
+                            subCategoryList.add(new SubCategory("-1", "Please Select SubCategory"));
 
-                            listDataHeader.add(new CategoryHome("-1", "Please Select Category", "", listDataChild));
-                            for (int i = 0; i < jsonResultArray.size(); i++) {
+                            categoryList.add(new CategoryHome("-1", "Please Select Category", "", subCategoryList));
+                            for (int i = 0; i < jsonResultArray.size(); i++)
+                            {
                                 JsonObject jsonObject1 = (JsonObject) jsonResultArray.get(i);
                                 JsonArray json_subcategory = jsonObject1.getAsJsonArray("subcategory");
 
-                                if (json_subcategory != null) {
-                                    listDataChild = new ArrayList<>();
-                                    for (int k = 0; k < json_subcategory.size(); k++) {
+                                if (json_subcategory != null)
+                                {
+                                    subCategoryList = new ArrayList<>();
+                                    for (int k = 0; k < json_subcategory.size(); k++)
+                                    {
                                         JsonObject jsonObject_subcategory = (JsonObject) json_subcategory.get(k);
                                         SubCategory subCategory = new SubCategory(jsonObject_subcategory.get("id").getAsString(), jsonObject_subcategory.get("name").getAsString());
-                                        listDataChild.add(subCategory);
+                                        subCategoryList.add(subCategory);
+
+
                                     }
-                                    CategoryHome categoryHome = new CategoryHome(jsonObject1.get("id").getAsString(), jsonObject1.get("name").getAsString(), jsonObject1.get("icon").getAsString(), listDataChild);
-                                    listDataHeader.add(categoryHome);
+                                    CategoryHome categoryHome = new CategoryHome(jsonObject1.get("id").getAsString(), jsonObject1.get("name").getAsString(), jsonObject1.get("icon").getAsString(), subCategoryList);
+
+                                    categoryList.add(categoryHome);
+
+                                    if (category_id.equals(categoryHome.getCategoryId()))
+                                    {
+                                        selectedIndex = i + 1;
+
+                                    }
+
                                     Log.e("data", categoryHome.toString());
 
                                 }
                             }
-                            setCategoryAdapter();
+                            setCategoryAdapter(selectedIndex);
                         }
 
                     }
                 });
     }
 
-    private void setCategoryAdapter() {
-        Log.e("data", this.listDataHeader.toString());
-        CustomSimpleListAdapter categoriesAdapter = new CustomSimpleListAdapter(context, this.listDataHeader);
+    private void setCategoryAdapter(int selectedIndex) {
+        Log.e("data", this.categoryList.toString());
+        CustomSimpleListAdapter categoriesAdapter = new CustomSimpleListAdapter(context, this.categoryList);
         spCategory.setAdapter(categoriesAdapter);
-
+        spCategory.setSelection(selectedIndex);
         spCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position > 0) {
-                    categoryID = listDataHeader.get(position).getCategoryId();
-                    listDataChild = new ArrayList<>();
-                    listDataChild = listDataHeader.get(position).getSubCategoryList();
-                    if (listDataChild.size() > 0) {
-                        CustomSimpleListAdapter adapter = new CustomSimpleListAdapter(context, listDataChild);
+                if (position > 0)
+                {
+                    int subselectedIndex= 0;
+                    categoryID = categoryList.get(position).getCategoryId();
+                    subCategoryList = new ArrayList<>();
+                    subCategoryList = categoryList.get(position).getSubCategoryList();
+                    if (subCategoryList.size() > 0)
+                    {
+                        for (int i = 0;i<subCategoryList.size();i++){
+
+                            if (category_id.equals(subCategoryList.get(i).subCategoryId))
+                            {
+                                subselectedIndex = i + 1;
+
+                            }
+
+
+                        }
+                        CustomSimpleListAdapter adapter = new CustomSimpleListAdapter(context, subCategoryList);
+                        spSubCategory.setSelection(subselectedIndex);
                         spSubCategory.setAdapter(adapter);
+
+
                         spSubCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                 if (position > 0) {
-                                    subCategoryID = listDataChild.get(position).subCategoryId;
+                                    subCategoryID = subCategoryList.get(position).subCategoryId;
                                 }
                             }
 
@@ -521,11 +635,13 @@ public class EditProductActivity extends AppCompatActivity {
 
                             }
                         });
-                    } else {
-                        listDataChild = new ArrayList<>();
-                        listDataChild.add(new SubCategory("0", "No SubCategory Found"));
-                        CustomSimpleListAdapter adapter = new CustomSimpleListAdapter(context, listDataChild);
+                    }
+                    else {
+                        subCategoryList = new ArrayList<>();
+                        subCategoryList.add(new SubCategory("0", "No SubCategory Found"));
+                        CustomSimpleListAdapter adapter = new CustomSimpleListAdapter(context, subCategoryList);
                         spSubCategory.setAdapter(adapter);
+
                     }
                 }
 
@@ -553,7 +669,10 @@ public class EditProductActivity extends AppCompatActivity {
                     public void onCompleted(Exception e, JsonObject result) {
 //                        Log.e("hi******", result);
                         unitList = new ArrayList<>();
-                        if (result != null) {
+                        if (result != null)
+                        {
+                            int selectedIndex=0;
+
                             JsonArray jsonArray = result.getAsJsonArray("result");
                             unitList = new ArrayList<>();
                             unitList.add(new City("-1", "Please Select Unit"));
@@ -562,10 +681,17 @@ public class EditProductActivity extends AppCompatActivity {
                                     JsonObject jsonObject = (JsonObject) jsonArray.get(i);
                                     City unit = new City(jsonObject.get("id").getAsString(), jsonObject.get("name").getAsString());
                                     unitList.add(unit);
+
+                                    if (unit_id.equals(unit.cityId)) {
+                                        selectedIndex = i + 1;
+
+                                    }
+
                                 }
                             }
 
                             spUnit.setAdapter(new SpCityAdapter(context, unitList));
+                            spUnit.setSelection(selectedIndex);
 
 
                         } else {
@@ -576,18 +702,16 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
 
-    private void setuptoolbar() {
+    private void setuptoolbar()
+    {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(null);
 
-        tvTitle = (TextView) findViewById(R.id.tvTitle);
+        tvTitle = (TextView) findViewById(R.id.header_name);
         tvTitle.setText("Add Product");
-
-
-
     }
 
     @Override
@@ -696,12 +820,18 @@ public class EditProductActivity extends AppCompatActivity {
         }
     }
 
-    private void setupRecyclerView() {
+
+
+    private void setupRecyclerView()
+    {
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         adapter = new ProductImages(EditProductActivity.this, productImagesDatas);
         layoutManager = new LinearLayoutManager(EditProductActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+
     }
 
 
@@ -780,7 +910,8 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
 
-    private File getFile(Bitmap photo) {
+    private File getFile(Bitmap photo)
+    {
         Uri tempUri = null;
         if (photo != null) {
             tempUri = getImageUri(EditProductActivity.this, photo);
@@ -791,7 +922,8 @@ public class EditProductActivity extends AppCompatActivity {
         return finalFile;
     }
 
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
+    public Uri getImageUri(Context inContext, Bitmap inImage)
+    {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);

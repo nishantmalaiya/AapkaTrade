@@ -5,6 +5,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.example.pat.aapkatrade.R;
 
 /**
@@ -19,7 +21,7 @@ public class ProductListHolder extends RecyclerView.ViewHolder
     LinearLayout linearlayout1;
     ImageView imgProduct,imgMore;
     RelativeLayout deleteRelative,editRelative ;
-
+   SwipeRevealLayout swipeReavelLayout;
 
 
     public ProductListHolder(View itemView)
@@ -43,6 +45,8 @@ public class ProductListHolder extends RecyclerView.ViewHolder
         deleteRelative = (RelativeLayout) itemView.findViewById(R.id.deleteRelative);
 
         editRelative = (RelativeLayout) itemView.findViewById(R.id.editRelative);
+
+        swipeReavelLayout = (SwipeRevealLayout) itemView.findViewById(R.id.swipeReavelLayout);
 
         view = itemView;
     }
