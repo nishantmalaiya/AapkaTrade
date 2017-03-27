@@ -44,7 +44,6 @@ public class CompanyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
 
-
     public CompanyListAdapter(Context context, List<CompanyData> itemList,CompanyList companylist)
     {
 
@@ -195,8 +194,9 @@ public class CompanyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             {
 
                 System.out.println("deiete company--------"+itemList.get(position).company_id);
-
                 delete_company(itemList.get(position).company_id, position);
+
+
             }
 
         });
