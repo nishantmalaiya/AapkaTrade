@@ -88,7 +88,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     private CommonAdapter_navigation_recycleview category_adapter;
     public ArrayList<CategoryHome> listDataHeader = new ArrayList<>();
     public ArrayList<SubCategory> listDataChild = new ArrayList<>();
-    RelativeLayout rl_category,rl_logout;
+    RelativeLayout rl_category, rl_logout;
 
     int flag_categoryclick;
     View rl_main_content;
@@ -99,6 +99,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     RecyclerView navigation_recycleview;
     LinearLayoutManager navigation_linear_layout_manager;
     ImageView navigation_close;
+    android.support.v7.widget.AppCompatImageView user_pic_img_vew;
 
     public NavigationFragment() {
         // Required empty public constructor
@@ -117,15 +118,18 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
 
     private void initView(View view) {
+
+        user_pic_img_vew = (android.support.v7.widget.AppCompatImageView) view.findViewById(R.id.circular_profile_image_home);
+
         navigation_close = (ImageView) view.findViewById(R.id.navigation_close);
-        rl_logout=(RelativeLayout)view.findViewById(R.id.rl_logout) ;
+        rl_logout = (RelativeLayout) view.findViewById(R.id.rl_logout);
         rl_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                save_shared_pref("notlogin", "notlogin", "notlogin");
+                save_shared_pref("notlogin", "notlogin", "notlogin", "");
 
 
-                Intent Homedashboard =new Intent(getActivity(), HomeActivity.class);
+                Intent Homedashboard = new Intent(getActivity(), HomeActivity.class);
                 Homedashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(Homedashboard);
 
@@ -159,11 +163,11 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
         //navigation_parent_scrollview=(NestedScrollView)this.view.findViewById(R.id.navigation_parent_scrollview);
 
-        if (app_sharedpreference.getsharedpref("username", "notlogin") != null)
-        {
+        if (app_sharedpreference.getsharedpref("username", "notlogin") != null) {
 
             String Username = app_sharedpreference.getsharedpref("name", "notlogin");
             String Emailid = app_sharedpreference.getsharedpref("emailid", "notlogin");
+            String user_image = app_sharedpreference.getsharedpref("profile_pic", "");
 
 
 
@@ -181,15 +185,32 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
                 if (app_sharedpreference.getsharedpref("usertype", "0").equals("3")) {
 
 
+                    Ion.with(user_pic_img_vew)
+                            .error(ContextCompat.getDrawable(getActivity(), R.drawable.ic_profile_user))
+                            .placeholder(ContextCompat.getDrawable(getActivity(), R.drawable.ic_profile_user))
+                            .load(user_image);
+                    Log.e("image_large", "image_large");
+
+
                     usertype.setText("Bussiness Associate");
 
 
                 } else if ((app_sharedpreference.getsharedpref("usertype", "0").equals("2"))) {
 
+
+                    Ion.with(user_pic_img_vew)
+                            .error(ContextCompat.getDrawable(getActivity(), R.drawable.ic_profile_user))
+                            .placeholder(ContextCompat.getDrawable(getActivity(), R.drawable.ic_profile_user))
+                            .load(user_image);
+
                     usertype.setText("Buyer");
 
 
                 } else if ((app_sharedpreference.getsharedpref("usertype", "0").equals("1"))) {
+                    Ion.with(user_pic_img_vew)
+                            .error(ContextCompat.getDrawable(getActivity(), R.drawable.ic_profile_user))
+                            .placeholder(ContextCompat.getDrawable(getActivity(), R.drawable.ic_profile_user))
+                            .load(user_image);
 
 
                     usertype.setText(" Seller");
@@ -290,22 +311,11 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
                 mDrawerToggle.syncState();
             }
         });
-       // mDrawerToggle.setDrawerIndicatorEnabled(true);
-       // mDrawerToggle.setHomeAsUpIndicator(R.drawable.menu_24dp);
+        // mDrawerToggle.setDrawerIndicatorEnabled(true);
+        // mDrawerToggle.setHomeAsUpIndicator(R.drawable.menu_24dp);
 
 
-
-toolbar.setNavigationIcon(R.drawable.menu_24dp);
-
-
-
-
-
-
-
-
-
-
+        toolbar.setNavigationIcon(R.drawable.menu_24dp);
 
 
         mDrawerToggle.setDrawerIndicatorEnabled(false);
@@ -317,7 +327,6 @@ toolbar.setNavigationIcon(R.drawable.menu_24dp);
                 mDrawerLayout.openDrawer(Gravity.LEFT);
             }
         });
-
 
 
     }
@@ -555,12 +564,11 @@ toolbar.setNavigationIcon(R.drawable.menu_24dp);
     }
 
 
-
-    public void save_shared_pref(String user_id, String user_name, String email_id)
-    {
+    public void save_shared_pref(String user_id, String user_name, String email_id, String profile_pic) {
         app_sharedpreference.setsharedpref("userid", user_id);
         app_sharedpreference.setsharedpref("username", user_name);
         app_sharedpreference.setsharedpref("emailid", email_id);
+        app_sharedpreference.setsharedpref("profile_pic", profile_pic);
 
     }
 
@@ -569,12 +577,10 @@ toolbar.setNavigationIcon(R.drawable.menu_24dp);
     public void onResume() {
         super.onResume();
 
-        if (app_sharedpreference.getsharedpref("username", "notlogin") != null)
-        {
+        if (app_sharedpreference.getsharedpref("username", "notlogin") != null) {
 
             String Username = app_sharedpreference.getsharedpref("name", "notlogin");
             String Emailid = app_sharedpreference.getsharedpref("emailid", "notlogin");
-
 
 
             if (Username.equals("notlogin")) {
