@@ -127,7 +127,7 @@
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="@string/state"
+                                            android:text="@string/category"
                                             android:textColor="@color/black"
                                             android:textSize="16dp"
                                             android:padding="10dp"
@@ -148,7 +148,7 @@
                                     </RelativeLayout>
 
                                     <android.support.design.widget.TextInputLayout
-                                        android:id="@+id/input_layout_state"
+                                        android:id="@+id/input_layout_category"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical|center_horizontal"
@@ -157,7 +157,7 @@
                                         android:textColorHint="@color/hint_color">
 
                                         <RelativeLayout
-                                            android:id="@+id/spStateLayout"
+                                            android:id="@+id/spCategoryLayout"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginBottom="@dimen/five_dip"
@@ -165,7 +165,7 @@
 
 
                                             <Spinner
-                                                android:id="@+id/spStateCategory"
+                                                android:id="@+id/spCategory"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
 
@@ -190,6 +190,89 @@
                                 </LinearLayout>
 
                             </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+
+                                <RelativeLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/relativeLayout_state"
+                                    android:paddingBottom="5dp"
+                                    android:paddingTop="5dp"
+                                    >
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/state"
+                                        android:textColor="@color/black"
+                                        android:textSize="16dp"
+                                        android:padding="10dp"
+                                        android:textStyle="bold"
+                                        android:layout_alignParentLeft="true"
+                                        />
+
+
+                                    <ImageView
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:src="@drawable/ic_filter_list"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_marginTop="10dp"
+                                        />
+
+                                </RelativeLayout>
+
+                                <android.support.design.widget.TextInputLayout
+                                    android:id="@+id/input_layout_state"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical|center_horizontal"
+                                    android:layout_weight="2"
+                                    android:layout_marginLeft="@dimen/five_dip"
+                                    android:textColorHint="@color/hint_color">
+
+                                    <RelativeLayout
+                                        android:id="@+id/spStateLayout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="@dimen/five_dip"
+                                        android:layout_marginTop="@dimen/five_dip">
+
+
+                                        <Spinner
+                                            android:id="@+id/spStateCategory"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+
+                                            android:layout_alignParentLeft="true"
+
+                                            android:background="@drawable/simple_spinner_back"
+                                            android:gravity="center_horizontal" />
+
+                                        <ImageView
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginRight="10dp"
+                                            android:scaleType="fitXY"
+                                            android:src="@drawable/ic_arrow" />
+
+                                    </RelativeLayout>
+                                </android.support.design.widget.TextInputLayout>
+
+
+                            </LinearLayout>
+
+
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">

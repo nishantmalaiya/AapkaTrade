@@ -2,10 +2,12 @@ package com.example.pat.aapkatrade.user_dashboard.my_profile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +22,9 @@ import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.user_dashboard.address.add_address.AddAddressActivity;
 import com.example.pat.aapkatrade.user_dashboard.changepassword.ChangePassword;
+import com.koushikdutta.ion.Ion;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfilePreviewActivity extends AppCompatActivity
 {
@@ -30,7 +35,7 @@ public class ProfilePreviewActivity extends AppCompatActivity
     ImageView btnEdit;
     private Context context;
 
-
+    de.hdodenhof.circleimageview.CircleImageView userimage;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -46,6 +51,7 @@ public class ProfilePreviewActivity extends AppCompatActivity
 
     private void setup_layout()
     {
+        userimage=(CircleImageView)findViewById(R.id.imageViewProfilePic);
         btnEdit = (ImageView) findViewById(R.id.btnEdit);
 
         linearLayoutLagout = (LinearLayout) findViewById(R.id.linearLayoutLagout);
@@ -72,7 +78,7 @@ public class ProfilePreviewActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                save_shared_pref("notlogin", "notlogin", "notlogin");
+                save_shared_pref("notlogin", "notlogin", "notlogin","profile_pic");
                 Intent Homedashboard = new Intent(ProfilePreviewActivity.this, HomeActivity.class);
                 Homedashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(Homedashboard);
@@ -114,24 +120,46 @@ public class ProfilePreviewActivity extends AppCompatActivity
             String Emailid = app_sharedpreference.getsharedpref("emailid", "not");
 
             String userType = app_sharedpreference.getsharedpref("usertype","0");
+            String user_image = app_sharedpreference.getsharedpref("profile_pic","");
 
-            System.out.println("UserName-----------"+Username);
+           Log.e("user_image",user_image);
 
             textViewName.setText(Username);
             tvEmail.setText(Emailid);
 
             if (userType.equals("1"))
             {
+                Log.e("user_image",user_image);
+
+                Ion.with(userimage)
+                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+                        .load(user_image);
+
+
+
                 tvUserType.setText("Welcome Seller");
 
             }
             else if (userType.equals("2"))
             {
+                Ion.with(userimage)
+                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+                        .load(user_image);
                 tvUserType.setText("Welcome Buyer");
+
+
+
 
             }
             else if (userType.equals("3"))
             {
+                Ion.with(userimage)
+                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+                        .load(user_image);
+
                 tvUserType.setText("Welcome Bussiness Associate");
 
             }
@@ -189,11 +217,12 @@ public class ProfilePreviewActivity extends AppCompatActivity
     }
 
 
-    public void save_shared_pref(String user_id, String user_name, String email_id)
+    public void save_shared_pref(String user_id, String user_name, String email_id, String profile_pic)
     {
         app_sharedpreference.setsharedpref("userid", user_id);
         app_sharedpreference.setsharedpref("username", user_name);
         app_sharedpreference.setsharedpref("emailid", email_id);
+        app_sharedpreference.setsharedpref("profile_pic",profile_pic);
 
     }
 
@@ -208,24 +237,40 @@ public class ProfilePreviewActivity extends AppCompatActivity
             String Emailid = app_sharedpreference.getsharedpref("emailid", "not");
 
             String userType = app_sharedpreference.getsharedpref("usertype","0");
+            String user_image = app_sharedpreference.getsharedpref("profile_pic", "");
 
-            System.out.println("UserName-----------"+Username);
+
 
             textViewName.setText(Username);
             tvEmail.setText(Emailid);
 
             if (userType.equals("1"))
             {
+                Ion.with(userimage)
+                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+                        .load(user_image);
+
+
+
                 tvUserType.setText("Welcome Seller");
 
             }
             else if (userType.equals("2"))
             {
+                Ion.with(userimage)
+                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+                        .load(user_image);
                 tvUserType.setText("Welcome Buyer");
 
             }
             else if (userType.equals("3"))
             {
+                Ion.with(userimage)
+                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+                        .load(user_image);
                 tvUserType.setText("Welcome Bussiness Associate");
 
             }
