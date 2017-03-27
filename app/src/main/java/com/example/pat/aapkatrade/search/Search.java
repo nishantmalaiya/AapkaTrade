@@ -268,7 +268,7 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
     private void setup_state_spinner() {
 
         state_list_spinner = (Spinner) findViewById(R.id.spin_select_state);
-        stateList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.state_list)));
+        stateList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.state_list)));
 
 
 

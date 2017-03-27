@@ -6,15 +6,17 @@
     android:id="@+id/content_product_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:layout_marginRight="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginBottom="10dp"
     >
+
+
     <com.chauthai.swipereveallayout.SwipeRevealLayout
+        android:id="@+id/swipeReavelLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:mode="normal"
+        app:mode="same_level"
         app:dragEdge="right">
 
         <!-- Your secondary layout here -->

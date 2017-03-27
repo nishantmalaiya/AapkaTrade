@@ -519,6 +519,8 @@ public class MyProfileFragment extends Fragment implements DatePickerDialog.OnDa
         spRelExp = (Spinner) view.findViewById(R.id.spRelExp);
         spSelectBank = (Spinner) view.findViewById(R.id.spSelectBank);
 
+
+
     }
 
     @Override
