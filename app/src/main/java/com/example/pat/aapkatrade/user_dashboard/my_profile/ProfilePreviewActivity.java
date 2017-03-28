@@ -23,6 +23,7 @@ import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.user_dashboard.address.add_address.AddAddressActivity;
 import com.example.pat.aapkatrade.user_dashboard.changepassword.ChangePassword;
 import com.koushikdutta.ion.Ion;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -137,11 +138,17 @@ public class ProfilePreviewActivity extends AppCompatActivity
 //                        .load(user_image);
 
 
-                Ion.with(userimage)
 
-                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                        .load(user_image);
+                Picasso.with(context).load(user_image)
+
+                        .error(R.drawable.ic_profile_user)
+                        .into(userimage);
+
+//                Ion.with(userimage)
+//
+//                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .load(user_image);
 
 
 
@@ -151,10 +158,16 @@ public class ProfilePreviewActivity extends AppCompatActivity
             else if (userType.equals("2"))
             {
                 Log.e("user_image2",user_image);
-                Ion.with(userimage)
-                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                        .load(user_image);
+
+                Picasso.with(context).load(user_image)
+
+                        .error(R.drawable.ic_profile_user)
+                        .into(userimage);
+
+//                Ion.with(userimage)
+//                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .load(user_image);
                 tvUserType.setText("Welcome Buyer");
 
 
@@ -164,10 +177,16 @@ public class ProfilePreviewActivity extends AppCompatActivity
             else if (userType.equals("3"))
             {
                 Log.e("user_image3",user_image);
-                Ion.with(userimage)
-                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                        .load(user_image);
+
+                Picasso.with(context).load(user_image)
+
+                        .error(R.drawable.ic_profile_user)
+                        .into(userimage);
+
+//                Ion.with(userimage)
+//                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .load(user_image);
 
                 tvUserType.setText("Welcome Bussiness Associate");
 
@@ -255,10 +274,16 @@ public class ProfilePreviewActivity extends AppCompatActivity
 
             if (userType.equals("1"))
             {
-                Ion.with(userimage)
-                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                        .load(user_image);
+                Picasso.with(context).load(user_image)
+
+                        .error(R.drawable.ic_profile_user)
+                        .into(userimage);
+
+
+//                Ion.with(userimage)
+//                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .load(user_image);
 
 
 
@@ -267,19 +292,31 @@ public class ProfilePreviewActivity extends AppCompatActivity
             }
             else if (userType.equals("2"))
             {
-                Ion.with(userimage)
-                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                        .load(user_image);
+                Picasso.with(context).load(user_image)
+
+                        .error(R.drawable.ic_profile_user)
+                        .into(userimage);
+
+
+//                Ion.with(userimage)
+//                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .load(user_image);
                 tvUserType.setText("Welcome Buyer");
 
             }
             else if (userType.equals("3"))
             {
-                Ion.with(userimage)
-                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-                        .load(user_image);
+                Picasso.with(context).load(user_image)
+
+                        .error(R.drawable.ic_profile_user)
+                        .into(userimage);
+
+
+//                Ion.with(userimage)
+//                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                        .load(user_image);
                 tvUserType.setText("Welcome Bussiness Associate");
 
             }
