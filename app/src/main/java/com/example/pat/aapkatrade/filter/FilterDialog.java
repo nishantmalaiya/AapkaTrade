@@ -17,6 +17,7 @@ import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.categories_tab.CategoriesListData;
 import com.example.pat.aapkatrade.categories_tab.CategoryListActivity;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
+import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.google.gson.JsonObject;
@@ -42,6 +43,7 @@ public class FilterDialog extends Dialog {
     private TextView applyFilter, clearAll;
     private Intent intent;
 
+    public static TaskCompleteReminder taskCompleteReminder = null;
 
     public FilterDialog(Context context) {
         super(context);
@@ -67,9 +69,7 @@ public class FilterDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 getDataByCategory();
-//                intent = new Intent(context, CategoryListActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                context.startActivity(intent);
+//
             }
         });
 
@@ -104,34 +104,45 @@ public class FilterDialog extends Dialog {
     private void getDataByCategory() {
         Log.e("message_data---", "calledd with category id "+categoryId);
         Log.e("message_data---URL", context.getResources().getString(R.string.webservice_base_url) + "/productlist");
-//        progress_handler.show();
+        progress_handler.show();
         Ion.with(context)
                 .load(context.getResources().getString(R.string.webservice_base_url) + "/productlist")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
 //                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("category_id", categoryId)
                 .setBodyParameter("apply", "1")
-                .asString()
-                .setCallback(new FutureCallback<String>() {
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
                     @Override
-                    public void onCompleted(Exception e, String result) {
-                        Log.e("message_data---", result==null?e.toString():result);
+                    public void onCompleted(Exception e, JsonObject result) {
+//                        Log.e("message_data---", result==null?e.toString():result);
 
-//                        progress_handler.hide();
+                        progress_handler.hide();
 
-//                        if (result == null) {
-//                            Log.e("message_data---", "null found");
-//
-//                        } else {
-//                            JsonObject jsonObject = result.getAsJsonObject();
-//
-//                            String message = jsonObject.get("message").toString().substring(0, jsonObject.get("message").toString().length());
-//
-//                            String message_data = message.replace("\"", "");
-//
-//                            Log.e("message_data---", result.toString());
-//
-//                        }
+                        if (result == null) {
+                            Log.e("message_data---", "null found");
+
+                        } else {
+
+                            taskCompleteReminder.Taskcomplete(result);
+                            JsonObject jsonObject = result.getAsJsonObject();
+
+                            String message = jsonObject.get("message").toString().substring(0, jsonObject.get("message").toString().length());
+
+                            String message_data = message.replace("\"", "");
+
+dismiss();
+
+
+
+
+
+
+                        }
+
+
+
+
 
                     }
 

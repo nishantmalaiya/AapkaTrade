@@ -27,6 +27,7 @@ import com.example.pat.aapkatrade.filter.FilterDialog;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.general.CheckPermission;
 import com.example.pat.aapkatrade.general.LocationManager_check;
+import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.general.recycleview_custom.MyRecyclerViewEffect;
@@ -71,7 +72,18 @@ public class CategoryListActivity extends AppCompatActivity
         setContentView(R.layout.activity_categories_list);
         context = CategoryListActivity.this;
         Intent intent = getIntent();
+        if(intent!=null)
+        {Log.e("message_data",""+intent.getStringExtra("message_data"));
 
+        }
+
+        FilterDialog.taskCompleteReminder=new TaskCompleteReminder() {
+            @Override
+            public void Taskcomplete(JsonObject data) {
+
+                Log.e("message_data3",data.toString());
+            }
+        };
         Bundle b = intent.getExtras();
         if(b!=null) {
             category_id = b.getString("category_id");
@@ -134,6 +146,9 @@ public class CategoryListActivity extends AppCompatActivity
 
     private void get_web_data()
     {
+
+
+
         productListDatas.clear();
         progress_handler.show();
             Ion.with(CategoryListActivity.this)
@@ -162,7 +177,7 @@ public class CategoryListActivity extends AppCompatActivity
 
                                 String message_data = message.replace("\"", "");
 
-                                Log.e("message_data", result.toString());
+                                Log.e("message_product_list", result.toString());
 
                                 if (message_data.equals("No record found"))
                                 {
@@ -259,4 +274,6 @@ public class CategoryListActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
