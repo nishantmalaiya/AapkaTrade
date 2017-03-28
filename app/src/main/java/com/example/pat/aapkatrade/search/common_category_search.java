@@ -5,7 +5,7 @@ package com.example.pat.aapkatrade.search;
  */
 
 public class common_category_search {
-    String cat_id,catname,catcount;
+    public String cat_id,catname,catcount;
 
     public common_category_search(String cat_id, String catname,String catcount){
         this.cat_id=cat_id;

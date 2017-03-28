@@ -39,6 +39,7 @@ import com.example.pat.aapkatrade.Home.registration.entity.State;
 import com.example.pat.aapkatrade.Home.registration.spinner_adapter.SpStateAdapter;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.categories_tab.CategoryListActivity;
+import com.example.pat.aapkatrade.filter.FilterDialog;
 import com.example.pat.aapkatrade.general.Adapter_callback_interface;
 import com.example.pat.aapkatrade.general.App_config;
 import com.example.pat.aapkatrade.general.Call_webservice;
@@ -152,12 +153,14 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
 
         coordinate_search = (CoordinatorLayout) findViewById(R.id.coordinate_search);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.search_filter_fab);
         fab.setBackgroundTintList(getResources().getColorStateList(R.color.color_voilet));
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
+                FilterDialog filterDialog = new FilterDialog(Search.this,autocomplete_textview_product.getText().toString(), common_category_searchlist,"search");
+                filterDialog.show();
                 // Click action
 //                Intent intent = new Intent(MainActivity.this, NewMessageActivity.class);
 //                startActivity(intent);
@@ -402,6 +405,7 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
                     .setBodyParameter("location", location_text)
                     .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                     .setBodyParameter("name", product_name1)
+                    .setBodyParameter("apply","1")
                     .asJsonObject()
                     .setCallback(new FutureCallback<JsonObject>() {
                         @Override
@@ -440,9 +444,9 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
         Log.e("Arvind_data",result.toString());
 
         search_productlist.clear();
-        common_category_searchlist.clear();
-        common_state_searchlist.clear();
-        common_city_searchlist.clear();
+//        common_category_searchlist.clear();
+//        common_state_searchlist.clear();
+//        common_city_searchlist.clear();
 
 
         JsonObject jsonObject = result.getAsJsonObject();
