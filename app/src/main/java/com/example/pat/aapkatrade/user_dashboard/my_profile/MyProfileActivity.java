@@ -94,10 +94,10 @@ getshared_pref_data();
         etFName = (EditText) findViewById(R.id.etFName);
 //        String fname = app_sharedpreference.getsharedpref("name", "");
 
-        Picasso.with(context).load(user_image)
-
-                .error(R.drawable.ic_profile_user)
-                .into(userimageview);
+//        Picasso.with(context).load(user_image)
+//
+//                .error(R.drawable.ic_profile_user)
+//                .into(userimageview);
 
 
 //        Ion.with(userimageview)

@@ -19,9 +19,10 @@ import java.util.ArrayList;
 public class SpStateAdapter extends BaseAdapter {
 
 
-    Context context;
-     ArrayList<State> stateList = new ArrayList<>();
-    LayoutInflater inflter;
+    private Context context;
+    private ArrayList<State> stateList = new ArrayList<>();
+    private LayoutInflater inflter;
+    private boolean isProductCount = false;
 
     public SpStateAdapter(Context applicationContext, ArrayList<State> stateList) {
         this.context = applicationContext;
@@ -51,4 +52,6 @@ public class SpStateAdapter extends BaseAdapter {
         names.setText(stateList.get(i).stateName);
         return view;
     }
+
+
 }
