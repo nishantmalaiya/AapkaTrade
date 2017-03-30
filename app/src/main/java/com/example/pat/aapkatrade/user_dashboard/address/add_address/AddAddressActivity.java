@@ -163,6 +163,7 @@ public class AddAddressActivity extends AppCompatActivity
 
                         if (result == null){
 
+
                             progress_handler.hide();
                         }
                         else

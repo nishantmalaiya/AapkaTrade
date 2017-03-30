@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -28,6 +29,9 @@ import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Validation;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
+import com.example.pat.aapkatrade.search.Search;
+import com.example.pat.aapkatrade.search.common_category_search;
+import com.example.pat.aapkatrade.search.common_state_search;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -62,10 +66,26 @@ public class FilterDialog extends Dialog {
     private RecyclerView cityRecyclerView;
     private ArrayList<City> getSelectedCityList = new ArrayList<>();
     public static CommonInterface commonInterface;
+    private Intent intent;
+    String search_name;
+    public ArrayList<common_category_search> common_category_searchlist;
+    public static TaskCompleteReminder taskCompleteReminder = null;
+    String classname ;
+    Spinner category_list,state_list;
+    ArrayList<String> categorynames=new ArrayList<>();
+    ArrayList<String> categoryids=new ArrayList<>();
+    ArrayList<String> statenames=new ArrayList<>();
+    ArrayList<String> stateids=new ArrayList<>();
 
-    public FilterDialog(Context context) {
+
+    common_state_search common_state_search;
+
+
+    public FilterDialog(Context context, String categoryId) {
         super(context);
         this.context = context;
+        this.categoryId = categoryId;
+
     }
 
     public FilterDialog(Context context, String categoryId, ArrayList<State> productAvailableStateList) {
@@ -75,6 +95,15 @@ public class FilterDialog extends Dialog {
         this.productAvailableStateList = productAvailableStateList;
         Log.e("message_data-categoryId", categoryId);
         Log.e("message_data--statesize", String.valueOf(productAvailableStateList.size()));
+
+    public FilterDialog(Context context, String search_name, ArrayList<common_category_search> common_category_searchlist, String classname) {
+        super(context);
+        this.context = context;
+        this.search_name = search_name;
+        this.common_category_searchlist = common_category_searchlist;
+        this.classname=classname;
+
+        Log.e("classname", classname);
     }
 
     @Override
@@ -130,7 +159,17 @@ public class FilterDialog extends Dialog {
         AndroidUtils.setBackgroundSolid(dialogue_toolbar, context, R.color.green, 8);
         imgCLose = (Button) findViewById(R.id.imgCLose);
         categoryFilter = (LinearLayout) findViewById(R.id.categoryFilter);
-        categoryFilter.setVisibility(View.GONE);
+
+        category_list=(Spinner)findViewById(R.id.spCategory);
+        state_list=(Spinner)findViewById(R.id.spStateCategory);
+        if (classname.contains("search")) {
+            if (categoryFilter.getVisibility() !=View.VISIBLE) {
+                categoryFilter.setVisibility(View.VISIBLE);
+
+            }
+        } else {
+            categoryFilter.setVisibility(View.GONE);
+        }
         applyFilter = (TextView) findViewById(R.id.applyFilter);
         spState = (Spinner) findViewById(R.id.spStateCategory);
         cityRecyclerView = (RecyclerView) findViewById(R.id.selectCityList);
@@ -140,9 +179,143 @@ public class FilterDialog extends Dialog {
     private void callWebService() {
         if (Validation.isEmptyStr(stateId)) {
             getDataByState();
-        } else {
-//            if(Validation.isEmptyStr(cityId))
         }
+        if(classname.contains("search"))
+        {
+            setup_search_functionality();
+        }
+
+    }
+
+    private void setup_search_functionality() {
+
+setup_category_spinner();
+        Log.e("search_name_filter",search_name);
+        Log.e("common_category_search",""+common_category_searchlist);
+
+
+
+
+    }
+
+    private void setup_category_spinner() {
+
+        for(int i=0;i<common_category_searchlist.size();i++)
+        {String cat_id=common_category_searchlist.get(i).cat_id;
+            categoryids.add(cat_id);
+            String cat_name=common_category_searchlist.get(i).catname;
+            categorynames.add(cat_name);
+        }
+
+        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,android.R.layout.simple_spinner_item, categorynames);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        category_list.setAdapter(spinnerArrayAdapter);
+
+        category_list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                call_category_to_state_webservice(context,categoryids.get(position),search_name);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+    }
+
+    private void call_category_to_state_webservice(Context c,String category_id,String search_name) {
+
+        statenames.clear();
+        stateids.clear();
+        Log.e("message_data---", "calledd with category id "+category_id);
+        Log.e("message_data---URL", context.getResources().getString(R.string.webservice_base_url) + "/search");
+        progress_handler.show();
+        Ion.with(c)
+                .load(context.getResources().getString(R.string.webservice_base_url) + "/search")
+                .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+//                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("category_id", category_id)
+                .setBodyParameter("name", search_name)
+                .setBodyParameter("apply", "1")
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+//                        Log.e("message_data---", result==null?e.toString():result);
+
+                        progress_handler.hide();
+
+                        if (result == null) {
+                            Log.e("message_data---", "null found");
+
+                        } else {
+                            JsonObject jsonObject = result.getAsJsonObject();
+                            JsonArray jsonarray_states = jsonObject.getAsJsonArray("states");
+                            for (int l = 0; l < jsonarray_states.size(); l++) {
+                                JsonObject jsonObject_result = (JsonObject) jsonarray_states.get(l);
+                                String state_id = jsonObject_result.get("state_id").getAsString();
+                                String statename = jsonObject_result.get("statename").getAsString();
+                                String countprod = jsonObject_result.get("countprod").getAsString();
+                                statenames.add(statename);
+                                stateids.add(state_id);
+                            }
+                            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context,android.R.layout.simple_spinner_item, statenames);
+                            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                            state_list.setAdapter(spinnerArrayAdapter);
+                            state_list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    call_state_to_city_webservice();
+
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+
+
+
+
+
+
+
+                           Log.e("result_state_list",result.toString());
+
+                           // dismiss();
+
+
+
+
+
+
+                        }
+
+
+
+
+
+                    }
+
+                });
+
+
+
+
+
+
+    }
+
+    private void call_state_to_city_webservice() {
+
+
+
     }
 
 

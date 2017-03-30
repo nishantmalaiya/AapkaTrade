@@ -242,7 +242,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
 
 
     private void callWebServiceForSellerRegistration() {
-        String URL = isAddVendorCall.equals("true")?"https://aapkatrade.com/slim/vendorregister":"http://aapkatrade.com/slim/sellerregister";
+        String URL = isAddVendorCall.equals("true")?getResources().getString(R.string.webservice_base_url)+"/vendorregister":getResources().getString(R.string.webservice_base_url)+"/sellerregister";
 
         if (docFile.getAbsolutePath().equals("/")) {
             Log.e("reach", "NUL_______DOCCCCCCCLICENCE");
@@ -421,7 +421,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
         Log.e("reach", " Buyer Data--------->\n" + formBuyerData.toString());
         progressBarHandler.show();
         Ion.with(RegistrationActivity.this)
-                .load("http://aapkatrade.com/slim/buyerregister")
+                .load(getResources().getString(R.string.webservice_base_url)+"/buyerregister")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "1")
