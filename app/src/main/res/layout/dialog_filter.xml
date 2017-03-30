@@ -112,13 +112,14 @@
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
+
                                     android:layout_height="wrap_content">
 
 
                                     <RelativeLayout
                                         android:orientation="vertical"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1"
+                                        android:layout_width="wrap_content"
+
                                         android:layout_height="wrap_content"
                                         android:id="@+id/relativeLayout1"
                                         android:paddingBottom="5dp"
@@ -126,25 +127,24 @@
                                         >
 
                                         <TextView
-                                            android:layout_width="wrap_content"
+                                            android:layout_width="100dp"
                                             android:layout_height="wrap_content"
                                             android:text="@string/category"
                                             android:textColor="@color/black"
                                             android:textSize="16dp"
                                             android:padding="10dp"
                                             android:textStyle="bold"
-                                            android:layout_alignParentLeft="true"
+                                            android:id="@+id/tv_category"
                                             />
 
 
                                         <ImageView
                                             android:layout_width="25dp"
                                             android:layout_height="25dp"
+                                            android:layout_toRightOf="@+id/tv_category"
                                             android:src="@drawable/ic_filter_list"
-                                            android:layout_alignParentRight="true"
-                                            android:layout_marginRight="10dp"
-                                            android:layout_marginTop="10dp"
-                                            />
+                                       android:layout_centerVertical="true"
+                                            android:id="@+id/imageView4" />
 
                                     </RelativeLayout>
 
@@ -200,8 +200,8 @@
 
                                 <RelativeLayout
                                     android:orientation="vertical"
-                                    android:layout_width="0dp"
-                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+
                                     android:layout_height="wrap_content"
                                     android:id="@+id/relativeLayout_state"
                                     android:paddingBottom="5dp"
@@ -209,11 +209,12 @@
                                     >
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="100dp"
                                         android:layout_height="wrap_content"
                                         android:text="@string/state"
                                         android:textColor="@color/black"
                                         android:textSize="16dp"
+                                        android:id="@+id/tv_state"
                                         android:padding="10dp"
                                         android:textStyle="bold"
                                         android:layout_alignParentLeft="true"
@@ -224,9 +225,9 @@
                                         android:layout_width="25dp"
                                         android:layout_height="25dp"
                                         android:src="@drawable/ic_filter_list"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_marginRight="10dp"
-                                        android:layout_marginTop="10dp"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toRightOf="@+id/tv_state"
+
                                         />
 
                                 </RelativeLayout>
@@ -285,8 +286,8 @@
 
                                     <RelativeLayout
                                         android:orientation="vertical"
-                                        android:layout_width="0dp"
-                                        android:layout_weight="1"
+                                        android:layout_width="wrap_content"
+
                                         android:layout_height="wrap_content"
                                         android:id="@+id/relativeLayout2"
                                         android:paddingBottom="5dp"
@@ -294,11 +295,12 @@
                                         >
 
                                         <TextView
-                                            android:layout_width="wrap_content"
+                                            android:layout_width="100dp"
                                             android:layout_height="wrap_content"
                                             android:text="@string/city"
                                             android:textColor="@color/black"
                                             android:textSize="16dp"
+                                            android:id="@+id/tv_city"
                                             android:padding="10dp"
                                             android:textStyle="bold"
                                             android:layout_alignParentLeft="true"
@@ -309,9 +311,9 @@
                                             android:layout_width="25dp"
                                             android:layout_height="25dp"
                                             android:src="@drawable/ic_filter_list"
-                                            android:layout_alignParentRight="true"
-                                            android:layout_marginRight="10dp"
-                                            android:layout_marginTop="10dp"
+                                            android:layout_toRightOf="@+id/tv_city"
+                                            android:layout_centerVertical="true"
+
                                             />
 
                                     </RelativeLayout>

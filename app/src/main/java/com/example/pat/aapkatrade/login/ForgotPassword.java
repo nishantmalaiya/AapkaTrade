@@ -113,7 +113,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         progressBarHandler.show();
 
 
-        String webservice_forgot_password = "http://aapkatrade.com/slim/forget";
+        String webservice_forgot_password = getResources().getString(R.string.webservice_base_url)+"/forget";
 
         if (app_sharedpreference.shared_pref != null) {
             if (app_sharedpreference.getsharedpref("usertype", "0").equals("3")) {
