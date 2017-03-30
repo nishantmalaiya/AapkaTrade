@@ -94,7 +94,7 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
     String selected_categoryid;
     ViewPager viewpager_state;
-
+    FloatingActionButton fab_filter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,13 +153,13 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
 
         coordinate_search = (CoordinatorLayout) findViewById(R.id.coordinate_search);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.search_filter_fab);
-        fab.setBackgroundTintList(getResources().getColorStateList(R.color.color_voilet));
-        fab.setOnClickListener(new View.OnClickListener() {
+        fab_filter = (FloatingActionButton) findViewById(R.id.search_filter_fab);
+        fab_filter.setBackgroundTintList(getResources().getColorStateList(R.color.color_voilet));
+        fab_filter.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                FilterDialog filterDialog = new FilterDialog(Search.this,autocomplete_textview_product.getText().toString(), common_category_searchlist,"search");
+                FilterDialog filterDialog = new FilterDialog(Search.this, autocomplete_textview_product.getText().toString(), common_category_searchlist, "search");
                 filterDialog.show();
                 // Click action
 //                Intent intent = new Intent(MainActivity.this, NewMessageActivity.class);
@@ -219,6 +219,8 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
                         call_search_webservice(state_list_spinner.getSelectedItem().toString(), autocomplete_textview_product.getText().toString(),"","","","");
 
                         App_config.hideKeyboard(Search.this);
+
+
 
                     }
 
@@ -595,7 +597,11 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 //search recycleview set adapter
            // recyclerView_search.setLayoutManager(gridLayoutManager);
 
+
+
+
             progressBarHandler.hide();
+            fab_filter.setVisibility(View.VISIBLE);
             findViewById(R.id.search_category_state_container).setVisibility(View.VISIBLE);
 
         }

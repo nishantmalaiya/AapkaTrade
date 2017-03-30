@@ -282,7 +282,7 @@ public class ActivityOTPVerify extends AppCompatActivity {
         webservice_header_type.put("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3");
 
 
-        String verifyotp_url = "http://aapkatrade.com/slim/varify_otp";
+        String verifyotp_url = getResources().getString(R.string.webservice_base_url)+"/varify_otp";
         Call_webservice.verify_otp(ActivityOTPVerify.this, verifyotp_url, "resend_otp", webservice_body_parameter, webservice_header_type);
 
         Call_webservice.taskCompleteReminder = new TaskCompleteReminder() {

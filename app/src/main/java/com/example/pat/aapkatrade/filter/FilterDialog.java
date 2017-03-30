@@ -250,7 +250,21 @@ setup_category_spinner();
 
 
 
+                            state_list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+
+
+                                    call_state_to_city_webservice();
+
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
 
 
 
@@ -276,6 +290,16 @@ setup_category_spinner();
                     }
 
                 });
+
+
+
+
+
+
+    }
+
+    private void call_state_to_city_webservice() {
+
 
 
 

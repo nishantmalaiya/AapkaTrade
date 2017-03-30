@@ -8,6 +8,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
@@ -22,7 +23,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.general.CheckPermission;
@@ -36,6 +40,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.shehabic.droppy.DroppyClickCallbackInterface;
+import com.shehabic.droppy.DroppyMenuItem;
+import com.shehabic.droppy.DroppyMenuPopup;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
@@ -70,14 +77,15 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     int quantity_value = 1;
     ProgressBarHandler progressBarHandler;
     String productlocation, categoryName;
+    LinearLayout linearLayoutQuantity;
+    EditText firstName, quantity, price, mobile, email, etEndDate, etStatDate, description,editText;
+    TextView tvServiceBuy,textViewQuantity;
 
-    EditText firstName, quantity, price, mobile, email, etEndDate, etStatDate, description;
-    TextView tvServiceBuy;
     // TextView tvDurationHeading,tvDuration;
     Dialog dialog;
     private Context context;
     private String product_name;
-
+    DroppyMenuPopup droppyMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +104,90 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         progressBarHandler=new ProgressBarHandler(context);
         setUpToolBar();
         initView();
+        //Init_droppy();
+
         get_data();
     }
+
+    private void Init_droppy() {
+
+        DroppyMenuPopup.Builder droppyBuilder = new DroppyMenuPopup.Builder(this, linearLayoutQuantity);
+        droppyMenu = droppyBuilder.build();
+        droppyBuilder.addMenuItem(new DroppyMenuItem("1"))
+                .addMenuItem(new DroppyMenuItem("2"))
+                .addMenuItem(new DroppyMenuItem("3"))
+                .addMenuItem(new DroppyMenuItem("4"))
+                .addMenuItem(new DroppyMenuItem("5"))
+                .addSeparator()
+                .addMenuItem(new DroppyMenuItem("More"));
+        droppyBuilder.setOnClick(new DroppyClickCallbackInterface() {
+            @Override
+            public void call(View v, int id) {
+                switch (id) {
+                    case 0:
+                        textViewQuantity.setText("1");
+                        break;
+                    case 1:
+                        textViewQuantity.setText("2");
+                        break;
+                    case 2:
+                        textViewQuantity.setText("3");
+                        break;
+                    case 3:
+                        textViewQuantity.setText("4");
+                        break;
+                    case 4:
+                        textViewQuantity.setText("5");
+                        break;
+                    case 5:
+                        showPopup("Quantity");
+                        break;
+
+
+                }
+            }
+        });
+        linearLayoutQuantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        droppyMenu = droppyBuilder.build();
+
+
+    }
+
+    private void showPopup(String description) {
+        boolean wrapInScrollView = true;
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title("Quantity")
+                .customView(R.layout.more, wrapInScrollView)
+                .positiveText(R.string.ok)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        if (editText.getText().length() <= 0) {
+                            showMessage("Nothing done");
+                        } else {
+                            showMessage(editText.getText().toString());
+                            textViewQuantity.setText(editText.getText().toString());
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+        editText = (EditText) dialog.findViewById(R.id.editText);
+
+    }
+
+
+
+
+
+
+
+
 
     private void get_data() {
         relativeBuyNow.setVisibility(View.INVISIBLE);
@@ -290,6 +380,8 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
     private void initView() {
         context = ProductDetail.this;
+        linearLayoutQuantity = (LinearLayout) findViewById(R.id.linearlayoutQuantity);
+        textViewQuantity = (TextView) findViewById(R.id.textViewQuantity);
         progress_handler = new ProgressBarHandler(this);
         imageList = new ArrayList<>();
         relativeRateReview = (RelativeLayout) findViewById(R.id.relativeRateReview);
@@ -469,5 +561,10 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         } else if (isStartDate == 1) {
             etEndDate.setText(date);
         }
+    }
+
+
+    private void showMessage(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }

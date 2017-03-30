@@ -139,10 +139,10 @@ public class ProfilePreviewActivity extends AppCompatActivity
 
 
 
-                Picasso.with(context).load(user_image)
-
-                        .error(R.drawable.ic_profile_user)
-                        .into(userimage);
+//                Picasso.with(context).load(user_image)
+//
+//                        .error(R.drawable.ic_profile_user)
+//                        .into(userimage);
 
 //                Ion.with(userimage)
 //

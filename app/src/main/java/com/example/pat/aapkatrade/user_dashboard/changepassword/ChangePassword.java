@@ -82,8 +82,11 @@ public class ChangePassword extends AppCompatActivity
         System.out.println("user_id------------" + user_id +"usertype-----"+userType+ "old password--" + OldPassword.getText().toString() + "Confirm password----" + ConfirmPassword.getText().toString());
 
         if (ConnetivityCheck.isNetworkAvailable(ChangePassword.this)) {
+
+
+            Log.e("changePassword",getResources().getString(R.string.webservice_base_url)+"/changePassword");
             Ion.with(ChangePassword.this)
-                    .load("http://aapkatrade.com/slim/changePassword")
+                    .load(getResources().getString(R.string.webservice_base_url)+"/changePassword")
                     .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                     .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                     .setBodyParameter("type", userType)
@@ -96,12 +99,18 @@ public class ChangePassword extends AppCompatActivity
                         @Override
                         public void onCompleted(Exception e, JsonObject result) {
 
+                            //Log.e("change_password_error",result.toString());
+
                             if (result == null) {
+                                Log.e("change_password_error",e.toString());
                                 progress_handler.hide();
-                            } else {
+                            }
+
+                            else
+                                {
                                 JsonObject jsonObject = result.getAsJsonObject();
                                 String message = jsonObject.get("message").getAsString();
-                                Log.e("data", result.toString());
+                                Log.e("data_change_password", result.toString());
                                 progress_handler.hide();
                                 showMessage(message);
                                 Intent intent = new Intent(ChangePassword.this, HomeActivity.class);
@@ -145,7 +154,25 @@ public class ChangePassword extends AppCompatActivity
 
                             if (NewPassword.getText().toString().equals(ConfirmPassword.getText().toString())) {
 
-                                callChangePasswordWebService(AndroidUtils.getUserType(user_type));
+String get_user_type=AndroidUtils.getUserType(user_type);
+                                String get_user_type_string;
+
+                                if(get_user_type.contains("1"))
+                                {
+                                    get_user_type_string="buyer";
+
+
+                                }
+                                else if (get_user_type.contains("2")){
+
+                                    get_user_type_string="sellers";
+
+                                }
+                                else {
+                                    get_user_type_string="business";
+                                }
+                                callChangePasswordWebService(get_user_type_string);
+                                Log.e("get_user_type_string",get_user_type_string);
 
                             } else {
                                 showMessage("Old and confirm password does not match");
