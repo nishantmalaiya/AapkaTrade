@@ -257,7 +257,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
 
         Ion.with(getActivity())
-                .load("http://aapkatrade.com/slim/home")
+                .load(getResources().getString(R.string.webservice_base_url)+"/home")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("city_id", "")
@@ -432,7 +432,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         {
             Intent go_to_product_listactivity = new Intent(getActivity(), PurticularActivity.class);
-            go_to_product_listactivity.putExtra("url","https://aapkatrade.com/slim/latestpost");
+            go_to_product_listactivity.putExtra("url",getResources().getString(R.string.webservice_base_url)+"/latestpost");
 
             startActivity(go_to_product_listactivity);
             ((AppCompatActivity) context).overridePendingTransition(R.anim.enter, R.anim.exit);
@@ -449,7 +449,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         {
             Intent go_to_product_listactivity = new Intent(getActivity(), PurticularActivity.class);
-            go_to_product_listactivity.putExtra("url","https://aapkatrade.com/slim/latestupdate");
+            go_to_product_listactivity.putExtra("url",getResources().getString(R.string.webservice_base_url)+"/latestupdate");
 
             startActivity(go_to_product_listactivity);
             ((AppCompatActivity) context).overridePendingTransition(R.anim.enter, R.anim.exit);

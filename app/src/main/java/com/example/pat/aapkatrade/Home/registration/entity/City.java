@@ -7,9 +7,16 @@ package com.example.pat.aapkatrade.Home.registration.entity;
 public class City {
     public String cityId;
     public String cityName;
+    public boolean isChecked;
 
     public City(String cityId, String cityName) {
         this.cityId = cityId;
         this.cityName = cityName;
+    }
+
+    public City(String cityId, String cityName, boolean isChecked) {
+        this.cityId = cityId;
+        this.cityName = cityName;
+        this.isChecked = isChecked;
     }
 }

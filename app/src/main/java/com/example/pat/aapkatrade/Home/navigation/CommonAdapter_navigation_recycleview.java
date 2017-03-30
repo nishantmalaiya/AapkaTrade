@@ -38,8 +38,6 @@ public class CommonAdapter_navigation_recycleview extends RecyclerView.Adapter<R
 
 
         CommonHolder_navigation_recycleview viewHolder;
-
-        //RecyclerView.ViewHolder viewHolder;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         v = inflater.inflate(R.layout.list_group, parent, false);
@@ -77,106 +75,10 @@ public class CommonAdapter_navigation_recycleview extends RecyclerView.Adapter<R
             public void onClick(View v) {
                 Intent i = new Intent(context, CategoryListActivity.class);
                 i.putExtra("category_id", _listDataHeader.get(position).getCategoryId());
-                //i.putExtra("sub_category_id",_listDataHeader.get(position).get);
                 context.startActivity(i);
 
             }
         });
-
-
-//        if (arrangementtype == "list")
-//
-//        {
-//            CommomHolder holder = new CommomHolder(v);
-//
-//
-//            Picasso.with(context).load(commomDatas.get(position).imageurl)
-//                    .error(R.drawable.banner)
-//                    .placeholder(R.drawable.default_noimage)
-//                    .error(R.drawable.default_noimage)
-//                    .into(holder.cimageview);
-////            Animation a = AnimationUtils.loadAnimation(context, R.anim.show_progress);
-////            a.setDuration(1000);
-////            holder.cimageview.startAnimation(a);
-//
-//
-////        Ion.with(holder.cimageview)
-////                 .placeholder(R.drawable.ms__drawable)
-////
-////                .load(commomDatas.get(0).imageurl);
-//            Log.e("imageurl", commomDatas.get(0).imageurl);
-//
-//            holder.cardview.setOnClickListener(new View.OnClickListener()
-//            {
-//                @Override
-//                public void onClick(View view)
-//                {
-//
-//                Intent intent = new Intent(context,ProductDetail.class);
-//                    intent.putExtra("product_id",commomDatas.get(position).id.toString());
-//                context.startActivity(intent);
-//                ((AppCompatActivity) context).overridePendingTransition(R.anim.enter, R.anim.exit);
-//
-//                }
-//            });
-//            holder.tvProductName.setText(commomDatas.get(position).name);
-//
-//        }
-//        else {
-//
-//            final CommonHolder_grid grid_holder = new CommonHolder_grid(v);
-//
-//            Picasso.with(context).load(commomDatas.get(position).imageurl)
-//                    .error(R.drawable.default_noimage)
-//                    .placeholder(R.drawable.default_noimage)
-//                    .into(grid_holder.product_imageview);
-//            grid_holder.tvProductName.setText(commomDatas.get(position).name);
-//            grid_holder.rl_grid_row_parent.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(context, ProductDetail.class);
-//                    intent.putExtra("product_id",commomDatas.get(position).id.toString());
-//                    context.startActivity(intent);
-//                    ((AppCompatActivity) context).overridePendingTransition(R.anim.enter, R.anim.exit);
-//                }
-//            });
-//
-//
-////            Animation a = AnimationUtils.loadAnimation(context, R.anim.show_progress);
-////            a.setDuration(1000);
-////            grid_holder.product_imageview.startAnimation(a);
-//
-//            if (Tabletsize.isTablet(context)) {
-//
-//                if (position % 3 == 0) {
-//
-//                    grid_holder.view_grid_left.setVisibility(View.GONE);
-//                    grid_holder.view_grid_right.setVisibility(View.GONE);
-//
-//
-//                } else {
-//                    grid_holder.view_grid_left.setVisibility(View.VISIBLE);
-//                    grid_holder.view_grid_right.setVisibility(View.GONE);
-//                }
-//
-//
-//            } else {
-//                if (position % 2 == 0) {
-//
-//                    grid_holder.view_grid_left.setVisibility(View.GONE);
-//                    grid_holder.view_grid_right.setVisibility(View.GONE);
-//
-//
-//                } else {
-//                    grid_holder.view_grid_left.setVisibility(View.VISIBLE);
-//                    grid_holder.view_grid_right.setVisibility(View.GONE);
-//                }
-//
-//
-//            }
-//        }
-
-
     }
 
     @Override

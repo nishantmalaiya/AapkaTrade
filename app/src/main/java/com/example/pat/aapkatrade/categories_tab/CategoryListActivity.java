@@ -2,10 +2,8 @@ package com.example.pat.aapkatrade.categories_tab;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,39 +16,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.pat.aapkatrade.Home.HomeActivity;
+import com.example.pat.aapkatrade.Home.registration.entity.State;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.filter.FilterDialog;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
-import com.example.pat.aapkatrade.general.CheckPermission;
+import com.example.pat.aapkatrade.general.CommonInterface;
 import com.example.pat.aapkatrade.general.LocationManager_check;
 import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
+import com.example.pat.aapkatrade.general.Validation;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.general.recycleview_custom.MyRecyclerViewEffect;
-import com.example.pat.aapkatrade.location.Geocoder;
 import com.example.pat.aapkatrade.location.MyAsyncTask_location;
 import com.example.pat.aapkatrade.location.Mylocation;
-import com.example.pat.aapkatrade.map.GoogleMapActivity;
-import com.example.pat.aapkatrade.search.Search;
-import com.example.pat.aapkatrade.user_dashboard.companylist.CompanyData;
-import com.example.pat.aapkatrade.user_dashboard.companylist.CompanyList;
-import com.example.pat.aapkatrade.user_dashboard.companylist.CompanyListAdapter;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.carlom.stikkyheader.core.StikkyHeaderBuilder;
 
 
-public class CategoryListActivity extends AppCompatActivity
-{
+public class CategoryListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private CategoriesListAdapter categoriesListAdapter;
@@ -61,31 +54,21 @@ public class CategoryListActivity extends AppCompatActivity
     private String category_id, sub_category_id, user_id;
     private AppSharedPreference app_sharedpreference;
     private Mylocation mylocation;
+    private ArrayList<State> productAvailableStateList = new ArrayList<>();
     private Context context;
-
+    private TextView toolbarRightText;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_categories_list);
         context = CategoryListActivity.this;
         Intent intent = getIntent();
-        if(intent!=null)
-        {Log.e("message_data",""+intent.getStringExtra("message_data"));
 
-        }
 
-        FilterDialog.taskCompleteReminder=new TaskCompleteReminder() {
-            @Override
-            public void Taskcomplete(JsonObject data) {
-
-                Log.e("message_data3",data.toString());
-            }
-        };
         Bundle b = intent.getExtras();
-        if(b!=null) {
+        if (b != null) {
             category_id = b.getString("category_id");
         }
         app_sharedpreference = new AppSharedPreference(this);
@@ -112,19 +95,13 @@ public class CategoryListActivity extends AppCompatActivity
                 Location location = null;
                 if (locationManagerCheck.isLocationServiceAvailable()) {
 
-                    MyAsyncTask_location myAsyncTask_location = new MyAsyncTask_location(CategoryListActivity.this,"homeactivity");
+                    MyAsyncTask_location myAsyncTask_location = new MyAsyncTask_location(CategoryListActivity.this, "homeactivity");
                     myAsyncTask_location.execute();
 
 
-                }
-
-                else {
+                } else {
                     locationManagerCheck.createLocationServiceError(CategoryListActivity.this);
                 }
-
-
-
-
 
 
             }
@@ -139,95 +116,104 @@ public class CategoryListActivity extends AppCompatActivity
                 .minHeightHeaderDim(R.dimen.min_header_height)
                 .build();
 
+        FilterDialog.commonInterface = new CommonInterface() {
+            @Override
+            public Object getData(Object object) {
+                categoriesListAdapter = new CategoriesListAdapter(CategoryListActivity.this, (List<CategoriesListData>) object);
+                myRecyclerViewEffect = new MyRecyclerViewEffect(CategoryListActivity.this);
+                mRecyclerView.setAdapter(categoriesListAdapter);
+                categoriesListAdapter.notifyDataSetChanged();
+                return null;
+            }
+        };
+
         get_web_data();
 
 
     }
 
-    private void get_web_data()
-    {
-
+    private void get_web_data() {
 
 
         productListDatas.clear();
-        progress_handler.show();
-            Ion.with(CategoryListActivity.this)
-                    .load("http://aapkatrade.com/slim/productlist")
-                    .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                    .setBodyParameter("type", "product_list")
-                    .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                    .setBodyParameter("category_id",category_id)
-                    .asJsonObject()
-                    .setCallback(new FutureCallback<JsonObject>()
-                    {
-                        @Override
-                        public void onCompleted(Exception e, JsonObject result)
-                        {
+        State state = new State("-1", "Select State", "0");
+        productAvailableStateList.add(state);
 
-                            if(result == null)
-                            {
+
+        progress_handler.show();
+        Ion.with(CategoryListActivity.this)
+                .load(getResources().getString(R.string.webservice_base_url)+"/productlist")
+                .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("type", "product_list")
+                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("category_id", category_id)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+
+                        if (result == null) {
+                            progress_handler.hide();
+                            layout_container.setVisibility(View.INVISIBLE);
+                        } else {
+                            if(Validation.isNumber(result.get("total_result").getAsString()) && Integer.parseInt(result.get("total_result").getAsString())>1){
+                                toolbarRightText.setVisibility(View.VISIBLE);
+                            }
+                            JsonArray statesArray = result.get("states").getAsJsonArray();
+                            for(int i = 0; i < statesArray.size(); i++){
+                                JsonObject stateObject = (JsonObject) statesArray.get(i);
+                                State state = new State(stateObject.get("state_id").getAsString(), stateObject.get("statename").getAsString(), stateObject.get("countprod").getAsString());
+                                productAvailableStateList.add(state);
+                            }
+
+                            String message = result.get("message").toString().substring(0, result.get("message").toString().length());
+
+                            String message_data = message.replace("\"", "");
+
+                            Log.e("message_product_list", result.toString());
+
+                            if (message_data.equals("No record found")) {
                                 progress_handler.hide();
                                 layout_container.setVisibility(View.INVISIBLE);
-                            }
-                            else
-                            {
-                                JsonObject jsonObject = result.getAsJsonObject();
 
-                                String message = jsonObject.get("message").toString().substring(0,jsonObject.get("message").toString().length());
+                            } else {
+                                JsonArray jsonArray = result.getAsJsonArray("result");
 
-                                String message_data = message.replace("\"", "");
+                                for (int i = 0; i < jsonArray.size(); i++) {
+                                    JsonObject jsonObject2 = (JsonObject) jsonArray.get(i);
 
-                                Log.e("message_product_list", result.toString());
+                                    String product_id = jsonObject2.get("id").getAsString();
 
-                                if (message_data.equals("No record found"))
-                                {
+                                    String product_name = jsonObject2.get("name").getAsString();
 
-                                    progress_handler.hide();
-                                    layout_container.setVisibility(View.INVISIBLE);
+                                    String product_price = jsonObject2.get("price").getAsString();
+
+                                    String product_cross_price = jsonObject2.get("cross_price").getAsString();
+
+                                    String product_image = jsonObject2.get("image_url").getAsString();
+                                    String productlocation = jsonObject2.get("city_name").getAsString() + "," + jsonObject2.get("state_name").getAsString() + "," +
+                                            jsonObject2.get("country_name").getAsString();
+
+                                    productListDatas.add(new CategoriesListData(product_id, product_name, product_price, product_cross_price, product_image, productlocation));
 
                                 }
-                                else
-                                {
-                                    JsonArray jsonArray = jsonObject.getAsJsonArray("result");
 
-                                    for (int i = 0; i < jsonArray.size(); i++)
-                                    {
-                                        JsonObject jsonObject2 = (JsonObject) jsonArray.get(i);
-
-                                        String product_id = jsonObject2.get("id").getAsString();
-
-                                        String product_name = jsonObject2.get("name").getAsString();
-
-                                        String product_price = jsonObject2.get("price").getAsString();
-
-                                        String product_cross_price = jsonObject2.get("cross_price").getAsString();
-
-                                        String product_image = jsonObject2.get("image_url").getAsString();
-                                        String productlocation=jsonObject2.get("city_name").getAsString()+","+jsonObject2.get("state_name").getAsString()+","+
-                                                jsonObject2.get("country_name").getAsString();
-
-                                        productListDatas.add(new CategoriesListData(product_id, product_name, product_price, product_cross_price, product_image,productlocation));
-
-                                    }
-
-                                    categoriesListAdapter = new CategoriesListAdapter(CategoryListActivity.this, productListDatas);
-                                    myRecyclerViewEffect = new MyRecyclerViewEffect(CategoryListActivity.this);
-                                    mRecyclerView.setAdapter(categoriesListAdapter);
-
-                                    categoriesListAdapter.notifyDataSetChanged();
-
-                                    progress_handler.hide();
-                                }
+                                categoriesListAdapter = new CategoriesListAdapter(CategoryListActivity.this, productListDatas);
+                                myRecyclerViewEffect = new MyRecyclerViewEffect(CategoryListActivity.this);
+                                mRecyclerView.setAdapter(categoriesListAdapter);
+                                categoriesListAdapter.notifyDataSetChanged();
+                                progress_handler.hide();
                             }
-
                         }
 
-                    });
+                    }
+
+                });
 
     }
 
     private void setUpToolBar() {
-        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome) ;
+        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         AndroidUtils.setImageColor(homeIcon, context, R.color.white);
         homeIcon.setOnClickListener(new View.OnClickListener() {
@@ -238,13 +224,12 @@ public class CategoryListActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-        TextView toolbarRightText = (TextView) findViewById(R.id.toolbarRightText);
-        toolbarRightText.setVisibility(View.VISIBLE);
+        toolbarRightText = (TextView) findViewById(R.id.toolbarRightText);
         toolbarRightText.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_filter));
         toolbarRightText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FilterDialog filterDialog = new FilterDialog(context, category_id);
+                FilterDialog filterDialog = new FilterDialog(context, category_id, productAvailableStateList);
                 filterDialog.show();
             }
         });
