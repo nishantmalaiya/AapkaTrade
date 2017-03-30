@@ -8,7 +8,7 @@
     android:background="#F1F5F8">
 
     <include
-        layout="@layout/toolbar_without_image_layout"
+        layout="@layout/toolbar_layout"
         />
 
 

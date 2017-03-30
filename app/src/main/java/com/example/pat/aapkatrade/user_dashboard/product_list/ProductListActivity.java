@@ -20,6 +20,7 @@ import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
+import com.example.pat.aapkatrade.user_dashboard.add_product.ProductImagesData;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -42,6 +43,8 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
     private SwipeRefreshLayout mSwipyRefreshLayout;
     private int page = 1;
     private Context context;
+    ArrayList<String> product_image_list = new ArrayList<>();
+
 
 
 
@@ -51,7 +54,9 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_list_product);
+
         context = ProductListActivity.this;
+
         app_sharedpreference = new AppSharedPreference(this);
 
         user_id = app_sharedpreference.getsharedpref("userid", "");
@@ -61,6 +66,8 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
         setup_layout();
 
         get_web_data();
+
+
 
     }
 
@@ -195,12 +202,15 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
 
 
 
-        if (getSupportActionBar() != null) {
+        if (getSupportActionBar() != null)
+        {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setTitle(null);
             getSupportActionBar().setElevation(0);
         }
+
+
 
 
 
@@ -233,12 +243,13 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
         // layout_container.setVisibility(View.INVISIBLE);
         // progress_handler.show();
         Ion.with(ProductListActivity.this)
-                .load("https://aapkatrade.com/slim/productlist")
+                .load("http://www.staging.aapkatrade.com/slim/productlist")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "product_list")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("seller_id", user_id)
                 .setBodyParameter("page", String.valueOf(page_number))
+                .setBodyParameter("apply", "1")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -250,11 +261,14 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
 
                         // System.out.println("jsonObject---------123----" + result.toString().substring(3574, result.toString().length()-1));
 
-                        if (result == null) {
+                        if (result == null)
+                        {
                             // progress_handler.hide();
                             // layout_container.setVisibility(View.INVISIBLE);
                             //  mSwipyRefreshLayout.setRefreshing(false);
-                        } else {
+                        }
+                        else
+                        {
 
                             JsonObject jsonObject = result.getAsJsonObject();
 
@@ -269,7 +283,6 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
                                 //progress_handler.hide();
 
                                 // layout_container.setVisibility(View.INVISIBLE);
-
                             }
                             else
                             {
@@ -317,7 +330,18 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
 
                                     String unit_id = jsonObject2.get("unit_id").getAsString();
 
-                                    productListDatas.add(new ProductListData(app_sharedpreference.getsharedpref("userid"), product_id, product_name, product_price, product_cross_price, product_image, category_name, state, description, delivery_distance, delivery_area_name,company_id,distanec_id,country_id,state_id,city_id,category_id,sub_category_id,unit_id));
+                                    JsonArray product_array = jsonObject2.getAsJsonArray("product_images");
+
+                                   /* product_image_list.clear();
+
+                                    for (int j=0; j<product_array.size(); j++)
+                                    {
+                                        JsonObject json_image = (JsonObject) product_array.get(j);
+                                        String product_images = json_image.get("image_url").getAsString();
+                                        product_image_list.add(product_images);
+                                    }
+*/
+                                    productListDatas.add(new ProductListData(app_sharedpreference.getsharedpref("userid"), product_id, product_name, product_price, product_cross_price, product_image, category_name, state, description, delivery_distance, delivery_area_name,company_id,distanec_id,country_id,state_id,city_id,category_id,sub_category_id,unit_id,product_image_list));
 
 
                                 }
@@ -326,7 +350,6 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
 
                                 //  mSwipyRefreshLayout.setRefreshing(false);
                                 // progress_handler.hide();
-
                             }
 
                             //   layout_container.setVisibility(View.VISIBLE);
@@ -346,12 +369,13 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
         productListDatas.clear();
 
         Ion.with(ProductListActivity.this)
-                .load("http://aapkatrade.com/slim/productlist")
+                .load("http://www.staging.aapkatrade.com/slim/productlist")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "product_list")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("seller_id", user_id)
                 .setBodyParameter("page", "0")
+                .setBodyParameter("apply", "1")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>()
                 {
@@ -378,7 +402,8 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
 
                             System.out.println("message_data==================" + message_data);
 
-                            if (message_data.equals("No record found")) {
+                            if (message_data.equals("No record found"))
+                            {
 
                                 layout_container.setVisibility(View.INVISIBLE);
                                 mSwipyRefreshLayout.setRefreshing(false);
@@ -431,10 +456,23 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
 
                                     String unit_id = jsonObject2.get("unit_id").getAsString();
 
-                                    productListDatas.add(new ProductListData(app_sharedpreference.getsharedpref("userid"), product_id, product_name, product_price, product_cross_price, product_image, category_name, state, description, delivery_distance, delivery_area_name,company_id,distanec_id,country_id,state_id,city_id,category_id,sub_category_id,unit_id));
+                                   /* JsonArray product_array = jsonObject2.getAsJsonArray("product_images");
+
+                                    product_image_list.clear();
+                                    for (int j=0; j<product_array.size(); j++)
+                                    {
+                                        JsonObject json_image = (JsonObject) product_array.get(j);
+                                        String product_images = json_image.get("image_url").getAsString();
+
+                                        product_image_list.add(product_images);
+                                    }
+*/
+                                    System.out.println("product_array------------"+product_image_list.toString());
+
+                                    productListDatas.add(new ProductListData(app_sharedpreference.getsharedpref("userid"), product_id, product_name, product_price, product_cross_price, product_image, category_name, state, description, delivery_distance, delivery_area_name,company_id,distanec_id,country_id,state_id,city_id,category_id,sub_category_id,unit_id,product_image_list));
+
 
                                 }
-
                                 productListAdapter.notifyDataSetChanged();
 
                                 mSwipyRefreshLayout.setRefreshing(false);
@@ -449,6 +487,7 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
     {
         get_web_data();
     }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState)
