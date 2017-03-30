@@ -29,9 +29,11 @@ import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Validation;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
+
 import com.example.pat.aapkatrade.search.Search;
 import com.example.pat.aapkatrade.search.common_category_search;
 import com.example.pat.aapkatrade.search.common_state_search;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -64,11 +66,13 @@ public class FilterDialog extends Dialog {
     JsonObject resultData;
     private JsonArray cityArray;
     private RecyclerView cityRecyclerView;
+
     private ArrayList<City> getSelectedCityList = new ArrayList<>();
     public static CommonInterface commonInterface;
     private Intent intent;
     String search_name;
     public ArrayList<common_category_search> common_category_searchlist;
+
     public static TaskCompleteReminder taskCompleteReminder = null;
     String classname ;
     Spinner category_list,state_list;
@@ -96,6 +100,7 @@ public class FilterDialog extends Dialog {
         Log.e("message_data-categoryId", categoryId);
         Log.e("message_data--statesize", String.valueOf(productAvailableStateList.size()));
 
+
     public FilterDialog(Context context, String search_name, ArrayList<common_category_search> common_category_searchlist, String classname) {
         super(context);
         this.context = context;
@@ -104,6 +109,7 @@ public class FilterDialog extends Dialog {
         this.classname=classname;
 
         Log.e("classname", classname);
+
     }
 
     @Override
@@ -118,10 +124,10 @@ public class FilterDialog extends Dialog {
         applyFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                for (int i = 0; i < getSelectedCityList.size(); i++) {
-//                    Log.e("message_data--statesize", "_)()_(_" + getSelectedCityList.get(i).cityName);
-//                }
+//                getDataByCategory();
+
                 getDataByCity();
+
                 dismiss();
             }
         });
@@ -175,7 +181,6 @@ public class FilterDialog extends Dialog {
         cityRecyclerView = (RecyclerView) findViewById(R.id.selectCityList);
     }
 
-
     private void callWebService() {
         if (Validation.isEmptyStr(stateId)) {
             getDataByState();
@@ -195,8 +200,14 @@ setup_category_spinner();
 
 
 
+    private void getDataByState() {
+        Log.e("message_data---", "called with category id " + categoryId + " stateId " + stateId);
 
-    }
+        Ion.with(context)
+                .load(context.getResources().getString(R.string.webservice_base_url) + "/productlist")
+                .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("category_id", categoryId)
+                .setBodyParameter("state_id", stateId)
 
     private void setup_category_spinner() {
 
@@ -241,19 +252,34 @@ setup_category_spinner();
 //                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("category_id", category_id)
                 .setBodyParameter("name", search_name)
+
                 .setBodyParameter("apply", "1")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-//                        Log.e("message_data---", result==null?e.toString():result);
-
-                        progress_handler.hide();
-
                         if (result == null) {
                             Log.e("message_data---", "null found");
-
                         } else {
+
+                            Log.e("result", result.toString());
+                            resultData = result;
+                            JsonArray cityArray = result.get("cities").getAsJsonArray();
+                            City city = new City("-1", "Select City");
+                            productAvailableCityList.add(city);
+                            for(int i = 0; i < cityArray.size(); i++){
+                                JsonObject jsonObject = (JsonObject) cityArray.get(i);
+                                city = new City(jsonObject.get("city_id").getAsString(), jsonObject.get("ctyname").getAsString());
+                                productAvailableCityList.add(city);
+                            }
+                            if(productAvailableCityList.size()>1){
+                                setUpCityAdapter();
+                            }
+                        }
+                    }
+
+                });
+    }
                             JsonObject jsonObject = result.getAsJsonObject();
                             JsonArray jsonarray_states = jsonObject.getAsJsonArray("states");
                             for (int l = 0; l < jsonarray_states.size(); l++) {
@@ -293,13 +319,54 @@ setup_category_spinner();
 
 
 
+    private void getDataByCity() {
+        Log.e("message_data---", "called with category id " + categoryId + " stateId " + stateId );
 
+        Ion.with(context)
+                .load(context.getResources().getString(R.string.webservice_base_url) + "/productlist")
+                .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("category_id", categoryId)
+                .setBodyParameter("state_id", stateId)
+//                .setBodyParameter("city_id", cityId)
+                .setBodyParameter("apply", "1")
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        if (result == null) {
+                            Log.e("message_data---", "null found");
+                        } else {
+//                            taskCompleteReminder.Taskcomplete(result);
 
                         }
+                    }
+
+                });
+    }
 
 
+    private void setUpStateSpinner(final ArrayList<State> stateList){
+        SpStateAdapter spStateAdapter = new SpStateAdapter(context, stateList);
+        spState.setAdapter(spStateAdapter);
+        spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position > 0) {
+                    stateId = stateList.get(position).stateId;
+                    getDataByState();
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+    }
+
+    private void setUpCityAdapter(){
+        SpCityAdapter spCityAdapter = new SpCityAdapter(context, productAvailableCityList, true);
+//        cityRecyclerView.setAdapter(spCityAdapter);
 
                     }
 

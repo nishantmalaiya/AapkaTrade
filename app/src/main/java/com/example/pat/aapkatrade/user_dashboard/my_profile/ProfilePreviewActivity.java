@@ -133,12 +133,9 @@ public class ProfilePreviewActivity extends AppCompatActivity
                 Log.e("user_image",user_image);
 
 //                Picasso.with(context).load(user_image)
-//                Ion.with(user_pic_img_vew)
-//                        .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-//                        .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
-//                        .load(user_image);
-
-
+//
+//                        .error(R.drawable.ic_profile_user)
+//                        .into(userimage);
 
                 tvUserType.setText("Welcome Seller");
 
