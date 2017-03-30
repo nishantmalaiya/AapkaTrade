@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,7 @@ import com.example.pat.aapkatrade.Home.registration.entity.State;
 import com.example.pat.aapkatrade.Home.registration.spinner_adapter.SpStateAdapter;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.categories_tab.CategoryListActivity;
+import com.example.pat.aapkatrade.filter.FilterDialog;
 import com.example.pat.aapkatrade.general.Adapter_callback_interface;
 import com.example.pat.aapkatrade.general.App_config;
 import com.example.pat.aapkatrade.general.Call_webservice;
@@ -66,7 +68,8 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
     public static RecyclerView recyclerView_search, state_names_recycler, category_names_recycler;
     CommomAdapter commomAdapter;
     Spinner state_list_spinner;
-
+    RecyclerView.LayoutManager mLayoutManager_state,mLayoutManager_category;
+    common_state_search common_state_search;
     Adapter_callback_interface callback_interface;
     ArrayList<String> state_names = new ArrayList<>();
     ArrayList<String> product_names = new ArrayList<>();
@@ -91,13 +94,13 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
     String selected_categoryid;
     ViewPager viewpager_state;
-
+    FloatingActionButton fab_filter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-
+        c = Search.this;
         Intent i = getIntent();
         currentlocation_statename = i.getStringExtra("state_name");
         Log.e("current_statename_",currentlocation_statename);
@@ -118,6 +121,15 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
     private void setuptoolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ImageView imgvew_home_icon = (ImageView) findViewById(R.id.imgvew_home_icon);
+        imgvew_home_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Search.this, HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -130,23 +142,39 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
     }
 
     private void initview() {
-        stateList = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.state_list)));
-        c = Search.this;
-
-
-        coordinate_search = (CoordinatorLayout) findViewById(R.id.coordinate_search);
-        state_names_recycler = (RecyclerView) findViewById(R.id.state_names_recycler);
-        state_list_spinner = (Spinner) findViewById(R.id.spin_select_state);
-        category_names_recycler = (RecyclerView) findViewById(R.id.category_names_recycler);
-
         progressBarHandler = new ProgressBarHandler(Search.this);
         autocomplete_textview_product = (AutoCompleteTextView) findViewById(R.id.search_autocompletetext_products);
         autocomplete_textview_product.setThreshold(1);
+        setup_state_spinner();
 
-        recyclerView_search = (RecyclerView) findViewById(R.id.recycleview_search);
+        setup_state_Recycleview();
+        setup_category_Recycleview();
+        setup_search_Recyclewview();
 
 
-        gridLayoutManager = new GridLayoutManager(c, 2);
+        coordinate_search = (CoordinatorLayout) findViewById(R.id.coordinate_search);
+        fab_filter = (FloatingActionButton) findViewById(R.id.search_filter_fab);
+        fab_filter.setBackgroundTintList(getResources().getColorStateList(R.color.color_voilet));
+        fab_filter.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                FilterDialog filterDialog = new FilterDialog(Search.this, autocomplete_textview_product.getText().toString(), common_category_searchlist, "search");
+                filterDialog.show();
+                // Click action
+//                Intent intent = new Intent(MainActivity.this, NewMessageActivity.class);
+//                startActivity(intent);
+            }
+        });
+
+
+
+
+
+
+
+
+
         autocomplete_textview_product.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -192,6 +220,8 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
                         App_config.hideKeyboard(Search.this);
 
+
+
                     }
 
 
@@ -206,15 +236,62 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
     }
 
+    private void setup_search_Recyclewview() {
+
+        recyclerView_search = (RecyclerView) findViewById(R.id.recycleview_search);
+        gridLayoutManager = new GridLayoutManager(c, 2);
+        recyclerView_search.setLayoutManager(gridLayoutManager);
+        commomAdapter = new CommomAdapter(Search.this, search_productlist, "grid", "latestupdate");
+        recyclerView_search.setAdapter(commomAdapter);
+
+    }
+
+    private void setup_category_Recycleview() {
+
+
+        category_names_recycler = (RecyclerView) findViewById(R.id.category_names_recycler);
+        mLayoutManager_category = new LinearLayoutManager(c, LinearLayoutManager.HORIZONTAL, false);
+        category_names_recycler.setLayoutManager(mLayoutManager_category);
+        searchResults_category_Adapter = new SearchcategoryAdapter(Search.this, common_category_searchlist, state_list_spinner.getItemAtPosition(current_state_index).toString(),
+                autocomplete_textview_product.getText().toString());
+        category_names_recycler.setAdapter(searchResults_category_Adapter);
+
+
+    }
+
+    private void setup_state_Recycleview() {
+
+        state_names_recycler = (RecyclerView) findViewById(R.id.state_names_recycler);
+        mLayoutManager_state = new LinearLayoutManager(c, LinearLayoutManager.HORIZONTAL, false);
+        state_names_recycler.setLayoutManager(mLayoutManager_state);
+        searchResults_state_Adapter = new SearchStateAdapter(Search.this, common_state_searchlist);
+        state_names_recycler.setAdapter(searchResults_state_Adapter);
+
+
+    }
+
+    private void setup_state_spinner() {
+
+        state_list_spinner = (Spinner) findViewById(R.id.spin_select_state);
+        stateList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.state_list)));
+
+
+
+        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(c, R.layout.white_textcolor_spinner, stateList);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.white_textcolor_spinner);
+
+        state_list_spinner.setAdapter(spinnerArrayAdapter);
+
+    }
+
 
     private void call_state_webservice( String a) {
 
         progressBarHandler.show();
         Log.e("statelist_state", stateList.toString() + "" + c);
 
-        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(c, R.layout.white_textcolor_spinner, stateList);
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.white_textcolor_spinner);
-        state_list_spinner.setAdapter(spinnerArrayAdapter);
+
+
 
 
         for (int i = 0; i < stateList.size(); i++) {
@@ -330,6 +407,7 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
                     .setBodyParameter("location", location_text)
                     .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                     .setBodyParameter("name", product_name1)
+                    .setBodyParameter("apply","1")
                     .asJsonObject()
                     .setCallback(new FutureCallback<JsonObject>() {
                         @Override
@@ -368,9 +446,9 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
         Log.e("Arvind_data",result.toString());
 
         search_productlist.clear();
-        common_category_searchlist.clear();
-        common_state_searchlist.clear();
-        common_city_searchlist.clear();
+//        common_category_searchlist.clear();
+//        common_state_searchlist.clear();
+//        common_city_searchlist.clear();
 
 
         JsonObject jsonObject = result.getAsJsonObject();
@@ -384,7 +462,7 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
             progressBarHandler.hide();
 
         } else {
-            search_productlist=new ArrayList<>();
+          //  search_productlist=new ArrayList<>();
 
             Log.e("data2_search", result.toString());
             if (jsonObject.get("result").isJsonNull()) {
@@ -405,10 +483,18 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
                 String imageurl = jsonObject_result.get("image_url").getAsString();
                 String productlocation = jsonObject_result.get("city_name").getAsString() + "," + jsonObject_result.get("state_name").getAsString() + "," +
                         jsonObject_result.get("country_name").getAsString();
+
                 search_productlist.add(new CommomData(productid, productname, product_prize, imageurl, productlocation));
 
 
             }
+
+
+            commomAdapter = new CommomAdapter(Search.this, search_productlist, "grid", "latestupdate");
+            //recyclerView_search.setAdapter(commomAdapter);
+            commomAdapter.notifyDataSetChanged();
+
+
 
 
             JsonArray jsonarray_category = jsonObject.getAsJsonArray("category");
@@ -426,6 +512,12 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
             }
 
+            searchResults_category_Adapter = new SearchcategoryAdapter(Search.this, common_category_searchlist, state_list_spinner.getItemAtPosition(current_state_index).toString(),
+                    autocomplete_textview_product.getText().toString());
+            Log.e("category_data",common_category_searchlist.toString());
+            searchResults_category_Adapter.notifyDataSetChanged();
+
+
             JsonArray jsonarray_states = jsonObject.getAsJsonArray("states");
 
 
@@ -435,11 +527,22 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
                 String state_id = jsonObject_result.get("state_id").getAsString();
                 String statename = jsonObject_result.get("statename").getAsString();
                 String countprod = jsonObject_result.get("countprod").getAsString();
+            common_state_search=  new common_state_search(state_id, statename, countprod);
 
-                common_state_searchlist.add(new common_state_search(state_id, statename, countprod));
+
+                common_state_searchlist.add(common_state_search);
 
 
             }
+
+            searchResults_state_Adapter = new SearchStateAdapter(Search.this, common_state_searchlist);
+            Log.e("state_data",common_state_searchlist.toString());
+
+            searchResults_state_Adapter.notifyDataSetChanged();
+
+
+
+
 
 
             JsonArray jsonarray_cities = jsonObject.getAsJsonArray("cities");
@@ -458,38 +561,47 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
             }
 
 
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(c, LinearLayoutManager.HORIZONTAL, false);
-            RecyclerView.LayoutManager mLayoutManager_category = new LinearLayoutManager(c, LinearLayoutManager.HORIZONTAL, false);
 
 
-            category_names_recycler.setLayoutManager(mLayoutManager_category);
-
-            state_list_spinner.setSelection(current_state_index);
-            if (type.contains("category"))
-            {
-
-            }
-            else{
-                Log.e("work2",type);
-                searchResults_category_Adapter = new SearchcategoryAdapter(Search.this, common_category_searchlist, state_list_spinner.getItemAtPosition(current_state_index).toString(),
-                        autocomplete_textview_product.getText().toString());
-                category_names_recycler.setAdapter(searchResults_category_Adapter);
-            }
+//            state_list_spinner.setSelection(current_state_index);
+//            if (type.contains("category"))
+//            {
+//
+//            }
+//            else{
+//                Log.e("work2",type);
+//
+//                category_names_recycler.setAdapter(searchResults_category_Adapter);
+//            }
 
 
 
 
 
 
-            state_names_recycler.setLayoutManager(mLayoutManager);
-            searchResults_state_Adapter = new SearchStateAdapter(Search.this, common_state_searchlist);
-            state_names_recycler.setAdapter(searchResults_state_Adapter);
+//            if(searchResults_state_Adapter!=null)
+//            {
+//                searchResults_state_Adapter = new SearchStateAdapter(Search.this, common_state_searchlist);
+//                state_names_recycler.setAdapter(searchResults_state_Adapter);
+//
+//                Log.e("searchstateAdapter!","notnull");
+//
+//            }
+//            else {
+//                searchResults_state_Adapter = new SearchStateAdapter(Search.this, common_state_searchlist);
+//                searchResults_state_Adapter.notifyDataSetChanged();
+//                Log.e("searchstateAdapter","null");
+//            }
+
 
 //search recycleview set adapter
-            recyclerView_search.setLayoutManager(gridLayoutManager);
-            commomAdapter = new CommomAdapter(Search.this, search_productlist, "grid", "latestupdate");
-            recyclerView_search.setAdapter(commomAdapter);
+           // recyclerView_search.setLayoutManager(gridLayoutManager);
+
+
+
+
             progressBarHandler.hide();
+            fab_filter.setVisibility(View.VISIBLE);
             findViewById(R.id.search_category_state_container).setVisibility(View.VISIBLE);
 
         }
@@ -515,7 +627,6 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
                         if (result != null) {
                             product_names.clear();
                             product_names = new ArrayList<String>();
-                            Log.e("webservice_returndata", product_names.toString());
                             JsonObject jsonObject = result.getAsJsonObject();
 
                             String error = jsonObject.get("error").getAsString();
@@ -531,12 +642,12 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
                                 Log.e("data2", result.toString());
                                 if (jsonObject.get("result").isJsonNull()) {
-                                    Log.e("data_jsonArray null", result.toString());
+
                                 }
 
 
                                 JsonArray jsonarray_result = jsonObject.getAsJsonArray("result");
-                                Log.e("data_jsonarray", jsonarray_result.toString());
+
 
                                 for (int l = 0; l < jsonarray_result.size(); l++) {
 
@@ -551,7 +662,7 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
                                 if (error.contains("false")) {
 
 
-                                    Log.e("product_names", product_names.toString());
+
                                     product_autocompleteadapter = new Webservice_search_autocompleteadapter(c, product_names);
 
                                     if (product_names.size() != 0)
@@ -578,87 +689,7 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
     }
 
 
-    private void call_search_suggest_webservice_state(String url, String input_txt) {
 
-
-        HashMap<String, String> webservice_body_parameter = new HashMap<>();
-        webservice_body_parameter.put("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3");
-        webservice_body_parameter.put("location", input_txt);
-
-
-        HashMap<String, String> webservice_header_type = new HashMap<>();
-        webservice_header_type.put("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3");
-
-
-        Call_webservice.suggest_search(Search.this, url, "search", webservice_body_parameter, webservice_header_type);
-
-        Call_webservice.taskCompleteReminder = new TaskCompleteReminder() {
-            @Override
-            public void Taskcomplete(JsonObject webservice_returndata) {
-
-
-                if (webservice_returndata != null) {
-                    Log.e("webservice_returndata", webservice_returndata.toString());
-                    JsonObject jsonObject = webservice_returndata.getAsJsonObject();
-                    state_names.clear();
-                    state_names = new ArrayList<>();
-                    String error = jsonObject.get("error").getAsString();
-                    String message = jsonObject.get("message").getAsString();
-
-
-                    if (message.contains("Failed")) {
-
-
-                        AndroidUtils.showSnackBar(coordinate_search, "No Suggesstion found");
-
-
-                    } else {
-
-
-                        Log.e("data2", webservice_returndata.toString());
-                        if (jsonObject.get("result").isJsonNull()) {
-                            Log.e("data_jsonArray null", webservice_returndata.toString());
-                        }
-
-
-                        JsonArray jsonarray_result = jsonObject.getAsJsonArray("result");
-                        Log.e("data_jsonarray", jsonarray_result.toString());
-
-                        for (int l = 0; l < jsonarray_result.size(); l++) {
-
-                            JsonObject jsonObject_top_banner = (JsonObject) jsonarray_result.get(l);
-                            String statename = jsonObject_top_banner.get("name").getAsString();
-
-                            state_names.add(statename);
-
-                        }
-
-
-                        if (error.contains("false")) {
-                            Log.e("error_false", "error_false");
-
-
-                            Log.e("state_names", state_names.toString());
-                            categoryadapter = new CustomAutocompleteAdapter(c, state_names);
-                            autocomplete_textview_state.setAdapter(categoryadapter);
-
-
-//
-
-
-                        } else {
-                            //showMessage(message);
-                        }
-
-                    }
-                }
-
-
-            }
-        };
-
-
-    }
 
 
     @Override
@@ -693,28 +724,6 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
     }
 
 
-    public void selected_city_name(String state_name) {
-
-        currentlocation_statename = state_name;
-        Log.e(" currentlocat;", stateList.toString());
-
-
-        for (int i = 0; i < stateList.size(); i++) {
-
-
-            if (currentlocation_statename.equals(stateList.get(i))) {
-                current_state_index = i;
-                state_list_spinner.setSelection(current_state_index);
-                Log.e("state_list", i + "");
-
-
-            }
-
-
-        }
-
-
-    }
 
 
     @Override
@@ -733,16 +742,7 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
     }
 
 
-    public void callback_from_categoryclick(String selected_location, String search_product,String category_id)
-    {
 
-
-        // Log.e("text_editor",autocomplete_textview_state.getText().toString()+"**********"+autocomplete_textview_state.getText().toString());
-
-
-
-
-    }
 
 
     @Override

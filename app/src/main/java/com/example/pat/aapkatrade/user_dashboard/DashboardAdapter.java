@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.pat.aapkatrade.Home.HomeActivity;
+import com.example.pat.aapkatrade.Home.registration.RegistrationActivity;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.login.LoginDashboard;
@@ -202,13 +203,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 } else if (itemList.get(position).dashboard_name.equals("Add Vendor")) {
 
                     if (app_sharedpreference.getsharedpref("userid", "notlogin").equals("notlogin")) {
-                        Intent i = new Intent(context, AddProductActivity.class);
+                        Intent i = new Intent(context, LoginDashboard.class);
                         context.startActivity(i);
 
 
                     } else {
-
-                        Intent list_company = new Intent(context, VendorActivity.class);
+                        app_sharedpreference.setsharedpref("isAddVendorCall", "true");
+                        Intent list_company = new Intent(context, RegistrationActivity.class);
                         context.startActivity(list_company);
 
                     }

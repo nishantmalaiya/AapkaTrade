@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,12 +19,15 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.R;
+import com.example.pat.aapkatrade.filter.FilterDialog;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.general.CheckPermission;
 import com.example.pat.aapkatrade.general.LocationManager_check;
+import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.general.recycleview_custom.MyRecyclerViewEffect;
@@ -68,13 +72,22 @@ public class CategoryListActivity extends AppCompatActivity
         setContentView(R.layout.activity_categories_list);
         context = CategoryListActivity.this;
         Intent intent = getIntent();
+        if(intent!=null)
+        {Log.e("message_data",""+intent.getStringExtra("message_data"));
 
+        }
+
+        FilterDialog.taskCompleteReminder=new TaskCompleteReminder() {
+            @Override
+            public void Taskcomplete(JsonObject data) {
+
+                Log.e("message_data3",data.toString());
+            }
+        };
         Bundle b = intent.getExtras();
-
-        category_id = b.getString("category_id");
-
-        // sub_category_id  = b.getString("sub_category_id");
-
+        if(b!=null) {
+            category_id = b.getString("category_id");
+        }
         app_sharedpreference = new AppSharedPreference(this);
 
         user_id = app_sharedpreference.getsharedpref("userid", "");
@@ -133,14 +146,11 @@ public class CategoryListActivity extends AppCompatActivity
 
     private void get_web_data()
     {
-       // layout_container.setVisibility(View.INVISIBLE);
+
+
+
         productListDatas.clear();
         progress_handler.show();
-
-//        if(sub_category_id.equals("not_available"))
-//        {
-            //System.out.println("data----------"+category_id+sub_category_id+user_id);
-
             Ion.with(CategoryListActivity.this)
                     .load("http://aapkatrade.com/slim/productlist")
                     .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
@@ -167,9 +177,9 @@ public class CategoryListActivity extends AppCompatActivity
 
                                 String message_data = message.replace("\"", "");
 
-                                Log.e("message_data",result.toString());
+                                Log.e("message_product_list", result.toString());
 
-                                if (message_data.toString().equals("No record found"))
+                                if (message_data.equals("No record found"))
                                 {
 
                                     progress_handler.hide();
@@ -208,93 +218,11 @@ public class CategoryListActivity extends AppCompatActivity
 
                                     progress_handler.hide();
                                 }
-
-                                //   layout_container.setVisibility(View.VISIBLE);
                             }
 
                         }
 
                     });
-
-//        }
-//        else
-//        {
-//            System.out.println("data   2----------"+category_id+sub_category_id+user_id);
-//
-//            Ion.with(CategoryListActivity.this)
-//                    .load("http://aapkatrade.com/slim/productlist")
-//                    .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-//                    .setBodyParameter("type", "product_list")
-//                    .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-//                    .setBodyParameter("subcat_id",sub_category_id)
-//                    .asJsonObject()
-//                    .setCallback(new FutureCallback<JsonObject>()
-//                    {
-//                        @Override
-//                        public void onCompleted(Exception e, JsonObject result)
-//                        {
-//
-//
-//                            if(result == null)
-//                            {
-//                                progress_handler.hide();
-//                                layout_container.setVisibility(View.INVISIBLE);
-//                            }
-//                            else
-//                            {
-//                                JsonObject jsonObject = result.getAsJsonObject();
-//
-//                                String message = jsonObject.get("message").toString().substring(0,jsonObject.get("message").toString().length());
-//
-//                                String message_data = message.replace("\"", "");
-//
-//                                System.out.println("message_data=================="+message_data);
-//
-//                                if (message_data.toString().equals("No record found"))
-//                                {
-//                                    progress_handler.hide();
-//                                    layout_container.setVisibility(View.INVISIBLE);
-//
-//                                }
-//                                else
-//                                {
-//
-//                                    JsonArray jsonArray = jsonObject.getAsJsonArray("result");
-//
-//                                    for (int i = 0; i < jsonArray.size(); i++)
-//                                    {
-//                                        JsonObject jsonObject2 = (JsonObject) jsonArray.get(i);
-//
-//                                        String product_id = jsonObject2.get("id").getAsString();
-//
-//                                        String product_name = jsonObject2.get("name").getAsString();
-//
-//                                        String product_price = jsonObject2.get("price").getAsString();
-//
-//                                        String product_cross_price = jsonObject2.get("cross_price").getAsString();
-//
-//                                        String product_image = jsonObject2.get("image_url").getAsString();
-//
-//                                        productListDatas.add(new CategoriesListData(product_id, product_name, product_price, product_cross_price, product_image));
-//                                    }
-//                                    categoriesListAdapter = new CategoriesListAdapter(CategoryListActivity.this, productListDatas);
-//                                    myRecyclerViewEffect = new MyRecyclerViewEffect(CategoryListActivity.this);
-//                                    mRecyclerView.setAdapter(categoriesListAdapter);
-//
-//                                    categoriesListAdapter.notifyDataSetChanged();
-//                                    progress_handler.hide();
-//
-//
-//
-//                                }
-//                                //   layout_container.setVisibility(View.VISIBLE);
-//                            }
-//
-//                        }
-//
-//                    });
-//
-//        }
 
     }
 
@@ -308,6 +236,16 @@ public class CategoryListActivity extends AppCompatActivity
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+            }
+        });
+        TextView toolbarRightText = (TextView) findViewById(R.id.toolbarRightText);
+        toolbarRightText.setVisibility(View.VISIBLE);
+        toolbarRightText.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_filter));
+        toolbarRightText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FilterDialog filterDialog = new FilterDialog(context, category_id);
+                filterDialog.show();
             }
         });
         setSupportActionBar(toolbar);
@@ -336,4 +274,6 @@ public class CategoryListActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

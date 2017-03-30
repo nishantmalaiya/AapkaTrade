@@ -48,6 +48,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import it.carlom.stikkyheader.core.StikkyHeaderBuilder;
+import me.relex.circleindicator.CircleIndicator;
 
 
 /**
@@ -81,7 +82,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     viewpageradapter_home viewpageradapter;
     JsonObject home_result;
     RelativeLayout rl_searchview_dashboard;
-
+    CircleIndicator circleIndicator;
     View view;
     Mylocation mylocation;
 
@@ -128,30 +129,32 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         }, 0, 3000);
 
 
-        vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//        vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                try {
+//                    for (int i = 0; i < dotsCount; i++) {
+//                        dots[i].setImageDrawable(getResources().getDrawable(R.drawable.nonselected_item));
+//                    }
+//
+//                    dots[position].setImageDrawable(getResources().getDrawable(R.drawable.selecteditem_dot));
+//                } catch (Exception e) {
+//                }
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
 
-            }
 
-            @Override
-            public void onPageSelected(int position) {
-                try {
-                    for (int i = 0; i < dotsCount; i++) {
-                        dots[i].setImageDrawable(getResources().getDrawable(R.drawable.nonselected_item));
-                    }
-
-                    dots[position].setImageDrawable(getResources().getDrawable(R.drawable.selecteditem_dot));
-                } catch (Exception e) {
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
+        circleIndicator.setViewPager(vp);
     }
 
     private void initializeview(View v, ViewGroup v2) {
@@ -166,7 +169,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         home_ads = (ImageView) v.findViewById(R.id.home_ads);
         home_ads.setImageResource(R.drawable.ic_home_ads_banner);
 
-
+        circleIndicator=(CircleIndicator)view.findViewById(R.id.indicator_custom) ;
         vp = (ViewPager) view.findViewById(R.id.viewpager_custom);
         context = getActivity();
 
@@ -369,24 +372,24 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
     private void setUiPageViewController() {
 
-        dotsCount = viewpageradapter.getCount();
-        dots = new ImageView[dotsCount];
-
-        for (int i = 0; i < dotsCount; i++) {
-            dots[i] = new ImageView(getActivity());
-            dots[i].setImageDrawable(getResources().getDrawable(R.drawable.nonselected_item));
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-
-            params.setMargins(4, 0, 4, 0);
-
-            viewpagerindicator.addView(dots[i], params);
-        }
-
-        dots[0].setImageDrawable(getResources().getDrawable(R.drawable.selecteditem_dot));
+//        dotsCount = viewpageradapter.getCount();
+//        dots = new ImageView[dotsCount];
+//
+//        for (int i = 0; i < dotsCount; i++) {
+//            dots[i] = new ImageView(getActivity());
+//            dots[i].setImageDrawable(getResources().getDrawable(R.drawable.nonselected_item));
+//
+//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+//                    LinearLayout.LayoutParams.WRAP_CONTENT,
+//                    LinearLayout.LayoutParams.WRAP_CONTENT
+//            );
+//
+//            params.setMargins(4, 0, 4, 0);
+//
+//            viewpagerindicator.addView(dots[i], params);
+//        }
+//
+//        dots[0].setImageDrawable(getResources().getDrawable(R.drawable.selecteditem_dot));
     }
 
 

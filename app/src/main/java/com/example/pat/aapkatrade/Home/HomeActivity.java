@@ -1,10 +1,12 @@
 package com.example.pat.aapkatrade.Home;
 
 import android.annotation.TargetApi;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -486,6 +488,16 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
                         // showOrHideBottomNavigation(true);
                         break;
 
+
+
+
+
+
+                    case 2:
+                        goToMyApp(true);
+
+
+break;
                     case 3:
                         if (user_dashboardFragment == null) {
                             user_dashboardFragment = new User_DashboardFragment();
@@ -680,7 +692,17 @@ public  void double_back_pressed(String type)
 
 
 }
-
+    public void goToMyApp(boolean googlePlay) {//true if Google Play, false if Amazone Store
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((googlePlay ? "market://details?id=" : "amzn://apps/android?p=") +getPackageName())));
+        } catch (ActivityNotFoundException e1) {
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((googlePlay ? "http://play.google.com/store/apps/details?id=" : "http://www.amazon.com/gp/mas/dl/android?p=") +getPackageName())));
+            } catch (ActivityNotFoundException e2) {
+                Toast.makeText(HomeActivity.this, "You don't have any app that can open this link", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
 
 

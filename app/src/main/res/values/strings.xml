@@ -126,7 +126,7 @@
     <string name="delivery_date" translatable="false">Delivery date: 19 Jan to 20 Jan</string>
     <string name="subtotal" translatable="false">Subtotal:</string>
 
-    <string name="webservice_base_url" translatable="false">https://aapkatrade.com/slim</string>
+    <string name="webservice_base_url" translatable="false">http://www.staging.aapkatrade.com/slim</string>
     <string name="msg_sender" translatable="false">IM-SMSEZY</string>
     <string name="logout" translatable="false">Logout</string>
     <string name="latest_update" translatable="false">LATEST UPDATE</string>
@@ -149,7 +149,7 @@
     <string name="save_and_next" translatable="false">Save &amp; Next</string>
 
     <string name="search_data" translatable="false">What?e.g. Dairy</string>
-
+    <string name="ok">OK</string>
     <string name="aacount_no" translatable="false">Account No.*</string>
     <string name="branch_code" translatable="false">Branch Code*</string>
     <string name="branch_name" translatable="false">Branch Name</string>
@@ -246,8 +246,19 @@
 
     <string name="skip">Skip</string>
     <string name="add_vender_heading">Add Vendor</string>
+
+    <string name="add_address_heading">Add Address</string>
+
     <string name="order_mgt_heading">Order Management</string>
     <string name="service_enquiry_list_heading">Enquiry Service List</string>
     <string name="my_network_list_heading">My Network List</string>
+    <string name="title_activity_add_vendor">AddVendorActivity</string>
+    <string name="vendor_list_heading">Vendor List</string>
+    <string name="associate_aggrement_heading">Associate Aggrement</string>
+    <string name="filter_heading">Filter</string>
+    <string name="city">City</string>
+    <string name="clear_all">Clear All</string>
+    <string name="apply_filter">Apply Filter</string>
+
 
 </resources>

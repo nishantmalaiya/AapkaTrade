@@ -1,9 +1,9 @@
 package com.example.pat.aapkatrade.categories_tab;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.os.Looper;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -152,12 +152,21 @@ public class CategoriesListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     Location location = null;
                     if (locationManagerCheck.isLocationServiceAvailable())
                     {
+
+                        if (Looper.myLooper() == null) {
+                            Looper.prepare();
+
+                        }
+                        Log.e("time_taken 1",(System.currentTimeMillis()/1000)+"");
                         progressBarHandler.show();
                         Intent intent = new Intent(context, GoogleMapActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("product_location", itemList.get(position).product_location);
                         context.startActivity(intent);
+
                         progressBarHandler.hide();
+                        Log.e("time_taken 2",(System.currentTimeMillis()/1000)+"");
+
                     }
                     else
                         {

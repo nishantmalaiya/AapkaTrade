@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CLEAR_APP_CACHE"/>
+    <uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
 
     <permission
         android:name="com.example.pat.aapkatrade.permission.MAPS_RECEIVE"
@@ -61,13 +61,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Home.HomeActivity"
-            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".Home.HomeActivity"
+            android:theme="@style/AppTheme" />
         <activity android:name=".user_dashboard.add_product.AddProductActivity" />
         <activity android:name=".productdetail.ProductDetail" />
         <activity
             android:name=".Home.registration.RegistrationActivity"
-
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".categories_tab.PurticularDataActivity.PurticularActivity" />
         <activity android:name=".login.ActivityOTPVerify" />
@@ -75,11 +75,8 @@
         <activity android:name=".user_dashboard.order_list.OrderActivity" />
         <activity android:name=".user_dashboard.order_list.order_details.OrderDetailsActivity" />
         <activity android:name=".categories_tab.CategoriesTabActivity" />
-        <activity
-            android:name=".Home.registration.RegistrationBusinessAssociateActivity"
-            />
-        <activity
-            android:name=".login.ForgotPassword" />
+        <activity android:name=".Home.registration.RegistrationBusinessAssociateActivity" />
+        <activity android:name=".login.ForgotPassword" />
         <activity android:name=".categories_tab.CategoryListActivity" />
         <activity android:name=".categories_tab.FilterActivity" />
         <activity android:name=".user_dashboard.address.AddressActivity" />
@@ -101,7 +98,6 @@
         <activity android:name=".parallax_recyclerview.ParallaxActivity" />
         <activity android:name=".user_dashboard.address.add_address.AddAddressActivity" />
         <activity android:name=".user_dashboard.my_profile.ProfilePreviewActivity" />
-
         <activity android:name=".search.Search" />
         <activity android:name=".user_dashboard.vender_detail.VendorActivity" />
         <activity android:name=".map.GoogleMapActivity" />
@@ -111,15 +107,17 @@
             android:label="@string/title_activity_bank_management"
             android:theme="@style/AppTheme" />
         <activity android:name=".user_dashboard.my_profile.MyProfileForBusinessAssociates" />
-
         <activity android:name=".user_dashboard.network.NetworkActivity" />
         <activity
             android:name=".user_dashboard.payout.PayoutActivity"
-            android:label="@string/title_activity_payout"
-            />
+            android:label="@string/title_activity_payout" />
         <activity android:name=".user_dashboard.editcompany.EditCompanyActivity" />
         <activity android:name=".user_dashboard.edit_product.EditProductActivity" />
-        <activity android:name=".user_dashboard.service_enquirylist.ServiceEnquiryActivity"></activity>
+        <activity android:name=".user_dashboard.service_enquirylist.ServiceEnquiryActivity" />
+        <activity
+            android:name=".user_dashboard.add_vendor.AddVendorActivity"
+            android:label="@string/title_activity_add_vendor"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

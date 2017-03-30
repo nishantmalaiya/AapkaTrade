@@ -54,6 +54,7 @@ public class SearchcategoryAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.context = context;
         this.selected_location=selected_location;
         this.search_product=search_product;
+        this.notifyDataSetChanged();
 
 
         this.callback_interface = ((Adapter_callback_interface) context);

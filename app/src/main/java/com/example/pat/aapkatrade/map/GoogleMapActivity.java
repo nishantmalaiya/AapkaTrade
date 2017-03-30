@@ -89,6 +89,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
     ArrayList<String> route_timeduration = new ArrayList<>();
 
     boolean permission_status;
+    
 
     public static TextView tv_travel_duration, travel_time;
 
@@ -96,10 +97,14 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.green, R.color.orange, R.color.dark_green};
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        Log.e("time_taken map ",(System.currentTimeMillis()/1000)+"");
         context = GoogleMapActivity.this;
         setContentView(R.layout.activity_map);
         polylines = new ArrayList<>();
@@ -145,7 +150,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
     public void initView() {
         pg_handler = new ProgressBarHandler(this);
-
+        Log.e("time_taken map  1",(System.currentTimeMillis()/1000)+"");
 
         final String product_location = getIntent().getStringExtra("product_location");
         product_location_lat_lng = getLocationFromAddress(GoogleMapActivity.this, product_location);
@@ -686,6 +691,8 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
     public void onRoutingCancelled() {
 
     }
+
+
 
 
     public interface AddressListner {

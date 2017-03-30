@@ -143,21 +143,21 @@ public class LoginActivity extends AppCompatActivity {
 
                                     Log.e("login------------", app_sharedpreference.getsharedpref("usertype", "0"));
 
-                                    String login_url = "https://aapkatrade.com/slim/businesslogin";
+                                    String login_url = getResources().getString(R.string.webservice_base_url)+"/businesslogin";
 
                                     callwebservice_login(login_url, input_email, input_password);
 
 
                                 } else if (app_sharedpreference.getsharedpref("usertype", "0").equals("2")) {
 
-                                    String login_url = "https://aapkatrade.com/slim/buyerlogin";
+                                    String login_url = getResources().getString(R.string.webservice_base_url)+"/buyerlogin";
 
                                     callwebservice_login(login_url, input_email, input_password);
 
 
                                 } else if (app_sharedpreference.getsharedpref("usertype", "0").equals("1")) {
 
-                                    String login_url = "https://aapkatrade.com/slim/sellerlogin";
+                                    String login_url = getResources().getString(R.string.webservice_base_url)+"/sellerlogin";
 
                                     callwebservice_login(login_url, input_email, input_password);
 
@@ -266,7 +266,7 @@ public class LoginActivity extends AppCompatActivity {
             app_sharedpreference.setsharedpref("city_id", jsonObject.get("city_id").getAsString());
             app_sharedpreference.setsharedpref("country_id", jsonObject.get("country_id").getAsString());
             app_sharedpreference.setsharedpref("state_id", jsonObject.get("state_id").getAsString());
-            app_sharedpreference.setsharedpref("profile_pick", jsonObject.get("profile_pick").getAsString());
+            app_sharedpreference.setsharedpref("profile_pic", jsonObject.get("profile_pick").getAsString());
             app_sharedpreference.setsharedpref("order", webservice_returndata.get("order").getAsString());
             app_sharedpreference.setsharedpref("product", webservice_returndata.get("product").getAsString());
             app_sharedpreference.setsharedpref("company", webservice_returndata.get("company").getAsString());
@@ -306,6 +306,7 @@ public class LoginActivity extends AppCompatActivity {
             JsonObject jsonObject = webservice_returndata.getAsJsonObject("all_info");
             Log.e("hi", jsonObject.toString());
             app_sharedpreference.setsharedpref("userid", webservice_returndata.get("user_id").getAsString());
+            app_sharedpreference.setsharedpref("business_id", webservice_returndata.get("user_id").getAsString());
             app_sharedpreference.setsharedpref("name", jsonObject.get("name").getAsString());
             app_sharedpreference.setsharedpref("username", jsonObject.get("name").getAsString());
             app_sharedpreference.setsharedpref("lname", jsonObject.get("lastname").getAsString());
@@ -316,7 +317,7 @@ public class LoginActivity extends AppCompatActivity {
             app_sharedpreference.setsharedpref("total_exp", jsonObject.get("total_exp").getAsString());
             app_sharedpreference.setsharedpref("relevant_exp", jsonObject.get("relevant_exp").getAsString());
             app_sharedpreference.setsharedpref("id_proof", jsonObject.get("id_proof").getAsString());
-            app_sharedpreference.setsharedpref("photo", jsonObject.get("photo").getAsString());
+            app_sharedpreference.setsharedpref("profile_pic", jsonObject.get("photo").getAsString());
             app_sharedpreference.setsharedpref("country_id", jsonObject.get("country_id").getAsString());
             app_sharedpreference.setsharedpref("state_id", jsonObject.get("state_id").getAsString());
             app_sharedpreference.setsharedpref("city_id", jsonObject.get("city_id").getAsString());

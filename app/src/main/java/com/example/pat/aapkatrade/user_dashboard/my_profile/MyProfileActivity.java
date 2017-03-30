@@ -38,11 +38,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.squareup.picasso.Picasso;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.Calendar;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import it.carlom.stikkyheader.core.StikkyHeaderBuilder;
 
 
@@ -61,7 +63,8 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
     AppBarLayout aapbar_layout_myprofile;
     CoordinatorLayout coordinatorlayout_myprofile;
     private Context context;
-
+    String fname,lname, email,mobile, address,dob,user_image;
+    de.hdodenhof.circleimageview.CircleImageView userimageview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,43 +83,54 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
 
     private void setup_layout() {
 
-        coordinatorlayout_myprofile=(CoordinatorLayout)findViewById(R.id.coordinate_myprofile) ;
+getshared_pref_data();
+        Log.e("user_image_profile",user_image);
+        coordinatorlayout_myprofile = (CoordinatorLayout) findViewById(R.id.coordinate_myprofile);
         //setupnewlayout();
         //imgCalender = (ImageView) findViewById(R.id.imgCalender);
-      //  backbutton=(ImageView)findViewById(R.id.back_imagview) ;
+        //  backbutton=(ImageView)findViewById(R.id.back_imagview) ;
         tvMyProfileDetailHeading = (TextView) findViewById(R.id.tvMyProfileDetailHeading);
-
+        userimageview = (CircleImageView) findViewById(R.id.user_imageview);
         etFName = (EditText) findViewById(R.id.etFName);
-        String fname = app_sharedpreference.getsharedpref("name", "");
+//        String fname = app_sharedpreference.getsharedpref("name", "");
+
+//        Picasso.with(context).load(user_image)
+//
+//                .error(R.drawable.ic_profile_user)
+//                .into(userimageview);
 
 
+//        Ion.with(userimageview)
+//                .error(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                .placeholder(ContextCompat.getDrawable(this, R.drawable.ic_profile_user))
+//                .load(user_image);
 
         tvMyProfileDetailHeading.setText("Hello, " + fname + " To Update your account information.");
         etFName.setText(fname);
         etFName.setSelection(etFName.getText().length());
 
         etLName = (EditText) findViewById(R.id.etLName);
-        String lname = app_sharedpreference.getsharedpref("lname", "");
+//        String lname = app_sharedpreference.getsharedpref("lname", "");
         etLName.setText(lname);
         etLName.setSelection(etLName.getText().length());
 
         etEmail = (EditText) findViewById(R.id.etEmail);
-        String email = app_sharedpreference.getsharedpref("emailid", "");
+      // email = app_sharedpreference.getsharedpref("emailid", "");
         etEmail.setText(email);
         etEmail.setSelection(etEmail.getText().length());
 
         etMobileNo = (EditText) findViewById(R.id.etMobileNo);
-        String mobile = app_sharedpreference.getsharedpref("mobile", "");
+       // String mobile = app_sharedpreference.getsharedpref("mobile", "");
         etMobileNo.setText(mobile);
         etMobileNo.setSelection(etMobileNo.getText().length());
 
         etAddress = (EditText) findViewById(R.id.etAddress);
-        String address = app_sharedpreference.getsharedpref("address", "");
+        //String address = app_sharedpreference.getsharedpref("address", "");
         etAddress.setText(address);
         // etAddress.setSelection(etAddress.getText().length());
 
         tvDate = (TextView) findViewById(R.id.tvDate);
-        String dob = app_sharedpreference.getsharedpref("dob", "");
+       // String dob = app_sharedpreference.getsharedpref("dob", "");
 
         System.out.println("dob--------------" + dob);
 
@@ -219,6 +233,17 @@ public class MyProfileActivity extends AppCompatActivity implements TimePickerDi
 //            }
 //        });
 
+
+    }
+
+    private void getshared_pref_data() {
+        user_image = app_sharedpreference.getsharedpref("profile_pic","");
+        fname = app_sharedpreference.getsharedpref("name", "");
+        lname = app_sharedpreference.getsharedpref("lname", "");
+        email = app_sharedpreference.getsharedpref("emailid", "");
+        mobile = app_sharedpreference.getsharedpref("mobile", "");
+        address = app_sharedpreference.getsharedpref("address", "");
+        dob = app_sharedpreference.getsharedpref("dob", "");
 
     }
 
