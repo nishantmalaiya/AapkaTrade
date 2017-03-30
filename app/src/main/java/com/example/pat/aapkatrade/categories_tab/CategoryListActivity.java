@@ -23,6 +23,7 @@ import com.example.pat.aapkatrade.Home.registration.entity.State;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.filter.FilterDialog;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
+import com.example.pat.aapkatrade.general.CommonInterface;
 import com.example.pat.aapkatrade.general.LocationManager_check;
 import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
@@ -37,6 +38,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.carlom.stikkyheader.core.StikkyHeaderBuilder;
 
@@ -56,7 +58,6 @@ public class CategoryListActivity extends AppCompatActivity {
     private Context context;
     private TextView toolbarRightText;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,13 +66,7 @@ public class CategoryListActivity extends AppCompatActivity {
         context = CategoryListActivity.this;
         Intent intent = getIntent();
 
-        FilterDialog.taskCompleteReminder = new TaskCompleteReminder() {
-            @Override
-            public void Taskcomplete(JsonObject data) {
 
-                Log.e("message_data3", data.toString());
-            }
-        };
         Bundle b = intent.getExtras();
         if (b != null) {
             category_id = b.getString("category_id");
@@ -121,6 +116,17 @@ public class CategoryListActivity extends AppCompatActivity {
                 .minHeightHeaderDim(R.dimen.min_header_height)
                 .build();
 
+        FilterDialog.commonInterface = new CommonInterface() {
+            @Override
+            public Object getData(Object object) {
+                categoriesListAdapter = new CategoriesListAdapter(CategoryListActivity.this, (List<CategoriesListData>) object);
+                myRecyclerViewEffect = new MyRecyclerViewEffect(CategoryListActivity.this);
+                mRecyclerView.setAdapter(categoriesListAdapter);
+                categoriesListAdapter.notifyDataSetChanged();
+                return null;
+            }
+        };
+
         get_web_data();
 
 
@@ -136,7 +142,7 @@ public class CategoryListActivity extends AppCompatActivity {
 
         progress_handler.show();
         Ion.with(CategoryListActivity.this)
-                .load("http://aapkatrade.com/slim/productlist")
+                .load(getResources().getString(R.string.webservice_base_url)+"/productlist")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "product_list")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
@@ -195,9 +201,7 @@ public class CategoryListActivity extends AppCompatActivity {
                                 categoriesListAdapter = new CategoriesListAdapter(CategoryListActivity.this, productListDatas);
                                 myRecyclerViewEffect = new MyRecyclerViewEffect(CategoryListActivity.this);
                                 mRecyclerView.setAdapter(categoriesListAdapter);
-
                                 categoriesListAdapter.notifyDataSetChanged();
-
                                 progress_handler.hide();
                             }
                         }
@@ -258,3 +262,4 @@ public class CategoryListActivity extends AppCompatActivity {
 
 
 }
+

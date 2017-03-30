@@ -70,6 +70,22 @@
                                 android:layout_height="150dp" />
 
 
+                            <me.relex.circleindicator.CircleIndicator
+                                android:id="@+id/indicator_custom"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+
+                                android:layout_marginBottom="100dp"
+                                android:layout_marginLeft="16dp"
+                                app:ci_animator="@anim/indicator_animator"
+                                app:ci_drawable="@drawable/selecteditem_dot"
+                                app:ci_drawable_unselected="@drawable/nonselected_item"
+                                app:ci_height="3dp"
+                                app:ci_margin="3dp"
+                                app:ci_width="8dp" />
+
                             <LinearLayout
                                 android:id="@+id/viewpagerindicator"
                                 android:layout_width="40dp"

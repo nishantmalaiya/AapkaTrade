@@ -158,13 +158,11 @@
                             android:layout_marginRight="@dimen/twenty_dip"
                             android:layout_marginTop="@dimen/ten_dip"
                             android:gravity="center_vertical"
-
                             android:textColorHint="@color/hint_color">
 
                             <EditText
                                 android:id="@+id/etshopname"
                                 style="@style/myedittext"
-
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/company_name_heading"
@@ -345,9 +343,10 @@
 
                     </android.support.design.widget.TextInputLayout>
 
+
+
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/input_layout_dob"
-
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/twenty_dip"
@@ -358,8 +357,6 @@
                         android:textColorHint="@color/hint_color"
                         app:hintAnimationEnabled="true"
                         app:hintEnabled="true"
-
-
                         app:hintTextAppearance="@style/nofocus_edittext_theme">
 
                         <RelativeLayout
@@ -370,14 +367,11 @@
 
                             <EditText
                                 android:id="@+id/etDOB"
-
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:enabled="false"
                                 android:focusableInTouchMode="true"
                                 android:hint="@string/date_of_birth"
-
-
                                 android:inputType="text"
                                 android:paddingLeft="@dimen/ten_dip"
                                 android:theme="@style/nofocus_edittext_theme" />
@@ -397,7 +391,7 @@
                     </android.support.design.widget.TextInputLayout>
 
 
-                    <android.support.design.widget.TextInputLayout
+            <android.support.design.widget.TextInputLayout
                     android:id="@+id/input_layout_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -477,6 +471,8 @@
                         </RelativeLayout>
 
                     </android.support.design.widget.TextInputLayout>
+
+
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/input_layout_state"

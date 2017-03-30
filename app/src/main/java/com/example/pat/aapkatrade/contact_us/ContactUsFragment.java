@@ -173,7 +173,7 @@ public class ContactUsFragment extends Fragment
         progress_handler.show();
 
         Ion.with(getActivity())
-                .load("https://aapkatrade.com/slim/contact")
+                .load(getResources().getString(R.string.webservice_base_url)+"/contact")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("name", username)

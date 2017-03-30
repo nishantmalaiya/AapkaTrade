@@ -66,8 +66,8 @@ public class User_DashboardFragment extends Fragment {
     private void setup_layout(View v) {
         imageviewpp=(CircleImageView)v.findViewById(R.id.imageviewpp) ;
 
-
-        user_image = app_sharedpreference.getsharedpref("profile_pic","");
+        user_image = app_sharedpreference.getsharedpref("profile_pic","demo");
+        Log.e("user_image",user_image);
 //        Picasso.with(getActivity()).load(user_image)
 //                .error(R.drawable.ic_profile_user)
 //                .into(imageviewpp);

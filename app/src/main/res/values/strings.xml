@@ -149,7 +149,7 @@
     <string name="save_and_next" translatable="false">Save &amp; Next</string>
 
     <string name="search_data" translatable="false">What?e.g. Dairy</string>
-
+    <string name="ok">OK</string>
     <string name="aacount_no" translatable="false">Account No.*</string>
     <string name="branch_code" translatable="false">Branch Code*</string>
     <string name="branch_name" translatable="false">Branch Name</string>

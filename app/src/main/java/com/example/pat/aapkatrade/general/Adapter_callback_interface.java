@@ -5,17 +5,5 @@ package com.example.pat.aapkatrade.general;
  */
 
 public interface Adapter_callback_interface {
-
-
     void callback(String id, String type);
-
-
-   
-
-    
-
-
-
-
-
 }

@@ -1,15 +1,23 @@
 package com.example.pat.aapkatrade.user_dashboard.product_list;
 
+import com.example.pat.aapkatrade.user_dashboard.add_product.ProductImagesData;
+
+import java.lang.ref.SoftReference;
+import java.util.ArrayList;
+
 /**
  * Created by PPC16 on 11-Jan-17.
  */
 
-public class ProductListData {
+public class ProductListData
+{
 
     public String user_id, product_id, product_name, product_price, product_cross_price, product_image, category_name, state, delivery_distance, description, delivery_area_name,
-            company_id,distance_id,country_id,state_id,city_id,category_id, sub_category_id,unit_id;
+                  company_id,distance_id,country_id,state_id,city_id,category_id, sub_category_id,unit_id;
 
-    public ProductListData(String user_id, String product_id, String product_name, String product_price, String product_cross_price, String product_image, String category_name, String state, String description, String delivery_distance, String delivery_area_name,String company_id,String distance_id,String country_id,String state_id,String city_id,String category_id, String  sub_category_id, String unit_id)
+    ArrayList<String> product_images = new ArrayList<>();
+
+    public ProductListData(String user_id, String product_id, String product_name, String product_price, String product_cross_price, String product_image, String category_name, String state, String description, String delivery_distance, String delivery_area_name, String company_id, String distance_id, String country_id, String state_id, String city_id, String category_id, String  sub_category_id, String unit_id, ArrayList<String> product_images)
     {
 
         this.user_id = user_id;
@@ -31,8 +39,7 @@ public class ProductListData {
         this.category_id = category_id;
         this.sub_category_id = sub_category_id;
         this.unit_id =unit_id;
-
-
+        this.product_images = product_images;
 
     }
 
