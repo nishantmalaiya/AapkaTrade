@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#F1F5F8">
 
     <include
         android:id="@+id/toolbar"
@@ -17,16 +19,18 @@
         >
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
-                android:layout_margin="5dp"
+                android:layout_margin="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp">
+                android:layout_height="200dp"
+                app:cardCornerRadius="5dp"
+                app:cardMaxElevation="8dp"
+                >
 
                 <RelativeLayout
                     android:id="@+id/cartViewPagerContainer"
@@ -66,7 +70,10 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardMaxElevation="8dp"
+                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -85,87 +92,91 @@
                                 style="@style/myAddress"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/product"
+                                android:text="@string/product_name"
                                 android:layout_alignParentLeft="true"
                                 android:textStyle="bold" />
 
 
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_below="@+id/tvProductName"
-                            android:layout_marginTop="6dp"
-                            >
-
-
-                            <TextView
-                                android:id="@+id/tvQtyHeading"
+                            <RelativeLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Qty."
-                                android:textColor="@color/orange"
-                                android:gravity="left"
-                                android:layout_marginTop="5dp"
-                                android:textStyle="bold"
-                                />
-
-
-                            <RelativeLayout
-                                android:layout_width="50dp"
-                                android:layout_height="33dp"
-                                android:background="@drawable/spinner_black_border"
-                                android:layout_toRightOf="@+id/tvQtyHeading"
-                                android:layout_marginLeft="5dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_below="@+id/tvProductName"
+                                android:layout_marginTop="6dp"
                                 >
 
+
                                 <TextView
-                                    android:id="@+id/tvQuatity"
+                                    android:id="@+id/tvQtyHeading"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1"
-                                    android:textSize="12sp"
-                                    android:layout_centerVertical="true"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_marginLeft="5dp"
-                                    android:textColor="@color/black"
+                                    android:text="Qty."
+                                    android:textColor="@color/orange"
+                                    android:gravity="left"
+                                    android:layout_marginTop="5dp"
+                                    android:textStyle="bold"
                                     />
 
-                                <RelativeLayout
-                                    android:layout_width="17dp"
-                                    android:layout_height="33dp"
-                                    android:orientation="vertical"
-                                    android:layout_toRightOf="@+id/editText1"
-                                    android:layout_marginLeft="10dp"
-                                    android:background="@color/black"
-                                    android:layout_alignParentRight="true"
 
+                                <RelativeLayout
+                                    android:layout_width="90dp"
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/spinner_black_border"
+                                    android:layout_toRightOf="@+id/tvQtyHeading"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginBottom="3dp"
                                     >
+
+
                                     <ImageView
                                         android:id="@+id/imgViewPlus"
-                                        android:layout_width="15dp"
-                                        android:layout_height="15dp"
-                                        android:layout_centerHorizontal="true"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
                                         android:src="@drawable/ic_plus"
+                                        android:scaleType="fitXY"
                                         />
+
+
+                                    <RelativeLayout
+                                        android:id="@+id/relativeQuantity"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:layout_toRightOf="@+id/imgViewPlus"
+                                        >
+
+
+                                        <TextView
+                                            android:id="@+id/tvQuatity"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="1"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_centerHorizontal="true"
+                                            android:textColor="@color/black"
+                                            android:layout_centerVertical="true"
+                                            />
+
+                                    </RelativeLayout>
 
 
                                     <ImageView
                                         android:id="@+id/imgViewMinus"
-                                        android:layout_width="15dp"
-                                        android:layout_height="15dp"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
                                         android:layout_centerHorizontal="true"
                                         android:src="@drawable/ic_minus"
-                                        android:layout_below="@+id/imgViewPlus"
+                                        android:layout_toRightOf="@+id/relativeQuantity"
+                                        android:scaleType="fitXY"
                                         />
+
 
                                 </RelativeLayout>
 
 
                             </RelativeLayout>
 
-           </RelativeLayout>
+
 
                         </RelativeLayout>
 
@@ -315,7 +326,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+
+                >
 
                 <include
                     android:id="@+id/address_for_shipping"

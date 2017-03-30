@@ -23,6 +23,7 @@ import com.example.pat.aapkatrade.general.Call_webservice;
 import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
+import com.example.pat.aapkatrade.user_dashboard.address.viewpager.CartCheckoutActivity;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -42,6 +43,7 @@ public class AddAddressActivity extends AppCompatActivity
     Spinner spState;
     RelativeLayout activity_add_address;
     ProgressBarHandler progress_handler;
+
 
 
 
@@ -161,7 +163,11 @@ public class AddAddressActivity extends AppCompatActivity
                     {
 
 
-                        if (result == null){
+                        Intent companylist = new Intent(AddAddressActivity.this, CartCheckoutActivity.class);
+                        startActivity(companylist);
+
+
+                      /*  if (result == null){
 
 
                             progress_handler.hide();
@@ -182,8 +188,8 @@ public class AddAddressActivity extends AppCompatActivity
                                 progress_handler.hide();
                                 Toast.makeText(getApplicationContext(),"Updated Successfully!",Toast.LENGTH_SHORT).show();
 
-                               /* Intent companylist = new Intent(AddAddressActivity.this, .class);
-                                startActivity(companylist);*/
+                               Intent companylist = new Intent(AddAddressActivity.this, CartCheckoutActivity.class);
+                                startActivity(companylist);
 
                                 finish();
                             }
@@ -193,7 +199,7 @@ public class AddAddressActivity extends AppCompatActivity
                                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
                             }
 
-                        }
+                        }*/
                     }
                 });
     }

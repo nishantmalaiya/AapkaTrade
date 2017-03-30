@@ -117,7 +117,7 @@ public class AddressActivity extends AppCompatActivity
             public void onClick(View v)
             {
 
-                Intent i = new Intent(AddressActivity.this, AddAddressActivity.class);
+                Intent i = new Intent(AddressActivity.this, CartCheckoutActivity.class);
                 startActivity(i);
 
 

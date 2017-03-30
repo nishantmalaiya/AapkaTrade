@@ -52,7 +52,9 @@ import java.util.TimerTask;
 import github.nisrulz.stackedhorizontalprogressbar.StackedHorizontalProgressBar;
 
 
-public class ProductDetail extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class ProductDetail extends AppCompatActivity implements DatePickerDialog.OnDateSetListener
+{
+
 
     LinearLayout viewpagerindicator, linearlayoutShare, linearlayoutLocation;
     Spinner spinner;
@@ -77,6 +79,7 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     int quantity_value = 1;
     ProgressBarHandler progressBarHandler;
     String productlocation, categoryName;
+
     LinearLayout linearLayoutQuantity;
     EditText firstName, quantity, price, mobile, email, etEndDate, etStatDate, description,editText;
     TextView tvServiceBuy,textViewQuantity;
@@ -86,6 +89,9 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     private Context context;
     private String product_name;
     DroppyMenuPopup droppyMenu;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -492,7 +498,6 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         relativeBuyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (tvServiceBuy.getText().toString().equals("Buy Now")) {
 
                     Intent i = new Intent(ProductDetail.this, AddAddressActivity.class);

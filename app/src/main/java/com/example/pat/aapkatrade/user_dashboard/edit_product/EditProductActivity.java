@@ -41,6 +41,7 @@ import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Utils.ImageUtils;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomSimpleListAdapter;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
+import com.example.pat.aapkatrade.user_dashboard.add_product.AddProductActivity;
 import com.example.pat.aapkatrade.user_dashboard.add_product.ProductImages;
 import com.example.pat.aapkatrade.user_dashboard.add_product.ProductImagesData;
 import com.example.pat.aapkatrade.user_dashboard.addcompany.CompanyData;
@@ -59,6 +60,7 @@ import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,7 +70,6 @@ import java.util.regex.Pattern;
 public class EditProductActivity extends AppCompatActivity
 {
 
-    
     private Context context;
     private LinearLayout contentAddProduct, add_product_root_container;
     private Spinner spCompanyName, spSubCategory, spCategory, spState, spCity, spdeliverydistance, spUnit;
@@ -88,26 +89,35 @@ public class EditProductActivity extends AppCompatActivity
     ImageView uploadButton;
     File docFile = new File("");
     public ArrayList<ProductImagesData> productImagesDatas = new ArrayList<>();
+    public  ArrayList<String> product_images;
     LinearLayoutManager layoutManager;
     RecyclerView recyclerView;
     ProductImages adapter;
     Bitmap imageForPreview;
     List<Part> files_image = new ArrayList();
     TextView tvTitle;
-    String user_id,product_name,price,cross_price,description,company_id,distance_id,
+    String product_id,user_id,product_name,price,cross_price,description,company_id,distance_id,
     country_id,state_id,city_id,category_id,sub_category_id,unit_id;
+    ArrayList<Bitmap> multiple_images;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_add_product);
 
         setuptoolbar();
 
+        setupRecyclerView();
+
         Intent i = getIntent();
 
         user_id = i.getStringExtra("user_id");
+
+        product_id = i.getStringExtra("product_id");
 
         product_name= i.getStringExtra("product_name");
 
@@ -133,15 +143,9 @@ public class EditProductActivity extends AppCompatActivity
 
         unit_id = i.getStringExtra("unit_id");
 
-
-        System.out.println("product_name-"+product_name+"price-"+price+"cross_price-"+cross_price+"description-"+description+"company_id-"+company_id+"distance_id-"+distance_id+"country_id-"+country_id+"state_id-"+state_id+"city_id-"+city_id+"category_id"+category_id+"sub_category_id-"+sub_category_id+"unit_id-"+unit_id);
-
-        Log.e("unit_id",unit_id);
+        get_products_images(product_id);
 
         initView();
-
-
-        setupRecyclerView();
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +154,40 @@ public class EditProductActivity extends AppCompatActivity
                 callEditProductWebService();
             }
         });
+
+
+
+
+
+
+    }
+
+    private void get_products_images(String product_id)
+    {
+        Ion.with(EditProductActivity.this)
+                .load("http://staging.aapkatrade.com/slim/product_image/"+product_id)
+                .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>()
+                {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject data)
+                    {
+                        if (data != null)
+                        {
+                            JsonArray product_array = data.getAsJsonArray("result");
+
+                            for (int j=0; j<product_array.size(); j++)
+                            {
+                                JsonObject json_image = (JsonObject) product_array.get(j);
+                                String product_images = json_image.get("image_url").getAsString();
+                                productImagesDatas.add(new ProductImagesData(product_images));
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                });
 
     }
 
@@ -187,13 +225,14 @@ public class EditProductActivity extends AppCompatActivity
             files_image.add(new FilePart("image[]", savebitmap(productImagesDatas.get(i).image_path)));
         }
 
+        Log.e("companyID--",companyID);
 
         Log.e("files_image", "  ==>   " + productImagesDatas.size());
 
         Log.e("company result", app_sharedpreference.getsharedpref("userid", "0"));
 
         Ion.with(context)
-                .load("http://aapkatrade.com/slim/add_product")
+                .load("http://staging.aapkatrade.com/slim/edit_product/"+product_id)
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .progress(new ProgressCallback() {
                     @Override
@@ -202,9 +241,8 @@ public class EditProductActivity extends AppCompatActivity
                     }
                 })
                 .addMultipartParts(files_image)
-
                 .setMultipartParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                .setMultipartParameter("user_id", app_sharedpreference.getsharedpref("userid", "0"))
+                .setMultipartParameter("user_id", user_id)
                 .setMultipartParameter("name", AndroidUtils.getEditTextData(etProductName))
                 .setMultipartParameter("company_id", companyID)
                 .setMultipartParameter("deliverTime", "")
@@ -220,20 +258,20 @@ public class EditProductActivity extends AppCompatActivity
                 .setMultipartParameter("city_id", cityID)
                 .setMultipartParameter("category_id", categoryID)
                 .setMultipartParameter("sub_cat_id", subCategoryID)
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
+                .asString()
+                .setCallback(new FutureCallback<String>() {
                     @Override
-                    public void onCompleted(Exception e, JsonObject result) {
+                    public void onCompleted(Exception e, String result) {
                         progressBar.hide();
                         Log.e("company result", "Result" + result);
 
-                        if (result != null && result.get("message").getAsString().equals("Product Added Successfully!")) {
+                       /* if (result != null && result.get("message").getAsString().equals("Product updated Successfully!")) {
                             Intent Homedashboard = new Intent(EditProductActivity.this, HomeActivity.class);
                             Homedashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(Homedashboard);
                         } else {
                             showMessage("Company Not Found");
-                        }
+                        }*/
 
                     }
                 });
@@ -242,7 +280,8 @@ public class EditProductActivity extends AppCompatActivity
     }
 
 
-    private void initView() {
+    private void initView()
+    {
         context = EditProductActivity.this;
 
         uploadButton = (ImageView) findViewById(R.id.uploadButton);
@@ -305,7 +344,9 @@ public class EditProductActivity extends AppCompatActivity
     }
 
 
-    private void initSpinner() {
+    private void initSpinner()
+    {
+
         CompanyData companyData = new CompanyData("Please Select Company", "-1");
         companyNames.add(companyData);
         CustomSimpleListAdapter adapter = new CustomSimpleListAdapter(context, companyNames);
@@ -326,6 +367,9 @@ public class EditProductActivity extends AppCompatActivity
         unitList.add(unitEntity_init);
         SpCityAdapter spUnitAdapter = new SpCityAdapter(context, unitList);
         spUnit.setAdapter(spUnitAdapter);
+
+
+
     }
 
     private void getCompany() {
@@ -527,7 +571,8 @@ public class EditProductActivity extends AppCompatActivity
 
     }
 
-    private void getCategory() {
+    private void getCategory()
+    {
         subCategoryList.clear();
         categoryList.clear();
         progressBar.show();
@@ -591,7 +636,8 @@ public class EditProductActivity extends AppCompatActivity
                 });
     }
 
-    private void setCategoryAdapter(int selectedIndex) {
+    private void setCategoryAdapter(int selectedIndex)
+    {
         Log.e("data", this.categoryList.toString());
         CustomSimpleListAdapter categoriesAdapter = new CustomSimpleListAdapter(context, this.categoryList);
         spCategory.setAdapter(categoriesAdapter);
@@ -704,6 +750,7 @@ public class EditProductActivity extends AppCompatActivity
 
     private void setuptoolbar()
     {
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -712,6 +759,7 @@ public class EditProductActivity extends AppCompatActivity
 
         tvTitle = (TextView) findViewById(R.id.header_name);
         tvTitle.setText("Add Product");
+
     }
 
     @Override
@@ -800,114 +848,130 @@ public class EditProductActivity extends AppCompatActivity
 
     }
 
-    void performImgPicAction(int which) {
+    void performImgPicAction(int which)
+    {
         Intent in;
-        if (which == 1) {
+        if (which == 1)
+        {
             in = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(Intent.createChooser(in, "Select profile picture"), 11);
-        } else if (which == 2) {
-            new MaterialFilePicker()
-                    .withActivity(this)
-                    .withRequestCode(1)
-                    .withFilter(Pattern.compile(".*\\.pdf$"))
-                    .withFilterDirectories(false)
-                    .withHiddenFiles(true)
-                    .start();
-        } else {
+            in.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+            in.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(in, "Select Multiple Picture From Gallery"), 11);
+        }
+        else
+        {
+
             in = new Intent();
             in.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(Intent.createChooser(in, "Select profile picture"), 11);
+            startActivityForResult(Intent.createChooser(in, "Capture Image from Camera"), 10);
         }
+
     }
 
 
 
     private void setupRecyclerView()
     {
-
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         adapter = new ProductImages(EditProductActivity.this, productImagesDatas);
         layoutManager = new LinearLayoutManager(EditProductActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-
     }
 
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
 
+        multiple_images=new ArrayList<>();
         Log.e("hi", "requestCode : " + requestCode + "result code : " + resultCode);
         try {
-            if (requestCode == 11) {
-                Log.e("hi", " if else if 2 ");
-                BitmapFactory.Options option = new BitmapFactory.Options();
-                option.inDither = false;
-                option.inPurgeable = true;
-                option.inInputShareable = true;
-                option.inTempStorage = new byte[32 * 1024];
-                option.inPreferredConfig = Bitmap.Config.RGB_565;
-                if (Build.VERSION.SDK_INT < 19) {
-                    // Uri selectedImageURI = data.getData();
-                    imageForPreview = BitmapFactory.decodeFile(getFilesDir().getPath(), option);
+            if (requestCode == 11)
+            {
+                if(data.getClipData()!=null)
+                {
 
-                } else {
-                    if (data.getData() != null) {
+                    data.getClipData().getItemCount();
 
-                        ParcelFileDescriptor pfd;
-                        try {
-                            pfd = getContentResolver()
-                                    .openFileDescriptor(data.getData(), "r");
-                            if (pfd != null) {
-                                FileDescriptor fileDescriptor = pfd
-                                        .getFileDescriptor();
+                    for (int k = 0; k < 4; k++)
+                    {
 
-                                imageForPreview = BitmapFactory.decodeFileDescriptor(
-                                        fileDescriptor, null, option);
-                            }
-                            pfd.close();
+                        Uri selectedImage = data.getClipData().getItemAt(k).getUri();
+
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                        multiple_images.add(bitmap);
 
 
-                        } catch (FileNotFoundException e) {
-                            Log.e("FileNotFoundException", e.toString());
-                        } catch (IOException e) {
-                            Log.e("IOException", e.toString());
+                        Log.e("doc", "***START.****** ");
+                        if (ImageUtils.sizeOf(bitmap) > 2048) {
+                            Log.e("doc", "if doc file path 1");
+
+                            docFile = getFile(ImageUtils.resize(bitmap, bitmap.getHeight() / 2, bitmap.getWidth() / 2));
+                            Log.e("doc", "if doc file path" + docFile.getAbsolutePath());
+                        } else {
+
+                            Log.e("doc", " else doc file path 1");
+                            docFile = getFile(bitmap);
+                            Log.e("doc", " else doc file path" + docFile.getAbsolutePath());
                         }
-                    } else {
-                        imageForPreview = (Bitmap) data.getExtras().get("data");
-                        Log.e("data_not_found", "data_not_found");
+
+                        productImagesDatas.add(new ProductImagesData(docFile.getAbsolutePath()));
+                        Log.e("docfile", docFile.getAbsolutePath());
+
+
+                        adapter.notifyDataSetChanged();
+
+
                     }
 
                 }
-                try {
+                else
+                {
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(data.getData());
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        Uri tempUri = getImageUri(EditProductActivity.this, bitmap);
 
-                    Log.e("doc", "***START.****** ");
-                    if (ImageUtils.sizeOf(imageForPreview) > 2048) {
-                        Log.e("doc", "if doc file path 1");
+                        // CALL THIS METHOD TO GET THE ACTUAL PATH
+                        File finalFile = new File(getRealPathFromURI(tempUri));
 
-                        docFile = getFile(ImageUtils.resize(imageForPreview, imageForPreview.getHeight() / 2, imageForPreview.getWidth() / 2));
-                        Log.e("doc", "if doc file path" + docFile.getAbsolutePath());
-                    } else {
+                        productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath()));
+                        Log.e("docfile", finalFile.getAbsolutePath());
 
-                        Log.e("doc", " else doc file path 1");
-                        docFile = getFile(imageForPreview);
-                        Log.e("doc", " else doc file path" + docFile.getAbsolutePath());
+                        adapter.notifyDataSetChanged();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
                     }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-                productImagesDatas.add(new ProductImagesData(docFile.getAbsolutePath()));
-                // imageViewDP.setImageURI(Uri.parse(finalFile.getAbsolutePath()));
+            }
+            if (requestCode == 10)
+            {
+
+                Log.e("docfile10","Sachin sdnsdfjsd fsdjfsd fnmsdabf");
+
+                Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+                Uri tempUri = getImageUri(EditProductActivity.this, photo);
+
+                // CALL THIS METHOD TO GET THE ACTUAL PATH
+                File finalFile = new File(getRealPathFromURI(tempUri));
+
+                productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath()));
+                Log.e("docfile", finalFile.getAbsolutePath());
+
                 adapter.notifyDataSetChanged();
             }
+
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("Exception",e.toString());
         }
 
     }
+
+
 
 
     private File getFile(Bitmap photo)
@@ -931,7 +995,8 @@ public class EditProductActivity extends AppCompatActivity
     }
 
 
-    public String getRealPathFromURI(Uri uri) {
+    public String getRealPathFromURI(Uri uri)
+    {
         Cursor cursor = null;
         int idx = 0;
         if (uri != null) {
@@ -942,5 +1007,10 @@ public class EditProductActivity extends AppCompatActivity
         }
         return cursor.getString(idx);
     }
+
+
+
+
+
 
 }

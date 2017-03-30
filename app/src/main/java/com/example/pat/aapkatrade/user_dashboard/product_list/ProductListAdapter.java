@@ -38,7 +38,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     ProgressBarHandler progress_handler;
     int p;
     ProductListHolder homeHolder;
-     final ViewBinderHelper binderHelper = new ViewBinderHelper();
+    final ViewBinderHelper binderHelper = new ViewBinderHelper();
 
 
 
@@ -66,7 +66,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position)
     {
 
-         homeHolder = (ProductListHolder) holder;
+        homeHolder = (ProductListHolder) holder;
 
         binderHelper.bind(homeHolder.swipeReavelLayout, itemList.toString());
 
@@ -79,7 +79,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         homeHolder.tvProductCity.setText(itemList.get(position).state);
 
         Ion.with(homeHolder.imgProduct).load(itemList.get(position).product_image);
-
 
 
         homeHolder.linearlayout1.setOnClickListener(new View.OnClickListener() {
@@ -114,20 +113,25 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         homeHolder.editRelative.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+
 
                 Intent product_detail = new Intent(context, EditProductActivity.class);
                 product_detail.putExtra("user_id", itemList.get(position).user_id);
+                product_detail.putExtra("product_id", itemList.get(position).product_id);
                 product_detail.putExtra("product_name", itemList.get(position).product_name);
                 product_detail.putExtra("product_price", itemList.get(position).product_price);
                 product_detail.putExtra("product_cross_price", itemList.get(position).product_cross_price);
                 product_detail.putExtra("description", itemList.get(position).description);
+
                // product_detail.putExtra("product_image", itemList.get(position).product_image);
                /* product_detail.putExtra("category_name", itemList.get(position).category_name);
                 product_detail.putExtra("description", itemList.get(position).description);
                 product_detail.putExtra("delivery_distance", itemList.get(position).delivery_distance);
                 product_detail.putExtra("delivery_area_name", itemList.get(position).delivery_area_name);
-*/
+               */
+
                 product_detail.putExtra("company_id",itemList.get(position).company_id);
                 product_detail.putExtra("distanec_id",itemList.get(position).distance_id);
                 product_detail.putExtra("country_id",itemList.get(position).country_id);
@@ -136,8 +140,14 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 product_detail.putExtra("category_id",itemList.get(position).category_id);
                 product_detail.putExtra("sub_category_id",itemList.get(position).sub_category_id);
                 product_detail.putExtra("unit_id",itemList.get(position).unit_id);
+                product_detail.putStringArrayListExtra("product_images",itemList.get(position).product_images);
+
+                System.out.println("itemlist-------------"+itemList.get(position).product_images);
+
                 product_detail.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(product_detail);
+
+
 
 
 /*
@@ -165,8 +175,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
                             }
                         });*/
+
+
             }
         });
+
+
 
        /*   homeHolder.imgMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,6 +188,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 Toast.makeText(context, "Hi ", Toast.LENGTH_SHORT).show();
             }
         });*/
+
+
+
 
     }
 

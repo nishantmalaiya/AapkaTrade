@@ -96,7 +96,8 @@ public class AddProductActivity extends AppCompatActivity
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         context = AddProductActivity.this;
@@ -105,7 +106,6 @@ public class AddProductActivity extends AppCompatActivity
         setupRecyclerView();
 
         initView();
-
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,7 +167,7 @@ public class AddProductActivity extends AppCompatActivity
             Log.e("company result", app_sharedpreference.getsharedpref("userid", "0"));
 
             Ion.with(context)
-                    .load("http://aapkatrade.com/slim/add_product")
+                    .load("http://staging.aapkatrade.com/slim/add_product")
                     .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                     .progress(new ProgressCallback() {
                         @Override
@@ -221,13 +221,11 @@ public class AddProductActivity extends AppCompatActivity
 
         }
 
-
-
-
     }
 
 
-    private void initView() {
+    private void initView()
+    {
         context = AddProductActivity.this;
 
         uploadButton = (ImageView) findViewById(R.id.uploadButton);
@@ -779,78 +777,6 @@ public class AddProductActivity extends AppCompatActivity
         try {
             if (requestCode == 11)
             {
-                /*Log.e("hi", " if else if 2 ");
-                BitmapFactory.Options option = new BitmapFactory.Options();
-                option.inDither = false;
-                option.inPurgeable = true;
-                option.inInputShareable = true;
-                option.inTempStorage = new byte[32 * 1024];
-                option.inPreferredConfig = Bitmap.Config.RGB_565;
-                if (Build.VERSION.SDK_INT < 19)
-                {
-
-                    Log.e("hi_____", " versioncode<19 ");
-                    // Uri selectedImageURI = data.getData();
-                    imageForPreview = BitmapFactory.decodeFile(getFilesDir().getPath(), option);
-
-
-                }
-                else
-                    {
-                    Log.e("hi_____", " versioncod ");
-                    if (data.getData() != null)
-                    {
-
-                        Log.e("AddProduct------------",data.getData().toString());
-
-                        Bitmap photo = (Bitmap) data.getExtras().get("data");
-
-                        Uri tempUri = getImageUri(AddProductActivity.this, photo);
-
-                        // CALL THIS METHOD TO GET THE ACTUAL PATH
-                        File finalFile = new File(getRealPathFromURI(tempUri));
-
-                        productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath()));
-                        Log.e("docfile", finalFile.getAbsolutePath());
-
-                        adapter.notifyDataSetChanged();
-
-                       *//* ParcelFileDescriptor pfd;
-                        try {
-                            pfd = getContentResolver()
-                                    .openFileDescriptor(data.getData(), "r");
-                            if (pfd != null) {
-                                FileDescriptor fileDescriptor = pfd
-                                        .getFileDescriptor();
-
-                                imageForPreview = BitmapFactory.decodeFileDescriptor(fileDescriptor, null, option);
-
-                                docFile = getFile(imageForPreview);
-
-
-
-                                productImagesDatas.add(new ProductImagesData(docFile.getAbsolutePath()));
-                                Log.e("docfile", docFile.getAbsolutePath());
-
-                                adapter.notifyDataSetChanged();
-
-                            }
-                            pfd.close();
-
-
-                        } catch (FileNotFoundException e) {
-                            Log.e("FileNotFoundException", e.toString());
-                        } catch (IOException e) {
-                            Log.e("IOException", e.toString());
-                        }*//*
-                    }
-
-                    else
-
-                        {
-
-                       // imageForPreview = (Bitmap) data.getExtras().get("data");*/
-
                 if(data.getClipData()!=null)
                 {
 
@@ -938,7 +864,8 @@ public class AddProductActivity extends AppCompatActivity
     }
 
 
-    private File getFile(Bitmap photo) {
+    private File getFile(Bitmap photo)
+    {
         Uri tempUri = null;
         if (photo != null) {
             tempUri = getImageUri(AddProductActivity.this, photo);
@@ -949,7 +876,8 @@ public class AddProductActivity extends AppCompatActivity
         return finalFile;
     }
 
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
+    public Uri getImageUri(Context inContext, Bitmap inImage)
+    {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
@@ -957,7 +885,8 @@ public class AddProductActivity extends AppCompatActivity
     }
 
 
-    public String getRealPathFromURI(Uri uri) {
+    public String getRealPathFromURI(Uri uri)
+    {
         Cursor cursor = null;
         int idx = 0;
         if (uri != null) {
@@ -968,5 +897,7 @@ public class AddProductActivity extends AppCompatActivity
         }
         return cursor.getString(idx);
     }
+
+
 
 }
