@@ -270,6 +270,7 @@ public class ServiceEnquiryActivity extends AppCompatActivity implements SwipeRe
 
         serviceEnquiryDatas.clear();
         Ion.with(ServiceEnquiryActivity.this)
+
                 .load(getResources().getString(R.string.webservice_base_url)+"/enquiry_service_list")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "company")

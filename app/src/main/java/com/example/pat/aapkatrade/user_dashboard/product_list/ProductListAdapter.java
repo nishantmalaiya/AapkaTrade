@@ -30,7 +30,6 @@ import java.util.List;
 public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
 
-
     final LayoutInflater inflater;
     List<ProductListData> itemList;
     Context context;
@@ -48,8 +47,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.itemList = itemList;
         this.context = context;
         inflater = LayoutInflater.from(context);
-
-
     }
 
     @Override
@@ -133,7 +130,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                */
 
                 product_detail.putExtra("company_id",itemList.get(position).company_id);
-                product_detail.putExtra("distanec_id",itemList.get(position).distance_id);
+                product_detail.putExtra("distance_id",itemList.get(position).distance_id);
                 product_detail.putExtra("country_id",itemList.get(position).country_id);
                 product_detail.putExtra("state_id",itemList.get(position).state_id);
                 product_detail.putExtra("city_id",itemList.get(position).city_id);

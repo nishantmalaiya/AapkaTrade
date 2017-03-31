@@ -37,7 +37,6 @@ public class CancelOrderFragment extends Fragment
     private String user_type;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -49,6 +48,7 @@ public class CancelOrderFragment extends Fragment
         app_sharedpreference = new AppSharedPreference(getActivity());
 
         user_id = app_sharedpreference.getsharedpref("userid","");
+
         user_type = app_sharedpreference.getsharedpref("usertype", "1");
 
         setup_layout(view);

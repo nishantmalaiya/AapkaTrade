@@ -155,7 +155,9 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
         coordinate_search = (CoordinatorLayout) findViewById(R.id.coordinate_search);
         fab_filter = (FloatingActionButton) findViewById(R.id.search_filter_fab);
         fab_filter.setBackgroundTintList(getResources().getColorStateList(R.color.color_voilet));
-        fab_filter.setOnClickListener(new View.OnClickListener() {
+
+
+      /*  fab_filter.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -166,7 +168,7 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 //                startActivity(intent);
             }
         });
-
+*/
 
 
 
