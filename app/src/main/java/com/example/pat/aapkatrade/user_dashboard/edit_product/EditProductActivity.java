@@ -165,7 +165,7 @@ public class EditProductActivity extends AppCompatActivity
     private void get_products_images(String product_id)
     {
         Ion.with(EditProductActivity.this)
-                .load("http://staging.aapkatrade.com/slim/product_image/"+product_id)
+                .load(getResources().getString(R.string.webservice_base_url)+"/product_image/"+product_id)
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .asJsonObject()
@@ -232,7 +232,7 @@ public class EditProductActivity extends AppCompatActivity
         Log.e("company result", app_sharedpreference.getsharedpref("userid", "0"));
 
         Ion.with(context)
-                .load("http://staging.aapkatrade.com/slim/edit_product/"+product_id)
+                .load(getResources().getString(R.string.webservice_base_url)+"/edit_product/"+product_id)
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .progress(new ProgressCallback() {
                     @Override
@@ -376,7 +376,7 @@ public class EditProductActivity extends AppCompatActivity
 
         Log.e("company result", app_sharedpreference.getsharedpref("userid", "0"));
         Ion.with(context)
-                .load("http://aapkatrade.com/slim/dropdown")
+                .load(getResources().getString(R.string.webservice_base_url)+"/dropdown")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "company")
@@ -444,7 +444,7 @@ public class EditProductActivity extends AppCompatActivity
         progressBar.show();
 
         Ion.with(context)
-                .load("http://aapkatrade.com/slim/dropdown")
+                .load(getResources().getString(R.string.webservice_base_url)+"/dropdown")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "state")
@@ -513,7 +513,7 @@ public class EditProductActivity extends AppCompatActivity
     public void getCity(String stateId) {
         progressBar.show();
         Ion.with(context)
-                .load("http://aapkatrade.com/slim/dropdown")
+                .load(getResources().getString(R.string.webservice_base_url)+"/dropdown")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "city")
@@ -578,7 +578,7 @@ public class EditProductActivity extends AppCompatActivity
         progressBar.show();
         Log.e("data", "getCategory Entered");
         Ion.with(context)
-                .load("http://aapkatrade.com/slim/dropdown")
+                .load(getResources().getString(R.string.webservice_base_url)+"/dropdown")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "category")

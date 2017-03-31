@@ -41,7 +41,10 @@ public class Validation {
     }
 
     public static boolean isValidPassword(String password) {
-        return isNonEmptyStr(password) && password.length() >= 6;
+        if(isNonEmptyStr(password) && password.length() >= 6){
+            return password.matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^!&+-]).{6,30}");
+        }
+        return false;
     }
 
     public static boolean isValidDOB(String dob) {

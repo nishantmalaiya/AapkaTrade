@@ -14,6 +14,15 @@ public class City {
         this.cityName = cityName;
     }
 
+    @Override
+    public String toString() {
+        return "City{" +
+                "cityId='" + cityId + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", isChecked=" + isChecked +
+                '}';
+    }
+
     public City(String cityId, String cityName, boolean isChecked) {
         this.cityId = cityId;
         this.cityName = cityName;

@@ -126,7 +126,7 @@
     <string name="delivery_date" translatable="false">Delivery date: 19 Jan to 20 Jan</string>
     <string name="subtotal" translatable="false">Subtotal:</string>
 
-    <string name="webservice_base_url" translatable="false">https://www.aapkatrade.com/slim</string>
+    <string name="webservice_base_url" translatable="false">http://staging.aapkatrade.com/slim</string>
     <string name="msg_sender" translatable="false">IM-SMSEZY</string>
     <string name="logout" translatable="false">Logout</string>
     <string name="latest_update" translatable="false">LATEST UPDATE</string>
