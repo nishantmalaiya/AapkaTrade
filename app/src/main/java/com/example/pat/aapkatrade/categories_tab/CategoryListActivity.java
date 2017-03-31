@@ -43,7 +43,8 @@ import java.util.List;
 import it.carlom.stikkyheader.core.StikkyHeaderBuilder;
 
 
-public class CategoryListActivity extends AppCompatActivity {
+public class CategoryListActivity extends AppCompatActivity
+{
 
     private RecyclerView mRecyclerView;
     private CategoriesListAdapter categoriesListAdapter;
@@ -58,14 +59,17 @@ public class CategoryListActivity extends AppCompatActivity {
     private Context context;
     private TextView toolbarRightText;
 
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_categories_list);
+
         context = CategoryListActivity.this;
         Intent intent = getIntent();
-
 
         Bundle b = intent.getExtras();
         if (b != null) {

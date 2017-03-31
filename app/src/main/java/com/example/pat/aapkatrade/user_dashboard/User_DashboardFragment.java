@@ -215,7 +215,9 @@ public class User_DashboardFragment extends Fragment {
                                     dashboardlist.setLayoutManager(layoutManager);
                                     dashboardAdapter = new DashboardAdapter(getContext(), dashboardDatas);
                                     dashboardlist.setAdapter(dashboardAdapter);
-                                } else if (user_type.contains("3")) {
+                                }
+                                else if (user_type.contains("3"))
+                                {
 
                                     String vendor_quantity = result.get("vendor").getAsString();
                                     String network_quantity = result.get("network").getAsString();

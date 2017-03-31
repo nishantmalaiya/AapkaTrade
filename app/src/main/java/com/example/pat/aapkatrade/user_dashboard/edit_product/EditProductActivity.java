@@ -8,9 +8,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +39,6 @@ import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Utils.ImageUtils;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomSimpleListAdapter;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
-import com.example.pat.aapkatrade.user_dashboard.add_product.AddProductActivity;
 import com.example.pat.aapkatrade.user_dashboard.add_product.ProductImages;
 import com.example.pat.aapkatrade.user_dashboard.add_product.ProductImagesData;
 import com.example.pat.aapkatrade.user_dashboard.addcompany.CompanyData;
@@ -52,23 +49,20 @@ import com.koushikdutta.async.http.body.FilePart;
 import com.koushikdutta.async.http.body.Part;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.ProgressCallback;
-import com.nbsp.materialfilepicker.MaterialFilePicker;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class EditProductActivity extends AppCompatActivity
 {
+
+
 
     private Context context;
     private LinearLayout contentAddProduct, add_product_root_container;
@@ -89,7 +83,7 @@ public class EditProductActivity extends AppCompatActivity
     ImageView uploadButton;
     File docFile = new File("");
     public ArrayList<ProductImagesData> productImagesDatas = new ArrayList<>();
-    public  ArrayList<String> product_images;
+    public ArrayList<String> product_images;
     LinearLayoutManager layoutManager;
     RecyclerView recyclerView;
     ProductImages adapter;
@@ -99,6 +93,8 @@ public class EditProductActivity extends AppCompatActivity
     String product_id,user_id,product_name,price,cross_price,description,company_id,distance_id,
     country_id,state_id,city_id,category_id,sub_category_id,unit_id;
     ArrayList<Bitmap> multiple_images;
+
+
 
 
 
@@ -143,6 +139,8 @@ public class EditProductActivity extends AppCompatActivity
 
         unit_id = i.getStringExtra("unit_id");
 
+        System.out.println("sub_category_id-------"+sub_category_id+"unit_id-------"+unit_id);
+
         get_products_images(product_id);
 
         initView();
@@ -174,6 +172,9 @@ public class EditProductActivity extends AppCompatActivity
                     @Override
                     public void onCompleted(Exception e, JsonObject data)
                     {
+
+                        Log.e("image_data",data.toString());
+
                         if (data != null)
                         {
                             JsonArray product_array = data.getAsJsonArray("result");
@@ -182,7 +183,7 @@ public class EditProductActivity extends AppCompatActivity
                             {
                                 JsonObject json_image = (JsonObject) product_array.get(j);
                                 String product_images = json_image.get("image_url").getAsString();
-                                productImagesDatas.add(new ProductImagesData(product_images));
+                                productImagesDatas.add(new ProductImagesData("",product_images));
                             }
                             adapter.notifyDataSetChanged();
                         }
@@ -219,15 +220,21 @@ public class EditProductActivity extends AppCompatActivity
 
     private void callEditProductWebService()
     {
+
         progressBar.show();
 
-        for (int i = 0; i < productImagesDatas.size(); i++) {
-            files_image.add(new FilePart("image[]", savebitmap(productImagesDatas.get(i).image_path)));
+        for (int i = 0; i < productImagesDatas.size(); i++)
+        {
+            if (!productImagesDatas.get(i).image_path.toString().equals(""))
+            {
+                files_image.add(new FilePart("image[]", savebitmap(productImagesDatas.get(i).image_path)));
+            }
+
         }
 
         Log.e("companyID--",companyID);
 
-        Log.e("files_image", "  ==>   " + productImagesDatas.size());
+        Log.e("files_image", "  ==>   " +files_image);
 
         Log.e("company result", app_sharedpreference.getsharedpref("userid", "0"));
 
@@ -240,9 +247,11 @@ public class EditProductActivity extends AppCompatActivity
                         Log.e("status", downloaded + "  * " + total);
                     }
                 })
+
                 .addMultipartParts(files_image)
                 .setMultipartParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setMultipartParameter("user_id", user_id)
+                .setMultipartParameter("delimage", user_id)
                 .setMultipartParameter("name", AndroidUtils.getEditTextData(etProductName))
                 .setMultipartParameter("company_id", companyID)
                 .setMultipartParameter("deliverTime", "")
@@ -258,20 +267,24 @@ public class EditProductActivity extends AppCompatActivity
                 .setMultipartParameter("city_id", cityID)
                 .setMultipartParameter("category_id", categoryID)
                 .setMultipartParameter("sub_cat_id", subCategoryID)
-                .asString()
-                .setCallback(new FutureCallback<String>() {
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
                     @Override
-                    public void onCompleted(Exception e, String result) {
+                    public void onCompleted(Exception e, JsonObject result)
+                    {
                         progressBar.hide();
                         Log.e("company result", "Result" + result);
 
-                       /* if (result != null && result.get("message").getAsString().equals("Product updated Successfully!")) {
+                        if (result != null && result.get("message").getAsString().equals("Product updated Successfully!"))
+                        {
                             Intent Homedashboard = new Intent(EditProductActivity.this, HomeActivity.class);
                             Homedashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(Homedashboard);
-                        } else {
-                            showMessage("Company Not Found");
-                        }*/
+                        }
+                        else
+                            {
+                            showMessage("Product not updated Successfully!");
+                        }
 
                     }
                 });
@@ -357,6 +370,7 @@ public class EditProductActivity extends AppCompatActivity
         stateList.add(stateEntity_init);
         SpStateAdapter spStateAdapter = new SpStateAdapter(context, stateList);
         spState.setAdapter(spStateAdapter);
+
 
         City cityEntity_init = new City("-1", "Please Select City");
         cityList.add(cityEntity_init);
@@ -582,7 +596,6 @@ public class EditProductActivity extends AppCompatActivity
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "category")
-
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -682,7 +695,8 @@ public class EditProductActivity extends AppCompatActivity
                             }
                         });
                     }
-                    else {
+                    else
+                    {
                         subCategoryList = new ArrayList<>();
                         subCategoryList.add(new SubCategory("0", "No SubCategory Found"));
                         CustomSimpleListAdapter adapter = new CustomSimpleListAdapter(context, subCategoryList);
@@ -781,7 +795,8 @@ public class EditProductActivity extends AppCompatActivity
     }
 
 
-    private void pickDeliveryLocation() {
+    private void pickDeliveryLocation()
+    {
         loadDistanceList();
         CustomSimpleListAdapter adapter = new CustomSimpleListAdapter(context, deliveryDistanceList);
         spdeliverydistance.setAdapter(adapter);
@@ -836,7 +851,8 @@ public class EditProductActivity extends AppCompatActivity
     }
 
 
-    void picPhoto() {
+    void picPhoto()
+    {
         String str[] = new String[]{"Camera", "Gallery", "PDF Files"};
         new AlertDialog.Builder(this).setItems(str,
                 new DialogInterface.OnClickListener() {
@@ -877,7 +893,6 @@ public class EditProductActivity extends AppCompatActivity
         layoutManager = new LinearLayoutManager(EditProductActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
     }
 
 
@@ -918,7 +933,7 @@ public class EditProductActivity extends AppCompatActivity
                             Log.e("doc", " else doc file path" + docFile.getAbsolutePath());
                         }
 
-                        productImagesDatas.add(new ProductImagesData(docFile.getAbsolutePath()));
+                        productImagesDatas.add(new ProductImagesData(docFile.getAbsolutePath(),""));
                         Log.e("docfile", docFile.getAbsolutePath());
 
 
@@ -938,7 +953,7 @@ public class EditProductActivity extends AppCompatActivity
                         // CALL THIS METHOD TO GET THE ACTUAL PATH
                         File finalFile = new File(getRealPathFromURI(tempUri));
 
-                        productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath()));
+                        productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(),""));
                         Log.e("docfile", finalFile.getAbsolutePath());
 
                         adapter.notifyDataSetChanged();
@@ -959,7 +974,7 @@ public class EditProductActivity extends AppCompatActivity
                 // CALL THIS METHOD TO GET THE ACTUAL PATH
                 File finalFile = new File(getRealPathFromURI(tempUri));
 
-                productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath()));
+                productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(),""));
                 Log.e("docfile", finalFile.getAbsolutePath());
 
                 adapter.notifyDataSetChanged();
@@ -970,8 +985,6 @@ public class EditProductActivity extends AppCompatActivity
         }
 
     }
-
-
 
 
     private File getFile(Bitmap photo)
@@ -999,7 +1012,8 @@ public class EditProductActivity extends AppCompatActivity
     {
         Cursor cursor = null;
         int idx = 0;
-        if (uri != null) {
+        if (uri != null)
+        {
             cursor = EditProductActivity.this.getContentResolver().query(uri, null, null, null, null);
             assert cursor != null;
             cursor.moveToFirst();
@@ -1007,10 +1021,5 @@ public class EditProductActivity extends AppCompatActivity
         }
         return cursor.getString(idx);
     }
-
-
-
-
-
 
 }

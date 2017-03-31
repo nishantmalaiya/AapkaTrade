@@ -333,7 +333,6 @@ getshared_pref_data();
 
                                     }
 
-
                                 }
 
                             }
@@ -359,7 +358,9 @@ getshared_pref_data();
 
     }
 
-    private void setUpToolBar() {
+    private void setUpToolBar()
+    {
+
         ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
         ImageView back_imagview = (ImageView) findViewById(R.id.back_imagview);
         back_imagview.setOnClickListener(new View.OnClickListener() {
@@ -386,8 +387,6 @@ getshared_pref_data();
             getSupportActionBar().setElevation(0);
         }
 
-
-
     }
 
 
@@ -399,7 +398,8 @@ getshared_pref_data();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         switch (item.getItemId())
         {
             case android.R.id.home:
@@ -432,7 +432,8 @@ getshared_pref_data();
 
 
     @Override
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth)
+    {
 
         showDate(year, monthOfYear + 1, dayOfMonth);
 

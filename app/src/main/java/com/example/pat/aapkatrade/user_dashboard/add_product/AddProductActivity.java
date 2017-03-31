@@ -95,6 +95,8 @@ public class AddProductActivity extends AppCompatActivity
     TextView tvTitle;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -804,7 +806,7 @@ public class AddProductActivity extends AppCompatActivity
                             Log.e("doc", " else doc file path" + docFile.getAbsolutePath());
                         }
 
-                        productImagesDatas.add(new ProductImagesData(docFile.getAbsolutePath()));
+                        productImagesDatas.add(new ProductImagesData(docFile.getAbsolutePath(),""));
                         Log.e("docfile", docFile.getAbsolutePath());
 
 
@@ -826,7 +828,7 @@ public class AddProductActivity extends AppCompatActivity
                         // CALL THIS METHOD TO GET THE ACTUAL PATH
                         File finalFile = new File(getRealPathFromURI(tempUri));
 
-                        productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath()));
+                        productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(),""));
                         Log.e("docfile", finalFile.getAbsolutePath());
 
                         adapter.notifyDataSetChanged();
@@ -850,7 +852,7 @@ public class AddProductActivity extends AppCompatActivity
                 // CALL THIS METHOD TO GET THE ACTUAL PATH
                 File finalFile = new File(getRealPathFromURI(tempUri));
 
-                productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath()));
+                productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(),""));
                 Log.e("docfile", finalFile.getAbsolutePath());
 
                 adapter.notifyDataSetChanged();

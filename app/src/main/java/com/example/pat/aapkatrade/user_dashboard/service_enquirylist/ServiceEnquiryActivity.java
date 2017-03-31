@@ -199,7 +199,7 @@ public class ServiceEnquiryActivity extends AppCompatActivity implements SwipeRe
 
         serviceEnquiryDatas.clear();
         Ion.with(ServiceEnquiryActivity.this)
-                .load("http://aapkatrade.com/slim/enquiry_service_list")
+                .load("http://staging.aapkatrade.com/slim/enquiry_service_list")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "company")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
@@ -270,7 +270,7 @@ public class ServiceEnquiryActivity extends AppCompatActivity implements SwipeRe
 
         serviceEnquiryDatas.clear();
         Ion.with(ServiceEnquiryActivity.this)
-                .load("http://aapkatrade.com/slim/enquiry_service_list")
+                .load("http://staging.aapkatrade.com/slim/enquiry_service_list")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "company")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
