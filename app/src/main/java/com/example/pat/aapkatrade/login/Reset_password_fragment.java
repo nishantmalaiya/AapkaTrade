@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.pat.aapkatrade.Home.HomeActivity;
@@ -48,7 +49,7 @@ public class Reset_password_fragment extends Fragment implements View.OnClickLis
     String classname;
     Forgot_password_fragment forgot_password_fragment;
     Reset_password_fragment reset_password_fragment;
-
+LinearLayout reset_password_container;
     String class_index;
 
 
@@ -83,14 +84,14 @@ public class Reset_password_fragment extends Fragment implements View.OnClickLis
         tv_forgot_password_description = (TextView) v.findViewById(R.id.tv_forgot_password_description);
 
 
-        et_password = (EditText)v. findViewById(R.id.et_password_forgot);
+        et_password = (EditText)v. findViewById(R.id.et_password);
         et_confirm_password = (EditText)v. findViewById(R.id.et_confirm_password);
 
         btn_reset_password = (Button) v.findViewById(R.id.btn_change_password);
         btn_reset_password.setOnClickListener(this);
 
-        // activity_forgot__password = (CoordinatorLayout) findViewById(R.id.activity_forgot__password);
-
+         activity_forgot__password = (CoordinatorLayout)v.findViewById(R.id.coordinate_reset_password);
+        reset_password_container=(LinearLayout)v.findViewById(R.id.reset_password_container);
         Change_Font.Change_Font_textview(getActivity(), tv_forgot_password);
         Change_Font.Change_Font_textview(getActivity(), tv_forgot_password_description);
 
@@ -103,7 +104,7 @@ public class Reset_password_fragment extends Fragment implements View.OnClickLis
 
             case R.id.btn_change_password:
 
-
+                Log.e("enter","enter");
                 Validatefields();
 
 
@@ -115,23 +116,41 @@ public class Reset_password_fragment extends Fragment implements View.OnClickLis
     private void Validatefields() {
 
         if (Validation.isValidPassword(et_password.getText().toString().trim())) {
+            Log.e("enter1","enter1");
             if(Validation.isPasswordMatching(et_password.getText().toString().trim(),et_confirm_password.getText().toString().trim()))
             {
 
                 call_reset_webservice();
             }
 
+            else {
+                showmessage(getResources().getString(R.string.passwordnotmathed));
 
-        } else if (Validation.isValidPassword(et_confirm_password.getText().toString().trim())) {
-
-            if(Validation.isPasswordMatching(et_password.getText().toString().trim(),et_confirm_password.getText().toString().trim()))
-            {
-                call_reset_webservice();
             }
 
+        }
 
-        } else {
-            showmessage("!Blank password not allowed");
+
+//        else if (Validation.isValidPassword(et_confirm_password.getText().toString().trim())) {
+//            Log.e("enter2","enter2");
+//            if(Validation.isPasswordMatching(et_password.getText().toString().trim(),et_confirm_password.getText().toString().trim()))
+//            {
+//                call_reset_webservice();
+//            }
+//            else {
+//                showmessage("! password not matched");
+//
+//            }
+//
+//
+//        }
+
+
+
+        else {
+
+
+            showmessage(getResources().getString(R.string.password_validing_text));
 
         }
 
@@ -165,7 +184,7 @@ public class Reset_password_fragment extends Fragment implements View.OnClickLis
             Log.e("null_sharedPreferences", "sharedPreferences");
         }
 
-
+Log.e("user_id",user_id);
 
         Ion.with(getActivity())
                 .load(webservice_reset_password)
