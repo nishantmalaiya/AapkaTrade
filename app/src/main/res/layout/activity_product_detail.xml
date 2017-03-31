@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="#EEEEEE"
-    >
+    android:fitsSystemWindows="true">
 
     <RelativeLayout
         android:id="@+id/RelativeProductDetail"
@@ -18,10 +16,7 @@
 
         >
 
-        <include
-            layout="@layout/toolbar_layout" />
-
-
+        <include layout="@layout/toolbar_layout" />
 
 
         <ScrollView
@@ -29,9 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar"
-            android:background="#EEEEEE"
-            >
-
+            android:background="#EEEEEE">
 
 
             <LinearLayout
@@ -52,7 +45,6 @@
                 <!--&gt;-->
 
 
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -63,8 +55,8 @@
                     <android.support.v4.view.ViewPager
                         android:id="@+id/viewpager_custom"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/ten_dip"
                         android:layout_height="180dp"
+                        android:layout_marginTop="@dimen/ten_dip"
 
                         />
 
@@ -83,13 +75,12 @@
                 <!--</android.support.v7.widget.CardView>-->
 
 
-
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
 
                     >
 
@@ -104,48 +95,42 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3"
                             android:layout_below="@+id/relativeProductDetail"
-                            >
+                            android:orientation="horizontal"
+                            android:weightSum="3">
 
                             <com.balysv.materialripple.MaterialRippleLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                app:mrl_rippleOverlay="true"
                                 app:mrl_rippleColor="#999999"
-                                >
+                                app:mrl_rippleOverlay="true">
 
 
                                 <LinearLayout
                                     android:id="@+id/linearlayoutShare"
                                     android:layout_width="match_parent"
-                                    android:layout_weight="1"
                                     android:layout_height="wrap_content"
-                                    android:padding="8dp"
+                                    android:layout_weight="1"
                                     android:background="@drawable/black_border"
-                                    android:weightSum="1"
                                     android:orientation="horizontal"
-                                    >
+                                    android:padding="8dp"
+                                    android:weightSum="1">
 
 
                                     <RelativeLayout
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="0.3"
-                                        >
+                                        android:layout_weight="0.3">
 
                                         <ImageView
                                             android:id="@+id/imgEdtCompanyName"
                                             android:layout_width="25dp"
                                             android:layout_height="20dp"
-                                            android:layout_weight="0.3"
-                                            android:src="@drawable/ic_share"
                                             android:layout_centerHorizontal="true"
                                             android:layout_centerVertical="true"
-                                            />
-
+                                            android:layout_weight="0.3"
+                                            android:src="@drawable/ic_share" />
 
 
                                     </RelativeLayout>
@@ -153,17 +138,15 @@
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:text="Share"
-                                        android:layout_weight="0.7"
                                         android:layout_gravity="center_vertical"
                                         android:layout_toRightOf="@+id/imgEdtCompanyName"
+                                        android:layout_weight="0.7"
+                                        android:text="Share"
                                         android:textColor="@color/black"
 
                                         />
 
                                 </LinearLayout>
-
-
 
 
                             </com.balysv.materialripple.MaterialRippleLayout>
@@ -173,52 +156,46 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                app:mrl_rippleOverlay="true"
                                 app:mrl_rippleColor="#999999"
-                                >
+                                app:mrl_rippleOverlay="true">
 
 
                                 <LinearLayout
                                     android:id="@+id/linearlayoutLocation"
                                     android:layout_width="match_parent"
-                                    android:layout_weight="1"
                                     android:layout_height="wrap_content"
+                                    android:layout_weight="1"
                                     android:background="@drawable/black_border"
-                                    android:padding="8dp"
-                                    android:weightSum="1"
                                     android:orientation="horizontal"
-                                    >
+                                    android:padding="8dp"
+                                    android:weightSum="1">
 
 
                                     <RelativeLayout
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="0.3"
-                                        >
+                                        android:layout_weight="0.3">
 
                                         <ImageView
                                             android:id="@+id/imgDeleteCompany"
                                             android:layout_width="25dp"
                                             android:layout_height="20dp"
-                                            android:layout_weight="0.3"
-                                            android:src="@drawable/ic_location"
                                             android:layout_centerHorizontal="true"
                                             android:layout_centerVertical="true"
-                                            />
-
+                                            android:layout_weight="0.3"
+                                            android:src="@drawable/ic_location" />
 
 
                                     </RelativeLayout>
 
 
-
                                     <TextView
                                         android:layout_width="0dp"
-                                        android:layout_weight="0.7"
                                         android:layout_height="wrap_content"
-                                        android:text="Location"
                                         android:layout_gravity="center_vertical"
                                         android:layout_toRightOf="@+id/imgDeleteCompany"
+                                        android:layout_weight="0.7"
+                                        android:text="Location"
                                         android:textColor="@color/black"
 
                                         />
@@ -232,40 +209,35 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                app:mrl_rippleOverlay="true"
                                 app:mrl_rippleColor="#999999"
+                                app:mrl_rippleOverlay="true"
 
                                 >
-
 
 
                                 <LinearLayout
                                     android:id="@+id/linearlayoutWishlist"
                                     android:layout_width="match_parent"
-                                    android:layout_weight="1"
                                     android:layout_height="wrap_content"
+                                    android:layout_weight="1"
                                     android:background="@drawable/black_border"
-                                    android:padding="8dp"
-                                    android:weightSum="1"
                                     android:orientation="horizontal"
-                                    >
+                                    android:padding="8dp"
+                                    android:weightSum="1">
 
                                     <RelativeLayout
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="0.3"
-                                        >
+                                        android:layout_weight="0.3">
 
                                         <ImageView
                                             android:id="@+id/imgWishlist"
                                             android:layout_width="25dp"
                                             android:layout_height="20dp"
-                                            android:layout_weight="0.3"
-                                            android:src="@drawable/ic_whislist"
                                             android:layout_centerHorizontal="true"
                                             android:layout_centerVertical="true"
-                                            />
-
+                                            android:layout_weight="0.3"
+                                            android:src="@drawable/ic_whislist" />
 
 
                                     </RelativeLayout>
@@ -273,11 +245,11 @@
 
                                     <TextView
                                         android:layout_width="0dp"
-                                        android:layout_weight="0.7"
                                         android:layout_height="wrap_content"
-                                        android:text="Wishlist"
                                         android:layout_gravity="center_vertical"
                                         android:layout_toRightOf="@+id/imgDeleteCompany"
+                                        android:layout_weight="0.7"
+                                        android:text="Wishlist"
                                         android:textColor="@color/black"
 
                                         />
@@ -293,10 +265,10 @@
                             android:id="@+id/relativeProductDetail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true">
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:padding="10dp">
 
                             <TextView
                                 android:id="@+id/tvProductName"
@@ -305,9 +277,8 @@
                                 android:layout_alignParentLeft="true"
                                 android:text="Laxmi Auto World"
                                 android:textColor="@color/green"
-                                android:textStyle="bold"
                                 android:textSize="18sp"
-                                />
+                                android:textStyle="bold" />
 
 
                             <TextView
@@ -315,44 +286,41 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/tvProductName"
+                                android:layout_marginTop="5dp"
                                 android:text="@string/rupees_deatils"
                                 android:textColor="@color/orange"
-                                android:layout_marginTop="5dp"
-                                android:textStyle="bold"
-                                />
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/tvCrossPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="\u20A8 200"
                                 android:layout_below="@+id/tvProductName"
-                                android:layout_toRightOf="@+id/tvProPrice"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="6dp"
-                                android:textSize="12sp"
+                                android:layout_toRightOf="@+id/tvProPrice"
+                                android:text="\u20A8 200"
                                 android:textColor="@color/black"
-                                />
+                                android:textSize="12sp" />
 
                             <RelativeLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:layout_below="@+id/tvProductName"
-                                android:layout_marginTop="6dp"
-                                >
+                                android:layout_marginTop="6dp">
 
                                 <LinearLayout
                                     android:id="@+id/linearlayoutQuantity"
                                     android:layout_width="wrap_content"
-                                    android:visibility="gone"
                                     android:layout_height="wrap_content"
                                     android:layout_above="@+id/relativeLayout"
                                     android:layout_alignParentRight="true"
                                     android:layout_marginRight="16dp"
                                     android:background="@drawable/border_bg_grey"
                                     android:gravity="center"
-                                    android:padding="3dp">
+                                    android:padding="3dp"
+                                    android:visibility="gone">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -388,60 +356,50 @@
                                 </LinearLayout>
 
 
-
-
-
-
-
                                 <TextView
                                     android:id="@+id/tvQtyHeading"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:gravity="left"
                                     android:text="Qty."
                                     android:textColor="@color/orange"
-                                    android:gravity="left"
-                                    android:layout_marginTop="5dp"
-                                    android:textStyle="bold"
-                                    />
+                                    android:textStyle="bold" />
 
 
                                 <RelativeLayout
                                     android:layout_width="90dp"
                                     android:layout_height="30dp"
-                                    android:background="@drawable/spinner_black_border"
-                                    android:layout_toRightOf="@+id/tvQtyHeading"
-                                    android:layout_marginLeft="5dp"
                                     android:layout_marginBottom="3dp"
-                                    >
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_toRightOf="@+id/tvQtyHeading"
+                                    android:background="@drawable/spinner_black_border">
 
 
                                     <ImageView
                                         android:id="@+id/imgViewPlus"
                                         android:layout_width="30dp"
                                         android:layout_height="30dp"
-                                        android:src="@drawable/ic_plus"
                                         android:scaleType="fitXY"
-                                        />
+                                        android:src="@drawable/ic_plus" />
 
 
                                     <RelativeLayout
                                         android:id="@+id/relativeQuantity"
                                         android:layout_width="30dp"
                                         android:layout_height="30dp"
-                                        android:layout_toRightOf="@+id/imgViewPlus"
-                                        >
+                                        android:layout_toRightOf="@+id/imgViewPlus">
 
 
                                         <TextView
                                             android:id="@+id/tvQuatity"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="1"
-                                            android:layout_marginLeft="5dp"
                                             android:layout_centerHorizontal="true"
-                                            android:textColor="@color/black"
                                             android:layout_centerVertical="true"
-                                            />
+                                            android:layout_marginLeft="5dp"
+                                            android:text="1"
+                                            android:textColor="@color/black" />
 
                                     </RelativeLayout>
 
@@ -451,10 +409,9 @@
                                         android:layout_width="30dp"
                                         android:layout_height="30dp"
                                         android:layout_centerHorizontal="true"
-                                        android:src="@drawable/ic_minus"
                                         android:layout_toRightOf="@+id/relativeQuantity"
                                         android:scaleType="fitXY"
-                                        />
+                                        android:src="@drawable/ic_minus" />
 
 
                                 </RelativeLayout>
@@ -490,10 +447,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/tvProPrice"
-                                android:text="@string/delivery_area_heading"
                                 android:layout_marginTop="15dp"
-                                android:textColor="@color/orange"
-                                />
+                                android:text="@string/delivery_area_heading"
+                                android:textColor="@color/orange" />
 
 
                             <TextView
@@ -501,12 +457,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/tvProPrice"
-                                android:text="Sector 45, Chandigarh,"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="15dp"
-                                android:textColor="@color/black"
                                 android:layout_toRightOf="@+id/tvDeliveryAreaHeading"
-                                />
+                                android:text="Sector 45, Chandigarh,"
+                                android:textColor="@color/black" />
 
 
                         </RelativeLayout>
@@ -520,17 +475,15 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    >
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp">
 
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        >
+                        android:padding="10dp">
 
                         <TextView
                             android:id="@+id/tvDiscriptionHeading"
@@ -538,44 +491,38 @@
                             android:layout_height="wrap_content"
                             android:text="@string/description_heading"
                             android:textColor="@color/black"
-                            android:textStyle="bold"
-                            />
+                            android:textStyle="bold" />
 
 
                         <TextView
                             android:id="@+id/tvDiscription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/description"
-                            android:textColor="@color/black"
                             android:layout_below="@+id/tvDiscriptionHeading"
                             android:layout_marginTop="10dp"
-                            />
+                            android:text="@string/description"
+                            android:textColor="@color/black" />
 
 
                     </RelativeLayout>
 
 
-
                 </android.support.v7.widget.CardView>
-
 
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    >
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone">
 
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        >
+                        android:padding="10dp">
 
                         <TextView
                             android:id="@+id/tvSpecificationHeading"
@@ -583,17 +530,16 @@
                             android:layout_height="wrap_content"
                             android:text="@string/specification_heading"
                             android:textColor="@color/black"
-                            android:textStyle="bold"
-                            />
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/tvSpecification"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/description"
-                            android:textColor="@color/black"
                             android:layout_below="@+id/tvSpecificationHeading"
                             android:layout_marginTop="10dp"
-                            />
+                            android:text="@string/description"
+                            android:textColor="@color/black" />
 
 
                     </RelativeLayout>
@@ -602,31 +548,26 @@
                 </android.support.v7.widget.CardView>
 
 
-
-
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="70dp"
-                    >
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
                             android:orientation="vertical"
-                            >
+                            android:padding="10dp">
 
                             <TextView
                                 android:id="@+id/tvReviewHeading"
@@ -634,24 +575,21 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/review_heading"
                                 android:textColor="@color/black"
-                                android:textStyle="bold"
-                                />
+                                android:textStyle="bold" />
 
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:weightSum="2"
-                                >
+                                android:weightSum="2">
 
 
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.8"
-                                    android:padding="10dp"
-                                    >
+                                    android:padding="10dp">
 
 
                                     <RelativeLayout
@@ -659,8 +597,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerHorizontal="true"
-                                        android:layout_marginTop="15dp"
-                                        >
+                                        android:layout_marginTop="15dp">
 
                                         <TextView
                                             android:id="@+id/tvRating"
@@ -669,16 +606,14 @@
                                             android:text="4.8"
                                             android:textColor="@color/black"
                                             android:textSize="25dp"
-                                            android:textStyle="bold"
-                                            />
+                                            android:textStyle="bold" />
 
                                         <ImageView
                                             android:layout_width="20dp"
                                             android:layout_height="20dp"
-                                            android:src="@drawable/ic_star"
                                             android:layout_marginTop="8dp"
                                             android:layout_toRightOf="@+id/tvRating"
-                                            />
+                                            android:src="@drawable/ic_star" />
 
                                     </RelativeLayout>
 
@@ -687,76 +622,67 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/relativeRatingDetails"
-                                        android:text="32 rating and 12 review"
                                         android:layout_marginTop="10dp"
-                                        />
+                                        android:text="32 rating and 12 review" />
 
                                 </RelativeLayout>
-
 
 
                                 <View
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:background="#E6E2E3"
                                     android:layout_weight="0.01"
-                                    ></View>
+                                    android:background="#E6E2E3"></View>
 
 
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1.19"
                                     android:layout_marginLeft="5dp"
-                                    >
+                                    android:layout_weight="1.19">
 
                                     <TextView
                                         android:id="@+id/tvfiveStar"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="5"
-                                        android:textColor="@color/black"
-                                        />
+                                        android:textColor="@color/black" />
 
 
                                     <ImageView
                                         android:id="@+id/imgFiveStar"
                                         android:layout_width="15dp"
                                         android:layout_height="15dp"
-                                        android:src="@drawable/ic_star"
-                                        android:layout_toRightOf="@+id/tvfiveStar"
                                         android:layout_marginTop="2dp"
-                                        />
+                                        android:layout_toRightOf="@+id/tvfiveStar"
+                                        android:src="@drawable/ic_star" />
 
                                     <github.nisrulz.stackedhorizontalprogressbar.StackedHorizontalProgressBar
                                         android:id="@+id/progressbarFive"
                                         style="?android:attr/progressBarStyleHorizontal"
                                         android:layout_width="match_parent"
                                         android:layout_height="4dp"
-                                        android:layout_toRightOf="@+id/imgFiveStar"
-                                        android:progressDrawable="@drawable/progrees_five_back"
                                         android:layout_marginTop="7dp"
-                                        />
+                                        android:layout_toRightOf="@+id/imgFiveStar"
+                                        android:progressDrawable="@drawable/progrees_five_back" />
 
                                     <TextView
                                         android:id="@+id/tvfourStar"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="4"
-                                        android:textColor="@color/black"
                                         android:layout_below="@+id/imgFiveStar"
                                         android:layout_marginTop="5dp"
-                                        />
+                                        android:text="4"
+                                        android:textColor="@color/black" />
 
                                     <ImageView
                                         android:id="@+id/imgFourStar"
                                         android:layout_width="15dp"
                                         android:layout_height="15dp"
-                                        android:src="@drawable/ic_star"
-                                        android:layout_toRightOf="@+id/tvfourStar"
                                         android:layout_below="@+id/imgFiveStar"
                                         android:layout_marginTop="7dp"
-                                        />
+                                        android:layout_toRightOf="@+id/tvfourStar"
+                                        android:src="@drawable/ic_star" />
 
 
                                     <github.nisrulz.stackedhorizontalprogressbar.StackedHorizontalProgressBar
@@ -764,31 +690,28 @@
                                         style="?android:attr/progressBarStyleHorizontal"
                                         android:layout_width="match_parent"
                                         android:layout_height="4dp"
-                                        android:layout_toRightOf="@+id/imgFourStar"
-                                        android:progressDrawable="@drawable/progrees_five_back"
-                                        android:layout_marginTop="13dp"
                                         android:layout_below="@+id/imgFiveStar"
-                                        />
+                                        android:layout_marginTop="13dp"
+                                        android:layout_toRightOf="@+id/imgFourStar"
+                                        android:progressDrawable="@drawable/progrees_five_back" />
 
                                     <TextView
                                         android:id="@+id/tvthreeStar"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="3"
-                                        android:textColor="@color/black"
                                         android:layout_below="@+id/imgFourStar"
                                         android:layout_marginTop="5dp"
-                                        />
+                                        android:text="3"
+                                        android:textColor="@color/black" />
 
                                     <ImageView
                                         android:id="@+id/imgthreeStar"
                                         android:layout_width="15dp"
                                         android:layout_height="15dp"
-                                        android:src="@drawable/ic_star"
-                                        android:layout_toRightOf="@+id/tvthreeStar"
                                         android:layout_below="@+id/imgFourStar"
                                         android:layout_marginTop="7dp"
-                                        />
+                                        android:layout_toRightOf="@+id/tvthreeStar"
+                                        android:src="@drawable/ic_star" />
 
 
                                     <github.nisrulz.stackedhorizontalprogressbar.StackedHorizontalProgressBar
@@ -796,31 +719,29 @@
                                         style="?android:attr/progressBarStyleHorizontal"
                                         android:layout_width="match_parent"
                                         android:layout_height="4dp"
-                                        android:layout_toRightOf="@+id/imgthreeStar"
-                                        android:progressDrawable="@drawable/progrees_five_back"
-                                        android:layout_marginTop="13dp"
                                         android:layout_below="@+id/imgFourStar"
-                                        />
+                                        android:layout_marginTop="13dp"
+                                        android:layout_toRightOf="@+id/imgthreeStar"
+                                        android:progressDrawable="@drawable/progrees_five_back" />
 
 
                                     <TextView
                                         android:id="@+id/tvtwoStar"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="2"
-                                        android:textColor="@color/black"
                                         android:layout_below="@+id/imgthreeStar"
                                         android:layout_marginTop="5dp"
-                                        />
+                                        android:text="2"
+                                        android:textColor="@color/black" />
 
                                     <ImageView
                                         android:id="@+id/imgtwoStar"
                                         android:layout_width="15dp"
                                         android:layout_height="15dp"
-                                        android:src="@drawable/ic_star"
-                                        android:layout_toRightOf="@+id/tvtwoStar"
                                         android:layout_below="@+id/imgthreeStar"
                                         android:layout_marginTop="7dp"
+                                        android:layout_toRightOf="@+id/tvtwoStar"
+                                        android:src="@drawable/ic_star"
 
                                         />
 
@@ -830,34 +751,30 @@
                                         style="?android:attr/progressBarStyleHorizontal"
                                         android:layout_width="match_parent"
                                         android:layout_height="4dp"
-                                        android:layout_toRightOf="@+id/imgtwoStar"
-                                        android:progressDrawable="@drawable/progrees_five_back"
-                                        android:layout_marginTop="13dp"
                                         android:layout_below="@+id/imgthreeStar"
-                                        />
+                                        android:layout_marginTop="13dp"
+                                        android:layout_toRightOf="@+id/imgtwoStar"
+                                        android:progressDrawable="@drawable/progrees_five_back" />
 
 
                                     <TextView
                                         android:id="@+id/tvOneStar"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="1"
-                                        android:textColor="@color/black"
                                         android:layout_below="@+id/imgtwoStar"
                                         android:layout_marginTop="5dp"
-                                        />
-
+                                        android:text="1"
+                                        android:textColor="@color/black" />
 
 
                                     <ImageView
                                         android:id="@+id/imgOneStar"
                                         android:layout_width="15dp"
                                         android:layout_height="15dp"
-                                        android:src="@drawable/ic_star"
-                                        android:layout_toRightOf="@+id/tvOneStar"
                                         android:layout_below="@+id/imgtwoStar"
                                         android:layout_marginTop="7dp"
-                                        />
+                                        android:layout_toRightOf="@+id/tvOneStar"
+                                        android:src="@drawable/ic_star" />
 
 
                                     <github.nisrulz.stackedhorizontalprogressbar.StackedHorizontalProgressBar
@@ -865,11 +782,10 @@
                                         style="?android:attr/progressBarStyleHorizontal"
                                         android:layout_width="match_parent"
                                         android:layout_height="4dp"
-                                        android:layout_toRightOf="@+id/imgOneStar"
-                                        android:progressDrawable="@drawable/progrees_five_back"
-                                        android:layout_marginTop="13dp"
                                         android:layout_below="@+id/imgtwoStar"
-                                        />
+                                        android:layout_marginTop="13dp"
+                                        android:layout_toRightOf="@+id/imgOneStar"
+                                        android:progressDrawable="@drawable/progrees_five_back" />
 
 
                                 </RelativeLayout>
@@ -883,24 +799,21 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="#BDBAB5"
                             android:layout_marginTop="10dp"
-                            ></View>
+                            android:background="#BDBAB5"></View>
 
                         <RelativeLayout
                             android:id="@+id/relativeRateReview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            >
+                            android:padding="10dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="RATE AND WRITE A REVIEW"
                                 android:layout_centerHorizontal="true"
-                                android:textColor="@color/orange"
-                                />
+                                android:text="RATE AND WRITE A REVIEW"
+                                android:textColor="@color/orange" />
 
 
                         </RelativeLayout>
@@ -912,7 +825,6 @@
                 </android.support.v7.widget.CardView>
 
 
-
             </LinearLayout>
         </ScrollView>
 
@@ -921,21 +833,19 @@
             android:id="@+id/relativeBuyNow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:layout_alignParentBottom="true"
             android:background="@color/orange"
-            android:visibility="invisible"
-            >
+            android:padding="15dp"
+            android:visibility="invisible">
 
             <TextView
                 android:id="@+id/tvServiceBuy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BUY NOW!"
                 android:layout_centerHorizontal="true"
+                android:text="BUY NOW!"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
 
         </RelativeLayout>
