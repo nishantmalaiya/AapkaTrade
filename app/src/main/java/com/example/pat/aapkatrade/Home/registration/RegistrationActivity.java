@@ -303,7 +303,12 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
 
                                             Log.e("registration_seller", "done");
                                             AndroidUtils.showSnackBar(registrationLayout, result.get("message").getAsString());
-                                            startActivity(new Intent(RegistrationActivity.this, ActivityOTPVerify.class));
+
+                                            Intent call_to_startactivity=new Intent(RegistrationActivity.this, ActivityOTPVerify.class);
+                                            call_to_startactivity.putExtra("class_name",context.getClass().getName());
+
+
+
                                         } else {
                                             AndroidUtils.showSnackBar(registrationLayout, result.get("message").getAsString());
                                         }
@@ -446,6 +451,8 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                                 AndroidUtils.showSnackBar(registrationLayout, result.get("message").getAsString());
 
                                 progressBarHandler.hide();
+                                Intent call_to_startactivity=new Intent(RegistrationActivity.this, ActivityOTPVerify.class);
+                                call_to_startactivity.putExtra("class_name",context.getClass().getName());
                                 startActivity(new Intent(RegistrationActivity.this, ActivityOTPVerify.class));
                             } else {
 

@@ -364,6 +364,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent forgotpassword_activity = new Intent(context, ForgotPassword.class);
+                forgotpassword_activity.putExtra("forgot_index","0");
                 startActivity(forgotpassword_activity);
             }
         });

@@ -172,7 +172,11 @@ public class RegistrationBusinessAssociateActivity extends AppCompatActivity imp
                             if (result.get("error").getAsString().equals("false")) {
                                 Log.e("registration_seller", "done");
                                 AndroidUtils.showSnackBar(registrationLayout, result.get("message").getAsString());
-                                startActivity(new Intent(RegistrationBusinessAssociateActivity.this, ActivityOTPVerify.class));
+                                Intent call_to_startactivity=new Intent(RegistrationBusinessAssociateActivity.this, ActivityOTPVerify.class);
+                                call_to_startactivity.putExtra("class_name",context.getClass().getName());
+
+
+
                             } else {
                                 showmessage(result.get("message").getAsString());
                             }

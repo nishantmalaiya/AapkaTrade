@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.pat.aapkatrade.Home.DashboardFragment;
 import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
@@ -38,35 +41,81 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     private String usertype;
     private ProgressBarHandler progressBarHandler;
     private Context context;
+    String classname;
+    Forgot_password_fragment forgot_password_fragment;
+    Reset_password_fragment reset_password_fragment;
+
+    String class_index;
+
+    public ForgotPassword(Context context, int class_index) {
+        this.context = context;
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot__password);
-        context = ForgotPassword.this;
-        setUpToolBar();
+        class_index=  getIntent().getStringExtra("forgot_index");
+        Log.e("class_index",""+class_index);
+        forgot_password_fragment = new Forgot_password_fragment();
+        //setUpToolBar();
+        setupForgetpassword(class_index);
 
         initView();
+
     }
 
+    public ForgotPassword() {
+    }
+
+    private void setupForgetpassword(String class_index) {
+        if (class_index .contains( "0")) {
+            if (forgot_password_fragment == null) {
+                forgot_password_fragment = new Forgot_password_fragment();
+            }
+            String tagName = forgot_password_fragment.getClass().getName();
+
+
+            replaceFragment(forgot_password_fragment, tagName);
+
+
+        } else {
+
+
+            if (reset_password_fragment == null) {
+                reset_password_fragment = new Reset_password_fragment();
+            }
+            String tagName = reset_password_fragment.getClass().getName();
+
+
+            replaceFragment(reset_password_fragment, tagName);
+
+
+        }
+
+
+    }
+
+
     private void initView() {
-        app_sharedpreference = new AppSharedPreference(context);
-        progressBarHandler = new ProgressBarHandler(context);
-
-        tv_forgot_password = (TextView) findViewById(R.id.tv_forgot_password);
-        tv_forgot_password_description = (TextView) findViewById(R.id.tv_forgot_password_description);
-
-
-        et_email_forgot = (EditText) findViewById(R.id.et_email_forgot);
-        et_mobile_no = (EditText) findViewById(R.id.et_mobile_no);
-
-        btn_send_otp = (Button) findViewById(R.id.btn_send_otp);
-        btn_send_otp.setOnClickListener(this);
+//        app_sharedpreference = new AppSharedPreference(context);
+//        progressBarHandler = new ProgressBarHandler(context);
+//
+//        tv_forgot_password = (TextView) findViewById(R.id.tv_forgot_password);
+//        tv_forgot_password_description = (TextView) findViewById(R.id.tv_forgot_password_description);
+//
+//
+//        et_email_forgot = (EditText) findViewById(R.id.et_email_forgot);
+//        et_mobile_no = (EditText) findViewById(R.id.et_mobile_no);
+//
+//        btn_send_otp = (Button) findViewById(R.id.btn_send_otp);
+//        btn_send_otp.setOnClickListener(this);
 
         activity_forgot__password = (CoordinatorLayout) findViewById(R.id.activity_forgot__password);
 
-        Change_Font.Change_Font_textview(ForgotPassword.this, tv_forgot_password);
-        Change_Font.Change_Font_textview(ForgotPassword.this, tv_forgot_password_description);
+//        Change_Font.Change_Font_textview(ForgotPassword.this, tv_forgot_password);
+//        Change_Font.Change_Font_textview(ForgotPassword.this, tv_forgot_password_description);
 
 
     }
@@ -113,7 +162,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         progressBarHandler.show();
 
 
-        String webservice_forgot_password = getResources().getString(R.string.webservice_base_url)+"/forget";
+        String webservice_forgot_password = getResources().getString(R.string.webservice_base_url) + "/forget";
 
         if (app_sharedpreference.shared_pref != null) {
             if (app_sharedpreference.getsharedpref("usertype", "0").equals("3")) {
@@ -151,6 +200,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     String error = data.get("error").getAsString();
                     if (error.contains("false")) {
                         Intent go_to_activity_otp_verify = new Intent(context, ActivityOTPVerify.class);
+                        go_to_activity_otp_verify.putExtra("class_name",context.getClass().getName());
                         startActivity(go_to_activity_otp_verify);
                     }
                     String message = data.get("message").getAsString();
@@ -165,7 +215,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     }
 
     private void setUpToolBar() {
-        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome) ;
+        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         AndroidUtils.setImageColor(homeIcon, context, R.color.white);
         homeIcon.setOnClickListener(new View.OnClickListener() {
@@ -202,6 +252,13 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                 return super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void replaceFragment(Fragment newFragment, String tag) {
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fl_forgot_password_container, newFragment, tag).addToBackStack(tag);
+        transaction.commit();
     }
 
 

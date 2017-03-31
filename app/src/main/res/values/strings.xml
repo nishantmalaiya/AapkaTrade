@@ -97,7 +97,7 @@
     <string name="confirm_password" translatable="false">Confirm Password</string>
     <string name="password" translatable="false">Password</string>
 
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+
     <string name="google_api" translatable="false">AIzaSyDEC-Z8NKvcLAbB4vKdNa2ByUcXfOX_Tao</string>
     <string name="forgot_your_password" translatable="false">Forgot your Password?</string>
     <string name="forgot_your_password_instruction1" translatable="false">Enter your Email/Mobile number below to receive OTP</string>
@@ -188,7 +188,7 @@
     <string name="choose_source" translatable="false">Choose Source</string>
     <string name="choose_destination" translatable="false">Choose Destination</string>
     <string name="action_settings" translatable="false">Settings</string>
-    <string name="hello_world" translatable="false">Hello world!</string>
+
     <string name="hnt_lat" translatable="false">Enter Latitude</string>
     <string name="hnt_lng" translatable="false">Enter Longitude</string>
     <string name="str_btn_show" translatable="false">Show Location in Map</string>
@@ -259,6 +259,13 @@
     <string name="city">City</string>
     <string name="clear_all">Clear All</string>
     <string name="apply_filter">Apply Filter</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="resetpassword">Reset Password?</string>
+    <string name="password_change_text">Enter your new password</string>
+    <string name="newpassword">New Password</string>
+    <string name="password_validing_text">Oops! Password must have length >=6 , a-z, A-Z, 0-9 and Special character</string>
 
 
 </resources>
