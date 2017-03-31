@@ -54,8 +54,7 @@ import com.example.pat.aapkatrade.user_dashboard.my_profile.ProfilePreviewActivi
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity
-{
+public class HomeActivity extends AppCompatActivity {
 
     private NavigationFragment drawer;
     private Toolbar toolbar;
@@ -74,33 +73,31 @@ public class HomeActivity extends AppCompatActivity
     public static String userid, username;
     NestedScrollView scrollView;
     float initialX, initialY;
-    public static  RelativeLayout rl_main_content,rl_searchview_dashboard;
+    public static RelativeLayout rl_main_content, rl_searchview_dashboard;
     AppSharedPreference app_sharedpreference;
 
     Mylocation mylocation;
     boolean doubleBackToExitPressedOnce = false;
     LinearLayout linearlayout_home;
-ProgressBarHandler progressBarHandler;
+    ProgressBarHandler progressBarHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
+        rl_main_content = (RelativeLayout) findViewById(R.id.rl_main_content);
+        progressBarHandler = new ProgressBarHandler(this);
 
-
-        rl_main_content=(RelativeLayout)findViewById(R.id.rl_main_content);
-        progressBarHandler=new ProgressBarHandler(this);
-
-        linearlayout_home=(LinearLayout)findViewById(R.id.ll_toolbar_container_home) ;
+        linearlayout_home = (LinearLayout) findViewById(R.id.ll_toolbar_container_home);
         app_sharedpreference = new AppSharedPreference(HomeActivity.this);
 
         App_config.set_defaultfont(HomeActivity.this);
-        aboutUsFragment= new AboutUsFragment();
-        contactUsFragment=new ContactUsFragment();
-        user_dashboardFragment=new User_DashboardFragment();
+        aboutUsFragment = new AboutUsFragment();
+        contactUsFragment = new ContactUsFragment();
+        user_dashboardFragment = new User_DashboardFragment();
 
-        if(!(app_sharedpreference.getsharedpref("usertype", "-1").equals("3") && app_sharedpreference.getsharedpref("term_accepted", "-1").equals("0"))) {
+        if (!(app_sharedpreference.getsharedpref("usertype", "-1").equals("3") && app_sharedpreference.getsharedpref("term_accepted", "-1").equals("0"))) {
             loadLocale();
 
             permission_status = CheckPermission.checkPermissions(HomeActivity.this);
@@ -123,13 +120,9 @@ ProgressBarHandler progressBarHandler;
 
                 App_config.deleteCache(HomeActivity.this);
 
-            }
-
-
-            else {
+            } else {
 
                 setContentView(R.layout.activity_homeactivity);
-
 
 
                 //prefs = getSharedPreferences(shared_pref_name, Activity.MODE_PRIVATE);
@@ -146,7 +139,7 @@ ProgressBarHandler progressBarHandler;
                 App_config.deleteCache(HomeActivity.this);
             }
         } else {
-Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
+            Log.e("HIIIIIIII", "UJUJUJUJUJUJUJUJUJUJ");
             AssociateAgreementDialog dialog = new AssociateAgreementDialog(HomeActivity.this);
             dialog.show();
 
@@ -158,8 +151,6 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
 
         int a = ConnetivityCheck.get_wifi_speed(this);
         Log.e("a", a + "");
-
-
 
 
     }
@@ -181,17 +172,15 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
     }
 
 
-    private void setupToolBar()
-    {
+    private void setupToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle(null);
-        ImageView home_link=(ImageView)toolbar.findViewById(R.id.iconHome);
+        ImageView home_link = (ImageView) toolbar.findViewById(R.id.iconHome);
         AndroidUtils.setImageColor(home_link, context, R.color.white);
         home_link.setVisibility(View.GONE);
         // getSupportActionBar().setIcon(R.drawable.logo_word);
-
 
 
     }
@@ -217,17 +206,14 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
         switch (item.getItemId()) {
             case R.id.login:
 
-                if (app_sharedpreference.getsharedpref("userid", "notlogin").equals("notlogin"))
-                {
+                if (app_sharedpreference.getsharedpref("userid", "notlogin").equals("notlogin")) {
                     Intent i = new Intent(HomeActivity.this, LoginDashboard.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
                     return true;
-                }
+                } else
 
-                else
-
-                    {
+                {
                     Intent i = new Intent(HomeActivity.this, ProfilePreviewActivity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
@@ -289,41 +275,30 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
         User_DashboardFragment showuserdashboardfragment = (User_DashboardFragment) fm.findFragmentByTag(user_dashboardFragment.getClass().getName());
 
 
-        if(dashboardFragment.isVisible())
-        {
+        if (dashboardFragment.isVisible()) {
 
             double_back_pressed("finish");
             //finish();
 
-            Log.e("myfragment_visible","myfragment visible");
-        }
-        else if(showcontactUsFragment!=null && showcontactUsFragment.isVisible())
-        {
+            Log.e("myfragment_visible", "myfragment visible");
+        } else if (showcontactUsFragment != null && showcontactUsFragment.isVisible()) {
             double_back_pressed("finish");
-           // finish();
-            Log.e("contact us visible","contact us visible");
+            // finish();
+            Log.e("contact us visible", "contact us visible");
 
-        }
-        else if (showaboutUsFragment!=null && showaboutUsFragment.isVisible())
-        {
+        } else if (showaboutUsFragment != null && showaboutUsFragment.isVisible()) {
             double_back_pressed("finish");
             //finish();
-            Log.e("showabout visible","showaboutUsFragment visible");
-        }
-        else if(showuserdashboardfragment!=null&&showuserdashboardfragment.isVisible())
-        {
+            Log.e("showabout visible", "showaboutUsFragment visible");
+        } else if (showuserdashboardfragment != null && showuserdashboardfragment.isVisible()) {
             double_back_pressed("finish");
             //finish();
-            Log.e("userdashboard visible","userdashboard visible");
-        }
-        else {
+            Log.e("userdashboard visible", "userdashboard visible");
+        } else {
 
             double_back_pressed("onbackpressed");
-           // super.onBackPressed();
+            // super.onBackPressed();
         }
-
-
-
 
 
 //        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
@@ -489,15 +464,11 @@ Log.e("HIIIIIIII","UJUJUJUJUJUJUJUJUJUJ");
                         break;
 
 
-
-
-
-
                     case 2:
                         goToMyApp(true);
 
 
-break;
+                        break;
                     case 3:
                         if (user_dashboardFragment == null) {
                             user_dashboardFragment = new User_DashboardFragment();
@@ -603,8 +574,7 @@ break;
 
     }
 
-    private void setForceTitleHide(boolean forceTitleHide)
-    {
+    private void setForceTitleHide(boolean forceTitleHide) {
 
         AHBottomNavigation.TitleState state = forceTitleHide ? AHBottomNavigation.TitleState.ALWAYS_HIDE : AHBottomNavigation.TitleState.ALWAYS_SHOW;
         bottomNavigation.setTitleState(state);
@@ -642,68 +612,62 @@ break;
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-public  void double_back_pressed(String type)
-{
-    if(type.contains("finish")) {
-        if (doubleBackToExitPressedOnce) {
+    public void double_back_pressed(String type) {
+        if (type.contains("finish")) {
+            if (doubleBackToExitPressedOnce) {
 
-            finish();
+                finish();
 
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
+                return;
             }
-        }, 2000);
-    }
-    else
-    {
-        if (doubleBackToExitPressedOnce) {
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Press again to quit.", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        } else {
+            if (doubleBackToExitPressedOnce) {
 
 
-            super.onBackPressed();
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-     //   AndroidUtils.showSnackBar(linearlayout_home,"Please click BACK again to exit"));
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
+                super.onBackPressed();
+                return;
             }
-        }, 2000);
+
+            this.doubleBackToExitPressedOnce = true;
+            //   AndroidUtils.showSnackBar(linearlayout_home,"Please click BACK again to exit"));
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
 
 
-
+        }
 
 
     }
 
-
-}
     public void goToMyApp(boolean googlePlay) {//true if Google Play, false if Amazone Store
         try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((googlePlay ? "market://details?id=" : "amzn://apps/android?p=") +getPackageName())));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((googlePlay ? "market://details?id=" : "amzn://apps/android?p=") + getPackageName())));
         } catch (ActivityNotFoundException e1) {
             try {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((googlePlay ? "http://play.google.com/store/apps/details?id=" : "http://www.amazon.com/gp/mas/dl/android?p=") +getPackageName())));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((googlePlay ? "http://play.google.com/store/apps/details?id=" : "http://www.amazon.com/gp/mas/dl/android?p=") + getPackageName())));
             } catch (ActivityNotFoundException e2) {
                 Toast.makeText(HomeActivity.this, "You don't have any app that can open this link", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
 
 
 }

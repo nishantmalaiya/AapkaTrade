@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.pat.aapkatrade.R;
+import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class AddressViewPagerAdapter extends PagerAdapter {
         Ion.with(imageView)
 //               .placeholder(R.drawable.placeholder_image)
 
-                .load("http://aapkatrade.com/laraveldemo/public/image/demo/slider/3.jpg");
+                .load(AndroidUtils.BaseUrl+"/laraveldemo/public/image/demo/slider/3.jpg");
         imageView.setImageResource(R.drawable.banner_home);
 
         container.addView(itemView);

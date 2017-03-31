@@ -171,7 +171,7 @@ public class AddCompany extends AppCompatActivity
         progress_handler.show();
 
         Ion.with(AddCompany.this)
-                .load("http://aapkatrade.com/slim/addCompany")
+                .load(getResources().getString(R.string.webservice_base_url)+"/addCompany")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("user_id", userId)
