@@ -24,12 +24,12 @@ public class OrderListHolder extends RecyclerView.ViewHolder
     {
         super(itemView);
 
-        relativeOrderlist = (RelativeLayout) itemView.findViewById(R.id.relativeOrderlist);
+       /* relativeOrderlist = (RelativeLayout) itemView.findViewById(R.id.relativeOrderlist);
 
         tvProductName = (TextView) itemView.findViewById(R.id.tvProductName);
 
         tvOrderId = (TextView) itemView.findViewById(R.id.tvOrderId);
-
+*/
         view = itemView;
     }
 }
