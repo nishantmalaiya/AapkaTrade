@@ -46,11 +46,13 @@ public class ActivityOTPVerify extends AppCompatActivity {
     CoordinatorLayout coordinatorLayout;
     BroadcastReceiver receiver;
     LocalBroadcastManager bManager;
+    String class_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpverify);
+        class_name= getIntent().getStringExtra("class_name");
         context = ActivityOTPVerify.this;
         appSharedPreference = new AppSharedPreference(context);
         setUpToolBar();
@@ -102,6 +104,7 @@ public class ActivityOTPVerify extends AppCompatActivity {
             getSupportActionBar().setTitle(null);
             getSupportActionBar().setElevation(0);
         }
+        Log.e("class_name",class_name);
     }
 
     @Override
@@ -300,9 +303,22 @@ public class ActivityOTPVerify extends AppCompatActivity {
                         if(appSharedPreference.getsharedpref("isAddVendorCall")!=null && appSharedPreference.getsharedpref("isAddVendorCall").equals("true")){
                             appSharedPreference.setsharedpref("isAddVendorCall", "false");
                         }
-                        Intent intent = new Intent(ActivityOTPVerify.this, HomeActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
+
+                        if(class_name.contains("com.example.pat.aapkatrade.login.ForgotPassword"))
+                        {
+                            Intent intent = new Intent(ActivityOTPVerify.this, ForgotPassword.class);
+                            intent.putExtra("forgot_index","2");
+
+
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
+                        else {
+
+                            Intent intent = new Intent(ActivityOTPVerify.this, HomeActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
                     } else {
                         showMessage(message);
                     }
@@ -345,9 +361,13 @@ public class ActivityOTPVerify extends AppCompatActivity {
 
                     String error = jsonObject.get("error").getAsString();
                     String message = jsonObject.get("message").getAsString();
+
+
+
+
                     if (error.equals("false")) {
                         String user_id = jsonObject.get("user_id").getAsString();
-
+                        appSharedPreference.setsharedpref("userid",user_id);
 
                         showMessage(message);
 

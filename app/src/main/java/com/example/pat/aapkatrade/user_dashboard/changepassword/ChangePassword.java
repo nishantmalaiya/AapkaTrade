@@ -183,7 +183,7 @@ String get_user_type=AndroidUtils.getUserType(user_type);
                         }
 
                     } else {
-                        showMessage("Please Enter Minimum 6 digit New Password");
+                        showMessage(getResources().getString(R.string.password_validing_text));
                     }
 
                 } else {
