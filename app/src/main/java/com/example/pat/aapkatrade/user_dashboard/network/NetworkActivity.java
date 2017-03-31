@@ -150,7 +150,7 @@ public class NetworkActivity extends AppCompatActivity
         progress_handler.show();
         networkDatas.clear();
         Ion.with(NetworkActivity.this)
-                .load("https://aapkatrade.com/slim/network_list")
+                .load(getResources().getString(R.string.webservice_base_url)+"/network_list")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("ref_no","aapkatrade11")
                 .asJsonObject()

@@ -81,7 +81,7 @@ public class ShippedFragment extends Fragment
 
         Log.e("hi1234", user_id+"#ship###"+AndroidUtils.getUserType(user_type)+"@!@@"+user_type);
         Ion.with(getActivity())
-                .load("http://aapkatrade.com/slim/seller_order_list")
+                .load(getResources().getString(R.string.webservice_base_url)+"/seller_order_list")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("seller_id", user_id)

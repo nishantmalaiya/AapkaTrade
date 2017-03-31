@@ -123,7 +123,7 @@ public class RegistrationBusinessAssociateActivity extends AppCompatActivity imp
             Log.e("hi", "file2 null");
         }
         Ion.with(context)
-                .load("http://aapkatrade.com/slim/businessregister")
+                .load(getResources().getString(R.string.webservice_base_url)+"/businessregister")
                 .setHeader("authorization", webservice_header_type.get("authorization"))
                 .progress(new ProgressCallback() {
                     @Override

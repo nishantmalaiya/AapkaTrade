@@ -1,5 +1,6 @@
 package com.example.pat.aapkatrade.Home.navigation.entity;
 
+import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Validation;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class CategoryHome
     private String categoryIconName;
     private String categoryIconPath;
     private ArrayList<SubCategory> subCategoryList;
-    private String basePath = "http://aapkatrade.com/public/appicon/";
+    private String basePath = AndroidUtils.BaseUrl+"/public/appicon/";
     private String iconExtention = ".png";
     public CategoryHome(String categoryId, String categoryName, String categoryIconName, ArrayList<SubCategory> subCategoryList) {
         this.categoryId = categoryId;

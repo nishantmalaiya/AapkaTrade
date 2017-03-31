@@ -161,8 +161,8 @@ public class Search extends AppCompatActivity  implements Adapter_callback_inter
 
             @Override
             public void onClick(View view) {
-                FilterDialog filterDialog = new FilterDialog(Search.this, autocomplete_textview_product.getText().toString(), common_category_searchlist, "search");
-                filterDialog.show();
+//                FilterDialog filterDialog = new FilterDialog(Search.this, autocomplete_textview_product.getText().toString(), common_category_searchlist, "search");
+//                filterDialog.show();
                 // Click action
 //                Intent intent = new Intent(MainActivity.this, NewMessageActivity.class);
 //                startActivity(intent);

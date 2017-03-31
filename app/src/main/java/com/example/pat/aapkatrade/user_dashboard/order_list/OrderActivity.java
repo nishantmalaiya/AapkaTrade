@@ -103,7 +103,7 @@ public class OrderActivity extends AppCompatActivity {
         Log.e("hi////", app_sharedpreference.getsharedpref("userid", user_id)+"GGGGGGG"+app_sharedpreference.getsharedpref("usertype","1"));
 
         Ion.with(OrderActivity.this)
-                .load("http://aapkatrade.com/slim/seller_order_list")
+                .load(getResources().getString(R.string.webservice_base_url)+"/seller_order_list")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
 

@@ -199,10 +199,10 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         relativeBuyNow.setVisibility(View.INVISIBLE);
         linearProductDetail.setVisibility(View.INVISIBLE);
         progress_handler.show();
-        Log.e("data_productdeatil", "http://aapkatrade.com/slim/product_detail/" + product_id);
+        Log.e("data_productdeatil", getResources().getString(R.string.webservice_base_url) + product_id);
 
         Ion.with(getApplicationContext())
-                .load("http://aapkatrade.com/slim/product_detail/" + product_id)
+                .load(getResources().getString(R.string.webservice_base_url)+"/product_detail/" + product_id)
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .asJsonObject()

@@ -316,7 +316,7 @@ public class MyProfileFragment extends Fragment implements DatePickerDialog.OnDa
 
     private void setUpStateSpinner() {
         Ion.with(context)
-                .load("http://aapkatrade.com/slim/dropdown")
+                .load(getResources().getString(R.string.webservice_base_url)+"/dropdown")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "state")
@@ -368,7 +368,7 @@ public class MyProfileFragment extends Fragment implements DatePickerDialog.OnDa
 
     private void setUpCitySpinner(String stateId) {
         Ion.with(context)
-                .load("http://aapkatrade.com/slim/dropdown")
+                .load(getResources().getString(R.string.webservice_base_url)+"/dropdown")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "city")
@@ -577,7 +577,7 @@ public class MyProfileFragment extends Fragment implements DatePickerDialog.OnDa
         progressBarHandler.show();
         bankList.add("Please Select Bank Name");
         Ion.with(context)
-                .load("https://aapkatrade.com/slim/bank_list")
+                .load(getResources().getString(R.string.webservice_base_url)+"/bank_list")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -638,7 +638,7 @@ public class MyProfileFragment extends Fragment implements DatePickerDialog.OnDa
         CustomSimpleListAdapter qualificationAdapter = new CustomSimpleListAdapter(context, qualificationList);
         spQualification.setAdapter(qualificationAdapter);
         Ion.with(context)
-                .load("https://aapkatrade.com/slim/qualification")
+                .load(getResources().getString(R.string.webservice_base_url)+"/qualification")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -699,7 +699,7 @@ public class MyProfileFragment extends Fragment implements DatePickerDialog.OnDa
 
 
         Ion.with(context)
-                .load("https://aapkatrade.com/slim/total_experience")
+                .load(getResources().getString(R.string.webservice_base_url)+"/total_experience")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -761,7 +761,7 @@ public class MyProfileFragment extends Fragment implements DatePickerDialog.OnDa
 
 
         Ion.with(context)
-                .load("https://aapkatrade.com/slim/relevant_experience")
+                .load(getResources().getString(R.string.webservice_base_url)+"/relevant_experience")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override

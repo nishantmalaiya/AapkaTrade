@@ -72,7 +72,7 @@ public class CompanyList extends AppCompatActivity implements SwipeRefreshLayout
         mSwipyRefreshLayout.setRefreshing(true);
         companyDatas.clear();
         Ion.with(CompanyList.this)
-                .load("http://aapkatrade.com/slim/listCompany")
+                .load(getResources().getString(R.string.webservice_base_url)+"/listCompany")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "company")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
@@ -275,7 +275,7 @@ public class CompanyList extends AppCompatActivity implements SwipeRefreshLayout
   public void  get_company_list_more_data()
   {
       Ion.with(CompanyList.this)
-              .load("http://aapkatrade.com/slim/listCompany")
+              .load(getResources().getString(R.string.webservice_base_url)+"/listCompany")
               .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
               .setBodyParameter("type", "company")
               .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")

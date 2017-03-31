@@ -19,6 +19,7 @@ import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Validation;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.internal.Streams;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,6 +30,9 @@ import java.util.HashMap;
  */
 
 public class AndroidUtils {
+
+    public static String BaseUrl = "http://staging.aapkatrade.com";
+
     public static void showSnackBar(ViewGroup layout, String message) {
         if(layout != null){
             Snackbar snackbar = Snackbar

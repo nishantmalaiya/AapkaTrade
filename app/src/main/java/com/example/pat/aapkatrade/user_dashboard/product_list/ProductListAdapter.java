@@ -143,52 +143,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
                 product_detail.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(product_detail);
-
-
-
-
-/*
-                Ion.with(context)
-                        .load("https://aapkatrade.com/slim/add_product\n")
-                        .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                        .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                        .setBodyParameter("user_id", )
-                        .setBodyParameter("productauthorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                        .setBodyParameter("company_id", )
-                        .setBodyParameter("distance_id", )
-                        .setBodyParameter("country_id", "101")
-                        .setBodyParameter("state_id", )
-                        .setBodyParameter("city_id", )
-                        .setBodyParameter("price", )
-                        .setBodyParameter("cross_price", )
-                        .setBodyParameter("unit_id", )
-                        .setBodyParameter("short_des",)
-                        .setBodyParameter("descriptiondeliveryArea", )
-                        .setBodyParameter("category_id", )
-                        .asJsonObject()
-                        .setCallback(new FutureCallback<JsonObject>() {
-                            @Override
-                            public void onCompleted(Exception e, JsonObject result) {
-
-                            }
-                        });*/
-
-
             }
         });
-
-
-
-       /*   homeHolder.imgMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Hi ", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
-
-
-
     }
 
 
@@ -208,7 +164,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public int getItemCount() {
         return itemList.size();
-        // return itemList.size();
     }
 
 
@@ -223,7 +178,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         p = pos;
         System.out.println("company--------"+product_id);
         Ion.with(context)
-                .load("https://aapkatrade.com/slim/delete_product")
+                .load(context.getResources().getString(R.string.webservice_base_url)+"/delete_product")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("id",product_id)
                 .asJsonObject()

@@ -243,7 +243,7 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
         // layout_container.setVisibility(View.INVISIBLE);
         // progress_handler.show();
         Ion.with(ProductListActivity.this)
-                .load("http://www.staging.aapkatrade.com/slim/productlist")
+                .load(getResources().getString(R.string.webservice_base_url)+"/productlist")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "product_list")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
@@ -369,7 +369,7 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
         productListDatas.clear();
 
         Ion.with(ProductListActivity.this)
-                .load("http://www.staging.aapkatrade.com/slim/productlist")
+                .load(getResources().getString(R.string.webservice_base_url)+"/productlist")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "product_list")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
