@@ -302,10 +302,12 @@ public class ActivityOTPVerify extends AppCompatActivity {
                         showMessage(message);
                         if(appSharedPreference.getsharedpref("isAddVendorCall")!=null && appSharedPreference.getsharedpref("isAddVendorCall").equals("true")){
                             appSharedPreference.setsharedpref("isAddVendorCall", "false");
+                            Log.e("userid_forgot_password",jsonObject.get("user_id").getAsString());
+
                         }
 
                         if(class_name.contains("com.example.pat.aapkatrade.login.ForgotPassword"))
-                        {
+                        {appSharedPreference.setsharedpref("userid", jsonObject.get("user_id").getAsString());
                             Intent intent = new Intent(ActivityOTPVerify.this, ForgotPassword.class);
                             intent.putExtra("forgot_index","2");
 
@@ -314,7 +316,7 @@ public class ActivityOTPVerify extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else {
-
+                            appSharedPreference.setsharedpref("userid", jsonObject.get("user_id").getAsString());
                             Intent intent = new Intent(ActivityOTPVerify.this, HomeActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);

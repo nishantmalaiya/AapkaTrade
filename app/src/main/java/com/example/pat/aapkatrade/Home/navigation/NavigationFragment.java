@@ -569,7 +569,6 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
         app_sharedpreference.setsharedpref("username", user_name);
         app_sharedpreference.setsharedpref("emailid", email_id);
         app_sharedpreference.setsharedpref("profile_pic", profile_pic);
-
     }
 
 

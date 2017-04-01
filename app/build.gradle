@@ -36,6 +36,7 @@ android {
         maven {
             url "http://dl.bintray.com/lukaville/maven"
         }
+        maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local' }
 
     }
     sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/menu'] } }
@@ -97,4 +98,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     compile 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.0'
     compile 'com.shehabic.droppy:Droppy:0.5.1@aar'
+    compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.6.0'
 }

@@ -190,6 +190,7 @@ initView(v);
                 if (data != null) {
                     String error = data.get("error").getAsString();
                     if (error.contains("false")) {
+
                         Intent go_to_activity_otp_verify = new Intent(getActivity(), ActivityOTPVerify.class);
                         go_to_activity_otp_verify.putExtra("class_name",getActivity().getClass().getName());
                         startActivity(go_to_activity_otp_verify);

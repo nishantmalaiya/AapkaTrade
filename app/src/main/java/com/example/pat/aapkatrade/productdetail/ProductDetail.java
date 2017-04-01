@@ -52,8 +52,7 @@ import java.util.TimerTask;
 import github.nisrulz.stackedhorizontalprogressbar.StackedHorizontalProgressBar;
 
 
-public class ProductDetail extends AppCompatActivity implements DatePickerDialog.OnDateSetListener
-{
+public class ProductDetail extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
 
     LinearLayout viewpagerindicator, linearlayoutShare, linearlayoutLocation;
@@ -81,16 +80,14 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     String productlocation, categoryName;
 
     LinearLayout linearLayoutQuantity;
-    EditText firstName, quantity, price, mobile, email, etEndDate, etStatDate, description,editText;
-    TextView tvServiceBuy,textViewQuantity;
+    EditText firstName, quantity, price, mobile, email, etEndDate, etStatDate, description, editText;
+    TextView tvServiceBuy, textViewQuantity;
 
     // TextView tvDurationHeading,tvDuration;
     Dialog dialog;
     private Context context;
     private String product_name;
     DroppyMenuPopup droppyMenu;
-
-
 
 
     @Override
@@ -107,11 +104,9 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         product_id = b.getString("product_id");
         Log.e("product_id", product_id);
         product_location = b.getString("product_location");
-        progressBarHandler=new ProgressBarHandler(context);
+        progressBarHandler = new ProgressBarHandler(context);
         setUpToolBar();
         initView();
-        //Init_droppy();
-
         get_data();
     }
 
@@ -188,13 +183,6 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     }
 
 
-
-
-
-
-
-
-
     private void get_data() {
         relativeBuyNow.setVisibility(View.INVISIBLE);
         linearProductDetail.setVisibility(View.INVISIBLE);
@@ -202,7 +190,7 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         Log.e("data_productdeatil", getResources().getString(R.string.webservice_base_url) + product_id);
 
         Ion.with(getApplicationContext())
-                .load(getResources().getString(R.string.webservice_base_url)+"/product_detail/" + product_id)
+                .load(getResources().getString(R.string.webservice_base_url) + "/product_detail/" + product_id)
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .asJsonObject()
@@ -262,18 +250,6 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
                             tvProPrice.setText("\u20A8" + "." + " " + product_price);
                             tvCrossPrice.setText("\u20A8" + "." + " " + product_cross_price);
                             tvDiscription.setText(description);
-
-                          /*  if (duration.toString().equals("")){
-
-                                tvDuration.setVisibility(View.INVISIBLE);
-                                tvDurationHeading.setVisibility(View.INVISIBLE);
-                            }
-                            else {
-                                tvDuration.setVisibility(View.VISIBLE);
-                                tvDurationHeading.setVisibility(View.VISIBLE);
-
-                                tvDuration.setText(duration);
-                            }*/
                             setupviewpager();
 
                             progress_handler.hide();
@@ -514,7 +490,7 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     }
 
     private void setUpToolBar() {
-        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome) ;
+        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         AndroidUtils.setImageColor(homeIcon, context, R.color.white);
         homeIcon.setOnClickListener(new View.OnClickListener() {
