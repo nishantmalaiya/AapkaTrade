@@ -13,10 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/green"
-        app:tabIndicatorColor="@color/text_order_tab"
-        app:tabIndicatorHeight="@dimen/two_dip"
-        app:tabMode="fixed" />
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/orange"
+        app:tabIndicatorHeight="3dp"
+        app:tabMode="scrollable" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/htab_viewpager"

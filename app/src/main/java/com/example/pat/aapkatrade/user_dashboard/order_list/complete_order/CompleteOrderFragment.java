@@ -84,7 +84,7 @@ public class CompleteOrderFragment extends Fragment
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("seller_id", user_id)
-                .setBodyParameter("type", AndroidUtils.getUserType(user_type))
+                .setBodyParameter("type", "3")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>()
                 {
@@ -145,8 +145,9 @@ public class CompleteOrderFragment extends Fragment
 
                                     String created_at = jsonObject2.get("created_at").getAsString();
 
+                                    String product_image= jsonObject2.get("image_url").getAsString();
 
-                                    orderListDatas.add(new OrderListData(order_id, product_name, product_price,product_qty,address,email,buyersmobile,buyersname,company_name,status,created_at));
+                                    orderListDatas.add(new OrderListData(order_id, product_name, product_price,product_qty,address,email,buyersmobile,buyersname,company_name,status,created_at,product_image));
 
 
                                 }

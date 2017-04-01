@@ -53,7 +53,7 @@ public class CancelOrderFragment extends Fragment
 
         setup_layout(view);
 
-        get_web_data();
+          get_web_data();
 
         return view;
     }
@@ -65,6 +65,7 @@ public class CancelOrderFragment extends Fragment
         order_list = (RecyclerView) view.findViewById(R.id.order_list);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         order_list.setLayoutManager(mLayoutManager);
+
     }
 
 
@@ -79,13 +80,16 @@ public class CancelOrderFragment extends Fragment
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("seller_id",user_id)
-                .setBodyParameter("type", AndroidUtils.getUserType(user_type))
+                .setBodyParameter("type", "1")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>()
                 {
                     @Override
                     public void onCompleted(Exception e, JsonObject result)
                     {
+
+                        System.out.println("result----------------"+result);
+
                         if(result == null)
                         {
                             progress_handler.hide();
@@ -140,7 +144,9 @@ public class CancelOrderFragment extends Fragment
 
                                     String created_at = jsonObject2.get("created_at").getAsString();
 
-                                    orderListDatas.add(new OrderListData(order_id, product_name, product_price,product_qty,address,email,buyersmobile,buyersname,company_name,status,created_at));
+                                    String product_image= jsonObject2.get("image_url").getAsString();
+
+                                    orderListDatas.add(new OrderListData(order_id, product_name, product_price,product_qty,address,email,buyersmobile,buyersname,company_name,status,created_at,product_image));
 
                                 }
 
@@ -148,6 +154,10 @@ public class CancelOrderFragment extends Fragment
                                 order_list.setAdapter(orderListAdapter);
                                 orderListAdapter.notifyDataSetChanged();
                                 progress_handler.hide();
+
+
+
+
                             }
 
                             //   layout_container.setVisibility(View.VISIBLE);
