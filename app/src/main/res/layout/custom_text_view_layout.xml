@@ -1,5 +1,5 @@
-<EditText xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/customEditText"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/customTextView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
@@ -10,6 +10,6 @@
     android:paddingRight="@dimen/ten_dip"
     android:paddingTop="@dimen/five_dip"
     android:paddingBottom="@dimen/five_dip"
-    android:text="@string/custom_edit_text_content"
+    android:text="@string/custom_text_view_content"
     android:textColor="@color/black"
     android:textSize="@dimen/textsize_medium" />

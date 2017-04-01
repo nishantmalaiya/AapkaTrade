@@ -1,16 +1,22 @@
 package com.example.pat.aapkatrade.productdetail;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.example.pat.aapkatrade.R;
+import com.example.pat.aapkatrade.ZoomImage.ZoomImageDialog;
 import com.example.pat.aapkatrade.general.Tabletsize;
 import com.koushikdutta.ion.Ion;
 import java.util.ArrayList;
@@ -54,7 +60,7 @@ public class ProductViewPagerAdapter extends PagerAdapter
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView = LayoutInflater.from(mContext).inflate(R.layout.viewpager_product_detail, container, false);
 
-        ImageView imageView = (ImageView) itemView.findViewById(R.id.img_viewpager_detail);
+        final ImageView imageView = (ImageView) itemView.findViewById(R.id.img_viewpager_detail);
 
         System.out.println("position============" + position);
         if(Tabletsize.isTablet(mContext))
@@ -91,6 +97,7 @@ public class ProductViewPagerAdapter extends PagerAdapter
             Log.e("image_small","image_small");
         }
 
+
 //        Ion.with(imageView)
 //                .error(ContextCompat.getDrawable(mContext, R.drawable.ic_applogo1))
 //                .placeholder(ContextCompat.getDrawable(mContext, R.drawable.ic_applogo1))
@@ -99,6 +106,17 @@ public class ProductViewPagerAdapter extends PagerAdapter
 
         container.addView(itemView);
 
+        imageView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                imageView.setDrawingCacheEnabled(true);
+                imageView.buildDrawingCache();
+                final Bitmap bitmap = Bitmap.createBitmap(imageView.getDrawingCache());
+                ZoomImageDialog zoomImageDialog = new ZoomImageDialog(mContext, bitmap);
+                zoomImageDialog.show();
+            }
+        });
         return itemView;
 
     }
