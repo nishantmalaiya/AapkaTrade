@@ -3,19 +3,22 @@ package com.example.pat.aapkatrade.productdetail;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import com.example.pat.aapkatrade.R;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import com.davemorrissey.labs.subscaleview.ImageSource;
-import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.ZoomImage.ZoomImageDialog;
 import com.example.pat.aapkatrade.general.Tabletsize;
 import com.koushikdutta.ion.Ion;
@@ -107,19 +110,43 @@ public class ProductViewPagerAdapter extends PagerAdapter
         container.addView(itemView);
 
         imageView.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 imageView.setDrawingCacheEnabled(true);
                 imageView.buildDrawingCache();
                 final Bitmap bitmap = Bitmap.createBitmap(imageView.getDrawingCache());
-                ZoomImageDialog zoomImageDialog = new ZoomImageDialog(mContext, bitmap);
-                zoomImageDialog.show();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("image", bitmap);
+
+
+//                showEditDialog(bitmap);
+
+
+                ZoomImageDialog newFragment = new ZoomImageDialog();
+                newFragment.setArguments(bundle);
+                FragmentManager fragmentManager = ((AppCompatActivity)mContext).getSupportFragmentManager();
+                fragmentManager.beginTransaction().add(R.id.productDetailContainer, newFragment).commit();
+//                ZoomImageDialog zoomImageDialog = new ZoomImageDialog(mContext, bitmap);
+//                zoomImageDialog.show();
+
             }
         });
         return itemView;
 
     }
+
+
+
+//    private void showEditDialog(Bitmap bitmap) {
+//        FragmentManager fm = ((FragmentActivity)mContext).getSupportFragmentManager();
+//
+//        ZoomImageDialog editNameDialogFragment = ZoomImageDialog.newInstance(bitmap);
+//
+//
+//
+//        editNameDialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Dialog_FullScreen);
+//        editNameDialogFragment.show(fm, "fragment_edit_name");
+//    }
 
 
     public void destroyItem(ViewGroup container, int position, Object object) {

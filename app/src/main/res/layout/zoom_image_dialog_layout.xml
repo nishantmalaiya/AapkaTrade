@@ -3,10 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
-        android:id="@+id/imageView"
+    <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:minHeight="500dp"/>
+        android:maxHeight="1500dp"
+        android:maxWidth="500dp"
+        android:scaleType="matrix" />
 
 </LinearLayout>

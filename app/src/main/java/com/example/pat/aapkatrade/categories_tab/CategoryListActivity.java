@@ -38,6 +38,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import it.carlom.stikkyheader.core.StikkyHeaderBuilder;
@@ -164,11 +165,13 @@ public class CategoryListActivity extends AppCompatActivity
                             if(Validation.isNumber(result.get("total_result").getAsString()) && Integer.parseInt(result.get("total_result").getAsString())>1){
                                 toolbarRightText.setVisibility(View.VISIBLE);
                             }
-                            JsonArray statesArray = result.get("states").getAsJsonArray();
-                            for(int i = 0; i < statesArray.size(); i++){
-                                JsonObject stateObject = (JsonObject) statesArray.get(i);
-                                State state = new State(stateObject.get("state_id").getAsString(), stateObject.get("statename").getAsString(), stateObject.get("countprod").getAsString());
-                                productAvailableStateList.add(state);
+                            if(result.get("states")!=null) {
+                                JsonArray statesArray = result.get("states").getAsJsonArray();
+                                for (int i = 0; i < statesArray.size(); i++) {
+                                    JsonObject stateObject = (JsonObject) statesArray.get(i);
+                                    State state = new State(stateObject.get("state_id").getAsString(), stateObject.get("statename").getAsString(), stateObject.get("countprod").getAsString());
+                                    productAvailableStateList.add(state);
+                                }
                             }
 
                             String message = result.get("message").toString().substring(0, result.get("message").toString().length());
@@ -183,6 +186,10 @@ public class CategoryListActivity extends AppCompatActivity
 
                             } else {
                                 JsonArray jsonArray = result.getAsJsonArray("result");
+                                JsonArray filterArray = result.getAsJsonArray("filter");
+                                if(filterArray!=null){
+                                    getDynamicFilterData(filterArray);
+                                }
 
                                 for (int i = 0; i < jsonArray.size(); i++) {
                                     JsonObject jsonObject2 = (JsonObject) jsonArray.get(i);
@@ -263,6 +270,33 @@ public class CategoryListActivity extends AppCompatActivity
                 return super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void getDynamicFilterData(JsonArray filterArray){
+        HashMap<String, ArrayList<HashMap<String, String>>> filterHashMap = new HashMap<>();
+        if(filterArray.size() > 0){
+            Log.e(AndroidUtils.getTag(context), "size of filter Array is  :  "+ filterArray.size());
+            for (int i = 0; i < filterArray.size(); i++){
+                JsonObject filterObject = (JsonObject) filterArray.get(i);
+                String filterName = filterObject.get("name").getAsString();
+                JsonArray filterValueJsonArray = filterObject.get("values").getAsJsonArray();
+                ArrayList<HashMap<String, String>> valueFilterArrayList = new ArrayList<>();
+                if(filterValueJsonArray!=null){
+                    HashMap<String, String> filterValueKVPair = new HashMap<>();
+                    for (int j = 0; j < filterValueJsonArray.size(); j++){
+                        JsonObject filterValueObject = (JsonObject) filterValueJsonArray.get(j);
+//                        String[] filterValueObjectArray = filterValueObject.toString();
+                        String key = filterValueObject.toString().split(":")[0].replaceAll("\"", "");
+                        String value = filterValueObject.toString().split(":")[1].replaceAll("\"", "");
+                        filterValueKVPair.put(key, value);
+                        Log.e("hi KV", "Key : "+/*key+"    Value : "+value+"\n"+*/filterValueObject.toString());
+                    }
+                    valueFilterArrayList.add(filterValueKVPair);
+                }
+                    filterHashMap.put(filterName, valueFilterArrayList);
+            }
+        }
     }
 
 

@@ -79,8 +79,7 @@ import java.util.regex.Pattern;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class RegistrationActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener
-{
+public class RegistrationActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     private static SellerRegistration formSellerData = new SellerRegistration();
     private static BuyerRegistration formBuyerData = new BuyerRegistration();
@@ -88,7 +87,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
     private LinearLayout uploadCard;
     private Spinner spBussinessCategory, spCountry, spState, spCity;
     private String[] spBussinessName = {"Please Select Business Type", "Licence", "Personal"};
-    private EditText etProductName, etFirstName, etLastName, etDOB, etEmail, etMobileNo, etAddress, etPassword, etReenterPassword, et_tin_number, et_tan_number;
+    private EditText etProductName, etFirstName, etLastName, etDOB, etEmail, etMobileNo, etAddress, etPassword, etReenterPassword, et_tin_number, et_tan_number, etReferenceNo;
     private TextView tvSave, uploadMsg;
     private LinearLayout registrationLayout;
     private ArrayList<Country> countryList = new ArrayList<>();
@@ -208,8 +207,6 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
         });
 
 
-
-
     }
 
     private void showDate(int year, int month, int day) {
@@ -242,7 +239,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
 
 
     private void callWebServiceForSellerRegistration() {
-        String URL = isAddVendorCall.equals("true")?getResources().getString(R.string.webservice_base_url)+"/vendorregister":getResources().getString(R.string.webservice_base_url)+"/sellerregister";
+        String URL = isAddVendorCall.equals("true") ? getResources().getString(R.string.webservice_base_url) + "/vendorregister" : getResources().getString(R.string.webservice_base_url) + "/sellerregister";
 
         if (docFile.getAbsolutePath().equals("/")) {
             Log.e("reach", "NUL_______DOCCCCCCCLICENCE");
@@ -304,9 +301,8 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                                             Log.e("registration_seller", "done");
                                             AndroidUtils.showSnackBar(registrationLayout, result.get("message").getAsString());
 
-                                            Intent call_to_startactivity=new Intent(RegistrationActivity.this, ActivityOTPVerify.class);
-                                            call_to_startactivity.putExtra("class_name",context.getClass().getName());
-
+                                            Intent call_to_startactivity = new Intent(RegistrationActivity.this, ActivityOTPVerify.class);
+                                            call_to_startactivity.putExtra("class_name", context.getClass().getName());
 
 
                                         } else {
@@ -426,7 +422,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
         Log.e("reach", " Buyer Data--------->\n" + formBuyerData.toString());
         progressBarHandler.show();
         Ion.with(RegistrationActivity.this)
-                .load(getResources().getString(R.string.webservice_base_url)+"/buyerregister")
+                .load(getResources().getString(R.string.webservice_base_url) + "/buyerregister")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "1")
@@ -451,8 +447,8 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                                 AndroidUtils.showSnackBar(registrationLayout, result.get("message").getAsString());
 
                                 progressBarHandler.hide();
-                                Intent call_to_startactivity=new Intent(RegistrationActivity.this, ActivityOTPVerify.class);
-                                call_to_startactivity.putExtra("class_name",context.getClass().getName());
+                                Intent call_to_startactivity = new Intent(RegistrationActivity.this, ActivityOTPVerify.class);
+                                call_to_startactivity.putExtra("class_name", context.getClass().getName());
                                 startActivity(new Intent(RegistrationActivity.this, ActivityOTPVerify.class));
                             } else {
 
@@ -686,13 +682,13 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
 
 
     private void setUpToolBar() {
-        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome) ;
+        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
         AppCompatImageView back_imagview = (AppCompatImageView) findViewById(R.id.back_imagview);
         back_imagview.setVisibility(View.VISIBLE);
         back_imagview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               finish();
+                finish();
             }
         });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -759,6 +755,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
         businessDetails = (LinearLayout) findViewById(R.id.businessDetails);
         spBussinessCategoryLayout = (RelativeLayout) findViewById(R.id.spBussinessCategoryLayout);
         etReenterPassword = (EditText) findViewById(R.id.etReenterPassword);
+        etReferenceNo = (EditText) findViewById(R.id.etReferenceNo);
         uploadView = (LinearLayout) findViewById(R.id.uploadView);
         uploadPDFView = (LinearLayout) findViewById(R.id.uploadPDFView);
         circleImageView = (CircleImageView) findViewById(R.id.previewImage);
@@ -772,7 +769,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
         cancelFile = (ImageView) findViewById(R.id.cancelFile);
         dobLayout = (RelativeLayout) findViewById(R.id.dobLayout);
         webservice_header_type.put("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3");
-        business_id = app_sharedpreference.getsharedpref("business_id")== null? "": app_sharedpreference.getsharedpref("business_id");
+        business_id = app_sharedpreference.getsharedpref("business_id") == null ? "" : app_sharedpreference.getsharedpref("business_id");
 
 
 //        Country countryEntity_init = new Country("-1", "Please Select Country");
@@ -888,7 +885,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                     putError(4);
                     isAllFieldSet++;
                 } else if (!Validation.isValidPassword(formBuyerData.getConfirmPassword())) {
-                    putError(4);
+                    putError(15);
                     isAllFieldSet++;
                 } else if (!Validation.isPasswordMatching(formBuyerData.getPassword(), formBuyerData.getConfirmPassword())) {
                     putError(5);
@@ -921,16 +918,12 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                 showmessage("Please Enter Valid Mobile Number");
                 break;
             case 4:
-                if (etPassword.getText().toString().length() < 6) {
-                    etPassword.setError("Password must be greater than 6 digits");
-                } else if (etReenterPassword.getText().toString().length() < 6) {
-                    etReenterPassword.setError("Password must be greater than 6 digits");
-                }
-                showmessage("Password must be greater than 6 digits");
+                etPassword.setError(getResources().getString(R.string.password_validing_text));
+                showmessage(getResources().getString(R.string.password_validing_text));
                 break;
             case 5:
-                etReenterPassword.setError("Password did not matched");
-                showmessage("Password did not matched");
+                etReenterPassword.setError("Password did not match");
+                showmessage("Password did not match");
                 break;
             case 6:
 //                etDOB.setError("Please Select Date");
@@ -959,6 +952,10 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
             case 14:
                 et_tan_number.setError("Tan Number Can't be empty");
                 showmessage("Tan Number Can't be empty");
+                break;
+            case 15:
+                etReenterPassword.setError(getResources().getString(R.string.password_validing_text));
+                showmessage(getResources().getString(R.string.password_validing_text));
                 break;
 
             default:
@@ -989,7 +986,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
         } else if (which == 2) {
 
 
-            MaterialFilePicker filePicker=        new MaterialFilePicker();
+            MaterialFilePicker filePicker = new MaterialFilePicker();
 
 
             filePicker.withActivity(this)
@@ -1004,10 +1001,6 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
             startActivityForResult(Intent.createChooser(in, "Select profile picture"), 11);
         }
     }
-
-
-
-
 
 
     @Override

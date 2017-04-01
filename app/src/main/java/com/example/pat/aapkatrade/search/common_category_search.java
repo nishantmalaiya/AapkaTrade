@@ -10,13 +10,6 @@ public class common_category_search {
     public common_category_search(String cat_id, String catname,String catcount){
         this.cat_id=cat_id;
         this.catcount=catcount;
-
         this.catname=catname;
-
     }
-
-
-
-
-
 }
