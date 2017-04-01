@@ -266,8 +266,8 @@
     <string name="password_change_text">Enter your new password</string>
     <string name="newpassword">New Password</string>
     <string name="password_validing_text">Oops! Password must have length >=6 , a-z, A-Z, 0-9 and Special character</string>
+    <string name="passwordnotmathed">both password not matched</string>
     <string name="custom_edit_text_content">My EditText</string>
     <string name="custom_text_view_content">My Text View</string>
-
 
 </resources>

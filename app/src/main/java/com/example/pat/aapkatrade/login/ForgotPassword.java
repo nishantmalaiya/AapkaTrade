@@ -50,12 +50,14 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     public ForgotPassword(Context context, int class_index) {
         this.context = context;
 
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot__password);
+        app_sharedpreference=new AppSharedPreference(context);
         class_index=  getIntent().getStringExtra("forgot_index");
         Log.e("class_index",""+class_index);
         forgot_password_fragment = new Forgot_password_fragment();
@@ -199,6 +201,10 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                 if (data != null) {
                     String error = data.get("error").getAsString();
                     if (error.contains("false")) {
+                        Log.e("userid_forgot_password",data.get("user_id").getAsString());
+
+                        app_sharedpreference.setsharedpref("userid", data.get("user_id").getAsString());
+
                         Intent go_to_activity_otp_verify = new Intent(context, ActivityOTPVerify.class);
                         go_to_activity_otp_verify.putExtra("class_name",context.getClass().getName());
                         startActivity(go_to_activity_otp_verify);
