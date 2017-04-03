@@ -47,17 +47,13 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
 
     String class_index;
 
-    public ForgotPassword(Context context, int class_index) {
-        this.context = context;
 
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot__password);
-        app_sharedpreference=new AppSharedPreference(context);
+        app_sharedpreference=new AppSharedPreference(this);
         class_index=  getIntent().getStringExtra("forgot_index");
         Log.e("class_index",""+class_index);
         forgot_password_fragment = new Forgot_password_fragment();

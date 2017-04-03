@@ -137,7 +137,7 @@ String AddressAsync;
                     latitude = location.getLatitude();
                     longitude = location.getLongitude();
 
-                    Log.e("latlng_asynctask",latitude+"**"+longitude+"");
+                    Log.e("latlng_asynctask", latitude + "**" + longitude + "");
                 }
             }
             // if GPS Enabled get lat/long using GPS Services
@@ -154,28 +154,36 @@ String AddressAsync;
                         if (location != null) {
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
-                            Log.e("latlng_asynctask",latitude+"**"+longitude+"");
+                            Log.e("latlng_asynctask", latitude + "**" + longitude + "");
                         }
                     }
                 }
             }
 
-            Log.e("latlng_asynctask",latitude+"**"+longitude+"");
-        List<Address> addresses = null;
-        GeocoderAsync = new Geocoder(ContextAsync, latitude,longitude);
 
-        try {
-           AddressAsync=GeocoderAsync.get_state_name();
-            Log.e("AddressAsync",AddressAsync);
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (latitude != 0.0 && longitude != 0.0) {
+
+
+                Log.e("latlng_asynctask", latitude + "**" + longitude + "");
+                List<Address> addresses = null;
+                GeocoderAsync = new Geocoder(ContextAsync, latitude, longitude);
+
+                try {
+
+
+                    AddressAsync = GeocoderAsync.get_state_name();
+                    Log.e("AddressAsync", AddressAsync);
+                } catch (Exception e) {
+                    Log.e("Exception_geocoder", e.toString());
+
+                }
+            }
+            else{
+                AddressAsync = "Haryana";
+            }
+
 
         }
-        }
-
-
-
-
 
 
 
