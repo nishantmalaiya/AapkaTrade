@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.user_dashboard.order_list.order_details.OrderDetailsActivity;
+import com.koushikdutta.ion.Ion;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +43,6 @@ public class OrderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         View view = inflater.inflate(R.layout.row_order_list, parent, false);
         viewHolder = new OrderListHolder(view);
 
-
         return viewHolder;
     }
 
@@ -51,11 +52,31 @@ public class OrderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         OrderListHolder homeHolder = (OrderListHolder) holder;
 
-        homeHolder.tvOrderId.setText(itemList.get(position).order_id);
-
         homeHolder.tvProductName.setText(itemList.get(position).product_name);
 
-        homeHolder.relativeOrderlist.setOnClickListener(new View.OnClickListener()
+        homeHolder.tvCompanyName.setText(itemList.get(position).company_name);
+
+        homeHolder.tvProductPrice.setText("Rs. "+itemList.get(position).product_price);
+
+        homeHolder.tvMobileNo.setText(itemList.get(position).buyersmobile);
+
+        homeHolder.tvUserName.setText(itemList.get(position).buyersname);
+
+        homeHolder.tvCreatedDate.setText(itemList.get(position).created_at);
+
+        homeHolder.tvUserEmail.setText(itemList.get(position).email);
+
+        homeHolder.tvAddress.setText(itemList.get(position).address);
+
+        Ion.with(homeHolder.circleImage).load(itemList.get(position).product_image);
+
+
+
+        // homeHolder.circleImage.
+
+
+
+       /* homeHolder.relativeOrderlist.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -73,11 +94,10 @@ public class OrderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 i.putExtra("company_name",itemList.get(position).company_name);
                 i.putExtra("created_at",itemList.get(position).created_at);
                 context.startActivity(i);
-
-
-
             }
-        });
+        });*/
+
+
 
     }
 
@@ -91,8 +111,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public int getItemCount()
     {
-        return itemList.size();
-        // return itemList.size();
+         return itemList.size();
     }
 
     public String getCurrentTimeStamp()

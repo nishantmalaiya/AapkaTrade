@@ -2,6 +2,9 @@ package com.example.pat.aapkatrade.general.Utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -94,7 +97,6 @@ public class AndroidUtils {
         imageView.setColorFilter(ContextCompat.getColor(context, color));
     }
 
-
     public static int screenHeight(Context ctx) {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         ((Activity) ctx).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
@@ -104,6 +106,14 @@ public class AndroidUtils {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         ((Activity) ctx).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         return displaymetrics.widthPixels;
+    }
+
+    public static Drawable setImageColor(Context context,int imageDrawable, int color){
+        Drawable mDrawable = ContextCompat.getDrawable(context, imageDrawable);
+        mDrawable.setColorFilter(ContextCompat.getColor(context, color), PorterDuff.Mode.MULTIPLY);
+
+        return mDrawable;
+
     }
 
 
