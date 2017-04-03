@@ -172,7 +172,27 @@ public class CategoryListActivity extends AppCompatActivity
                                     State state = new State(stateObject.get("state_id").getAsString(), stateObject.get("statename").getAsString(), stateObject.get("countprod").getAsString());
                                     productAvailableStateList.add(state);
                                 }
+
+                            JsonArray statesArray = result.get("filter").getAsJsonArray();
+                            for(int i = 0; i < statesArray.size(); i++){
+                                JsonObject stateObject = (JsonObject) statesArray.get(i);
+                                Log.e("stateobject",stateObject.toString());
+
+
+//                                State state = new State(stateObject.get("state_id").getAsString(), stateObject.get("statename").getAsString(), stateObject.get("countprod").getAsString());
+//                                productAvailableStateList.add(state);
+
                             }
+
+                            //JsonArray statesArray = result.get("states").getAsJsonArray();
+//                            for(int i = 0; i < statesArray.size(); i++){
+//                                JsonObject stateObject = (JsonObject) statesArray.get(i);
+//                                State state = new State(stateObject.get("state_id").getAsString(), stateObject.get("statename").getAsString(), stateObject.get("countprod").getAsString());
+//                                productAvailableStateList.add(state);
+//                            }
+
+
+
 
                             String message = result.get("message").toString().substring(0, result.get("message").toString().length());
 

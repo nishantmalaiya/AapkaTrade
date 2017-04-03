@@ -5,19 +5,17 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Matrix;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
@@ -29,67 +27,64 @@ import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
  * Created by PPC15 on 31-03-2017.
  */
 
-public class ZoomImageDialog extends Fragment {
+public class ZoomImageDialog extends Dialog {
     private Bitmap bitmap;
-    private ImageView imageView;
-    private ScaleGestureDetector scaleGestureDetector;
-    private Matrix matrix = new Matrix();
+    private SubsamplingScaleImageView imageView;
 
-    public ZoomImageDialog() {
-
+    public ZoomImageDialog(Context context, Bitmap bitmap) {
+        super(context);
+        this.bitmap=bitmap;
     }
 
 
-    public static ZoomImageDialog newInstance(Bitmap bitmap) {
-        ZoomImageDialog frag = new ZoomImageDialog();
-        Bundle args = new Bundle();
-        args.putParcelable("image", bitmap);
-        frag.setArguments(args);
-        return frag;
-    }
+//    public static ZoomImageDialog newInstance(Bitmap bitmap) {
+//        ZoomImageDialog frag = new ZoomImageDialog();
+//        Bundle args = new Bundle();
+//        args.putParcelable("image", bitmap);
+//        //this.bitmap=bitmap;
+//        frag.setArguments(args);
+//
+//        return frag;
+//    }
+
+
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.zoom_image_dialog_layout, container, false);
-        initView(view);
-        imageView = (ImageView) view.findViewById(R.id.imageView1);
-        if (bitmap != null)
-            imageView.setImageBitmap(bitmap);
-        imageView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                scaleGestureDetector.onTouchEvent(event);
-                return true;
-            }
-        });
-        return view;
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.zoom_image_dialog_layout);
+        initView();
+        //setStyle(DialogFragment.STYLE_NORMAL, R.style.dialog_theme);
     }
 
 
-    private void initView(View view) {
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(AndroidUtils.screenWidth(getActivity()), AndroidUtils.screenHeight(getActivity()));
-        view.setLayoutParams(params);
-        Bundle bundle = getArguments();
-        if(bundle!=null){
-            if(bundle.get("image")!=null){
-                bitmap = (Bitmap) bundle.get("image");
-            }
-        }
-        scaleGestureDetector = new ScaleGestureDetector(getContext(),new ScaleListener());
 
-    }
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//
+//
+//
+//
+//        View view = inflater.inflate(R.layout.zoom_image_dialog_layout, container, false);
+//
+//
+//        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) new RelativeLayout.LayoutParams(
+//                AndroidUtils.screenWidth(getActivity()), AndroidUtils.screenHeight(getActivity()));
+//
+//        view.setLayoutParams(params);
+//        initView(view);
+//       // imageView.setImage(ImageSource.bitmap(bitmap));
+//        return view;
+//    }
 
 
-    private class ScaleListener extends ScaleGestureDetector.
-            SimpleOnScaleGestureListener {
-        @Override
-        public boolean onScale(ScaleGestureDetector detector) {
-            float scaleFactor = detector.getScaleFactor();
-            scaleFactor = Math.max(0.1f, Math.min(scaleFactor, 5.0f));
-            matrix.setScale(scaleFactor, scaleFactor);
-            imageView.setImageMatrix(matrix);
-            return true;
-        }
+
+
+
+
+    private void initView() {
+        imageView = (SubsamplingScaleImageView)findViewById(R.id.imageView);
     }
 }

@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.Home.registration.RegistrationActivity;
 import com.example.pat.aapkatrade.R;
+import com.example.pat.aapkatrade.filter.FilterScreenActivity;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.login.LoginDashboard;
 import com.example.pat.aapkatrade.user_dashboard.add_product.AddProductActivity;
@@ -120,7 +121,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
                     } else {
-                        Intent my_profile = new Intent(context, MyProfileActivity.class);
+                        Intent my_profile = new Intent(context, FilterScreenActivity.class);
                         context.startActivity(my_profile);
 
                     }
