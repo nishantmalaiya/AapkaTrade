@@ -162,10 +162,10 @@ public class CategoryListActivity extends AppCompatActivity
                             progress_handler.hide();
                             layout_container.setVisibility(View.INVISIBLE);
                         } else {
-                            if(Validation.isNumber(result.get("total_result").getAsString()) && Integer.parseInt(result.get("total_result").getAsString())>1){
+                            if (Validation.isNumber(result.get("total_result").getAsString()) && Integer.parseInt(result.get("total_result").getAsString()) > 1) {
                                 toolbarRightText.setVisibility(View.VISIBLE);
                             }
-                            if(result.get("states")!=null) {
+                            if (result.get("states") != null) {
                                 JsonArray statesArray = result.get("states").getAsJsonArray();
                                 for (int i = 0; i < statesArray.size(); i++) {
                                     JsonObject stateObject = (JsonObject) statesArray.get(i);
@@ -173,18 +173,18 @@ public class CategoryListActivity extends AppCompatActivity
                                     productAvailableStateList.add(state);
                                 }
 
-                            JsonArray statesArray = result.get("filter").getAsJsonArray();
-                            for(int i = 0; i < statesArray.size(); i++){
-                                JsonObject stateObject = (JsonObject) statesArray.get(i);
-                                Log.e("stateobject",stateObject.toString());
+                                JsonArray statesArray1 = result.get("filter").getAsJsonArray();
+                                for (int i = 0; i < statesArray1.size(); i++) {
+                                    JsonObject stateObject = (JsonObject) statesArray1.get(i);
+                                    Log.e("stateobject", stateObject.toString());
 
 
 //                                State state = new State(stateObject.get("state_id").getAsString(), stateObject.get("statename").getAsString(), stateObject.get("countprod").getAsString());
 //                                productAvailableStateList.add(state);
 
-                            }
+                                }
 
-                            //JsonArray statesArray = result.get("states").getAsJsonArray();
+                                //JsonArray statesArray = result.get("states").getAsJsonArray();
 //                            for(int i = 0; i < statesArray.size(); i++){
 //                                JsonObject stateObject = (JsonObject) statesArray.get(i);
 //                                State state = new State(stateObject.get("state_id").getAsString(), stateObject.get("statename").getAsString(), stateObject.get("countprod").getAsString());
@@ -192,53 +192,51 @@ public class CategoryListActivity extends AppCompatActivity
 //                            }
 
 
+                                String message = result.get("message").toString().substring(0, result.get("message").toString().length());
 
+                                String message_data = message.replace("\"", "");
 
-                            String message = result.get("message").toString().substring(0, result.get("message").toString().length());
+                                Log.e("message_product_list", result.toString());
 
-                            String message_data = message.replace("\"", "");
+                                if (message_data.equals("No record found")) {
+                                    progress_handler.hide();
+                                    layout_container.setVisibility(View.INVISIBLE);
 
-                            Log.e("message_product_list", result.toString());
+                                } else {
+                                    JsonArray jsonArray = result.getAsJsonArray("result");
+                                    JsonArray filterArray = result.getAsJsonArray("filter");
+                                    if (filterArray != null) {
+                                        getDynamicFilterData(filterArray);
+                                    }
 
-                            if (message_data.equals("No record found")) {
-                                progress_handler.hide();
-                                layout_container.setVisibility(View.INVISIBLE);
+                                    for (int i = 0; i < jsonArray.size(); i++) {
+                                        JsonObject jsonObject2 = (JsonObject) jsonArray.get(i);
 
-                            } else {
-                                JsonArray jsonArray = result.getAsJsonArray("result");
-                                JsonArray filterArray = result.getAsJsonArray("filter");
-                                if(filterArray!=null){
-                                    getDynamicFilterData(filterArray);
+                                        String product_id = jsonObject2.get("id").getAsString();
+
+                                        String product_name = jsonObject2.get("name").getAsString();
+
+                                        String product_price = jsonObject2.get("price").getAsString();
+
+                                        String product_cross_price = jsonObject2.get("cross_price").getAsString();
+
+                                        String product_image = jsonObject2.get("image_url").getAsString();
+                                        String productlocation = jsonObject2.get("city_name").getAsString() + "," + jsonObject2.get("state_name").getAsString() + "," +
+                                                jsonObject2.get("country_name").getAsString();
+
+                                        productListDatas.add(new CategoriesListData(product_id, product_name, product_price, product_cross_price, product_image, productlocation));
+
+                                    }
+
+                                    categoriesListAdapter = new CategoriesListAdapter(CategoryListActivity.this, productListDatas);
+                                    myRecyclerViewEffect = new MyRecyclerViewEffect(CategoryListActivity.this);
+                                    mRecyclerView.setAdapter(categoriesListAdapter);
+                                    categoriesListAdapter.notifyDataSetChanged();
+                                    progress_handler.hide();
                                 }
-
-                                for (int i = 0; i < jsonArray.size(); i++) {
-                                    JsonObject jsonObject2 = (JsonObject) jsonArray.get(i);
-
-                                    String product_id = jsonObject2.get("id").getAsString();
-
-                                    String product_name = jsonObject2.get("name").getAsString();
-
-                                    String product_price = jsonObject2.get("price").getAsString();
-
-                                    String product_cross_price = jsonObject2.get("cross_price").getAsString();
-
-                                    String product_image = jsonObject2.get("image_url").getAsString();
-                                    String productlocation = jsonObject2.get("city_name").getAsString() + "," + jsonObject2.get("state_name").getAsString() + "," +
-                                            jsonObject2.get("country_name").getAsString();
-
-                                    productListDatas.add(new CategoriesListData(product_id, product_name, product_price, product_cross_price, product_image, productlocation));
-
-                                }
-
-                                categoriesListAdapter = new CategoriesListAdapter(CategoryListActivity.this, productListDatas);
-                                myRecyclerViewEffect = new MyRecyclerViewEffect(CategoryListActivity.this);
-                                mRecyclerView.setAdapter(categoriesListAdapter);
-                                categoriesListAdapter.notifyDataSetChanged();
-                                progress_handler.hide();
                             }
-                        }
 
-                    }
+                        }}
 
                 });
 

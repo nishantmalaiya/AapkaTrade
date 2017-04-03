@@ -113,18 +113,7 @@ public class AndroidUtils {
         return context.getClass().getSimpleName();
     }
 
-    public static int screenHeight(Context ctx) {
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        ((Activity) ctx).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        return displaymetrics.heightPixels;
-    }
-    public static int screenWidth(Context ctx) {
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        ((Activity) ctx).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        return displaymetrics.widthPixels;
-    }
-
-    public static Drawable setImageColor(Context context,int imageDrawable, int color){
+    public static Drawable setImageColor(Context context, int imageDrawable, int color) {
         Drawable mDrawable = ContextCompat.getDrawable(context, imageDrawable);
         mDrawable.setColorFilter(ContextCompat.getColor(context, color), PorterDuff.Mode.MULTIPLY);
 
