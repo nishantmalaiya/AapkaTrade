@@ -118,7 +118,8 @@
             android:name=".user_dashboard.add_vendor.AddVendorActivity"
             android:label="@string/title_activity_add_vendor"
             android:theme="@style/AppTheme" />
-        <activity android:name=".filter.FilterScreenActivity"></activity>
+        <activity android:name=".filter.FilterScreenActivity" />
+        <activity android:name=".payment.PaymentActivity"></activity>
     </application>
 
 </manifest>
