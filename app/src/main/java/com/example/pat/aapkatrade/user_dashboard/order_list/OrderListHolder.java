@@ -46,6 +46,8 @@ public class OrderListHolder extends RecyclerView.ViewHolder
         buttonDespatched = (Button) itemView.findViewById(R.id.buttonDespatched);
 
         circleImage = (CircleImageView) itemView.findViewById(R.id.circleImage);
+
+
         view = itemView;
     }
 }
