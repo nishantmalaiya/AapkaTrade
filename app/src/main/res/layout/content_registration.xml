@@ -568,7 +568,32 @@
 
                     </android.support.design.widget.TextInputLayout>
 
+                    <View
+                        android:id="@+id/height2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/ten_dip"/>
 
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_ref_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/twenty_dip"
+                        android:layout_marginRight="@dimen/twenty_dip"
+                        android:textColorHint="@color/hint_color">
+
+                        <EditText
+                            android:id="@+id/etReferenceNo"
+                            style="@style/myedittext"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/ref_number"
+                            android:inputType="text"
+                            android:paddingLeft="@dimen/ten_dip"
+                            android:textColorHint="@color/green"
+                            android:theme="@style/myedittext" />
+
+
+                    </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>

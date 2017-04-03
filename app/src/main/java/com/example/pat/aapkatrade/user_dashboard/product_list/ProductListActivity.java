@@ -240,8 +240,6 @@ public class ProductListActivity extends AppCompatActivity implements SwipeRefre
 
     public void get_web_data2(int page_number)
     {
-        // layout_container.setVisibility(View.INVISIBLE);
-        // progress_handler.show();
         Ion.with(ProductListActivity.this)
                 .load(getResources().getString(R.string.webservice_base_url)+"/productlist")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")

@@ -162,4 +162,3 @@ public class ProductViewPagerAdapter extends PagerAdapter
 
 
 }
-
