@@ -1,9 +1,11 @@
 package com.example.pat.aapkatrade.general.Utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,5 +93,18 @@ public class AndroidUtils {
         if(imageView!=null)
         imageView.setColorFilter(ContextCompat.getColor(context, color));
     }
+
+
+    public static int screenHeight(Context ctx) {
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        ((Activity) ctx).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        return displaymetrics.heightPixels;
+    }
+    public static int screenWidth(Context ctx) {
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        ((Activity) ctx).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        return displaymetrics.widthPixels;
+    }
+
 
 }
