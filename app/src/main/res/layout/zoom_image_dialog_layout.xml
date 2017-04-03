@@ -1,10 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
     android:gravity="center_horizontal|center_vertical"
     android:layout_height="match_parent">
+
+
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+         >
+
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager_zoom"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+
+                    />
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/indicator_custom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+
+                    android:layout_marginBottom="100dp"
+                    android:layout_marginLeft="16dp"
+                    app:ci_animator="@anim/indicator_animator"
+                    app:ci_drawable="@drawable/selecteditem_dot"
+                    app:ci_drawable_unselected="@drawable/nonselected_item"
+                    app:ci_height="3dp"
+                    app:ci_margin="3dp"
+                    app:ci_width="8dp" />
+
+
+
+                <LinearLayout
+                    android:id="@+id/viewpagerindicator"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+        </RelativeLayout>
+
+
 
 
 
@@ -18,6 +70,7 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
+            android:visibility="gone"
             android:src="@drawable/banner_home"
             android:layout_centerVertical="true"
             android:scaleType="matrix"/>

@@ -1,18 +1,12 @@
-package com.example.pat.aapkatrade.productdetail;
+package com.example.pat.aapkatrade.ZoomImage;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,14 +14,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.example.pat.aapkatrade.R;
-import com.example.pat.aapkatrade.ZoomImage.ZoomImageDialog;
-import com.example.pat.aapkatrade.ZoomImage.ZoomViewPagerAdapter;
-import com.example.pat.aapkatrade.general.CustomImageVIew;
 import com.example.pat.aapkatrade.general.Tabletsize;
+import com.example.pat.aapkatrade.general.customimageview.ZoomableImageView;
 import com.koushikdutta.ion.Ion;
+
 import java.util.ArrayList;
+
+import static com.example.pat.aapkatrade.R.id.imageView;
 
 /**
  * Created by PPC16 on 10-Feb-17.
@@ -36,14 +30,14 @@ import java.util.ArrayList;
 
 
 
-public class ProductViewPagerAdapter extends PagerAdapter
+public class ZoomViewPagerAdapter extends PagerAdapter implements GestureDetector.OnDoubleTapListener
 {
 
-    Context mContext;
+     Context mContext;
     ArrayList<String> imageurl = new ArrayList<>();
 
 
-    public ProductViewPagerAdapter(Context mContext, ArrayList<String>productImage_url)
+    public ZoomViewPagerAdapter(Context mContext, ArrayList<String>productImage_url)
     {
 
         this. imageurl=productImage_url;
@@ -66,9 +60,9 @@ public class ProductViewPagerAdapter extends PagerAdapter
     }
 
     public Object instantiateItem(final ViewGroup container, int position) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.viewpager_product_detail, container, false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.zoom_imageview, container, false);
 
-        final ImageView imageView = (ImageView) itemView.findViewById(R.id.img_viewpager_detail);
+        final ZoomableImageView imageView = (ZoomableImageView) itemView.findViewById(R.id.action_infolinks_splash);
 
         System.out.println("position============" + position);
         if(Tabletsize.isTablet(mContext))
@@ -79,6 +73,7 @@ public class ProductViewPagerAdapter extends PagerAdapter
                     .error(ContextCompat.getDrawable(mContext, R.drawable.ic_applogo1))
                     .placeholder(ContextCompat.getDrawable(mContext, R.drawable.ic_applogo1))
                     .load(product_imageurl);
+            imageView.setMaxZoom(4f);
             Log.e("image_large","image_large");
 
         }
@@ -91,6 +86,7 @@ public class ProductViewPagerAdapter extends PagerAdapter
                     .placeholder(ContextCompat.getDrawable(mContext, R.drawable.ic_applogo1))
                     .load(product_imageurl);
             Log.e("image_medium","image_medium");
+            imageView.setMaxZoom(4f);
 
         }
         else if(Tabletsize.isSmall(mContext))
@@ -101,9 +97,17 @@ public class ProductViewPagerAdapter extends PagerAdapter
                     .error(ContextCompat.getDrawable(mContext, R.drawable.ic_applogo1))
                     .placeholder(ContextCompat.getDrawable(mContext, R.drawable.ic_applogo1))
                     .load(imageurl.get(position));
+            imageView.setMaxZoom(4f);
+
 
             Log.e("image_small","image_small");
         }
+
+
+//        int deviceWidthInPixels = mContext.getResources().getDisplayMetrics().widthPixels;
+//        int deviceHeightInPixels = mContext.getResources().getDisplayMetrics().heightPixels;
+//        imageView.getLayoutParams().width = deviceWidthInPixels;
+//        imageView.getLayoutParams().height = deviceHeightInPixels;
 
 
 //        Ion.with(imageView)
@@ -114,17 +118,15 @@ public class ProductViewPagerAdapter extends PagerAdapter
 
         container.addView(itemView);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                //ZoomImageDialog zoomImageDialog=new ZoomImageDialog();
-                Intent goto_zoomimageview=new Intent(mContext,ZoomImageDialog.class);
-                goto_zoomimageview.putStringArrayListExtra("imageurl",imageurl);
-
-                mContext.startActivity(goto_zoomimageview);
-//                imageView.setDrawingCacheEnabled(true);
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                Intent goto_zoom_imageview=new Intent(mContext,ZoomImageDialog.class);
+//
+//                goto_zoom_imageview.putStringArrayListExtra("imageurl",imageurl);
+//                mContext.startActivity(goto_zoom_imageview);
+//                /*imageView.setDrawingCacheEnabled(true);
 //                imageView.buildDrawingCache();
 //                final Bitmap bitmap = Bitmap.createBitmap(imageView.getDrawingCache());
 //
@@ -136,22 +138,22 @@ public class ProductViewPagerAdapter extends PagerAdapter
 //                img.setImageResource(R.drawable.banner_home);
 //                img.setMaxZoom(4f);
 //
-//                normalDialog.show();
-
-
-
-
-
-
-                // ZoomImageDialog editNameDialogFragment = new ZoomImageDialog(mContext,bitmap);
+//                normalDialog.show();*/
 //
-//                editNameDialogFragment.show();
-
-                //showEditDialog(bitmap);
-
-
-            }
-        });
+//
+//
+//
+//
+//
+//              // ZoomImageDialog editNameDialogFragment = new ZoomImageDialog(mContext,bitmap);
+////
+////                editNameDialogFragment.show();
+//
+//                //showEditDialog(bitmap);
+//
+//
+//            }
+//        });
         return itemView;
 
     }
@@ -159,6 +161,23 @@ public class ProductViewPagerAdapter extends PagerAdapter
 
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((LinearLayout) object);
+    }
+
+    @Override
+    public boolean onSingleTapConfirmed(MotionEvent e) {
+
+        return false;
+    }
+
+    @Override
+    public boolean onDoubleTap(MotionEvent e) {
+
+        return false;
+    }
+
+    @Override
+    public boolean onDoubleTapEvent(MotionEvent e) {
+        return false;
     }
 //    private void showEditDialog(Bitmap bitmap) {
 //        FragmentManager fm = ((FragmentActivity)mContext).getSupportFragmentManager();
