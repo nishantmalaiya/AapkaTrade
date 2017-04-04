@@ -120,7 +120,8 @@
             android:label="@string/title_activity_add_vendor"
             android:theme="@style/AppTheme" />
         <activity android:name=".filter.FilterScreenActivity" />
-        <activity android:name=".payment.PaymentActivity"></activity>
+        <activity android:name=".payment.PaymentActivity" />
+        <activity android:name=".rateus.RateusActivity"></activity>
     </application>
 
 </manifest>

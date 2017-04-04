@@ -34,6 +34,7 @@ import com.example.pat.aapkatrade.general.LocationManager_check;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.map.GoogleMapActivity;
+import com.example.pat.aapkatrade.payment.PaymentActivity;
 import com.example.pat.aapkatrade.service_enquiry.ServiceEnquiry;
 import com.example.pat.aapkatrade.user_dashboard.address.add_address.AddAddressActivity;
 import com.google.gson.JsonArray;
@@ -476,7 +477,7 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
             public void onClick(View v) {
                 if (tvServiceBuy.getText().toString().equals("Buy Now")) {
 
-                    Intent i = new Intent(ProductDetail.this, AddAddressActivity.class);
+                    Intent i = new Intent(ProductDetail.this, PaymentActivity.class);
                     startActivity(i);
 
                 } else {
