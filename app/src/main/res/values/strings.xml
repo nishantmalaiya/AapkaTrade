@@ -269,5 +269,6 @@
     <string name="passwordnotmathed">both password not matched</string>
     <string name="custom_edit_text_content">My EditText</string>
     <string name="custom_text_view_content">My Text View</string>
+    <string name="write_review">Please write your product review here. If you need help with your order , contact us using the help center menu.</string>
 
 </resources>
