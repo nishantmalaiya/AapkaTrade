@@ -54,6 +54,8 @@ dependencies {
 
 
 
+
+
     compile 'com.google.android.gms:play-services-places:10.0.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.iarcuschin:simpleratingbar:0.1.5'
@@ -100,6 +102,7 @@ dependencies {
     compile 'com.shehabic.droppy:Droppy:0.5.1@aar'
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.6.0'
     compile 'com.android.volley:volley:1.0.0'
-
     compile 'com.jsibbold:zoomage:1.1.0-SNAPSHOT'
+    compile 'com.wang.avi:library:2.1.3'
+
 }
