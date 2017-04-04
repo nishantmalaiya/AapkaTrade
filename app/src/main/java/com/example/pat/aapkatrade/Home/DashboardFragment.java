@@ -33,6 +33,7 @@ import com.example.pat.aapkatrade.categories_tab.PurticularDataActivity.Purticul
 import com.example.pat.aapkatrade.general.CheckPermission;
 import com.example.pat.aapkatrade.general.LocationManager_check;
 import com.example.pat.aapkatrade.general.Tabletsize;
+import com.example.pat.aapkatrade.general.progressbar.Custom_progress_bar;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.location.Geocoder;
 import com.example.pat.aapkatrade.location.MyAsyncTask_location;
@@ -85,6 +86,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     CircleIndicator circleIndicator;
     View view;
     Mylocation mylocation;
+    Custom_progress_bar custom_progress_bar;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -97,6 +99,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
             view = inflater.inflate(R.layout.fragment_dashboard_new, container, false);
             initializeview(view, container);
         }
+
         return view;
     }
 
