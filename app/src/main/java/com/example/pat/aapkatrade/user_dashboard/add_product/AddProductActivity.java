@@ -70,7 +70,7 @@ public class AddProductActivity extends AppCompatActivity
     private Context context;
     private LinearLayout contentAddProduct, add_product_root_container;
     private Spinner spCompanyName, spSubCategory, spCategory, spState, spCity, spdeliverydistance, spUnit;
-    public static String countryID = "101", stateID, cityID, companyID, categoryID, subCategoryID, deliveryDistanceID, unit;
+    public  static String countryID = "101", stateID, cityID, companyID, categoryID, subCategoryID, deliveryDistanceID, unit;
     private HashMap<String, String> webservice_header_type = new HashMap<>();
     private ArrayList<CategoryHome> listDataHeader = new ArrayList<>();
     private ArrayList<SubCategory> listDataChild = new ArrayList<>();

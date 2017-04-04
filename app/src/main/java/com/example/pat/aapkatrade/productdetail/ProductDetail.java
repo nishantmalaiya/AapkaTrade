@@ -35,6 +35,7 @@ import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.map.GoogleMapActivity;
 import com.example.pat.aapkatrade.payment.PaymentActivity;
+import com.example.pat.aapkatrade.rateus.RateusActivity;
 import com.example.pat.aapkatrade.service_enquiry.ServiceEnquiry;
 import com.example.pat.aapkatrade.user_dashboard.address.add_address.AddAddressActivity;
 import com.google.gson.JsonArray;
@@ -361,7 +362,8 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     }
 
 
-    private void initView() {
+    private void initView()
+    {
         context = ProductDetail.this;
         linearLayoutQuantity = (LinearLayout) findViewById(R.id.linearlayoutQuantity);
         textViewQuantity = (TextView) findViewById(R.id.textViewQuantity);
@@ -371,9 +373,18 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         linearlayoutShare = (LinearLayout) findViewById(R.id.linearlayoutShare);
         linearlayoutLocation = (LinearLayout) findViewById(R.id.linearlayoutLocation);
         tvServiceBuy = (TextView) findViewById(R.id.tvServiceBuy);
-        relativeRateReview.setOnClickListener(new View.OnClickListener() {
+
+
+        relativeRateReview.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+
+                     Intent rate = new Intent(ProductDetail.this, RateusActivity.class);
+                     startActivity(rate);
+
+
 
 
             }

@@ -1,9 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.pat.aapkatrade.rateus.RateusActivity">
+    >
 
-</android.support.constraint.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:id="@+id/relativeProductImage"
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+
+            <ImageView
+                android:id="@+id/imgProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/banner"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                />
+
+
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile Signal Booster"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/relativeProductImage"
+            android:textColor="@color/black"
+            />
+
+
+        <TextView
+            android:id="@+id/tvCategoriesName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Electronics Repair"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tvProductName"
+            android:layout_marginTop="10dp"
+            />
+
+
+        <io.techery.properratingbar.ProperRatingBar
+            android:id="@+id/lowerRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            app:prb_defaultRating="3"
+            app:prb_tickNormalDrawable="@drawable/ic_white_star"
+            app:prb_tickSelectedDrawable="@drawable/ic_orange_star"
+            app:prb_totalTicks="5"
+            app:prb_clickable="false"
+            app:prb_tickSpacing="0dp"
+            android:layout_below="@+id/tvCategoriesName"
+            android:layout_marginTop="10dp"
+            />
+
+
+        <Button
+            android:id="@+id/butttonExperience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rate your experience"
+            android:layout_below="@+id/lowerRatingBar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/green"
+            android:background="?android:attr/selectableItemBackground"
+            />
+
+        <TextView
+            android:id="@+id/tvReviewHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/write_review"
+            android:layout_below="@+id/butttonExperience"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+
+            />
+
+        <EditText
+            android:id="@+id/edtWriteReview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvReviewHeading"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="text"
+            android:layout_marginTop="10dp"
+            />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:background="@drawable/orange_background"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="SUBMIT"
+            android:layout_below="@+id/edtWriteReview"
+            />
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

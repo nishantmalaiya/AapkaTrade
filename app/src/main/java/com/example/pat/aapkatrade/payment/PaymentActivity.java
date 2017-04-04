@@ -1,5 +1,4 @@
 package com.example.pat.aapkatrade.payment;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,14 +19,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.R;
-import com.example.pat.aapkatrade.categories_tab.BlankFragment;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.payment.payment_method.CreditDebitFragment;
 import com.example.pat.aapkatrade.payment.payment_method.NetBankingFragment;
-import com.example.pat.aapkatrade.user_dashboard.order_list.cancel_order_fragment.CancelOrderFragment;
-import com.example.pat.aapkatrade.user_dashboard.order_list.complete_order.CompleteOrderFragment;
-import com.example.pat.aapkatrade.user_dashboard.order_list.shipped_fragment.ShippedFragment;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +41,6 @@ public class PaymentActivity extends AppCompatActivity implements TabLayout.OnTa
             R.drawable.shipped_order_wht,
 
             R.drawable.complete_order_wht,
-
     };
 
 
@@ -72,18 +65,23 @@ public class PaymentActivity extends AppCompatActivity implements TabLayout.OnTa
 
     }
 
-    private void setUpToolBar() {
+    private void setUpToolBar()
+    {
         ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
         AppCompatImageView back_imagview = (AppCompatImageView) findViewById(R.id.back_imagview);
+
         back_imagview.setVisibility(View.VISIBLE);
+
         back_imagview.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 finish();
             }
         });
         findViewById(R.id.logoWord).setVisibility(View.GONE);
-        ;
+
         TextView header_name = (TextView) findViewById(R.id.header_name);
         header_name.setVisibility(View.VISIBLE);
         header_name.setText(getResources().getString(R.string.order_mgt_heading));
