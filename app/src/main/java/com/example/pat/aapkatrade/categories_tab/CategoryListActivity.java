@@ -25,9 +25,9 @@ import com.example.pat.aapkatrade.filter.FilterDialog;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.general.CommonInterface;
 import com.example.pat.aapkatrade.general.LocationManager_check;
-import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Validation;
+import com.example.pat.aapkatrade.general.entity.KeyValue;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.general.recycleview_custom.MyRecyclerViewEffect;
 import com.example.pat.aapkatrade.location.MyAsyncTask_location;
@@ -44,8 +44,7 @@ import java.util.List;
 import it.carlom.stikkyheader.core.StikkyHeaderBuilder;
 
 
-public class CategoryListActivity extends AppCompatActivity
-{
+public class CategoryListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private CategoriesListAdapter categoriesListAdapter;
@@ -61,10 +60,8 @@ public class CategoryListActivity extends AppCompatActivity
     private TextView toolbarRightText;
 
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_categories_list);
@@ -144,99 +141,94 @@ public class CategoryListActivity extends AppCompatActivity
         State state = new State("-1", "Select State", "0");
         productAvailableStateList.add(state);
 
-
+        Log.e(AndroidUtils.getTag(context), "called categorylist webservice");
         progress_handler.show();
         Ion.with(CategoryListActivity.this)
-                .load(getResources().getString(R.string.webservice_base_url)+"/productlist")
+                .load(getResources().getString(R.string.webservice_base_url) + "/productlist")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "product_list")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("category_id", category_id)
                 .setBodyParameter("apply", "1")
+//                .asString()
+//                .setCallback(new FutureCallback<String>() {
+//                    @Override
+//                    public void onCompleted(Exception e, String result) {
+//                        Log.e(AndroidUtils.getTag(context), "result"+result);
+//                    }
+//                });
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
+                        progress_handler.hide();
 
                         if (result == null) {
-                            progress_handler.hide();
                             layout_container.setVisibility(View.INVISIBLE);
                         } else {
+                            AndroidUtils.showErrorLog(context, result.get("message").toString() + "<--result-->" + result);
                             if (Validation.isNumber(result.get("total_result").getAsString()) && Integer.parseInt(result.get("total_result").getAsString()) > 1) {
                                 toolbarRightText.setVisibility(View.VISIBLE);
+                                Log.e(AndroidUtils.getTag(context), "total_result" + result);
                             }
-                            if (result.get("states") != null) {
-                                JsonArray statesArray = result.get("states").getAsJsonArray();
-                                for (int i = 0; i < statesArray.size(); i++) {
-                                    JsonObject stateObject = (JsonObject) statesArray.get(i);
-                                    State state = new State(stateObject.get("state_id").getAsString(), stateObject.get("statename").getAsString(), stateObject.get("countprod").getAsString());
-                                    productAvailableStateList.add(state);
-                                }
-
-                                JsonArray statesArray1 = result.get("filter").getAsJsonArray();
-                                for (int i = 0; i < statesArray1.size(); i++) {
-                                    JsonObject stateObject = (JsonObject) statesArray1.get(i);
-                                    Log.e("stateobject", stateObject.toString());
-
-
-//                                State state = new State(stateObject.get("state_id").getAsString(), stateObject.get("statename").getAsString(), stateObject.get("countprod").getAsString());
-//                                productAvailableStateList.add(state);
-
-                                }
-
-                                //JsonArray statesArray = result.get("states").getAsJsonArray();
-//                            for(int i = 0; i < statesArray.size(); i++){
-//                                JsonObject stateObject = (JsonObject) statesArray.get(i);
-//                                State state = new State(stateObject.get("state_id").getAsString(), stateObject.get("statename").getAsString(), stateObject.get("countprod").getAsString());
-//                                productAvailableStateList.add(state);
+//                            if (result.get("states") != null) {
+//                                Log.e(AndroidUtils.getTag(context), "result" + result);
+//                                JsonArray statesArray = result.get("states").getAsJsonArray();
+//                                for (int i = 0; i < statesArray.size(); i++) {
+//                                    JsonObject stateObject = (JsonObject) statesArray.get(i);
+//                                    State state = new State(stateObject.get("state_id").getAsString(), stateObject.get("statename").getAsString(), stateObject.get("countprod").getAsString());
+//                                    productAvailableStateList.add(state);
+//                                }
 //                            }
 
-
-                                String message = result.get("message").toString().substring(0, result.get("message").toString().length());
-
-                                String message_data = message.replace("\"", "");
-
-                                Log.e("message_product_list", result.toString());
-
-                                if (message_data.equals("No record found")) {
-                                    progress_handler.hide();
-                                    layout_container.setVisibility(View.INVISIBLE);
-
-                                } else {
-                                    JsonArray jsonArray = result.getAsJsonArray("result");
-                                    JsonArray filterArray = result.getAsJsonArray("filter");
-                                    if (filterArray != null) {
-                                        getDynamicFilterData(filterArray);
-                                    }
-
-                                    for (int i = 0; i < jsonArray.size(); i++) {
-                                        JsonObject jsonObject2 = (JsonObject) jsonArray.get(i);
-
-                                        String product_id = jsonObject2.get("id").getAsString();
-
-                                        String product_name = jsonObject2.get("name").getAsString();
-
-                                        String product_price = jsonObject2.get("price").getAsString();
-
-                                        String product_cross_price = jsonObject2.get("cross_price").getAsString();
-
-                                        String product_image = jsonObject2.get("image_url").getAsString();
-                                        String productlocation = jsonObject2.get("city_name").getAsString() + "," + jsonObject2.get("state_name").getAsString() + "," +
-                                                jsonObject2.get("country_name").getAsString();
-
-                                        productListDatas.add(new CategoriesListData(product_id, product_name, product_price, product_cross_price, product_image, productlocation));
-
-                                    }
-
-                                    categoriesListAdapter = new CategoriesListAdapter(CategoryListActivity.this, productListDatas);
-                                    myRecyclerViewEffect = new MyRecyclerViewEffect(CategoryListActivity.this);
-                                    mRecyclerView.setAdapter(categoriesListAdapter);
-                                    categoriesListAdapter.notifyDataSetChanged();
-                                    progress_handler.hide();
-                                }
+                            JsonArray statesArray1 = result.get("filter").getAsJsonArray();
+                            for (int i = 0; i < statesArray1.size(); i++) {
+                                JsonObject stateObject = (JsonObject) statesArray1.get(i);
+                                Log.e("stateobject", stateObject.toString());
                             }
 
-                        }}
+                            String message = result.get("message").toString();
+
+                            String message_data = message.replace("\"", "");
+                            AndroidUtils.showErrorLog(context, "message_data " + message_data);
+                            Log.e("message_product_list", result.toString());
+
+                            if (message_data.equals("No record found")) {
+                                layout_container.setVisibility(View.INVISIBLE);
+                            } else {
+                                JsonArray jsonArray = result.getAsJsonArray("result");
+                                JsonArray filterArray = result.getAsJsonArray("filter");
+                                if (filterArray != null) {
+                                    getDynamicFilterData(filterArray);
+                                }
+                                for (int i = 0; i < jsonArray.size(); i++) {
+                                    JsonObject jsonObject2 = (JsonObject) jsonArray.get(i);
+
+                                    String product_id = jsonObject2.get("id").getAsString();
+
+                                    String product_name = jsonObject2.get("name").getAsString();
+
+                                    String product_price = jsonObject2.get("price").getAsString();
+
+                                    String product_cross_price = jsonObject2.get("cross_price").getAsString();
+
+                                    String product_image = jsonObject2.get("image_url").getAsString();
+                                    String productlocation = jsonObject2.get("city_name").getAsString() + "," + jsonObject2.get("state_name").getAsString() + "," +
+                                            jsonObject2.get("country_name").getAsString();
+
+                                    productListDatas.add(new CategoriesListData(product_id, product_name, product_price, product_cross_price, product_image, productlocation));
+
+                                }
+
+                                categoriesListAdapter = new CategoriesListAdapter(CategoryListActivity.this, productListDatas);
+                                myRecyclerViewEffect = new MyRecyclerViewEffect(CategoryListActivity.this);
+                                mRecyclerView.setAdapter(categoriesListAdapter);
+                                categoriesListAdapter.notifyDataSetChanged();
+                                progress_handler.hide();
+                            }
+
+                        }
+                    }
 
                 });
 
@@ -291,29 +283,44 @@ public class CategoryListActivity extends AppCompatActivity
     }
 
 
-    private void getDynamicFilterData(JsonArray filterArray){
-        HashMap<String, ArrayList<HashMap<String, String>>> filterHashMap = new HashMap<>();
-        if(filterArray.size() > 0){
-            Log.e(AndroidUtils.getTag(context), "size of filter Array is  :  "+ filterArray.size());
-            for (int i = 0; i < filterArray.size(); i++){
+    private void getDynamicFilterData(JsonArray filterArray) {
+        HashMap<String, ArrayList<KeyValue>> filterHashMap = new HashMap<>();
+        if (filterArray.size() > 0) {
+            AndroidUtils.showErrorLog(context, "size of filter Array is  :  " + filterArray.size());
+            for (int i = 0; i < filterArray.size(); i++) {
                 JsonObject filterObject = (JsonObject) filterArray.get(i);
                 String filterName = filterObject.get("name").getAsString();
-                JsonArray filterValueJsonArray = filterObject.get("values").getAsJsonArray();
-                ArrayList<HashMap<String, String>> valueFilterArrayList = new ArrayList<>();
-                if(filterValueJsonArray!=null){
-                    HashMap<String, String> filterValueKVPair = new HashMap<>();
-                    for (int j = 0; j < filterValueJsonArray.size(); j++){
-                        JsonObject filterValueObject = (JsonObject) filterValueJsonArray.get(j);
-//                        String[] filterValueObjectArray = filterValueObject.toString();
-                        String key = filterValueObject.toString().split(":")[0].replaceAll("\"", "");
-                        String value = filterValueObject.toString().split(":")[1].replaceAll("\"", "");
-                        filterValueKVPair.put(key, value);
-                        Log.e("hi KV", "Key : "+/*key+"    Value : "+value+"\n"+*/filterValueObject.toString());
+                JsonArray valueJsonArray = filterObject.get("values").getAsJsonArray();
+                ArrayList valueArrayList = new ArrayList<>();
+
+                if (valueJsonArray != null) {
+
+                    for (int j = 0; j < valueJsonArray.size(); j++) {
+                        JsonObject filterValueObject = (JsonObject) valueJsonArray.get(j);
+                        String[] filterValueObjectArray = filterValueObject.toString().replaceAll("\\{", "").replaceAll("\\}", "").trim().split(",");
+                        AndroidUtils.showErrorLog(context, "Length of filter value array is : ******" + filterValueObjectArray.length);
+
+                        ArrayList<KeyValue> valueItemArrayList = new ArrayList<>();
+                        for (int k = 0; k < filterValueObjectArray.length; k++) {
+                            AndroidUtils.showErrorLog(context, filterValueObjectArray[k]);
+                            String key = filterValueObjectArray[k].split(":")[0].replaceAll("\"", "");
+                            String value = filterValueObjectArray[k].split(":")[1].replaceAll("\"", "");
+                            valueItemArrayList.add(new KeyValue(key, value));
+                            Log.e("hi KV", "Key : " + key + "    Value : " + value + "\n"/*filterValueObject.toString()*/);
+                        }
+                        valueArrayList.add(valueItemArrayList);
                     }
-                    valueFilterArrayList.add(filterValueKVPair);
                 }
-                    filterHashMap.put(filterName, valueFilterArrayList);
+                filterHashMap.put(filterName, valueArrayList);
             }
+        }
+//        decodeData(filterHashMap);
+    }
+
+    private void decodeData(HashMap<String, ArrayList> filterHashMap) {
+        for (String key : filterHashMap.keySet()) {
+            AndroidUtils.showErrorLog(context, "Keeeey is " + key);
+            AndroidUtils.showErrorLog(context, "value is " + filterHashMap.get(key).toString());
         }
     }
 

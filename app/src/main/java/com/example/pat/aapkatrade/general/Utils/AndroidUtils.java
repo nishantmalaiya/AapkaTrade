@@ -121,5 +121,9 @@ public class AndroidUtils {
 
     }
 
+    public static void showErrorLog(Context context, Object message){
+        Log.e(getTag(context), message.toString());
+    }
+
 
 }

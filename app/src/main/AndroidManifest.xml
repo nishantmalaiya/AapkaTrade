@@ -112,6 +112,7 @@
             android:name=".user_dashboard.payout.PayoutActivity"
             android:label="@string/title_activity_payout" />
         <activity android:name=".user_dashboard.editcompany.EditCompanyActivity" />
+        <activity android:name=".ZoomImage.ZoomImageDialog" />
         <activity android:name=".user_dashboard.edit_product.EditProductActivity" />
         <activity android:name=".user_dashboard.service_enquirylist.ServiceEnquiryActivity" />
         <activity
