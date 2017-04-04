@@ -1,0 +1,116 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.pat.aapkatrade.payment.payment_method.NetBankingFragment">
+
+  
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerBankList"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:orientation="horizontal"
+        ></android.support.v7.widget.RecyclerView>
+
+
+    <View
+        android:id="@+id/View1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/mdtp_dark_gray"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/recyclerBankList"
+        >
+
+    </View>
+
+
+    <TextView
+        android:id="@+id/tvBank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bank"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/View1"
+        />
+
+
+    <RelativeLayout
+        android:id="@+id/spBussinessCategoryLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/five_dip"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/tvBank"
+        >
+
+
+        <Spinner
+            android:id="@+id/spBussinessCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentLeft="true"
+
+            android:background="@drawable/simple_spinner_back"
+            android:gravity="center_horizontal" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_arrow" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/spBussinessCategoryLayout"
+        android:layout_marginTop="40dp"
+        >
+
+
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CANCEL"
+            android:background="@drawable/orange_background"
+            android:textColor="@color/white"
+            android:padding="2dp"
+            />
+
+
+        <Button
+            android:id="@+id/buttonContinuePay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONTINUE TO PAY"
+            android:background="@drawable/orange_background"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@+id/buttonCancel"
+            android:layout_marginLeft="15dp"
+            android:padding="2dp"
+            />
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>
