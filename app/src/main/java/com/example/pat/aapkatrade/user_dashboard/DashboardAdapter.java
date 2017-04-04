@@ -9,10 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.Home.registration.RegistrationActivity;
 import com.example.pat.aapkatrade.R;
-import com.example.pat.aapkatrade.filter.FilterScreenActivity;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.login.LoginDashboard;
 import com.example.pat.aapkatrade.user_dashboard.add_product.AddProductActivity;
@@ -21,7 +19,6 @@ import com.example.pat.aapkatrade.user_dashboard.associateagreement.AssociateAgr
 import com.example.pat.aapkatrade.user_dashboard.changepassword.ChangePassword;
 import com.example.pat.aapkatrade.user_dashboard.companylist.CompanyList;
 import com.example.pat.aapkatrade.user_dashboard.my_company_profile.MyCompanyProfile;
-import com.example.pat.aapkatrade.user_dashboard.my_profile.MyProfileActivity;
 import com.example.pat.aapkatrade.user_dashboard.my_profile.MyProfileForBusinessAssociates;
 import com.example.pat.aapkatrade.user_dashboard.order_list.OrderManagementActivity;
 import com.example.pat.aapkatrade.user_dashboard.payout.PayoutActivity;

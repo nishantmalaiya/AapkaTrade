@@ -5,8 +5,8 @@ package com.example.pat.aapkatrade.general.entity;
  */
 
 public class KeyValue {
-    private Object key;
-    private Object value;
+    public Object key;
+    public Object value;
 
     public KeyValue(Object key, Object value) {
         this.key = key;
