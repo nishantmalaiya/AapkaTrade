@@ -73,6 +73,7 @@
     <string name="buy" translatable="false">Buy Now!</string>
     <string name="title_activity_product_list" translatable="false">ProductListActivity</string>
     <string name="category" translatable="false">Category</string>
+
     <string name="phone_number" translatable="false">+91 9696969696</string>
     <string name="loginregisterfooter" translatable="false">Please Click one for Login/Register</string>
     <string name="tab_1" translatable="false">Home</string>
@@ -270,5 +271,6 @@
     <string name="custom_edit_text_content">My EditText</string>
     <string name="custom_text_view_content">My Text View</string>
     <string name="write_review">Please write your product review here. If you need help with your order , contact us using the help center menu.</string>
+    <string name="continue_next">CONTINUE</string>
 
 </resources>

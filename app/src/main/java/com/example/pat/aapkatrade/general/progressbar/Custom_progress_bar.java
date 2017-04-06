@@ -48,10 +48,7 @@ public class Custom_progress_bar {
     }
 
     public void hide() {
-        mProgressBar.
-                hide();
-
-
+        mProgressBar.hide();
         //setVisibility(View.INVISIBLE);
     }
 

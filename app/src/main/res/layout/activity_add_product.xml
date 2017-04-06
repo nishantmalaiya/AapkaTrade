@@ -16,8 +16,30 @@
         <include
             layout="@layout/toolbar_layout" />
 
+
         <include
-            layout="@layout/content_add_product" />
+            layout="@layout/content_add_product_company_detail"
+            android:visibility="gone"/>
+        <include
+            layout="@layout/content_add_product_dynamic_form"
+            android:visibility="gone"
+            />
+        <include
+            layout="@layout/content_add_product_product_location"
+      />
+
+        <include
+            layout="@layout/content_add_product"
+            android:visibility="gone"/>
+
+
+
+
+
+
+
+
+
 
 
     </LinearLayout>
@@ -29,6 +51,7 @@
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_weight="1"
+        android:visibility="gone"
         android:background="@color/orange"
         >
 
