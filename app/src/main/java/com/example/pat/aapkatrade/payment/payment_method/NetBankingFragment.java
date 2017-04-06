@@ -32,9 +32,9 @@ public class NetBankingFragment extends Fragment
     private ArrayList<State> stateList = new ArrayList<>();
     public  ArrayList<BankData> bankdatas = new ArrayList<>();
     private ProgressBarHandler progressBar;
-    LinearLayoutManager mLayoutManager;
+    LinearLayoutManager layoutManager;
     RelativeLayout relativeCompanylist;
-    RecyclerView recyclerViewcompanylist;
+    RecyclerView recyclerBankList;
     BankAdapter companyListAdapter;
 
 
@@ -60,17 +60,18 @@ public class NetBankingFragment extends Fragment
 
         getState();
 
-        relativeCompanylist = (RelativeLayout) v.findViewById(R.id.relativeCompanylist);
+        recyclerBankList = (RecyclerView) v.findViewById(R.id.recyclerBankList);
 
-        recyclerViewcompanylist = (RecyclerView) v.findViewById(R.id.companylist);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
 
-         mLayoutManager = new LinearLayoutManager(getActivity());
         companyListAdapter = new BankAdapter(getActivity(), bankdatas);
-         recyclerViewcompanylist.setAdapter(companyListAdapter);
+
+        recyclerBankList.setAdapter(companyListAdapter);
+
+        recyclerBankList.setLayoutManager(layoutManager);
 
 
 
-        recyclerViewcompanylist.setLayoutManager(mLayoutManager);
     }
 
 

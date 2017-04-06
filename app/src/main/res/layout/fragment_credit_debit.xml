@@ -58,14 +58,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="10"
         android:layout_below="@+id/tvAccepted"
         android:layout_marginLeft="10dp"
         >
 
         <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="50dp"
             android:layout_height="50dp">
             <ImageView
                 android:layout_width="wrap_content"
@@ -77,8 +75,7 @@
 
 
         <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="50dp"
             android:layout_height="50dp">
             <ImageView
                 android:layout_width="wrap_content"
@@ -89,25 +86,23 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="50dp"
             android:layout_height="50dp">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_rupay"
+                android:src="@drawable/ic_mestro"
                 />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="50dp"
             android:layout_height="50dp">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_maestro"
+                android:src="@drawable/ic_rupay"
                 />
 
         </RelativeLayout>
@@ -144,7 +139,7 @@
             >
 
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:src="@drawable/ic_card"
                 />
@@ -420,7 +415,7 @@
         <RelativeLayout
             android:id="@+id/relativeExpirationDate"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/View1"
             android:layout_marginTop="20dp"
             android:layout_alignParentLeft="true"
@@ -439,8 +434,7 @@
             <RelativeLayout
                 android:id="@+id/relativeExpirationInput"
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
-
+                android:layout_height="50dp"
                 android:layout_below="@+id/tvExpirationHeading"
                 >
 
@@ -449,19 +443,21 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:src="@drawable/ic_exp_card"
-
+                    android:layout_centerVertical="true"
                     />
+
 
                 <EditText
                     android:id="@+id/tvDate"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:text="10/17"
                     android:layout_toRightOf="@+id/imgExpiration"
                     android:clickable="false"
                     android:textSize="18sp"
                     android:textColor="@color/green"
-                   android:layout_marginTop="-5dp"
+                    android:background="@android:color/transparent"
+                    android:layout_centerVertical="true"
                     />
 
 
@@ -487,7 +483,7 @@
         <RelativeLayout
             android:id="@+id/relativeCvDetail"
             android:layout_width="100dp"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/View1"
             android:layout_marginTop="20dp"
             android:layout_alignParentRight="true"
@@ -506,7 +502,7 @@
             <RelativeLayout
                 android:id="@+id/relativeCvvDetail"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_below="@+id/tvCvvHeading"
                 >
 
@@ -515,20 +511,21 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:src="@drawable/ic_cvv_card"
+                    android:layout_centerVertical="true"
                     />
 
                 <EditText
                     android:id="@+id/edt"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:text="117"
                     android:layout_toRightOf="@+id/imgCvv"
                     android:textSize="18sp"
                     android:textColor="@color/green"
-                    android:layout_marginTop="-5dp"
                     android:maxLength="3"
                     android:inputType="number"
-
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/transparent"
                     />
 
 
@@ -550,15 +547,11 @@
         </RelativeLayout>
 
 
-
-
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relativeExpirationDate"
             android:layout_marginTop="20dp"
-
             >
 
             <TextView
@@ -567,14 +560,13 @@
                 android:layout_height="wrap_content"
                 android:text="Card Alias (Optional)"
                 android:textSize="18sp"
-
                 />
 
 
             <RelativeLayout
                 android:id="@+id/realativeAlias"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_below="@+id/relativeCardAlias"
                 >
 
@@ -584,12 +576,13 @@
                     android:layout_height="35dp"
                     android:src="@drawable/ic_alise_card"
                     android:layout_marginTop="10dp"
+                    android:layout_centerVertical="true"
                     />
 
                 <EditText
                     android:id="@+id/edtCardAlias"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:hint="Enter Alias"
                     android:layout_toRightOf="@+id/imgCardAlias"
                     android:textSize="18sp"
@@ -598,9 +591,9 @@
                     android:layout_marginRight="10dp"
                     android:textColor="@color/green"
                     android:textColorHint="@color/green"
-                    android:layout_marginTop="15dp"
                     android:background="@android:color/transparent"
                     android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
                     />
 
 
@@ -641,24 +634,26 @@
         <Button
             android:id="@+id/buttonCancel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:text="CANCEL"
             android:background="@drawable/orange_background"
             android:textColor="@color/white"
-            android:padding="2dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             />
 
 
         <Button
             android:id="@+id/buttonContinuePay"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:text="CONTINUE TO PAY"
             android:background="@drawable/orange_background"
             android:textColor="@color/white"
             android:layout_toRightOf="@+id/buttonCancel"
             android:layout_marginLeft="15dp"
-            android:padding="2dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             />
 
 

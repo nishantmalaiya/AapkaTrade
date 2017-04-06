@@ -54,7 +54,8 @@ import java.util.TimerTask;
 import github.nisrulz.stackedhorizontalprogressbar.StackedHorizontalProgressBar;
 
 
-public class ProductDetail extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class ProductDetail extends AppCompatActivity implements DatePickerDialog.OnDateSetListener
+{
 
 
     LinearLayout viewpagerindicator, linearlayoutShare, linearlayoutLocation;

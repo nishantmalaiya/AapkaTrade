@@ -36,6 +36,7 @@ android {
         maven {
             url "http://dl.bintray.com/lukaville/maven"
         }
+        maven { url "https://www.jitpack.io" }
         maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local' }
 
     }
@@ -49,10 +50,6 @@ dependencies {
             {
                 transitive = true
             }
-
-
-
-
 
 
 
@@ -103,4 +100,6 @@ dependencies {
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.6.0'
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.jsibbold:zoomage:1.1.0-SNAPSHOT'
+    compile 'com.hedgehog.ratingbar:app:1.1.2'
+
 }
