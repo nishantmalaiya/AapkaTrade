@@ -118,8 +118,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
                     } else {
-                        Intent my_profile = new Intent(context, FilterScreenActivity.class);
-                        context.startActivity(my_profile);
+//                        Intent my_profile = new Intent(context, FilterScreenActivity.class);
+//                        context.startActivity(my_profile);
 
                     }
 

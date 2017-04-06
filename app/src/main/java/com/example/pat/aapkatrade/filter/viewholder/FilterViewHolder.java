@@ -19,7 +19,7 @@ public class FilterViewHolder extends RecyclerView.ViewHolder {
 
     public FilterViewHolder(View view){
         super(view);
-        checkBox = (CheckBox) view.findViewById(R.id.checkBox);
-        tvCity = (TextView) view.findViewById(R.id.tvCity);
+//        checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+//        tvCity = (TextView) view.findViewById(R.id.tvCity);
     }
 }

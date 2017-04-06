@@ -99,7 +99,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
             view = inflater.inflate(R.layout.fragment_dashboard_new, container, false);
             initializeview(view, container);
         }
-
+        custom_progress_bar=new Custom_progress_bar(getActivity());
         return view;
     }
 
