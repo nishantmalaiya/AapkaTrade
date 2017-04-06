@@ -13,6 +13,7 @@ import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.general.ConnectivityNotFound;
 import com.example.pat.aapkatrade.general.ConnetivityCheck;
 import com.example.pat.aapkatrade.general.animation_effects.App_animation;
+import com.example.pat.aapkatrade.general.progressbar.Custom_progress_bar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     ProgressDialog pd;
     ImageView circle_image;
+    Custom_progress_bar custom_progress_bar;
 
 
     @Override
@@ -54,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
         // Applying font
         tv_aapkatrade.setTypeface(tf);
         connetivity_check = new ConnetivityCheck();
+        custom_progress_bar=new Custom_progress_bar(MainActivity.this);
+        custom_progress_bar.show();
+
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

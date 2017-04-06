@@ -19,7 +19,7 @@
         android:theme="@style/customCheckBoxStyle" />
 
     <TextView
-        android:id="@+id/tvCity"
+        android:id="@+id/tvFilterValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/ten_dip"

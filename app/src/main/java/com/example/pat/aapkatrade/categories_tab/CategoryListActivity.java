@@ -22,6 +22,7 @@ import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.Home.registration.entity.State;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.filter.FilterDialog;
+import com.example.pat.aapkatrade.filter.entity.FilterObject;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.general.CommonInterface;
 import com.example.pat.aapkatrade.general.LocationManager_check;
@@ -58,6 +59,7 @@ public class CategoryListActivity extends AppCompatActivity {
     private ArrayList<State> productAvailableStateList = new ArrayList<>();
     private Context context;
     private TextView toolbarRightText;
+    private HashMap<String, ArrayList<FilterObject>> filterHashMap = null;
 
 
     @Override
@@ -118,16 +120,16 @@ public class CategoryListActivity extends AppCompatActivity {
                 .minHeightHeaderDim(R.dimen.min_header_height)
                 .build();
 
-        FilterDialog.commonInterface = new CommonInterface() {
-            @Override
-            public Object getData(Object object) {
-                categoriesListAdapter = new CategoriesListAdapter(CategoryListActivity.this, (List<CategoriesListData>) object);
-                myRecyclerViewEffect = new MyRecyclerViewEffect(CategoryListActivity.this);
-                mRecyclerView.setAdapter(categoriesListAdapter);
-                categoriesListAdapter.notifyDataSetChanged();
-                return null;
-            }
-        };
+//        FilterDialog.commonInterface = new CommonInterface() {
+//            @Override
+//            public Object getData(Object object) {
+//                categoriesListAdapter = new CategoriesListAdapter(CategoryListActivity.this, (List<CategoriesListData>) object);
+//                myRecyclerViewEffect = new MyRecyclerViewEffect(CategoryListActivity.this);
+//                mRecyclerView.setAdapter(categoriesListAdapter);
+//                categoriesListAdapter.notifyDataSetChanged();
+//                return null;
+//            }
+//        };
 
         get_web_data();
 
@@ -199,7 +201,7 @@ public class CategoryListActivity extends AppCompatActivity {
                                 JsonArray jsonArray = result.getAsJsonArray("result");
                                 JsonArray filterArray = result.getAsJsonArray("filter");
                                 if (filterArray != null) {
-                                    getDynamicFilterData(filterArray);
+                                    loadFilterDataInHashMap(filterArray);
                                 }
                                 for (int i = 0; i < jsonArray.size(); i++) {
                                     JsonObject jsonObject2 = (JsonObject) jsonArray.get(i);
@@ -251,7 +253,7 @@ public class CategoryListActivity extends AppCompatActivity {
         toolbarRightText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FilterDialog filterDialog = new FilterDialog(context, category_id, productAvailableStateList);
+                FilterDialog filterDialog = new FilterDialog(context, category_id, filterHashMap);
                 filterDialog.show();
             }
         });
@@ -283,44 +285,46 @@ public class CategoryListActivity extends AppCompatActivity {
     }
 
 
-    private void getDynamicFilterData(JsonArray filterArray) {
-        HashMap<String, ArrayList<KeyValue>> filterHashMap = new HashMap<>();
+    private void loadFilterDataInHashMap(JsonArray filterArray) {
+        filterHashMap = new HashMap<>();
         if (filterArray.size() > 0) {
             AndroidUtils.showErrorLog(context, "size of filter Array is  :  " + filterArray.size());
             for (int i = 0; i < filterArray.size(); i++) {
                 JsonObject filterObject = (JsonObject) filterArray.get(i);
                 String filterName = filterObject.get("name").getAsString();
                 JsonArray valueJsonArray = filterObject.get("values").getAsJsonArray();
-                ArrayList valueArrayList = new ArrayList<>();
+                ArrayList<FilterObject> valueArrayList = new ArrayList<>();
 
                 if (valueJsonArray != null) {
 
                     for (int j = 0; j < valueJsonArray.size(); j++) {
+                        FilterObject filterObjectData = new FilterObject();
                         JsonObject filterValueObject = (JsonObject) valueJsonArray.get(j);
                         String[] filterValueObjectArray = filterValueObject.toString().replaceAll("\\{", "").replaceAll("\\}", "").trim().split(",");
                         AndroidUtils.showErrorLog(context, "Length of filter value array is : ******" + filterValueObjectArray.length);
 
-                        ArrayList<KeyValue> valueItemArrayList = new ArrayList<>();
                         for (int k = 0; k < filterValueObjectArray.length; k++) {
                             AndroidUtils.showErrorLog(context, filterValueObjectArray[k]);
                             String key = filterValueObjectArray[k].split(":")[0].replaceAll("\"", "");
                             String value = filterValueObjectArray[k].split(":")[1].replaceAll("\"", "");
-                            valueItemArrayList.add(new KeyValue(key, value));
-                            Log.e("hi KV", "Key : " + key + "    Value : " + value + "\n"/*filterValueObject.toString()*/);
+                            if(key.contains("id")){
+                                filterObjectData.id.key = key;
+                                filterObjectData.id.value = value;
+                            } else  if(key.contains("name")){
+                                filterObjectData.name.key = key;
+                                filterObjectData.name.value = value;
+                            }else  if(key.contains("count")){
+                                filterObjectData.count.key = key;
+                                filterObjectData.count.value = value;
+                            }
                         }
-                        valueArrayList.add(valueItemArrayList);
+                        //                            AndroidUtils.showErrorLog(context, "---->"+filterValueObjectArray[k].split(":")[0].replaceAll("\"", ""));
+
+                        valueArrayList.add(filterObjectData);
                     }
                 }
                 filterHashMap.put(filterName, valueArrayList);
             }
-        }
-//        decodeData(filterHashMap);
-    }
-
-    private void decodeData(HashMap<String, ArrayList> filterHashMap) {
-        for (String key : filterHashMap.keySet()) {
-            AndroidUtils.showErrorLog(context, "Keeeey is " + key);
-            AndroidUtils.showErrorLog(context, "value is " + filterHashMap.get(key).toString());
         }
     }
 

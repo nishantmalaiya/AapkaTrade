@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.example.pat.aapkatrade.R;
+import com.example.pat.aapkatrade.animation.ProgressBarAnimation;
 
 /**
  * Created by PPC21 on 01-Feb-17.
@@ -35,7 +36,12 @@ public class ProgressBarHandler
 
         mProgressBar = new ProgressBar(context, null, android.R.attr.progressBarStyleLarge);
         mProgressBar.setIndeterminate(true);
-        mProgressBar.invalidateDrawable(mContext.getResources().getDrawable(R.drawable.progress_bar_animation));
+        mProgressBar.invalidateDrawable(ContextCompat.getDrawable(mContext,R.drawable.progress_bar_animation));
+        ProgressBarAnimation mProgressAnimation = new ProgressBarAnimation(mProgressBar, 1000);
+
+
+        mProgressAnimation.setDuration(1000);
+        mProgressBar.startAnimation(mProgressAnimation);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 
