@@ -43,11 +43,16 @@ public class Custom_progress_bar {
     }
 
     public void show() {
-        mProgressBar.setVisibility(View.VISIBLE);
+        mProgressBar.show();
+        //setVisibility(View.VISIBLE);
     }
 
     public void hide() {
-        mProgressBar.setVisibility(View.INVISIBLE);
+        mProgressBar.
+                hide();
+
+
+        //setVisibility(View.INVISIBLE);
     }
 
 
