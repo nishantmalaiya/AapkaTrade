@@ -23,6 +23,7 @@
     <dimen name="fourty_dip">40dp</dimen>
     <dimen name="twenty_five_dip">25dp</dimen>
     <dimen name="two_dip">2dp</dimen>
+    <dimen name="one_hundred_twenty_dip">120dp</dimen>
     <!-- view* 1 -->
 
 </resources>
