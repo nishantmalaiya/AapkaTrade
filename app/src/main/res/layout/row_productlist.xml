@@ -19,7 +19,6 @@
         app:mode="same_level"
         app:dragEdge="right">
 
-        <!-- Your secondary layout here -->
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="100dp"

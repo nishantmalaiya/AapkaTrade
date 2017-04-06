@@ -13,13 +13,13 @@ import com.example.pat.aapkatrade.R;
  * Created by PPC15 on 29-03-2017.
  */
 
-public class FilterViewHolder extends RecyclerView.ViewHolder {
-    public CheckBox checkBox;
-    public TextView tvCity;
+public class FilterColumn2ViewHolder extends RecyclerView.ViewHolder {
+    public CheckBox checkFilterValue;
+    public TextView filterValue;
 
-    public FilterViewHolder(View view){
+    public FilterColumn2ViewHolder(View view){
         super(view);
-//        checkBox = (CheckBox) view.findViewById(R.id.checkBox);
-//        tvCity = (TextView) view.findViewById(R.id.tvCity);
+        checkFilterValue = (CheckBox) view.findViewById(R.id.check_filter_value);
+        filterValue = (TextView) view.findViewById(R.id.filter_value);
     }
 }
