@@ -36,6 +36,7 @@ android {
         maven {
             url "http://dl.bintray.com/lukaville/maven"
         }
+        maven { url "https://www.jitpack.io" }
         maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local' }
 
     }
@@ -45,7 +46,14 @@ android {
 dependencies {
 
 
+
+    compile('com.github.florent37:androidparallax:1.0.1@aar')
+            {
+                transitive = true
+            }
+
     compile 'com.google.android.gms:play-services-places:10.2.1'
+
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.iarcuschin:simpleratingbar:0.1.5'
     //noinspection GradleCompatible
@@ -92,6 +100,8 @@ dependencies {
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.6.0'
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.jsibbold:zoomage:1.1.0-SNAPSHOT'
+    compile 'com.hedgehog.ratingbar:app:1.1.2'
     compile 'com.wang.avi:library:2.1.3'
+
 
 }
