@@ -178,8 +178,6 @@ android:layout_alignParentRight="true"
                android:layout_width="70dp"
                android:layout_weight="1"
                android:id="@+id/right_panel"
-
-
                android:src="@drawable/ic_right_prt"
                android:layout_height="70dp"
                android:layout_alignParentTop="true"

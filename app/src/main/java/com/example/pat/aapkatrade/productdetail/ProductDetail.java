@@ -29,10 +29,12 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.R;
+import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.general.CheckPermission;
 import com.example.pat.aapkatrade.general.LocationManager_check;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
+import com.example.pat.aapkatrade.login.LoginDashboard;
 import com.example.pat.aapkatrade.map.GoogleMapActivity;
 import com.example.pat.aapkatrade.payment.PaymentActivity;
 import com.example.pat.aapkatrade.rateus.RateusActivity;
@@ -57,7 +59,6 @@ import github.nisrulz.stackedhorizontalprogressbar.StackedHorizontalProgressBar;
 public class ProductDetail extends AppCompatActivity implements DatePickerDialog.OnDateSetListener
 {
 
-
     LinearLayout viewpagerindicator, linearlayoutShare, linearlayoutLocation;
     Spinner spinner;
     int max = 10;
@@ -81,36 +82,52 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     int quantity_value = 1;
     ProgressBarHandler progressBarHandler;
     String productlocation, categoryName;
-
     LinearLayout linearLayoutQuantity;
     EditText firstName, quantity, price, mobile, email, etEndDate, etStatDate, description, editText;
     TextView tvServiceBuy, textViewQuantity;
-
     // TextView tvDurationHeading,tvDuration;
     Dialog dialog;
     private Context context;
     private String product_name;
     DroppyMenuPopup droppyMenu;
+    AppSharedPreference app_sharedpreference;
+
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         Log.e("time  Product Detail", String.valueOf(System.currentTimeMillis()));
 
         setContentView(R.layout.activity_product_detail);
+
+        app_sharedpreference = new AppSharedPreference(ProductDetail.this);
+
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+
         context = ProductDetail.this;
+
         Intent intent = getIntent();
+
         Bundle b = intent.getExtras();
+
         product_id = b.getString("product_id");
+
         Log.e("product_id", product_id);
+
         product_location = b.getString("product_location");
+
         progressBarHandler = new ProgressBarHandler(context);
+
         setUpToolBar();
+
         initView();
+
         get_data();
+
+
     }
 
     private void Init_droppy() {
@@ -186,7 +203,8 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     }
 
 
-    private void get_data() {
+    private void get_data()
+    {
         relativeBuyNow.setVisibility(View.INVISIBLE);
         linearProductDetail.setVisibility(View.INVISIBLE);
         progress_handler.show();
@@ -375,16 +393,24 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         linearlayoutLocation = (LinearLayout) findViewById(R.id.linearlayoutLocation);
         tvServiceBuy = (TextView) findViewById(R.id.tvServiceBuy);
 
-
         relativeRateReview.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
 
-                     Intent rate = new Intent(ProductDetail.this, RateusActivity.class);
-                     startActivity(rate);
+                if (app_sharedpreference.getsharedpref("username", "not").contains("not"))
+                {
+                    startActivity(new Intent(ProductDetail.this, LoginDashboard.class));
+                }
+                else
+                {
 
+                    Intent rate_us = new Intent(ProductDetail.this,RateusActivity.class);
+                    rate_us.putExtra("product_id",product_id);
+                    startActivity(rate_us);
+
+                }
 
 
 
@@ -548,7 +574,8 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     }
 
 
-    private void showDate(int year, int month, int day) {
+    private void showDate(int year, int month, int day)
+    {
         date = (new StringBuilder()).append(year).append("-").append(month).append("-").append(day).toString();
         if (isStartDate == 0) {
             etStatDate.setText(date);
@@ -561,4 +588,8 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     private void showMessage(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
+
+
+
+
 }

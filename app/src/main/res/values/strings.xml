@@ -16,6 +16,7 @@
     <string name="login" translatable="false">LOGIN</string>
     <string name="my_company_profile_heading" translatable="false">My Company Profile</string>
     <string name="change_password_heading" translatable="false">Change Password</string>
+    <string name="write_and_review">Write And Review</string>
     <string name="add_company_heading" translatable="false">Add Company</string>
     <string name="user_name" translatable="false">Pawan</string>
     <string name="date" translatable="false">31-2-2016</string>
