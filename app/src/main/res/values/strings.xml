@@ -272,5 +272,6 @@
     <string name="custom_text_view_content">My Text View</string>
     <string name="write_review">Please write your product review here. If you need help with your order , contact us using the help center menu.</string>
     <string name="continue_next">CONTINUE</string>
+    <string name="add_product">Add Product</string>
 
 </resources>

@@ -19,13 +19,16 @@
 
         <include
             layout="@layout/content_add_product_company_detail"
-            android:visibility="gone"/>
+
+
+            />
         <include
             layout="@layout/content_add_product_dynamic_form"
             android:visibility="gone"
             />
         <include
             layout="@layout/content_add_product_product_location"
+            android:visibility="gone"
       />
 
         <include

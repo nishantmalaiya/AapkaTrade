@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +30,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pat.aapkatrade.Home.CommomData;
 import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.Home.navigation.entity.CategoryHome;
 import com.example.pat.aapkatrade.Home.navigation.entity.SubCategory;
@@ -42,6 +44,8 @@ import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Utils.ImageUtils;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomSimpleListAdapter;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
+import com.example.pat.aapkatrade.service_enquiry.ServiceEnquiry;
+import com.example.pat.aapkatrade.user_dashboard.add_product.Dialog.Timing_dialog;
 import com.example.pat.aapkatrade.user_dashboard.addcompany.CompanyData;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -64,13 +68,13 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class AddProductActivity extends AppCompatActivity
-{
+public class AddProductActivity extends AppCompatActivity {
+
 
     private Context context;
     private LinearLayout contentAddProduct, add_product_root_container;
-    private Spinner spCompanyName, spSubCategory, spCategory, spState, spCity, spdeliverydistance, spUnit;
-    public  static String countryID = "101", stateID, cityID, companyID, categoryID, subCategoryID, deliveryDistanceID, unit;
+    private Spinner spCompanyName, spSubCategory, spCategory, spState, spCity, spdeliverydistance, spService_type;
+    private String countryID = "101", stateID, cityID, companyID, categoryID, subCategoryID, deliveryDistanceID, unit;
     private HashMap<String, String> webservice_header_type = new HashMap<>();
     private ArrayList<CategoryHome> listDataHeader = new ArrayList<>();
     private ArrayList<SubCategory> listDataChild = new ArrayList<>();
@@ -78,6 +82,9 @@ public class AddProductActivity extends AppCompatActivity
     private ArrayList<City> cityList = new ArrayList<>(), unitList = new ArrayList<>();
     private ArrayList<String> deliveryDistanceList = new ArrayList<>();
     private ArrayList<CompanyData> companyNames = new ArrayList<>();
+    private ArrayList<String> serviceTypes = new ArrayList<>();
+    private ArrayList<String> opening_time_list = new ArrayList<>();
+    private ArrayList<String> closing_time_list = new ArrayList<>();
     private ProgressBarHandler progressBar;
     private AppSharedPreference app_sharedpreference;
     private TextView btnUpload;
@@ -91,217 +98,256 @@ public class AddProductActivity extends AppCompatActivity
     ProductImages adapter;
     Bitmap imageForPreview;
     ArrayList<Bitmap> multiple_images;
+
     List<Part> files_image = new ArrayList();
     TextView tvTitle;
 
 
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
-        context = AddProductActivity.this;
         setUpToolBar();
-
-        setupRecyclerView();
-
-        initView();
-
-        btnUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                count++;
-                callAddProductWebService();
-            }
-        });
-
-    }
-
-    private File savebitmap(String filePath)
-    {
-
-        File file = new File(filePath);
-        String extension = filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length());
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        Bitmap bitmap = BitmapFactory.decodeFile(filePath, bmOptions);
-        OutputStream outStream = null;
-        try {
-            // make a new bitmap from your file
-            outStream = new FileOutputStream(file);
-            if (extension.equalsIgnoreCase("png")) {
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, outStream);
-            } else if (extension.equalsIgnoreCase("jpg") || extension.equalsIgnoreCase("jpeg")) {
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, outStream);
-            } else {
-                return null;
-            }
-            outStream.flush();
-            outStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return file;
-    }
-
-
-    private void callAddProductWebService() {
-
-
-        if (Integer.valueOf(etCrossedPrice.getText().toString())> Integer.valueOf(etPrice.getText().toString()))
-        {
-
-            progressBar.show();
-
-            for (int i = 0; i < productImagesDatas.size(); i++)
-            {
-                files_image.add(new FilePart("image[]", savebitmap(productImagesDatas.get(i).image_path)));
-            }
-
-            // System.out.println("companyId---"+companyID+"categoryID----"+categoryID+"subCategoryID---"+subCategoryID);
-
-            Log.e("files_image", "  ==>   " + productImagesDatas.size());
-
-            Log.e("data-------------",companyID+categoryID+subCategoryID);
-
-            Log.e("company result", app_sharedpreference.getsharedpref("userid", "0"));
-
-            Ion.with(context)
-                    .load(getResources().getString(R.string.webservice_base_url)+"/add_product")
-                    .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                    .progress(new ProgressCallback() {
-                        @Override
-                        public void onProgress(long downloaded, long total) {
-                            Log.e("status", downloaded + "  * " + total);
-                        }
-                    })
-                    .addMultipartParts(files_image)
-
-                    .setMultipartParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                    .setMultipartParameter("user_id", app_sharedpreference.getsharedpref("userid", "0"))
-                    .setMultipartParameter("name", AndroidUtils.getEditTextData(etProductName))
-                    .setMultipartParameter("company_id", companyID)
-                    .setMultipartParameter("deliverTime", "")
-                    .setMultipartParameter("distance_id", deliveryDistanceID)
-                    .setMultipartParameter("deliverday", etDeliverLocation.getText().toString())
-                    .setMultipartParameter("price", etPrice.getText().toString())
-                    .setMultipartParameter("cross_price", etCrossedPrice.getText().toString())
-                    .setMultipartParameter("unit_id", "1")
-                    .setMultipartParameter("availablestatus_id", "")
-                    .setMultipartParameter("short_des", etDescription.getText().toString())
-                    .setMultipartParameter("deliveryArea", AndroidUtils.getEditTextData(etDeliverLocation))
-                    .setMultipartParameter("country_id", countryID)
-                    .setMultipartParameter("state_id", stateID)
-                    .setMultipartParameter("city_id", cityID)
-                    .setMultipartParameter("category_id", categoryID)
-                    .setMultipartParameter("sub_cat_id", subCategoryID)
-                    .asJsonObject()
-                    .setCallback(new FutureCallback<JsonObject>() {
-                        @Override
-                        public void onCompleted(Exception e, JsonObject result) {
-                            progressBar.hide();
-                            Log.e("company result", "Result" + result);
-
-                            if (result != null && result.get("message").getAsString().equals("Product Added Successfully!")) {
-                           /* Intent Homedashboard = new Intent(AddProductActivity.this, HomeActivity.class);
-                            Homedashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(Homedashboard);*/
-                            } else {
-                                showMessage("Company Not Found");
-                            }
-
-                        }
-                    });
-
-        }
-        else
-        {
-
-            Toast.makeText(getApplicationContext(),"Cross Price is less then Price",Toast.LENGTH_SHORT).show();
-
-        }
-
-    }
-
-
-    private void initView()
-    {
-        context = AddProductActivity.this;
-
-        uploadButton = (ImageView) findViewById(R.id.uploadButton);
-
-        uploadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                picPhoto();
-
-            }
-        });
-
-        contentAddProduct = (LinearLayout) findViewById(R.id.contentAddProduct);
-        add_product_root_container = (LinearLayout) findViewById(R.id.add_product_root_container);
-        webservice_header_type.put("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3");
-        progressBar = new ProgressBarHandler(context);
-        app_sharedpreference = new AppSharedPreference(context);
-
-        spCompanyName = (Spinner) findViewById(R.id.spCompanyName);
-        spSubCategory = (Spinner) findViewById(R.id.spSubCategory);
-        spCategory = (Spinner) findViewById(R.id.spCategory);
-        spState = (Spinner) findViewById(R.id.spState);
-        spCity = (Spinner) findViewById(R.id.spCity);
-        spdeliverydistance = (Spinner) findViewById(R.id.spDeliverydistance);
-        spUnit = (Spinner) findViewById(R.id.spUnit);
-
-        btnUpload = (TextView) findViewById(R.id.btnUpload);
-        btnUpload.setText("Add");
-
-        etProductName = (EditText) findViewById(R.id.etProductName);
-        etDeliverLocation = (EditText) findViewById(R.id.etDeliverLocation);
-        etPrice = (EditText) findViewById(R.id.etPrice);
-        etCrossedPrice = (EditText) findViewById(R.id.etCrossedPrice);
-        etDescription = (EditText) findViewById(R.id.etDescription);
-
-        initSpinner();
+        initview();
+        initspinner();
         getCompany();
         getCategory();
-        getState();
-        getUnit();
-        pickDeliveryLocation();
+
+
+       //getState();
+
+
     }
 
+    private void initview() {
 
-    private void initSpinner()
-    {
+        context=AddProductActivity.this;
+        progressBar = new ProgressBarHandler(context);
+        app_sharedpreference = new AppSharedPreference(context);
+        spService_type=(Spinner)findViewById(R.id.sp_service_type);
+        spCompanyName=(Spinner)findViewById(R.id.spCompanyName);
+
+        contentAddProduct = (LinearLayout) findViewById(R.id.contentAddProduct);
+        etProductName=(EditText)findViewById(R.id.etProductName);
+        spCategory=(Spinner)findViewById(R.id.spCategory);
+        spSubCategory=(Spinner)findViewById(R.id.spSubCategory);
+
+    }
+
+    private void initspinner() {
+
+//step 1 data spinner
+
         CompanyData companyData = new CompanyData("Please Select Company", "-1");
         companyNames.add(companyData);
         CustomSimpleListAdapter adapter = new CustomSimpleListAdapter(context, companyNames);
         spCompanyName.setAdapter(adapter);
 
-        State stateEntity_init = new State("-1", "Please Select State");
-        stateList.add(stateEntity_init);
-        SpStateAdapter spStateAdapter = new SpStateAdapter(context, stateList);
-        spState.setAdapter(spStateAdapter);
 
-        City cityEntity_init = new City("-1", "Please Select City");
-        cityList.add(cityEntity_init);
-        SpCityAdapter spCityAdapter = new SpCityAdapter(context, cityList);
-        spCity.setAdapter(spCityAdapter);
+//        State stateEntity_init = new State("-1", "Please Select State");
+//        stateList.add(stateEntity_init);
+//        SpStateAdapter spStateAdapter = new SpStateAdapter(context, stateList);
+//        spState.setAdapter(spStateAdapter);
 
-        City unitEntity_init = new City("-1", "Please Select Unit");
-        unitList.add(unitEntity_init);
-        SpCityAdapter spUnitAdapter = new SpCityAdapter(context, unitList);
-        spUnit.setAdapter(spUnitAdapter);
+//        City cityEntity_init = new City("-1", "Please Select City");
+//        cityList.add(cityEntity_init);
+//        SpCityAdapter spCityAdapter = new SpCityAdapter(context, cityList);
+//        spCity.setAdapter(spCityAdapter);
 
 
+        serviceTypes.add("Select Service Type");
+        serviceTypes.add("Service Enquiry");
+        serviceTypes.add("Sell");
+        ArrayAdapter<String> service_type_spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, serviceTypes);
+        service_type_spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spService_type.setAdapter(service_type_spinner_adapter);
+
+
+spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        final String sellorservice;
+
+        if(position>0)
+        {
+            opening_time_list.clear();
+            closing_time_list.clear();
+            if(position==1)
+            {
+                sellorservice="0";
+            }
+            else {
+                sellorservice="1";
+            }
+
+            String getdailytime=getResources().getString(R.string.webservice_base_url)+"/getoctime";
+
+            Ion.with(context)
+                    .load(getdailytime)
+                    .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                    .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                    .setBodyParameter("id", sellorservice)
+                    .asJsonObject()
+                    .setCallback(new FutureCallback<JsonObject>() {
+                        @Override
+                        public void onCompleted(Exception e, JsonObject result) {
+
+                            Log.e(AndroidUtils.getTag(context)+"add_product"+sellorservice,result.toString());
+
+                            String error = result.get("error").getAsString();
+                            String message = result.get("message").getAsString();
+                            String status = result.get("status").getAsString();
+
+
+                            if(status.contains("1"))
+{
+    JsonObject formdata = result.get("form_data").getAsJsonObject();
+    JsonArray jsonarray_opening = formdata.getAsJsonArray("opening_time");
+
+
+
+    for (int l = 0; l < jsonarray_opening.size(); l++) {
+
+        JsonObject jsonObject_result = (JsonObject) jsonarray_opening.get(l);
+        String opentiming = jsonObject_result.get("timing").getAsString();
+
+        opening_time_list.add(opentiming);
+    }
+    Log.e("data_opening", opening_time_list.toString());
+
+    JsonArray jsonarray_closing = formdata.getAsJsonArray("closing_time");
+    for (int l = 0; l < jsonarray_closing.size(); l++) {
+
+        JsonObject jsonObject_result = (JsonObject) jsonarray_closing.get(l);
+        String closetiming = jsonObject_result.get("timing").getAsString();
+
+        closing_time_list.add(closetiming);
+    }
+    Log.e("data_closing", closing_time_list.toString());
+
+    Timing_dialog serviceEnquiry = new Timing_dialog(context, opening_time_list, closing_time_list);
+    serviceEnquiry.show();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        }
+                    });
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+});
+
+        // step 2 spinner_dynamic_data
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+    private void setUpToolBar() {
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        AppCompatImageView back_imagview = (AppCompatImageView) findViewById(R.id.back_imagview);
+        back_imagview.setVisibility(View.VISIBLE);
+        back_imagview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
+        ImageView logoWord = (ImageView) findViewById(R.id.logoWord);
+        TextView header_name = (TextView) findViewById(R.id.header_name);
+        header_name.setVisibility(View.VISIBLE);
+        header_name.setText(getResources().getString(R.string.add_product_heading));
+        logoWord.setVisibility(View.GONE);
+        AndroidUtils.setImageColor(homeIcon, this, R.color.white);
+        homeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddProductActivity.this, HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setTitle(null);
+            getSupportActionBar().setElevation(0);
+        }
+
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bottom_home_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void getCompany() {
 
         Log.e("company result", app_sharedpreference.getsharedpref("userid", "0"));
         Ion.with(context)
-                .load(getResources().getString(R.string.webservice_base_url)+"/dropdown")
+                .load("http://aapkatrade.com/slim/dropdown")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "company")
@@ -335,7 +381,8 @@ public class AddProductActivity extends AppCompatActivity
                                         } else {
                                             Log.e("hi***", String.valueOf(count));
                                             if (count >= 0)
-                                                showMessage("Invalid Company");
+                                            {}
+                                               // showMessage("Invalid Company");
                                         }
                                     }
 
@@ -358,13 +405,12 @@ public class AddProductActivity extends AppCompatActivity
 
     }
 
-
     public void getState() {
         Log.e("state result ", "getState started");
         progressBar.show();
 
         Ion.with(context)
-                .load(getResources().getString(R.string.webservice_base_url)+"/dropdown")
+                .load("http://aapkatrade.com/slim/dropdown")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "state")
@@ -414,15 +460,10 @@ public class AddProductActivity extends AppCompatActivity
                 });
     }
 
-    private void showMessage(String message) {
-        AndroidUtils.showSnackBar(contentAddProduct, message);
-    }
-
-
     public void getCity(String stateId) {
         progressBar.show();
         Ion.with(context)
-                .load(getResources().getString(R.string.webservice_base_url)+"/dropdown")
+                .load("http://aapkatrade.com/slim/dropdown")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "city")
@@ -478,7 +519,7 @@ public class AddProductActivity extends AppCompatActivity
         progressBar.show();
         Log.e("data", "getCategory Entered");
         Ion.with(context)
-                .load(getResources().getString(R.string.webservice_base_url)+"/dropdown")
+                .load("http://aapkatrade.com/slim/dropdown")
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("type", "category")
@@ -526,7 +567,6 @@ public class AddProductActivity extends AppCompatActivity
         CustomSimpleListAdapter categoriesAdapter = new CustomSimpleListAdapter(context, this.listDataHeader);
         spCategory.setAdapter(categoriesAdapter);
 
-
         spCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -534,14 +574,13 @@ public class AddProductActivity extends AppCompatActivity
                     categoryID = listDataHeader.get(position).getCategoryId();
                     listDataChild = new ArrayList<>();
                     listDataChild = listDataHeader.get(position).getSubCategoryList();
-
                     if (listDataChild.size() > 0) {
                         CustomSimpleListAdapter adapter = new CustomSimpleListAdapter(context, listDataChild);
                         spSubCategory.setAdapter(adapter);
                         spSubCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                if (position >= 0) {
+                                if (position > 0) {
                                     subCategoryID = listDataChild.get(position).subCategoryId;
                                 }
                             }
@@ -568,338 +607,25 @@ public class AddProductActivity extends AppCompatActivity
         });
 
     }
-
-
-    private void getUnit() {
-        Ion.with(context)
-                .load(getResources().getString(R.string.webservice_base_url)+"/dropdown")
-                .setHeader("authorization", webservice_header_type.get("authorization"))
-                .setBodyParameter("authorization", webservice_header_type.get("authorization"))
-                .setBodyParameter("type", "unit")
-                .asJsonObject()
-//                .asString()
-                .setCallback(new FutureCallback<JsonObject>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonObject result) {
-//                        Log.e("hi******", result);
-                        unitList = new ArrayList<>();
-                        if (result != null) {
-                            JsonArray jsonArray = result.getAsJsonArray("result");
-                            unitList = new ArrayList<>();
-                            unitList.add(new City("-1", "Please Select Unit"));
-                            if (jsonArray != null) {
-                                for (int i = 0; i < jsonArray.size(); i++) {
-                                    JsonObject jsonObject = (JsonObject) jsonArray.get(i);
-                                    City unit = new City(jsonObject.get("id").getAsString(), jsonObject.get("name").getAsString());
-                                    unitList.add(unit);
-                                }
-                            }
-
-                            spUnit.setAdapter(new SpCityAdapter(context, unitList));
-
-
-                        } else {
-                            showMessage("Unit Not loaded");
-                        }
-                    }
-                });
+    private void showMessage(String message) {
+        AndroidUtils.showSnackBar(contentAddProduct, message);
     }
 
-    private void setUpToolBar() {
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        AppCompatImageView back_imagview = (AppCompatImageView) findViewById(R.id.back_imagview);
-        back_imagview.setVisibility(View.VISIBLE);
-        back_imagview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
-        ImageView logoWord = (ImageView) findViewById(R.id.logoWord);
-        TextView header_name = (TextView) findViewById(R.id.header_name);
-        header_name.setVisibility(View.VISIBLE);
-        header_name.setText(getResources().getString(R.string.add_product_heading));
-        logoWord.setVisibility(View.GONE);
-        AndroidUtils.setImageColor(homeIcon, context, R.color.white);
-        homeIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, HomeActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            getSupportActionBar().setTitle(null);
-            getSupportActionBar().setElevation(0);
-        }
-
-
-
-    }
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.bottom_home_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())
-        {
-            case android.R.id.home:
-                finish();
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
-
-    private void pickDeliveryLocation() {
-        loadDistanceList();
-        CustomSimpleListAdapter adapter = new CustomSimpleListAdapter(context, deliveryDistanceList);
-        spdeliverydistance.setAdapter(adapter);
-        spdeliverydistance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position > 0) {
-                    deliveryDistanceID = String.valueOf(position);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    private void loadDistanceList() {
-        deliveryDistanceList.add(0, "Please Select distance");
-        deliveryDistanceList.add(1, "0 to 0.5 km");
-        deliveryDistanceList.add(2, "0.5 to 1 km");
-        deliveryDistanceList.add(3, "1 to 2 km");
-        deliveryDistanceList.add(4, "2 to 3 km");
-        deliveryDistanceList.add(5, "3 to 4 km");
-        deliveryDistanceList.add(6, "4 to 5 km");
-        deliveryDistanceList.add(7, "5 to 6 km");
-        deliveryDistanceList.add(8, "6 to 7 km");
-        deliveryDistanceList.add(9, "7 to 8 km");
-        deliveryDistanceList.add(10, "8 to 9 km");
-        deliveryDistanceList.add(11, "9 to 10 km");
-        deliveryDistanceList.add(12, "10 to 11 km");
-        deliveryDistanceList.add(13, "11 to 12 km");
-        deliveryDistanceList.add(14, "12 to 13 km");
-        deliveryDistanceList.add(15, "13 to 14 km");
-        deliveryDistanceList.add(16, "14 to 15 km");
-        deliveryDistanceList.add(17, "15 to 16 km");
-        deliveryDistanceList.add(18, "16 to 17 km");
-        deliveryDistanceList.add(19, "17 to 18 km");
-        deliveryDistanceList.add(20, "18 to 19 km");
-        deliveryDistanceList.add(21, "19 to 20 km");
-        deliveryDistanceList.add(22, "20 to 21 km");
-        deliveryDistanceList.add(23, "21 to 22 km");
-        deliveryDistanceList.add(24, "22 to 23 km");
-        deliveryDistanceList.add(25, "23 to 24 km");
-        deliveryDistanceList.add(26, "24 to 25 km");
-        deliveryDistanceList.add(27, "25 to 26 km");
-        deliveryDistanceList.add(28, "26 to 27 km");
-        deliveryDistanceList.add(29, "27 to 28 km");
-        deliveryDistanceList.add(30, "28 to 29 km");
-        deliveryDistanceList.add(31, "29 to 30 km");
-    }
-
-
-    void picPhoto() {
-        String str[] = new String[]{"Camera", "Gallery"};
-        new AlertDialog.Builder(this).setItems(str,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        performImgPicAction(which);
-                    }
-                }).show();
-
-    }
-
-    void performImgPicAction(int which)
-    {
-        Intent in;
-        if (which == 1)
-        {
-            in = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            in.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-            in.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(in, "Select Multiple Picture From Gallery"), 11);
-        }
-        else
-        {
-
-            in = new Intent();
-            in.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(Intent.createChooser(in, "Capture Image from Camera"), 10);
-        }
-
-
-
-    }
-
-    private void setupRecyclerView()
-    {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler);
-        adapter = new ProductImages(AddProductActivity.this, productImagesDatas);
-        layoutManager = new LinearLayoutManager(AddProductActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-
-
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        multiple_images=new ArrayList<>();
-        Log.e("hi", "requestCode : " + requestCode + "result code : " + resultCode);
-        try {
-            if (requestCode == 11)
-            {
-                if(data.getClipData()!=null)
-                {
-
-                    data.getClipData().getItemCount();
-
-                    for (int k = 0; k < 4; k++)
-                    {
-
-                        Uri selectedImage = data.getClipData().getItemAt(k).getUri();
-
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                        multiple_images.add(bitmap);
-
-
-                        Log.e("doc", "***START.****** ");
-                        if (ImageUtils.sizeOf(bitmap) > 2048) {
-                            Log.e("doc", "if doc file path 1");
-
-                            docFile = getFile(ImageUtils.resize(bitmap, bitmap.getHeight() / 2, bitmap.getWidth() / 2));
-                            Log.e("doc", "if doc file path" + docFile.getAbsolutePath());
-                        } else {
-
-                            Log.e("doc", " else doc file path 1");
-                            docFile = getFile(bitmap);
-                            Log.e("doc", " else doc file path" + docFile.getAbsolutePath());
-                        }
-
-                        productImagesDatas.add(new ProductImagesData(docFile.getAbsolutePath(),""));
-                        Log.e("docfile", docFile.getAbsolutePath());
-
-
-                        adapter.notifyDataSetChanged();
-
-
-                    }
-
-                }
-                else
-                {
-
-
-                    try {
-                        InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                        Uri tempUri = getImageUri(AddProductActivity.this, bitmap);
-
-                        // CALL THIS METHOD TO GET THE ACTUAL PATH
-                        File finalFile = new File(getRealPathFromURI(tempUri));
-
-                        productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(),""));
-                        Log.e("docfile", finalFile.getAbsolutePath());
-
-                        adapter.notifyDataSetChanged();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
-
-
-                }
-            }
-            if (requestCode == 10)
-            {
-
-                Log.e("docfile10","Sachin sdnsdfjsd fsdjfsd fnmsdabf");
-
-                Bitmap photo = (Bitmap) data.getExtras().get("data");
-
-                Uri tempUri = getImageUri(AddProductActivity.this, photo);
-
-                // CALL THIS METHOD TO GET THE ACTUAL PATH
-                File finalFile = new File(getRealPathFromURI(tempUri));
-
-                productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(),""));
-                Log.e("docfile", finalFile.getAbsolutePath());
-
-                adapter.notifyDataSetChanged();
-
-            }
-
-        } catch (Exception e) {
-           Log.e("Exception",e.toString());
-        }
-
-    }
-
-
-    private File getFile(Bitmap photo)
-    {
-        Uri tempUri = null;
-        if (photo != null) {
-            tempUri = getImageUri(AddProductActivity.this, photo);
-        }
-        File finalFile = new File(getRealPathFromURI(tempUri));
-        Log.e("data", getRealPathFromURI(tempUri));
-
-        return finalFile;
-    }
-
-    public Uri getImageUri(Context inContext, Bitmap inImage)
-    {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
-    }
-
-
-    public String getRealPathFromURI(Uri uri)
-    {
-        Cursor cursor = null;
-        int idx = 0;
-        if (uri != null) {
-            cursor = AddProductActivity.this.getContentResolver().query(uri, null, null, null, null);
-            assert cursor != null;
-            cursor.moveToFirst();
-            idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-        }
-        return cursor.getString(idx);
-    }
 
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
