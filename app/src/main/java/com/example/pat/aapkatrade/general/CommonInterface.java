@@ -5,5 +5,5 @@ package com.example.pat.aapkatrade.general;
  */
 
 public interface CommonInterface {
-    Object getData(Object object);
+    public Object getData(Object object);
 }
