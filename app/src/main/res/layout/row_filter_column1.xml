@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/tv_filter_name"
         android:layout_width="@dimen/one_hundred_twenty_dip"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/fifty_dip"
         android:layout_gravity="center_vertical|center_horizontal"
         android:padding="@dimen/ten_dip"
         android:text="@string/category"

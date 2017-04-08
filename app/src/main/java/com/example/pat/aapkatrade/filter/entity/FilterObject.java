@@ -31,4 +31,26 @@ public class FilterObject {
                 ", count='" + count.value + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FilterObject)) return false;
+
+        FilterObject that = (FilterObject) o;
+
+        if (!id.equals(that.id)) return false;
+        if (!name.equals(that.name)) return false;
+        if (!count.equals(that.count)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + count.hashCode();
+        return result;
+    }
 }

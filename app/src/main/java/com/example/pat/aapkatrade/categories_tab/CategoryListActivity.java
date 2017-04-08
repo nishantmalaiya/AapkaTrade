@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -59,7 +60,7 @@ public class CategoryListActivity extends AppCompatActivity {
     private ArrayList<State> productAvailableStateList = new ArrayList<>();
     private Context context;
     private TextView toolbarRightText;
-    private HashMap<String, ArrayList<FilterObject>> filterHashMap = null;
+    private ArrayMap<String, ArrayList<FilterObject>> filterHashMap = null;
 
 
     @Override
@@ -286,7 +287,7 @@ public class CategoryListActivity extends AppCompatActivity {
 
 
     private void loadFilterDataInHashMap(JsonArray filterArray) {
-        filterHashMap = new HashMap<>();
+        filterHashMap = new ArrayMap<>();
         if (filterArray.size() > 0) {
             AndroidUtils.showErrorLog(context, "size of filter Array is  :  " + filterArray.size());
             for (int i = 0; i < filterArray.size(); i++) {

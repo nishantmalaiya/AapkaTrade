@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.filter.viewholder.FilterColumn1ViewHolder;
 import com.example.pat.aapkatrade.general.CommonInterface;
+import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,12 @@ public class FilterColumn1RecyclerAdapter extends RecyclerView.Adapter<FilterCol
     private final LayoutInflater inflater;
     private ArrayList<String> filterNameList;
     private Context context;
-    public static CommonInterface commonInterface;
+    public static CommonInterface commonInterface = new CommonInterface() {
+        @Override
+        public Object getData(Object object) {
+            return null;
+        }
+    };
 
     public FilterColumn1RecyclerAdapter(Context context, ArrayList<String> filterNameList) {
         this.context = context;
@@ -35,10 +41,21 @@ public class FilterColumn1RecyclerAdapter extends RecyclerView.Adapter<FilterCol
         holder.filterName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(commonInterface!=null)
-                commonInterface.getData(position);
+               onClickListener(position);
             }
         });
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener(position);
+            }
+        });
+    }
+
+    private void onClickListener(int position) {
+        AndroidUtils.showErrorLog(context, "Item No Selected ;  "+position);
+            commonInterface.getData(filterNameList.get(position));
     }
 
 
@@ -46,28 +63,6 @@ public class FilterColumn1RecyclerAdapter extends RecyclerView.Adapter<FilterCol
     public int getItemCount() {
         return filterNameList.size();
     }
-
-   /* private ArrayList<City> getSelectedCityList(ArrayList<City> cityArrayList){
-        ArrayList<City> tempArrayList = new ArrayList<>();
-        int count = 0;
-        if (cityArrayList!=null){
-            for (int i = 0; i < cityArrayList.size(); i++){
-                if (cityArrayList.get(i).isChecked){
-                    tempArrayList.add(cityArrayList.get(i));
-                } else {
-                    count++;
-                }
-            }
-            Log.e("message_data---", "cityArrayList.size() "+cityArrayList.size()+ " tempArrayList.size() "+tempArrayList.size()+"count"+ count);
-            if(count == cityArrayList.size()){
-                return cityArrayList;
-            }else {
-                return tempArrayList;
-            }
-        }
-        return null;
-    }*/
-
 
 }
 
