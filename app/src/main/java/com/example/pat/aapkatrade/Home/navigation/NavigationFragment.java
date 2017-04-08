@@ -363,12 +363,14 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     }
 
 
-    private void showMessage(String clicked) {
+    private void showMessage(String clicked)
+    {
         Toast.makeText(context, clicked, Toast.LENGTH_SHORT).show();
     }
 
 
-    public void setdata(String username, String email) {
+    public void setdata(String username, String email)
+    {
         Fname = username;
 
         Log.e("Username", username);
@@ -517,16 +519,15 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
     }
 
-    private void set_recycleview_adapter() {
+    private void set_recycleview_adapter()
+    {
 
-
-        if (listDataHeader.size() != 0) {
+        if (listDataHeader.size() != 0)
+        {
             category_adapter = new CommonAdapter_navigation_recycleview(context, listDataHeader);
             navigation_recycleview.setAdapter(category_adapter);
 
         }
-
-
     }
 
 

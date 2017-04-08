@@ -104,9 +104,13 @@ public class LoginDashboard extends AppCompatActivity {
     }
     private void setUpToolBar() {
         ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
+        findViewById(R.id.logoWord).setVisibility(View.INVISIBLE);
         TextView toolbarRightText = (TextView) findViewById(R.id.toolbarRightText);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         AndroidUtils.setImageColor(homeIcon, context, R.color.white);
+
+
+
         homeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
