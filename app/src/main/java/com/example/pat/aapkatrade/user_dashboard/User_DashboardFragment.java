@@ -146,7 +146,7 @@ public class User_DashboardFragment extends Fragment {
         Ion.with(getActivity())
                 .load(url)
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                .setBodyParameter("type", user_type)
+                .setBodyParameter("type",user_type)
                 .setBodyParameter("id", user_id)
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .asJsonObject()
@@ -161,7 +161,9 @@ public class User_DashboardFragment extends Fragment {
                             String error = result.get("error").getAsString();
                             if (error.contains("true")) {
                                 progressBarHandler.hide();
-                            } else {
+                            }
+                            else
+                                {
 
                                 progressBarHandler.hide();
                                 if (user_type.contains("1")) {
