@@ -1,5 +1,4 @@
 package com.example.pat.aapkatrade.payment.payment_method;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,18 +23,16 @@ public class BankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public BankAdapter(Context context, List<BankData> itemList)
     {
-
         this.itemList = itemList;
         this.context = context;
         inflater = LayoutInflater.from(context);
-
     }
 
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View view = inflater.inflate(R.layout.row_company_list, parent, false);
+        View view = inflater.inflate(R.layout.row_bank, parent, false);
 
         viewHolder = new BankHolder(view);
 
@@ -48,23 +45,24 @@ public class BankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position)
     {
 
-        final CompanyListHolder homeHolder = (CompanyListHolder) holder;
-
+        final BankHolder homeHolder = (BankHolder) holder;
     }
 
 
-    private void showMessage(String s) {
+    private void showMessage(String s)
+    {
 
         Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public int getItemCount() {
-        return itemList.size();
+        return 5;
 
     }
 
-    public String getCurrentTimeStamp() {
+    public String getCurrentTimeStamp()
+    {
         return new SimpleDateFormat("dd MMM yyyy HH:mm").format(new Date());
     }
 
