@@ -163,6 +163,7 @@ public class FilterDialog extends Dialog {
         };
         count = 0;
     }
+
     private void getColumn2CallBack() {
         AndroidUtils.showErrorLog(context, "getColumn2CallBack2");
         FilterColumn2RecyclerAdapter.commonInterface = new CommonInterface() {
