@@ -3,6 +3,7 @@ package com.example.pat.aapkatrade.filter;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.util.ArrayMap;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,7 +25,6 @@ import com.example.pat.aapkatrade.general.entity.KeyValue;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by PPC09 on 25-Mar-17.
@@ -93,7 +93,7 @@ public class FilterDialog extends Dialog {
         app_sharedpreference = new AppSharedPreference(context);
         progress_handler = new ProgressBarHandler(context);
         dialogue_toolbar = (RelativeLayout) findViewById(R.id.dialogue_toolbar);
-        AndroidUtils.setBackgroundSolid(dialogue_toolbar, context, R.color.green, 8);
+        AndroidUtils.setBackgroundSolid(dialogue_toolbar, context, R.color.green, 8, GradientDrawable.OVAL);
         imgCLose = (Button) findViewById(R.id.imgCLose);
         applyFilter = (TextView) findViewById(R.id.applyFilter);
         clearAll = (TextView) findViewById(R.id.clearAll);

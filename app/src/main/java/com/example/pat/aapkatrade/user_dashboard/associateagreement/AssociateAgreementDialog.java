@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -121,8 +122,8 @@ public class AssociateAgreementDialog extends Dialog {
         app_sharedpreference = new AppSharedPreference(context);
         input_layout_agreement = (LinearLayout) findViewById(R.id.input_layout_agreement);
         dialogue_toolbar = (RelativeLayout) findViewById(R.id.dialogue_toolbar);
-        AndroidUtils.setBackgroundSolid(input_layout_agreement, context, R.color.orange, 10);
-        AndroidUtils.setBackgroundSolid(dialogue_toolbar, context, R.color.green, 8);
+        AndroidUtils.setBackgroundSolid(input_layout_agreement, context, R.color.orange, 10, GradientDrawable.OVAL);
+        AndroidUtils.setBackgroundSolid(dialogue_toolbar, context, R.color.green, 8, GradientDrawable.OVAL);
         tvUserName = (TextView) findViewById(R.id.tvUserName);
         tvDate = (TextView) findViewById(R.id.tvDate);
         tvReferenceNumber = (TextView) findViewById(R.id.tvReferenceNumber);

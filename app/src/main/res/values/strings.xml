@@ -273,5 +273,13 @@
     <string name="write_review">Please write your product review here. If you need help with your order , contact us using the help center menu.</string>
     <string name="filter_text">Filter Text</string>
     <string name="add_product">Add Product</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thrusday">Thrusday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="openingclosing"><![CDATA[Opening & Closing Time]]></string>
 
 </resources>

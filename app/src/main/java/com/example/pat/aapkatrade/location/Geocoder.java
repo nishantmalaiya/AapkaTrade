@@ -46,7 +46,7 @@ public class Geocoder {
             if (addressList != null && addressList.size() > 0) {
                 Address address = addressList.get(0);
 
-//
+
                 result = address.getAdminArea();
                // progressBarHandler.hide();
 

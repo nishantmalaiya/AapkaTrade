@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.shapes.Shape;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
@@ -77,20 +78,35 @@ public class AndroidUtils {
         return calendar;
     }
 
-    public static void setBackgroundSolid(View layout, Context context, int bgColor, int cornerRadius) {
+    public static void setBackgroundSolid(View layout, Context context, int bgColor, int cornerRadius, int oval) {
         GradientDrawable shape = new GradientDrawable();
         shape.setCornerRadius(cornerRadius);
+
         shape.setColor(ContextCompat.getColor(context, bgColor));
+        shape.setShape(oval);
         layout.setBackground(shape);
     }
+
+    public static void setBackgroundSolid(View layout, Context context, int bgColor, int cornerRadius, int oval,int border_width,int border_color) {
+        GradientDrawable shape = new GradientDrawable();
+        shape.setCornerRadius(cornerRadius);
+        shape.setStroke(border_width, ContextCompat.getColor(context, border_color));
+        shape.setColor(ContextCompat.getColor(context, bgColor));
+        shape.setShape(oval);
+        layout.setBackground(shape);
+    }
+
 
 
     public static void setBackgroundStroke(View layout, Context context, int bgColor, int cornerRadius, int strokeWidth) {
         GradientDrawable shape = new GradientDrawable();
         shape.setStroke(strokeWidth, ContextCompat.getColor(context, bgColor));
         shape.setCornerRadius(cornerRadius);
+
         layout.setBackground(shape);
     }
+
+
 
     public static void setImageColor(ImageView imageView, Context context, int color) {
         if (imageView != null)

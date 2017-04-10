@@ -2,6 +2,7 @@ package com.example.pat.aapkatrade.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -130,7 +131,7 @@ public class LoginDashboard extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        AndroidUtils.setBackgroundSolid(toolbar, context, R.color.transparent, 0);
+        AndroidUtils.setBackgroundSolid(toolbar, context, R.color.transparent, 0, GradientDrawable.OVAL);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);

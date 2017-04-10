@@ -1,7 +1,7 @@
 package com.example.pat.aapkatrade.search;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,14 +14,8 @@ import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.general.Adapter_callback_interface;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
-
-import static com.example.pat.aapkatrade.search.Search.recyclerView_search;
 
 /**
  * Created by PPC21 on 06-Feb-17.
@@ -109,7 +103,7 @@ public class SearchcategoryAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 
 
-                AndroidUtils.setBackgroundSolid(viewHolder1.product_name,context,R.color.green,20);
+                AndroidUtils.setBackgroundSolid(viewHolder1.product_name,context,R.color.green,20, GradientDrawable.OVAL);
 
 
 

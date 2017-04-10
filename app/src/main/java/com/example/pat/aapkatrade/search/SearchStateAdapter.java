@@ -1,6 +1,7 @@
 package com.example.pat.aapkatrade.search;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,7 +91,7 @@ Log.e("common_state.statename",common_state_searchlist.get(position).statename);
             public void onClick(View v) {
 
 
-                AndroidUtils.setBackgroundSolid(viewHolder1.product_name,context,R.color.green,20);
+                AndroidUtils.setBackgroundSolid(viewHolder1.product_name,context,R.color.green,20, GradientDrawable.OVAL);
 
 
 

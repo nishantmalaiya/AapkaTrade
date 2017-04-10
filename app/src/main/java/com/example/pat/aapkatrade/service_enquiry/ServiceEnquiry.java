@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.util.Log;
@@ -111,8 +112,8 @@ public class ServiceEnquiry extends Dialog implements DatePickerDialog.OnDateSet
         input_layout_end_date = (TextInputLayout) findViewById(R.id.input_layout_end_date);
         description = (EditText) findViewById(R.id.et_layout_description);
         submit = (TextView) findViewById(R.id.buttonSubmit);
-        AndroidUtils.setBackgroundSolid(submit, context, R.color.orange, 8);
-        AndroidUtils.setBackgroundSolid(dialogue_toolbar, context, R.color.green, 15);
+        AndroidUtils.setBackgroundSolid(submit, context, R.color.orange, 8, GradientDrawable.OVAL);
+        AndroidUtils.setBackgroundSolid(dialogue_toolbar, context, R.color.green, 15, GradientDrawable.OVAL);
         openStartDateCal = (ImageView) findViewById(R.id.openStartDateCal);
         openEndDateCal = (ImageView) findViewById(R.id.openEndDateCal);
         tvProductname = (TextView) findViewById(R.id.tvProductname);
