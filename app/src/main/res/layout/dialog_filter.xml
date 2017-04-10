@@ -104,6 +104,7 @@
                                 android:id="@+id/recyclerView1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:minHeight="1000dp"
                                 android:paddingBottom="@dimen/five_dip"
                                 android:paddingTop="@dimen/five_dip"
                                 android:paddingRight="@dimen/five_dip">

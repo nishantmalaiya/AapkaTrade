@@ -305,7 +305,7 @@ public class CategoryListActivity extends AppCompatActivity {
                         AndroidUtils.showErrorLog(context, "Length of filter value array is : ******" + filterValueObjectArray.length);
 
                         for (int k = 0; k < filterValueObjectArray.length; k++) {
-                            AndroidUtils.showErrorLog(context, filterValueObjectArray[k]);
+                            AndroidUtils.showErrorLog(context, "filterValueObjectArray[k]"+ filterValueObjectArray[k]);
                             String key = filterValueObjectArray[k].split(":")[0].replaceAll("\"", "");
                             String value = filterValueObjectArray[k].split(":")[1].replaceAll("\"", "");
                             if(key.contains("id")){

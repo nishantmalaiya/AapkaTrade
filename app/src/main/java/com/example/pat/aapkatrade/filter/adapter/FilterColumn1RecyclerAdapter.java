@@ -36,26 +36,37 @@ public class FilterColumn1RecyclerAdapter extends RecyclerView.Adapter<FilterCol
     }
 
     @Override
-    public void onBindViewHolder(FilterColumn1ViewHolder holder, final int position) {
+    public void onBindViewHolder(final FilterColumn1ViewHolder holder, final int position) {
         holder.filterName.setText(filterNameList.get(position));
         holder.filterName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               onClickListener(position);
+                onClickListener(position, holder.filterColumn1);
             }
         });
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickListener(position);
+                onClickListener(position, holder.filterColumn1);
             }
         });
     }
 
-    private void onClickListener(int position) {
-        AndroidUtils.showErrorLog(context, "Item No Selected ;  "+position);
-            commonInterface.getData(filterNameList.get(position));
+    private void setBackground(int position, View view) {
+        for (int i = 0; i < filterNameList.size(); i++) {
+            AndroidUtils.showErrorLog(context, position+"POSITION"+(position == i));
+            if (position == i)
+                AndroidUtils.setBackgroundSolid(view, context, R.color.green, 0);
+//            else
+//                AndroidUtils.setBackgroundSolid(view, context, R.color.white, 0);
+        }
+    }
+
+    private void onClickListener(int position, View view) {
+        setBackground(position, view);
+        AndroidUtils.showErrorLog(context, "Item No Selected ;  " + position);
+        commonInterface.getData(filterNameList.get(position));
     }
 
 

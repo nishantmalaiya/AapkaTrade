@@ -10,6 +10,7 @@ public class FilterObject {
     public KeyValue id;
     public KeyValue name;
     public KeyValue count;
+    public boolean isChecked = false;
 
     public FilterObject(KeyValue id, KeyValue name, KeyValue count) {
         this.id = id;

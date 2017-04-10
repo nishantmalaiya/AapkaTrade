@@ -43,7 +43,7 @@ public class FilterDialog extends Dialog {
     private ArrayList<String> filterNameArrayList = new ArrayList<>();
     private ArrayList<FilterObject> filterValueArrayList = new ArrayList<>();
     private ArrayList<FilterObject> selectedValueArrayList = new ArrayList<>();
-    private ArrayMap<String, ArrayList<FilterObject>> filterHashMap = null, selectedHashMap = null;
+    private ArrayMap<String, ArrayList<FilterObject>> filterHashMap = null, selectedHashMap = new ArrayMap<>();
     private String key = "";
     private int count = 0;
 
@@ -53,7 +53,6 @@ public class FilterDialog extends Dialog {
         this.context = context;
         this.categoryId = categoryId;
         this.filterHashMap = filterHashMap;
-        this.selectedHashMap = filterHashMap;
     }
 
 
@@ -69,7 +68,7 @@ public class FilterDialog extends Dialog {
         applyFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                printHashMap();
             }
         });
 
@@ -83,12 +82,59 @@ public class FilterDialog extends Dialog {
         clearAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (String key : filterHashMap.keySet()) {
+                    filterValueArrayList = filterHashMap.get(key);
+                    for (int i = 0; i < filterValueArrayList.size(); i++) {
+                        if(filterValueArrayList.get(i).isChecked)   {
+                            filterHashMap.get(key).get(i).isChecked = false;
+                        }
+                    }
+                }
 
+                setUpColumn1Adapter();
+                setUpColumn2Adapter(filterHashMap.keyAt(0), true);
             }
         });
     }
 
+    private void printHashMap() {
+        syncHashMap();
+        AndroidUtils.showErrorLog(context,"Size printHashMap"+ selectedHashMap.size());
+        for (String key : selectedHashMap.keySet()) {
+            AndroidUtils.showErrorLog(context,"Main printHashMap     "+ key);
+            selectedValueArrayList = selectedHashMap.get(key);
+            for (int i = 0; i < selectedValueArrayList.size(); i++) {
+                AndroidUtils.showErrorLog(context, " printHashMap Key : " + selectedValueArrayList.get(i).name.key + " printHashMap Value : " + selectedValueArrayList.get(i).name.value);
+            }
+        }
 
+    }
+
+
+    private void syncHashMap() {
+        AndroidUtils.showErrorLog(context,"syncHashMap printHashMap"+ selectedHashMap.size());
+        for (String key : filterHashMap.keySet()) {
+            syncEachArrayList(key);
+        }
+    }
+
+    private void syncEachArrayList(String key) {
+        AndroidUtils.showErrorLog(context,"syncHashMap printHashMap"+ selectedHashMap.size());
+        ArrayList<FilterObject> tempList = new ArrayList<>();
+        selectedHashMap.put(key, tempList);
+        tempList = filterHashMap.get(key);
+        int count = 0;
+        for (int i = 0; i < tempList.size(); i++) {
+            if(tempList.get(i).isChecked){
+                selectedHashMap.get(key).add(filterHashMap.get(key).get(i));
+            }else {
+                count++;
+            }
+        }
+        if(count == tempList.size()){
+            selectedHashMap.put(key, tempList);
+        }
+    }
     private void initView() {
         app_sharedpreference = new AppSharedPreference(context);
         progress_handler = new ProgressBarHandler(context);
@@ -115,12 +161,13 @@ public class FilterDialog extends Dialog {
     private void decodeData(ArrayMap<String, ArrayList<FilterObject>> filterHashMap) {
         for (String key : filterHashMap.keySet()) {
             filterNameArrayList.add(key);
+            AndroidUtils.showErrorLog(context,"Main decoded     "+ key);
             filterValueArrayList = filterHashMap.get(key);
             for (int i = 0; i < filterValueArrayList.size(); i++) {
-                AndroidUtils.showErrorLog(context, "decoded Key : " + filterValueArrayList.get(i).id.value + " decoded Value : " + filterValueArrayList.get(i).name.value);
+                AndroidUtils.showErrorLog(context, " decoded Key : " + filterValueArrayList.get(i).name.key + " decoded Value : " + filterValueArrayList.get(i).name.value);
             }
         }
-
+        AndroidUtils.showErrorLog(context,"Size decoded"+ filterHashMap.size());
     }
 
     private void setUpColumn1Adapter() {
@@ -131,8 +178,6 @@ public class FilterDialog extends Dialog {
             FilterColumn1RecyclerAdapter filterNameAdapter = new FilterColumn1RecyclerAdapter(context, filterNameArrayList);
             recyclerViewColumn1.setAdapter(filterNameAdapter);
             recyclerViewColumn1.setLayoutManager(mLayoutManager);
-//            setUpColumn2Adapter();
-//            getColumn1CallBack();
         }
     }
 
@@ -172,8 +217,16 @@ public class FilterDialog extends Dialog {
                 KeyValue keyValue = (KeyValue) object;
                 String key = (String) keyValue.key;
                 selectedValueArrayList = (ArrayList<FilterObject>) keyValue.value;
-                selectedHashMap.put(key, selectedValueArrayList);
-                AndroidUtils.showErrorLog(context, "HashMap Key : " + key + " HashMap Key Size : " + selectedHashMap.get(key).size());
+//                selectedHashMap.put(key, selectedValueArrayList);
+
+                filterValueArrayList = filterHashMap.get(key);
+                for (int i = 0; i < filterValueArrayList.size(); i++) {
+                    if(filterValueArrayList.get(i).isChecked && !filterHashMap.get(key).get(i).isChecked){
+                        filterHashMap.get(key).get(i).isChecked = true;
+                    }
+                }
+
+//                AndroidUtils.showErrorLog(context, "HashMap Key : " + key + " HashMap Key Size : " + selectedHashMap.get(key).size());
                 return null;
             }
         };

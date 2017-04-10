@@ -42,7 +42,7 @@ public class FilterColumn2RecyclerAdapter extends RecyclerView.Adapter<FilterCol
     @Override
     public void onBindViewHolder(final FilterColumn2ViewHolder holder, final int position) {
         if (Validation.isNonEmptyStr(filterValueList.get(position).name.value.toString())) {
-            holder.checkFilterValue.setChecked(false);
+            holder.checkFilterValue.setChecked(filterValueList.get(position).isChecked);
             holder.filterValue.setText(filterValueList.get(position).name.value.toString());
             holder.filterValue.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -57,17 +57,11 @@ public class FilterColumn2RecyclerAdapter extends RecyclerView.Adapter<FilterCol
             holder.checkFilterValue.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    filterValueList.get(position).isChecked = isChecked;
                     if(isChecked){
                         addItemsToList(position);
                     } else {
-                        if(isExist(filterValueList.get(position))){
-                            for(int i = 0; i < selectedValueList.size(); i++){
-                                if(selectedValueList.get(i).equals(filterValueList.get(position))){
-                                    selectedValueList.remove(i);
-                                }
-                            }
-                            AndroidUtils.showErrorLog(context, "Item No removed ;  " + position+"  new size "+selectedValueList.size());
-                        }
+                        removeItemsFromList(position);
                     }
                     commonInterface.getData(selectedValueList.size()>0?new KeyValue(key, selectedValueList):new KeyValue(key, filterValueList));
                 }
@@ -76,6 +70,16 @@ public class FilterColumn2RecyclerAdapter extends RecyclerView.Adapter<FilterCol
         }
     }
 
+    private void removeItemsFromList(int position) {
+        if(selectedValueList.contains(filterValueList.get(position))){
+            for(int i = 0; i < selectedValueList.size(); i++){
+                if(selectedValueList.get(i).equals(filterValueList.get(position))){
+                    selectedValueList.remove(i);
+                }
+            }
+            AndroidUtils.showErrorLog(context, "Item No removed ;  " + position+"  new size "+selectedValueList.size());
+        }
+    }
 
 
     @Override
@@ -85,19 +89,11 @@ public class FilterColumn2RecyclerAdapter extends RecyclerView.Adapter<FilterCol
 
     private void addItemsToList(int position){
         AndroidUtils.showErrorLog(context, "Item No Selected ;  " + position);
-        if (!isExist(filterValueList.get(position))){
+        if (!selectedValueList.contains(filterValueList.get(position))){
             selectedValueList.add(filterValueList.get(position));
             AndroidUtils.showErrorLog(context, "Item No Added ;  " + position+"  new size "+selectedValueList.size());
         }
     }
 
-    private boolean isExist(FilterObject filterObject){
-        for (int i = 0; i < selectedValueList.size(); i++){
-            if(filterObject.equals(selectedValueList.get(i))){
-                return true;
-            }
-        }
-        return false;
-    }
 }
 
