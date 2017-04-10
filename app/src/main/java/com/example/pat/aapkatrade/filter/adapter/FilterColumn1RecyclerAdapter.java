@@ -1,6 +1,7 @@
 package com.example.pat.aapkatrade.filter.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ public class FilterColumn1RecyclerAdapter extends RecyclerView.Adapter<FilterCol
     private final LayoutInflater inflater;
     private ArrayList<String> filterNameList;
     private Context context;
+    private ArrayList<View> viewArrayList = new ArrayList<>();
     public static CommonInterface commonInterface = new CommonInterface() {
         @Override
         public Object getData(Object object) {
@@ -36,35 +38,37 @@ public class FilterColumn1RecyclerAdapter extends RecyclerView.Adapter<FilterCol
     }
 
     @Override
-    public void onBindViewHolder(final FilterColumn1ViewHolder holder, final int position) {
+    public void onBindViewHolder(final FilterColumn1ViewHolder holder, int position) {
+        if(!viewArrayList.contains(holder.filterColumn1)){
+            viewArrayList.add(holder.filterColumn1);
+        }
         holder.filterName.setText(filterNameList.get(position));
         holder.filterName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickListener(position, holder.filterColumn1);
+                onClickListener(holder.getAdapterPosition());
             }
         });
-
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickListener(position, holder.filterColumn1);
+                onClickListener(holder.getAdapterPosition());
             }
         });
     }
 
-    private void setBackground(int position, View view) {
+    private void setBackground(int position) {
         for (int i = 0; i < filterNameList.size(); i++) {
-            AndroidUtils.showErrorLog(context, position+"POSITION"+(position == i));
+            AndroidUtils.showErrorLog(context, position + "POSITION" + (position == i));
             if (position == i)
-                AndroidUtils.setBackgroundSolid(view, context, R.color.green, 0);
-//            else
-//                AndroidUtils.setBackgroundSolid(view, context, R.color.white, 0);
+                AndroidUtils.setBackgroundSolid(viewArrayList.get(position), context, R.color.selected_filter_col1_bg, 0, GradientDrawable.RECTANGLE);
+            else
+                AndroidUtils.setBackgroundSolid(viewArrayList.get(i), context, R.color.filter_col1_bg, 0, GradientDrawable.RECTANGLE);
         }
     }
 
-    private void onClickListener(int position, View view) {
-        setBackground(position, view);
+    private void onClickListener(int position) {
+        setBackground(position);
         AndroidUtils.showErrorLog(context, "Item No Selected ;  " + position);
         commonInterface.getData(filterNameList.get(position));
     }
