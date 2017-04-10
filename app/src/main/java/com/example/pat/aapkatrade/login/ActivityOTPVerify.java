@@ -104,7 +104,7 @@ public class ActivityOTPVerify extends AppCompatActivity {
             getSupportActionBar().setTitle(null);
             getSupportActionBar().setElevation(0);
         }
-        Log.e("class_name",class_name);
+        //Log.e("class_name",class_name);
     }
 
     @Override
