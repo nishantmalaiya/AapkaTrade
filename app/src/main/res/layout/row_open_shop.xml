@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeOpenShop"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/orange_background"
+    android:padding="5dp"
+    android:layout_marginRight="2dp"
+    >
+    <TextView
+        android:id="@+id/tvdays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SUN"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/tvopentime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open Time: 06:00AM"
+        android:layout_below="@+id/tvdays"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        />
+
+    <TextView
+        android:id="@+id/tvclosetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open Time: 06:00AM"
+        android:layout_below="@+id/tvopentime"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:layout_marginTop="3dp"
+        />
+
+
+
+</RelativeLayout>

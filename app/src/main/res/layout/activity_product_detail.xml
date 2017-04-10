@@ -224,7 +224,7 @@
                                 android:layout_alignParentLeft="true"
                                 android:text="Laxmi Auto World"
                                 android:textColor="@color/green"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
 
@@ -237,6 +237,8 @@
                                 android:text="@string/rupees_deatils"
                                 android:textColor="@color/orange"
                                 android:textStyle="bold" />
+
+
 
                             <TextView
                                 android:id="@+id/tvCrossPrice"
@@ -498,11 +500,65 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="70dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp">
+                    >
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <ImageView
+                            android:id="@+id/imgOpenShop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_open_shop"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvOpenShopheading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="OPEN SHOP"
+                            android:layout_centerHorizontal="true"
+                            android:layout_below="@+id/imgOpenShop"
+                            android:textColor="@color/black"
+                            android:layout_marginTop="15dp"
+                            android:textSize="18sp"
+                            />
+
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/openShopList"
+                            android:layout_width="match_parent"
+                            android:layout_height="110dp"
+                            android:layout_below="@+id/tvOpenShopheading"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="5dp"
+                            >
+
+                        </android.support.v7.widget.RecyclerView>
+
+
+                    </RelativeLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -651,6 +707,7 @@
                                         android:text="3"
                                         android:textColor="@color/black" />
 
+
                                     <ImageView
                                         android:id="@+id/imgthreeStar"
                                         android:layout_width="15dp"
@@ -689,9 +746,7 @@
                                         android:layout_marginTop="7dp"
                                         android:layout_toRightOf="@+id/tvtwoStar"
                                         android:src="@drawable/ic_star"
-
                                         />
-
 
                                     <github.nisrulz.stackedhorizontalprogressbar.StackedHorizontalProgressBar
                                         android:id="@+id/progressbarTwo"
@@ -722,6 +777,7 @@
                                         android:layout_marginTop="7dp"
                                         android:layout_toRightOf="@+id/tvOneStar"
                                         android:src="@drawable/ic_star" />
+
 
 
                                     <github.nisrulz.stackedhorizontalprogressbar.StackedHorizontalProgressBar
@@ -772,6 +828,25 @@
                 </android.support.v7.widget.CardView>
 
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="70dp"
+                        >
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/reviewList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            >
+
+                        </android.support.v7.widget.RecyclerView>
+
+
+                    </RelativeLayout>
+
+
             </LinearLayout>
         </ScrollView>
 
@@ -793,7 +868,6 @@
                 android:text="BUY NOW!"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
-
 
         </RelativeLayout>
 

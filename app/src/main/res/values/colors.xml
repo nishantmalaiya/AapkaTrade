@@ -66,5 +66,14 @@
         <item name="tab_5">#F63D2B</item>
     </array>
 
+    <color name="open_shop_day_color1">#4ab2d6</color>
+    <color name="open_shop_day_color2">#fc795b</color>
+    <color name="open_shop_day_color3">#ff6eb0</color>
+    <color name="open_shop_day_color4">#6599ff</color>
+    <color name="open_shop_day_color5">#4ecdc4</color>
+    <color name="open_shop_day_color6">#ff6b6b</color>
+    <color name="open_shop_day_color7">#012f6a</color>
+
+
 
 </resources>

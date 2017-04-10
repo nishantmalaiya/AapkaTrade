@@ -35,8 +35,8 @@ import java.util.List;
  * Created by PPC16 on 10-Jan-17.
  */
 
-public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+{
 
     private final LayoutInflater inflater;
     private List<DashboardData> itemList;
@@ -45,7 +45,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     AppSharedPreference app_sharedpreference;
 
 
-    public DashboardAdapter(Context context, List<DashboardData> itemList) {
+    public DashboardAdapter(Context context, List<DashboardData> itemList)
+    {
         this.itemList = itemList;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -53,7 +54,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
 
         View view = inflater.inflate(R.layout.row_dashboard2, parent, false);
         viewHolder = new DashboardHolder(view);
@@ -62,10 +64,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
-
-
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position)
+    {
         DashboardHolder homeHolder = (DashboardHolder) holder;
 
         homeHolder.tvDashboard.setText(itemList.get(position).dashboard_name.toString());
@@ -296,20 +297,18 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     }
 
 
-                } else if (itemList.get(position).dashboard_name.equals("Associate Agreement")) {
-                    if (app_sharedpreference.getsharedpref("userid", "notlogin").equals("notlogin")) {
+                } else if (itemList.get(position).dashboard_name.equals("Associate Agreement"))
+                {
+                    if (app_sharedpreference.getsharedpref("userid", "notlogin").equals("notlogin"))
+                    {
 
                         Intent i = new Intent(context, LoginDashboard.class);
                         context.startActivity(i);
-
-
-
                     }
-                     else {
+                    else
+                    {
                         AssociateAgreementDialog dialog = new AssociateAgreementDialog(context);
                         dialog.show();
-
-
                     }
                     //
 
@@ -321,19 +320,22 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     }
 
-    private void showMessage(String s) {
+    private void showMessage(String s)
+    {
 
         Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
     }
 
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return itemList.size();
 
     }
 
-    public String getCurrentTimeStamp() {
+    public String getCurrentTimeStamp()
+    {
         return new SimpleDateFormat("dd MMM yyyy HH:mm").format(new Date());
     }
 

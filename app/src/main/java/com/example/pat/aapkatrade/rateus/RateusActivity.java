@@ -15,8 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pat.aapkatrade.Home.HomeActivity;
+
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.general.ConnectivityNotFound;
@@ -37,11 +39,14 @@ public class RateusActivity extends AppCompatActivity
     RatingBar ratingbar;
     Button butttonExperience,buttonSubmit;
     EditText edtWriteTitleReview,edtWriteMessage;
-    private Context context;
+    Context context;
     AppSharedPreference app_sharedpreference;
-    String user_id,product_id;
+    String user_id,product_id,product_name,product_price,product_image;
     ProgressBarHandler progress_handler;
     CoordinatorLayout coordinationRateus;
+    ImageView imgProduct;
+   public static float rating_count;
+
 
 
     @Override
@@ -51,15 +56,19 @@ public class RateusActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_rateus);
 
-
         Intent intent = getIntent();
 
         Bundle b = intent.getExtras();
 
         product_id = b.getString("product_id");
 
-        System.out.println("product_id------------"+product_id.toString());
+        product_name = b.getString("product_name");
 
+        product_price = b.getString("product_price");
+
+        product_image = b.getString("product_image");
+
+        System.out.println("product_id------------"+product_id.toString());
 
         progress_handler = new ProgressBarHandler(this);
 
@@ -73,6 +82,9 @@ public class RateusActivity extends AppCompatActivity
 
         setup_layout();
 
+
+
+
     }
 
     private void setup_layout()
@@ -80,11 +92,28 @@ public class RateusActivity extends AppCompatActivity
 
         coordinationRateus = (CoordinatorLayout) findViewById(R.id.coordinationRateus);
 
+        imgProduct = (ImageView) findViewById(R.id.imgProduct);
+
+        Ion.with(imgProduct).load(product_image);
+
         tvProductName = (TextView) findViewById(R.id.tvProductName);
+
+        tvProductName.setText(product_name);
 
         tvCategoriesName = (TextView) findViewById(R.id.tvCategoriesName);
 
+        tvCategoriesName.setText(product_price);
+
         ratingbar = (RatingBar) findViewById(R.id.ratingbar);
+
+        ratingbar.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+            @Override
+            public void onRatingChange(float RatingCount)
+            {
+
+                rating_count = RatingCount;
+            }
+        });
 
         butttonExperience= (Button) findViewById(R.id.butttonExperience);
 
@@ -194,6 +223,8 @@ public class RateusActivity extends AppCompatActivity
         if (ConnetivityCheck.isNetworkAvailable(RateusActivity.this))
         {
 
+            System.out.println("sachin-----------"+String.valueOf(rating_count));
+
             Ion.with(RateusActivity.this)
                     .load(getResources().getString(R.string.webservice_base_url)+"/write_review")
                     .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
@@ -201,7 +232,7 @@ public class RateusActivity extends AppCompatActivity
                     .setBodyParameter("user_id", user_id)
                     .setBodyParameter("message", edtWriteMessage.getText().toString())
                     .setBodyParameter("product_id", product_id)
-                    .setBodyParameter("rating","4")
+                    .setBodyParameter("rating", String.valueOf(rating_count))
                     .setBodyParameter("title", edtWriteTitleReview.getText().toString())
                     .asJsonObject()
                     .setCallback(new FutureCallback<JsonObject>()
@@ -217,7 +248,6 @@ public class RateusActivity extends AppCompatActivity
                                 Log.e("change_password_error",e.toString());
                                 progress_handler.hide();
                             }
-
                             else
                             {
                                 JsonObject jsonObject = result.getAsJsonObject();
@@ -226,14 +256,16 @@ public class RateusActivity extends AppCompatActivity
 
                                 if (message.toString().equals("Your reviews already submitted!"))
                                 {
+
                                     progress_handler.hide();
-                                    //showMessage(message);
+                                    Toast.makeText(RateusActivity.this,message,Toast.LENGTH_SHORT).show();
 
                                 }
                                 else
                                 {
                                     progress_handler.hide();
                                     //showMessage(message);
+                                    Toast.makeText(RateusActivity.this,message,Toast.LENGTH_SHORT).show();
 
                                 }
 
@@ -248,6 +280,8 @@ public class RateusActivity extends AppCompatActivity
             intent.putExtra("callerActivity", ChangePassword.class.getName());
             startActivity(intent);
         }
+
+
 
 
     }

@@ -29,6 +29,7 @@ public class ContactUsFragment extends Fragment
     ProgressBarHandler progress_handler;
     ImageView imgPhone,imgEmail;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -67,15 +68,12 @@ public class ContactUsFragment extends Fragment
 
         buttonSave = (Button)v.findViewById(R.id.buttonSave);
 
-
-
         buttonSave.setOnClickListener(new View.OnClickListener()
         {
 
             @Override
             public void onClick(View v)
             {
-
 
                 String subject = etSubject.getText().toString();
                 String username = etUserName.getText().toString();
@@ -164,8 +162,6 @@ public class ContactUsFragment extends Fragment
 
 
     }
-
-
 
 
     private void callAddCompanyWebService(String subject, String username , String mobile, String email, String query)

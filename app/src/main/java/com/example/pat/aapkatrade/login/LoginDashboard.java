@@ -24,15 +24,19 @@ import com.example.pat.aapkatrade.user_dashboard.User_DashboardFragment;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class LoginDashboard extends AppCompatActivity {
+public class LoginDashboard extends AppCompatActivity
+{
+
     FrameLayout fl_seller, fl_buyer, fl_business_assoc;
     AppSharedPreference app_sharedpreference;
     private Context context;
+    TextView skip;
 
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_logindashboard);
@@ -48,6 +52,7 @@ public class LoginDashboard extends AppCompatActivity {
                     app_sharedpreference.setsharedpref("usertype","1");
 
                 Intent i = new Intent(LoginDashboard.this, LoginActivity.class);
+                i.putExtra("user_login","SELLER LOGIN");
                 startActivity(i);
                 overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
             }
@@ -59,6 +64,7 @@ public class LoginDashboard extends AppCompatActivity {
                 if(app_sharedpreference.shared_pref!= null)
                     app_sharedpreference.setsharedpref("usertype","2");
                 Intent i = new Intent(LoginDashboard.this, LoginActivity.class);
+                i.putExtra("user_login","BUYER LOGIN");
                 startActivity(i);
                 overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
             }
@@ -71,9 +77,8 @@ public class LoginDashboard extends AppCompatActivity {
                 if(app_sharedpreference.shared_pref!= null)
                     app_sharedpreference.setsharedpref("usertype","3");
                 Intent i = new Intent(LoginDashboard.this, LoginActivity.class);
+                i.putExtra("user_login","BUSINESS ASSOCIATE LOGIN");
                 startActivity(i);
-
-
 
                 overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
             }
@@ -82,12 +87,25 @@ public class LoginDashboard extends AppCompatActivity {
 
     }
 
-    private void Initview() {
+    private void Initview()
+    {
 
         fl_seller = (FrameLayout) findViewById(R.id.fl_seller);
         fl_buyer = (FrameLayout) findViewById(R.id.fl_buyer);
         fl_business_assoc = (FrameLayout) findViewById(R.id.fl_business_assoc);
         fl_seller = (FrameLayout) findViewById(R.id.fl_seller);
+
+
+        skip = (TextView) findViewById(R.id.skip) ;
+
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
         fl_seller.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +137,7 @@ public class LoginDashboard extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        toolbarRightText.setVisibility(View.VISIBLE);
+        //toolbarRightText.setVisibility(View.VISIBLE);
         toolbarRightText.setTextColor(ContextCompat.getColor(context, R.color.orange));
         toolbarRightText.setText(getResources().getString(R.string.skip));
         toolbarRightText.setOnClickListener(new View.OnClickListener() {
