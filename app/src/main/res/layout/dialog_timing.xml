@@ -21,10 +21,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 
-<ScrollView
-    android:layout_width="match_parent"
 
-    android:layout_height="match_parent">
 
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -36,17 +33,18 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
 
-            android:layout_margin="2dp"
+
             android:orientation="vertical"
             android:weightSum="15"
             android:background="@drawable/dialogbg"
             tools:context="com.example.pat.aapkatrade.user_dashboard.associateagreement.AssociateAgreementDialog">
 
-        <RelativeLayout
+        <LinearLayout
 
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:orientation="vertical"
+            android:layout_weight="4"
 
 
 
@@ -57,8 +55,11 @@
                 android:src="@drawable/daily_dialog_icon"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="@dimen/ten_dip"
+                android:layout_weight="3"
+                android:layout_gravity="center_horizontal"
                 android:id="@+id/dialog_daily_header"
-                android:layout_height="wrap_content" />
+                android:scaleType="fitCenter"
+                android:layout_height="0dp" />
 
 
 <TextView
@@ -67,15 +68,17 @@
     android:layout_centerHorizontal="true"
     android:text="@string/openingclosing"
     android:textStyle="bold"
-    android:layout_height="wrap_content" />
+    android:layout_gravity="center_horizontal"
+    android:layout_weight="1"
+    android:layout_height="0dp" />
 
 
-            </RelativeLayout>
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/activity_my_profile"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="12"
+                android:layout_height="200dp"
+                android:layout_weight="11"
                 android:weightSum="14"
 
 
@@ -85,13 +88,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
-
-
-                        <View xmlns:android="http://schemas.android.com/apk/res/android"
+    <View xmlns:android="http://schemas.android.com/apk/res/android"
                             android:orientation="vertical"
-                            android:layout_width="20dp"
+                            android:layout_width="12dp"
                             android:layout_marginLeft="10dp"
 
                             android:layout_height="fill_parent"
@@ -99,20 +98,7 @@
                             >
                         </View>
 
-<LinearLayout
 
-
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1"
-
-
-
-    android:layout_height="match_parent"
-
-    >
-
-</LinearLayout>
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -141,12 +127,14 @@
 
 
 <View
-    android:layout_width="25dp"
+
  android:background="@drawable/circle_voilet"
     android:id="@+id/view_monday"
-    android:layout_marginLeft="10dp"
+    android:layout_marginLeft="7dp"
+    android:layout_width="18dp"
+    android:layout_height="18dp"
     android:layout_centerVertical="true"
-    android:layout_height="25dp"
+
     >
 
 </View>
@@ -162,22 +150,33 @@
                 android:layout_toRightOf="@+id/view_monday"
                 android:layout_height="match_parent" />
 
+
+
+
             <Spinner
                 android:id="@+id/spinner_monday_open"
                 android:layout_width="wrap_content"
+                android:padding="1dp"
+                android:layout_toRightOf="@+id/tv_monday"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/spinner_green_back"
+                android:layout_centerVertical="true"
+           android:layout_marginLeft="40dp"
+
                 android:gravity="center_vertical" />
+
+
 
             <Spinner
                 android:id="@+id/spinner_monday_close"
                 android:layout_width="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp"
+                android:padding="1dp"
                 android:layout_toRightOf="@+id/spinner_monday_open"
+
+                android:layout_centerVertical="true"
+
+                android:layout_marginLeft="20dp"
+
                 android:layout_height="wrap_content"
                 />
 
@@ -195,17 +194,21 @@
         android:layout_height="0dp">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
 
             <View
-                android:layout_width="25dp"
+
                 android:background="@drawable/circle_black"
                 android:id="@+id/view_tuesday"
                 android:layout_centerVertical="true"
-                android:layout_height="25dp"
-                android:layout_marginLeft="8dp"
+
+                android:layout_marginLeft="7dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 >
 
             </View>
@@ -227,8 +230,11 @@
                 android:layout_width="wrap_content"
                 android:gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-
+                android:layout_marginLeft="40dp"
+                android:layout_toRightOf="@+id/tv_tuesday"
+                android:padding="1dp"
+                
+              
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
                 />
@@ -237,8 +243,12 @@
                 android:id="@+id/spinner_tuesday_close"
                 android:layout_width="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="20dp"
+           android:padding="1dp"
+
                 android:layout_toRightOf="@+id/spinner_tuesday_open"
+
+
                 android:layout_height="wrap_content"
                 />
 
@@ -257,17 +267,24 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
 
             <View
-                android:layout_width="25dp"
+
                 android:background="@drawable/circle_black"
                 android:id="@+id/view_wednesday"
-                android:layout_marginLeft="8dp"
+
                 android:layout_centerVertical="true"
-                android:layout_height="25dp"
+
+                android:layout_marginLeft="7dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+
+
                 >
 
             </View>
@@ -279,6 +296,7 @@
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/view_wednesday"
                 android:text="@string/wednesday"
+                android:id="@+id/tv_wed"
                 android:layout_height="match_parent" />
 
 
@@ -288,7 +306,11 @@
                 android:gravity="center_vertical"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
+                android:padding="1dp"
+                android:layout_marginLeft="40dp"
+                android:layout_toRightOf="@+id/tv_wed"
 
+                
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
                 />
@@ -296,10 +318,13 @@
             <Spinner
                 android:id="@+id/spinner_wednesday_close"
                 android:layout_width="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp"
-                android:layout_toRightOf="@+id/spinner_wednesday_open"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+               android:layout_toRightOf="@+id/spinner_wednesday_open"
+                android:layout_marginLeft="20dp"
+                android:padding="1dp"
+                
+                
                 />
 
         </RelativeLayout>
@@ -314,18 +339,25 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_centerVertical="true"
 
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
 
             <View
-                android:layout_width="25dp"
+
                 android:background="@drawable/circle_black"
                 android:id="@+id/view_thursday"
-                android:layout_marginLeft="8dp"
+
                 android:layout_centerVertical="true"
-                android:layout_height="25dp"
+
+
+                android:layout_marginLeft="7dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+
                 >
 
             </View>
@@ -337,6 +369,7 @@
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/view_thursday"
                 android:text="@string/thrusday"
+                android:id="@+id/tv_thursday"
                 android:layout_height="match_parent" />
 
 
@@ -346,8 +379,10 @@
                 android:layout_width="wrap_content"
                 android:gravity="center_vertical"
                 android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-
+                android:padding="1dp"
+             android:layout_marginLeft="40dp"
+             android:layout_toRightOf="@+id/tv_thursday"
+                
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
                 />
@@ -356,8 +391,12 @@
                 android:id="@+id/spinner_thursday_close"
                 android:layout_width="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="20dp"
+                android:padding="1dp"
+
                 android:layout_toRightOf="@+id/spinner_thursday_open"
+                
+
                 android:layout_height="wrap_content"
                 />
 
@@ -379,12 +418,17 @@
 
 
             <View
-                android:layout_width="25dp"
+
                 android:id="@+id/view_friday"
                 android:background="@drawable/circle_black"
-                android:layout_marginLeft="8dp"
+
                 android:layout_centerVertical="true"
-                android:layout_height="25dp"
+
+                android:layout_marginLeft="7dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+
+
                 >
 
             </View>
@@ -394,17 +438,21 @@
                 android:textColor="@color/gradient_dialog5"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
+                android:id="@+id/tv_friday"
                 android:text="@string/friday"
                 android:layout_toRightOf="@+id/view_friday"
                 android:layout_height="match_parent" />
 
             <Spinner
             android:id="@+id/spinner_friday_open"
-            android:layout_width="wrap_content"
+                android:layout_width="wrap_content"
             android:gravity="center_vertical"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
 
+            android:layout_centerVertical="true"
+         android:layout_toRightOf="@+id/tv_friday"
+                android:padding="1dp"
+                android:layout_marginLeft="40dp"
+                
             android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
             />
@@ -413,8 +461,12 @@
                 android:id="@+id/spinner_friday_close"
                 android:layout_width="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp"
+                android:padding="1dp"
                 android:layout_toRightOf="@+id/spinner_friday_open"
+                android:layout_marginLeft="20dp"
+                
+                android:layout_marginRight="5dp"
+
                 android:layout_height="wrap_content"
                 />
 
@@ -429,18 +481,21 @@
         android:id="@+id/ll_saturday"
         android:layout_weight="2"
         android:layout_height="0dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_height="wrap_content">
+
 
 
             <View
-                android:layout_width="25dp"
+
                 android:background="@drawable/circle_black"
                 android:id="@+id/view_saturday"
-                android:layout_height="25dp"
-                android:layout_marginLeft="8dp"
+
+                android:layout_centerVertical="true"
+
+
+                android:layout_marginLeft="7dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+
                 >
 
             </View>
@@ -449,11 +504,47 @@
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/gradient_dialog6"
                 android:text="@string/saturday"
+                android:id="@+id/tv_saturday"
+                android:layout_toRightOf="@+id/view_saturday"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:layout_height="match_parent" />
 
-        </LinearLayout>
+
+
+            <Spinner
+                android:id="@+id/spinner_saturday_open"
+                android:layout_width="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+               android:layout_toRightOf="@+id/tv_saturday"
+                android:padding="1dp"
+                
+                android:layout_marginLeft="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_saturday_close"
+                android:layout_width="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="1dp"
+                
+                android:layout_marginLeft="20dp"
+
+                android:layout_toRightOf="@+id/spinner_saturday_open"
+                android:layout_height="wrap_content"
+                />
+
+
+
+
+
+
+
+
+
 
     </RelativeLayout>
     <RelativeLayout
@@ -462,18 +553,21 @@
         android:id="@+id/ll_sunday"
         android:layout_weight="2"
         android:layout_height="0dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_height="wrap_content">
+
 
 
             <View
-                android:layout_width="25dp"
+
                 android:background="@drawable/circle_black"
                 android:id="@+id/view_sunday"
-                android:layout_marginLeft="8dp"
-                android:layout_height="25dp"
+
+                android:layout_centerVertical="true"
+
+
+                android:layout_marginLeft="7dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+
                 >
 
             </View>
@@ -483,11 +577,46 @@
                 android:textColor="@color/gradient_dialog7"
 
                 android:text="@string/sunday"
+                android:id="@+id/tv_sunday"
+                android:layout_toRightOf="@+id/view_sunday"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:layout_height="match_parent" />
 
-        </LinearLayout>
+
+
+            <Spinner
+                android:id="@+id/spinner_sunday_open"
+                android:layout_width="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+             android:layout_toRightOf="@+id/tv_sunday"
+                android:padding="1dp"
+
+                android:layout_marginLeft="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                />
+
+            <Spinner
+                android:id="@+id/spinner_sunday_close"
+                android:layout_width="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="1dp"
+                android:layout_toRightOf="@+id/spinner_sunday_open"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                
+
+                android:layout_height="wrap_content"
+                />
+
+
+
+
+
+
+
 
     </RelativeLayout>
 
@@ -513,6 +642,5 @@
 
         </LinearLayout>
 
-</ScrollView>
     </RelativeLayout>
 </RelativeLayout>
