@@ -477,9 +477,6 @@
         </RelativeLayout>
 
 
-
-
-
         <RelativeLayout
             android:id="@+id/relativeCvDetail"
             android:layout_width="100dp"
@@ -596,8 +593,6 @@
                     android:layout_centerVertical="true"
                     />
 
-
-
             </RelativeLayout>
 
 
@@ -610,7 +605,6 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
                 ></View>
-
 
 
 
@@ -634,7 +628,7 @@
         <Button
             android:id="@+id/buttonCancel"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/fifty_dip"
             android:text="CANCEL"
             android:background="@drawable/orange_background"
             android:textColor="@color/white"
@@ -646,7 +640,7 @@
         <Button
             android:id="@+id/buttonContinuePay"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/fifty_dip"
             android:text="CONTINUE TO PAY"
             android:background="@drawable/orange_background"
             android:textColor="@color/white"
@@ -658,7 +652,6 @@
 
 
     </RelativeLayout>
-
 
 
 </RelativeLayout>

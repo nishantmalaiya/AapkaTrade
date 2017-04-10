@@ -245,7 +245,7 @@
     <string name="about_us_data9">You can sell any kind of services / products</string>
 
 
-    <string name="skip">Skip</string>
+    <string name="skip"><u>Skip</u></string>
     <string name="add_vender_heading">Add Vendor</string>
 
     <string name="add_address_heading">Add Address</string>

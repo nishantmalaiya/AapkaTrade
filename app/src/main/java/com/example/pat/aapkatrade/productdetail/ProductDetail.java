@@ -12,6 +12,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -37,9 +39,15 @@ import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.login.LoginDashboard;
 import com.example.pat.aapkatrade.map.GoogleMapActivity;
 import com.example.pat.aapkatrade.payment.PaymentActivity;
+import com.example.pat.aapkatrade.productdetail.open_shop.OpenShopAdapter;
+import com.example.pat.aapkatrade.productdetail.open_shop.OpenShopData;
+import com.example.pat.aapkatrade.productdetail.reviewlist.ReviewListAdapter;
+import com.example.pat.aapkatrade.productdetail.reviewlist.ReviewListData;
 import com.example.pat.aapkatrade.rateus.RateusActivity;
 import com.example.pat.aapkatrade.service_enquiry.ServiceEnquiry;
 import com.example.pat.aapkatrade.user_dashboard.address.add_address.AddAddressActivity;
+import com.example.pat.aapkatrade.user_dashboard.companylist.CompanyList;
+import com.example.pat.aapkatrade.user_dashboard.companylist.CompanyListAdapter;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -58,6 +66,7 @@ import github.nisrulz.stackedhorizontalprogressbar.StackedHorizontalProgressBar;
 
 public class ProductDetail extends AppCompatActivity implements DatePickerDialog.OnDateSetListener
 {
+
 
     LinearLayout viewpagerindicator, linearlayoutShare, linearlayoutLocation;
     Spinner spinner;
@@ -91,10 +100,16 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     private String product_name;
     DroppyMenuPopup droppyMenu;
     AppSharedPreference app_sharedpreference;
+    RecyclerView reviewList,openShopList;
+    LinearLayoutManager mLayoutManager,mLayoutManagerShoplist;
+    ReviewListAdapter reviewListAdapter;
+    OpenShopAdapter openShopAdapter;
+    ArrayList<OpenShopData> openShopDatas = new ArrayList<>();
+    ArrayList<ReviewListData> reviewListDatas = new ArrayList<>();
+    ArrayList<Integer> color_openshop = new ArrayList<>();
 
 
 
-    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -122,6 +137,15 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         progressBarHandler = new ProgressBarHandler(context);
 
         setUpToolBar();
+
+        color_openshop.add(R.color.open_shop_day_color1);
+        color_openshop.add(R.color.open_shop_day_color2);
+        color_openshop.add(R.color.open_shop_day_color3);
+        color_openshop.add(R.color.open_shop_day_color4);
+        color_openshop.add(R.color.open_shop_day_color5);
+        color_openshop.add(R.color.open_shop_day_color6);
+        color_openshop.add(R.color.open_shop_day_color7);
+
 
         initView();
 
@@ -353,12 +377,14 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
         vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
 
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(int position)
+            {
 
                 try {
                     for (int i = 0; i < dotsCount; i++) {
@@ -384,14 +410,38 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     private void initView()
     {
         context = ProductDetail.this;
+
         linearLayoutQuantity = (LinearLayout) findViewById(R.id.linearlayoutQuantity);
+
         textViewQuantity = (TextView) findViewById(R.id.textViewQuantity);
+
         progress_handler = new ProgressBarHandler(this);
+
         imageList = new ArrayList<>();
+
         relativeRateReview = (RelativeLayout) findViewById(R.id.relativeRateReview);
+
         linearlayoutShare = (LinearLayout) findViewById(R.id.linearlayoutShare);
+
         linearlayoutLocation = (LinearLayout) findViewById(R.id.linearlayoutLocation);
+
         tvServiceBuy = (TextView) findViewById(R.id.tvServiceBuy);
+
+        reviewList = (RecyclerView) findViewById(R.id.reviewList);
+
+        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        reviewList.setLayoutManager(mLayoutManager);
+        reviewListAdapter = new ReviewListAdapter(ProductDetail.this, reviewListDatas);
+        reviewList.setAdapter(reviewListAdapter);
+
+        openShopList = (RecyclerView) findViewById(R.id.openShopList);
+
+        mLayoutManagerShoplist = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+        openShopList.setLayoutManager(mLayoutManagerShoplist);
+        openShopAdapter = new OpenShopAdapter(ProductDetail.this, openShopDatas,color_openshop);
+        openShopList.setAdapter(openShopAdapter);
+
 
         relativeRateReview.setOnClickListener(new View.OnClickListener()
         {
@@ -408,6 +458,9 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
                     Intent rate_us = new Intent(ProductDetail.this,RateusActivity.class);
                     rate_us.putExtra("product_id",product_id);
+                    rate_us.putExtra("product_name",tvProductName.getText().toString());
+                    rate_us.putExtra("product_price",tvProPrice.getText().toString());
+                    rate_us.putExtra("product_image",imageList.get(0).toString());
                     startActivity(rate_us);
 
                 }
@@ -447,8 +500,9 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
                 Intent share = new Intent(Intent.ACTION_SEND);
                 share.setType("text/plain");
                 share.putExtra(Intent.EXTRA_TEXT, message);
-
                 startActivity(Intent.createChooser(share, "Title of the dialog the system will open"));
+
+
 
             }
         });
@@ -486,10 +540,12 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         relativeBuyNow = (RelativeLayout) findViewById(R.id.relativeBuyNow);
         vp = (ViewPager) findViewById(R.id.viewpager_custom);
         viewpagerindicator = (LinearLayout) findViewById(R.id.viewpagerindicator);
+
         progressbarFive = (StackedHorizontalProgressBar) findViewById(R.id.progressbarFive);
         progressbarFive.setMax(max);
         progressbarFive.setProgress(10);
         progressbarFive.setSecondaryProgress(0);
+
         progressbarFour = (StackedHorizontalProgressBar) findViewById(R.id.progressbarFour);
         progressbarFour.setMax(max);
         progressbarFour.setProgress(6);
@@ -528,7 +584,8 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
     }
 
-    private void setUpToolBar() {
+    private void setUpToolBar()
+    {
         ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         AndroidUtils.setImageColor(homeIcon, context, R.color.white);
@@ -549,8 +606,11 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         }
     }
 
+
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         getMenuInflater().inflate(R.menu.menu_map, menu);
         return true;
     }
@@ -569,7 +629,8 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
 
     @Override
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth)
+    {
         showDate(year, monthOfYear + 1, dayOfMonth);
     }
 

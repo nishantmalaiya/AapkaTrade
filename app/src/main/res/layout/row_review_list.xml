@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/relativeRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/orange_background"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            >
+
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                />
+
+            <ImageView
+                android:id="@+id/imgStar"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_white_star"
+                android:layout_toRightOf="@+id/tvRating"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tvtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Review After 2 month use"
+            android:layout_toRightOf="@+id/relativeRating"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeRating"
+            android:layout_marginTop="10dp"
+            android:text="Phone is amazing. Nice display, nice camera, smooth touch, design is superb. The only thing I didn't like is the sim card thing. The only thing I did not like is the sim card thing."
+            />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvMessage"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rohan Strike"
+                android:textColor="@color/green"
+                android:layout_alignParentLeft="true"
+                />
+
+
+            <RelativeLayout
+                android:id="@+id/relativeCertified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                >
+
+
+                <ImageView
+                    android:id="@+id/imgCertified"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/ic_certified"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Certified Buyer"
+                    android:layout_toRightOf="@+id/imgCertified"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/green"
+                    />
+
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/deliver_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="21 Oct, 2016"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/green"
+                />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

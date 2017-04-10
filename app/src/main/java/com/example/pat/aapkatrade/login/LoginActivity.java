@@ -40,11 +40,20 @@ public class LoginActivity extends AppCompatActivity {
     private AppSharedPreference app_sharedpreference;
     private CoordinatorLayout cl;
     private Context context;
+    String user_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+        Intent intent = getIntent();
+
+        Bundle b = intent.getExtras();
+
+        user_login = b.getString("user_login");
+
 
         context = LoginActivity.this;
         app_sharedpreference = new AppSharedPreference(context);
@@ -78,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setUpToolBar() {
         ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
+        findViewById(R.id.logoWord).setVisibility(View.INVISIBLE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         AndroidUtils.setImageColor(homeIcon, context, R.color.white);
         homeIcon.setOnClickListener(new View.OnClickListener() {
@@ -341,6 +351,9 @@ public class LoginActivity extends AppCompatActivity {
 
         forgot_password = (TextView) findViewById(R.id.tv_forgotpassword);
         login_text = (TextView) findViewById(R.id.tv_login);
+
+        login_text.setText(user_login);
+
         cl = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
         etEmail = (EditText) findViewById(R.id.etEmail);
         password = (EditText) findViewById(R.id.etpassword);
