@@ -6,7 +6,7 @@
     <color name="hint_color">#606060</color>
     <color name="color_voilet">#FF6600</color>
     <color name="color_voilet_transparent">#40FF6600</color>
-   <color name="green">#63BEAC</color>
+    <color name="green">#63BEAC</color>
     <color name="green_line">#05DB61</color>
     <color name="green_transparent">#8063BEAC</color>
     <color name="teal">#008080</color>
@@ -20,8 +20,8 @@
     <color name="white">#FFFFFF</color>
     <color name="screen_back">#F8EEE5</color>
     <color name="black">#000000</color>
-   <color name="order_detail_back">#313131</color>
-<color name="blue_gradient">#415673</color>
+    <color name="order_detail_back">#313131</color>
+    <color name="blue_gradient">#415673</color>
     <color name="blue_gradient_dark">#FF212B39</color>
     <color name="aquamarine">#7AE1CC</color>
     <color name="bg_product_title">#DAD7CC</color>
@@ -34,6 +34,10 @@
     <color name="item_details_color">#585858</color>
     <color name="green_gradient2">#1C7B67</color>
     <color name="transparent">#40d1cece</color>
+
+    <color name="filter_col1_bg">#f9f9f9</color>
+    <color name="selected_filter_col1_bg">#f9f0ea</color>
+    <color name="filter_row_saparator">#e6e3e3</color>
 
     <color name="stroke_bg">#707070</color>
     <color name="brown_light">#F1EEE4</color>

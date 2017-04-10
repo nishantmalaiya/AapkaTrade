@@ -96,7 +96,6 @@
                             android:id="@+id/linearlayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/grey__more_light"
                             android:orientation="horizontal">
 
 
@@ -106,6 +105,7 @@
                                 android:layout_height="wrap_content"
                                 android:minHeight="1000dp"
                                 android:paddingBottom="@dimen/five_dip"
+                                android:background="@color/filter_col1_bg"
                                 android:paddingTop="@dimen/five_dip"
                                 android:paddingRight="@dimen/five_dip">
 
@@ -119,6 +119,7 @@
                                 android:layout_height="wrap_content"
                                 android:minHeight="1000dp"
                                 android:paddingBottom="@dimen/five_dip"
+                                android:background="@color/white"
                                 android:paddingTop="@dimen/five_dip"
                                 android:paddingLeft="@dimen/five_dip">
 
