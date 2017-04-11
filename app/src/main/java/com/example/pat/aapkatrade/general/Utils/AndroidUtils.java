@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.pat.aapkatrade.Home.navigation.entity.CategoryHome;
 import com.example.pat.aapkatrade.Home.registration.entity.State;
 import com.example.pat.aapkatrade.Home.registration.spinner_adapter.SpStateAdapter;
 import com.example.pat.aapkatrade.R;
@@ -151,6 +152,11 @@ public class AndroidUtils {
 
     public static void showErrorLog(Context context, Object message){
         Log.e(getTag(context), message.toString());
+    }
+
+
+    public static void sortArrayList(ArrayList<CategoryHome> arrayList){
+
     }
 
 

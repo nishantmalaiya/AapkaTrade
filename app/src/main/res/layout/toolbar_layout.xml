@@ -1,23 +1,20 @@
-<android.support.v7.widget.Toolbar
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@color/green"
-    app:contentInsetLeft="0dp"
-
-    app:contentInsetStart="0dp"
-    app:contentInsetStartWithNavigation="0dp"
     android:elevation="4dp"
+
     android:minHeight="?attr/actionBarSize"
-    >
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    app:contentInsetStartWithNavigation="0dp">
 
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/back_imagview"
@@ -25,18 +22,18 @@
             android:layout_height="@dimen/twenty_five_dip"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
-            app:srcCompat="@drawable/ic_arrow_back_white_24dp"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
 
 
         <ImageView
 
+            android:id="@+id/iconHome"
             android:layout_width="@dimen/twenty_five_dip"
             android:layout_height="@dimen/twenty_five_dip"
             android:layout_centerVertical="true"
-            android:adjustViewBounds="true"
-            android:id="@+id/iconHome"
             android:layout_toRightOf="@+id/back_imagview"
+            android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_navigation_home" />
 
@@ -45,10 +42,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
             android:layout_marginLeft="@dimen/ten_dip"
             android:layout_toRightOf="@+id/iconHome"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
             android:src="@drawable/logo_word" />
 
 
@@ -56,25 +53,22 @@
             android:id="@+id/header_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/iconHome"
             android:layout_marginLeft="@dimen/thirty_five_dip"
+            android:layout_toRightOf="@+id/iconHome"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_medium"
             android:textStyle="bold"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/toolbarRightText"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/thirty_five_dip"
-            android:layout_alignParentRight = "true"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/twenty_dip"
             android:textColor="@color/orange"
             android:textSize="@dimen/textsize_medium"
-            android:visibility="gone"
-            />
-
+            android:visibility="gone" />
 
 
     </RelativeLayout>

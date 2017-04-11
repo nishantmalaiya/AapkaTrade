@@ -28,6 +28,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -85,10 +86,10 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
     private static BuyerRegistration formBuyerData = new BuyerRegistration();
     private int isAllFieldSet = 0;
     private LinearLayout uploadCard;
-    private Spinner spBussinessCategory, spCountry, spState, spCity;
+    private Spinner spBussinessCategory, spState, spCity;
     private String[] spBussinessName = {"Please Select Business Type", "Licence", "Personal"};
     private EditText etProductName, etFirstName, etLastName, etDOB, etEmail, etMobileNo, etAddress, etPassword, etReenterPassword, et_tin_number, et_tan_number, etReferenceNo;
-    private TextView tvSave, uploadMsg;
+    private TextView tvSave, uploadMsg, tv_agreement;
     private LinearLayout registrationLayout;
     private ArrayList<Country> countryList = new ArrayList<>();
     private ArrayList<State> stateList = new ArrayList<>();
@@ -109,6 +110,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
     private CardView businessDetailsCard;
     private RelativeLayout relativeCompanyListheader;
     private Context context;
+    private CheckBox agreement_check;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -514,66 +516,6 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
 
     }
 
-    private void getCountry() {
-        HashMap<String, String> webservice_body_parameter = new HashMap<>();
-        webservice_body_parameter.put("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3");
-        webservice_body_parameter.put("type", "country");
-
-        HashMap<String, String> webservice_header_type = new HashMap<>();
-        webservice_header_type.put("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3");
-
-
-        Call_webservice.getcountrystatedata(RegistrationActivity.this, "country", getResources().getString(R.string.webservice_base_url) + "/dropdown", webservice_body_parameter, webservice_header_type);
-
-        Call_webservice.taskCompleteReminder = new TaskCompleteReminder() {
-            @Override
-            public void Taskcomplete(JsonObject webservice_returndata) {
-
-
-                if (webservice_returndata != null) {
-                    Log.e("webservice_returndata", webservice_returndata.toString());
-                    JsonObject jsonObject = webservice_returndata.getAsJsonObject();
-                    JsonArray jsonResultArray = jsonObject.getAsJsonArray("result");
-                    countryList.clear();
-                    Country countryEntity_init = new Country("-1", "-Please Select Country-");
-                    countryList.add(countryEntity_init);
-                    for (int i = 0; i < jsonResultArray.size(); i++) {
-
-                        JsonObject jsonObject1 = (JsonObject) jsonResultArray.get(i);
-
-                        Country countryEntity = new Country(jsonObject1.get("id").getAsString(), jsonObject1.get("name").getAsString());
-                        countryList.add(countryEntity);
-                    }
-                    SpCountrysAdapter spCountrysAdapter = new SpCountrysAdapter(RegistrationActivity.this, countryList);
-                    spCountry.setAdapter(spCountrysAdapter);
-                    spCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            Log.d("datacountry", countryList.get(position).countryId);
-                            countryID = countryList.get(position).countryId;
-//                            stateList = new ArrayList<>();
-                            if (position > 0) {
-//                                getState(countryID);
-                            }
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-
-
-                    });
-                } else {
-                    AndroidUtils.showSnackBar(registrationLayout, "Country Not Found");
-                }
-
-            }
-        };
-
-    }
-
     public void getState() {
 
         HashMap<String, String> webservice_body_parameter = new HashMap<>();
@@ -683,14 +625,6 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
 
     private void setUpToolBar() {
         ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
-        AppCompatImageView back_imagview = (AppCompatImageView) findViewById(R.id.back_imagview);
-        back_imagview.setVisibility(View.VISIBLE);
-        back_imagview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         AndroidUtils.setImageColor(homeIcon, context, R.color.white);
         homeIcon.setOnClickListener(new View.OnClickListener() {
@@ -704,7 +638,7 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(null);
             getSupportActionBar().setElevation(0);
         }
@@ -738,7 +672,6 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
         progressBarHandler = new ProgressBarHandler(this);
         registrationLayout = (LinearLayout) findViewById(R.id.registrationLayout);
         spBussinessCategory = (Spinner) findViewById(R.id.spBussinessCategory);
-        spCountry = (Spinner) findViewById(R.id.spCountryCategory);
         spState = (Spinner) findViewById(R.id.spStateCategory);
         spCity = (Spinner) findViewById(R.id.spCityCategory);
         tvSave = (TextView) findViewById(R.id.tvSave);
@@ -770,12 +703,18 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
         dobLayout = (RelativeLayout) findViewById(R.id.dobLayout);
         webservice_header_type.put("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3");
         business_id = app_sharedpreference.getsharedpref("business_id") == null ? "" : app_sharedpreference.getsharedpref("business_id");
-
-
-//        Country countryEntity_init = new Country("-1", "Please Select Country");
-//        countryList.add(countryEntity_init);
-//        SpCountrysAdapter spCountrysAdapter = new SpCountrysAdapter(RegistrationActivity.this, countryList);
-//        spCountry.setAdapter(spCountrysAdapter);
+        agreement_check = (CheckBox) findViewById(R.id.agreement_check);
+        tv_agreement = (TextView) findViewById(R.id.tv_agreement);
+        tv_agreement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(agreement_check.isChecked()){
+                    agreement_check.setChecked(false);
+                }else {
+                    agreement_check.setChecked(true);
+                }
+            }
+        });
 
         State stateEntity_init = new State("-1", "Please Select State");
         stateList.add(stateEntity_init);
@@ -797,6 +736,16 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
             if (formSellerData != null) {
 
                 Log.e("reach", formSellerData.toString() + "            DATAAAAAAAAA");
+                if (Validation.isEmptyStr(formSellerData.getFirstName())) {
+                    putError(0);
+                    isAllFieldSet++;
+                } else if (Validation.isEmptyStr(formSellerData.getLastName())) {
+                    putError(1);
+                    isAllFieldSet++;
+                }else if (!Validation.isValidNumber(formSellerData.getMobile(), Validation.getNumberPrefix(formSellerData.getMobile()))) {
+                    putError(3);
+                    isAllFieldSet++;
+                }else
                 if (Validation.isEmptyStr(formSellerData.getBusinessType())
                         || formSellerData.getBusinessType().equals("0")) {
                     showmessage("Please Select Business Category");
@@ -818,22 +767,13 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                         Integer.parseInt(formSellerData.getCityId()) > 0)) {
                     showmessage("Please Select City");
                     isAllFieldSet++;
-                } else if (Validation.isEmptyStr(formSellerData.getFirstName())) {
-                    putError(0);
-                    isAllFieldSet++;
-                } else if (Validation.isEmptyStr(formSellerData.getLastName())) {
-                    putError(1);
-                    isAllFieldSet++;
-                } else if (!Validation.isValidDOB(formSellerData.getDOB())) {
+                } else   if (!Validation.isValidDOB(formSellerData.getDOB())) {
                     putError(6);
                     isAllFieldSet++;
                 } else if (!Validation.isValidEmail(formSellerData.getEmail())) {
                     putError(2);
                     isAllFieldSet++;
-                } else if (!Validation.isValidNumber(formSellerData.getMobile(), Validation.getNumberPrefix(formSellerData.getMobile()))) {
-                    putError(3);
-                    isAllFieldSet++;
-                } else if (!Validation.isValidPassword(formSellerData.getPassword())) {
+                }  else if (!Validation.isValidPassword(formSellerData.getPassword())) {
                     putError(4);
                     isAllFieldSet++;
                 } else if (!Validation.isValidPassword(formSellerData.getConfirmPassword())) {
@@ -843,6 +783,9 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                     putError(5);
                     isAllFieldSet++;
                 }
+                else if(!agreement_check.isChecked()){
+                    putError(16);
+                }
 
 
             }
@@ -851,6 +794,16 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
         if (userType.equals("2")) {
             Log.e("reach", "BuyerValidate Called");
             if (formBuyerData != null) {
+                if (Validation.isEmptyStr(formBuyerData.getFirstName())) {
+                    putError(0);
+                    isAllFieldSet++;
+                } else if (Validation.isEmptyStr(formBuyerData.getLastName())) {
+                    putError(1);
+                    isAllFieldSet++;
+                }else if (!Validation.isValidNumber(formBuyerData.getMobile(), Validation.getNumberPrefix(formBuyerData.getMobile()))) {
+                    putError(3);
+                    isAllFieldSet++;
+                } else
                 if (!(Validation.isNonEmptyStr(formBuyerData.getCountryId()) &&
                         Integer.parseInt(formBuyerData.getCountryId()) > 0)) {
                     showmessage("Please Select Country");
@@ -866,19 +819,10 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                 } else if (Validation.isEmptyStr(formBuyerData.getAddress())) {
                     putError(9);
                     isAllFieldSet++;
-                } else if (Validation.isEmptyStr(formBuyerData.getFirstName())) {
-                    putError(0);
-                    isAllFieldSet++;
-                } else if (Validation.isEmptyStr(formBuyerData.getLastName())) {
-                    putError(1);
-                    isAllFieldSet++;
-                } else if (!Validation.isValidEmail(formBuyerData.getEmail())) {
+                } else  if (!Validation.isValidEmail(formBuyerData.getEmail())) {
                     putError(2);
                     isAllFieldSet++;
-                } else if (!Validation.isValidNumber(formBuyerData.getMobile(), Validation.getNumberPrefix(formBuyerData.getMobile()))) {
-                    putError(3);
-                    isAllFieldSet++;
-                } else if (!Validation.isEmptyStr(formBuyerData.getUserName())) {
+                }  else if (!Validation.isEmptyStr(formBuyerData.getUserName())) {
                     putError(10);
                     isAllFieldSet++;
                 } else if (!Validation.isValidPassword(formBuyerData.getPassword())) {
@@ -891,6 +835,10 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                     putError(5);
                     isAllFieldSet++;
                 }
+                else if(!agreement_check.isChecked()){
+                    putError(16);
+                }
+
 
             }
         }
@@ -957,6 +905,9 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                 etReenterPassword.setError(getResources().getString(R.string.password_validing_text));
                 showmessage(getResources().getString(R.string.password_validing_text));
                 break;
+            case 16:
+                showmessage("Please Check the Agreement");
+                break;
 
             default:
                 break;
@@ -1010,13 +961,6 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
         Log.e("hi", "requestCode : " + requestCode + "result code : " + resultCode);
 
         try {
-            /*if (requestCode == 11) {
-                Log.e("hi", " if 1 " );
-
-                if (resultCode == Activity.RESULT_OK) {
-                    isReqCode = true;
-                }
-            } else*/
             if (requestCode == 1) {
 
                 Log.e("hi", " if else if 1 ");
@@ -1046,8 +990,6 @@ public class RegistrationActivity extends AppCompatActivity implements TimePicke
                 option.inTempStorage = new byte[32 * 1024];
                 option.inPreferredConfig = Bitmap.Config.RGB_565;
                 if (Build.VERSION.SDK_INT < 19) {
-//                    Uri selectedImageURI = data.getData();
-
                     imageForPreview = BitmapFactory.decodeFile(getFilesDir().getPath(), option);
                 } else {
                     if (data.getData() != null) {
