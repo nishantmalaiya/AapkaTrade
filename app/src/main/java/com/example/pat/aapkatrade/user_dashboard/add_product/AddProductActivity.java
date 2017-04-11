@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -98,6 +99,7 @@ public class AddProductActivity extends AppCompatActivity {
     ProductImages adapter;
     Bitmap imageForPreview;
     ArrayList<Bitmap> multiple_images;
+    RelativeLayout rl_layout1_saveandcontinue_container;
 
     List<Part> files_image = new ArrayList();
     TextView tvTitle;
@@ -109,6 +111,7 @@ public class AddProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         setUpToolBar();
+        setupRecyclerView();
         initview();
         initspinner();
         getCompany();
@@ -116,6 +119,17 @@ public class AddProductActivity extends AppCompatActivity {
 
 
        //getState();
+
+
+    }
+
+
+    private void setupRecyclerView() {
+        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        adapter = new ProductImages(AddProductActivity.this, productImagesDatas);
+        layoutManager = new LinearLayoutManager(AddProductActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
 
     }
@@ -132,6 +146,35 @@ public class AddProductActivity extends AppCompatActivity {
         etProductName=(EditText)findViewById(R.id.etProductName);
         spCategory=(Spinner)findViewById(R.id.spCategory);
         spSubCategory=(Spinner)findViewById(R.id.spSubCategory);
+        rl_layout1_saveandcontinue_container=(RelativeLayout)findViewById(R.id.rl_layout1_saveandcontinue_container);
+
+        //container 1 save& continue click event
+
+
+        rl_layout1_saveandcontinue_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+
+
+
+            }
+        });
+
+
+        uploadButton = (ImageView) findViewById(R.id.uploadButton);
+
+
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picPhoto();
+
+            }
+        });
 
     }
 
@@ -612,6 +655,173 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
     }
 
 
+
+    void picPhoto() {
+        String str[] = new String[]{"Camera", "Gallery"};
+        new AlertDialog.Builder(this).setItems(str,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        performImgPicAction(which);
+                    }
+                }).show();
+
+    }
+
+    void performImgPicAction(int which) {
+        Intent in;
+        if (which == 1) {
+            in = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            in.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+            in.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(in, "Select profile picture"), 11);
+        }  else {
+            in = new Intent();
+            in.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(Intent.createChooser(in, "Select profile picture"), 11);
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.e("hi", "requestCode : " + requestCode + "result code : " + resultCode);
+        try {
+            if (requestCode == 11) {
+                Log.e("hi", " if else if 2 ");
+                BitmapFactory.Options option = new BitmapFactory.Options();
+                option.inDither = false;
+                option.inPurgeable = true;
+                option.inInputShareable = true;
+                option.inTempStorage = new byte[32 * 1024];
+                option.inPreferredConfig = Bitmap.Config.RGB_565;
+                if (Build.VERSION.SDK_INT < 19) {
+                    Log.e("hi_____", " versioncode<19 ");
+                    // Uri selectedImageURI = data.getData();
+                    imageForPreview = BitmapFactory.decodeFile(getFilesDir().getPath(), option);
+
+                }
+                else {
+                    Log.e("hi_____", " versioncod ");
+                    if (data.getData() != null) {
+
+                        ParcelFileDescriptor pfd;
+                        try {
+                            pfd = getContentResolver()
+                                    .openFileDescriptor(data.getData(), "r");
+                            if (pfd != null) {
+                                FileDescriptor fileDescriptor = pfd
+                                        .getFileDescriptor();
+
+                                imageForPreview = BitmapFactory.decodeFileDescriptor(
+                                        fileDescriptor, null, option);
+                            }
+                            pfd.close();
+
+
+                        } catch (FileNotFoundException e) {
+                            Log.e("FileNotFoundException", e.toString());
+                        } catch (IOException e) {
+                            Log.e("IOException", e.toString());
+                        }
+                    }
+
+                    else
+
+                    {
+
+
+
+                        // imageForPreview = (Bitmap) data.getExtras().get("data");
+
+                        multiple_images=new ArrayList<>();
+
+                        data.getClipData().getItemCount();
+                        for(int k=0;k<4;k++)
+                        {
+
+                            Uri selectedImage = data.getClipData().getItemAt(k).getUri();
+
+
+                            Bitmap   bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                            multiple_images.add(bitmap);
+
+
+                            Log.e("doc", "***START.****** ");
+                            if (ImageUtils.sizeOf(bitmap) > 2048) {
+                                Log.e("doc", "if doc file path 1");
+
+                                docFile = getFile(ImageUtils.resize(bitmap, bitmap.getHeight() / 2, bitmap.getWidth() / 2));
+                                Log.e("doc", "if doc file path" + docFile.getAbsolutePath());
+                            } else {
+
+                                Log.e("doc", " else doc file path 1");
+                                docFile = getFile(bitmap);
+                                Log.e("doc", " else doc file path" + docFile.getAbsolutePath());
+                            }
+
+                            productImagesDatas.add(new ProductImagesData(docFile.getAbsolutePath(),docFile.getAbsolutePath()));
+                            Log.e("docfile", docFile.getAbsolutePath());
+
+
+
+                            adapter.notifyDataSetChanged();
+
+
+
+
+                        }
+
+                    }
+
+                }
+
+
+
+                // imageViewDP.setImageURI(Uri.parse(finalFile.getAbsolutePath()));
+
+
+
+            }
+        } catch (Exception e) {
+            Log.e("Exception",e.toString());
+        }
+
+    }
+
+
+    private File getFile(Bitmap photo) {
+        Uri tempUri = null;
+        if (photo != null) {
+            tempUri = getImageUri(AddProductActivity.this, photo);
+        }
+        File finalFile = new File(getRealPathFromURI(tempUri));
+        Log.e("data", getRealPathFromURI(tempUri));
+
+        return finalFile;
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = null;
+        int idx = 0;
+        if (uri != null) {
+            cursor = AddProductActivity.this.getContentResolver().query(uri, null, null, null, null);
+            assert cursor != null;
+            cursor.moveToFirst();
+            idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        }
+        return cursor.getString(idx);
+    }
 
 
 }

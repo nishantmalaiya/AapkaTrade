@@ -18,20 +18,24 @@
 
 
         <include
+            android:id="@+id/content_add_product_company_detail"
             layout="@layout/content_add_product_company_detail"
 
 
             />
-        <include
+        <include   android:id="@+id/content_add_product_dynamic_form"
             layout="@layout/content_add_product_dynamic_form"
             android:visibility="gone"
             />
         <include
+
+            android:id="@+id/content_add_product_product_location"
             layout="@layout/content_add_product_product_location"
             android:visibility="gone"
       />
 
         <include
+            android:id="@+id/content_add_product"
             layout="@layout/content_add_product"
             android:visibility="gone"/>
 
