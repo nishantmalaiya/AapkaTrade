@@ -19,7 +19,6 @@
         >
 
         <include
-            android:id="@+id/toolbar"
             layout="@layout/toolbar_layout" />
 
         <android.support.v4.widget.NestedScrollView

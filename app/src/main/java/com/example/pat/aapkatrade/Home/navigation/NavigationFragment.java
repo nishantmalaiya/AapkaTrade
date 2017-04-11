@@ -46,6 +46,9 @@ import com.koushikdutta.ion.Ion;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
@@ -170,7 +173,6 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
             String user_image = app_sharedpreference.getsharedpref("profile_pic", "");
 
 
-
             if (Username.equals("notlogin")) {
 
                 rl_logout.setVisibility(View.GONE);
@@ -232,37 +234,6 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
     }
 
-//       navigation_parent_scrollview.setOnTouchListener(new View.OnTouchListener() {
-//           @Override
-//           public boolean onTouch(View v, MotionEvent event) {
-//
-//               expListView.getParent().requestDisallowInterceptTouchEvent(false);
-//               Log.e("expListView__notwork","false");
-//               return false;
-//           }
-//       });
-
-
-//        expListView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//
-//
-//                expListView.getParent().requestDisallowInterceptTouchEvent(true);
-//             // listAdapter.notifyDataSetChanged();
-//                Log.e("expListView_work","true");
-//                return false;
-//            }
-//        });
-//
-//    }
-
-
-    private void Showmessage(String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -285,7 +256,6 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
                 rl_main_content = getActivity().findViewById(R.id.rl_main_content);
                 rl_main_content.setBackgroundColor(Color.parseColor("#33000000"));
                 hideSoftKeyboard(getActivity());
-                // mDrawerLayout.setScrimColor(Color.TRANSPARENT);
                 super.onDrawerOpened(drawerView);
                 if (!mUserLearnedDrawer) {
                     mUserLearnedDrawer = true;
@@ -298,7 +268,6 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
                 getActivity().invalidateOptionsMenu();
-                // rl_main_content.setBackgroundColor(Color.parseColor("#ffffff"));
 
             }
 
@@ -311,8 +280,6 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
                 mDrawerToggle.syncState();
             }
         });
-        // mDrawerToggle.setDrawerIndicatorEnabled(true);
-        // mDrawerToggle.setHomeAsUpIndicator(R.drawable.menu_24dp);
 
 
         toolbar.setNavigationIcon(R.drawable.menu_24dp);
@@ -363,14 +330,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     }
 
 
-    private void showMessage(String clicked)
-    {
-        Toast.makeText(context, clicked, Toast.LENGTH_SHORT).show();
-    }
-
-
-    public void setdata(String username, String email)
-    {
+    public void setdata(String username, String email) {
         Fname = username;
 
         Log.e("Username", username);
@@ -392,7 +352,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
         System.out.println("childview------------" + groupview + childview);
 
-        String category_id = listDataHeader.get(groupview).getCategoryId().toString();
+        String category_id = listDataHeader.get(groupview).getCategoryId();
 
         System.out.println("size-------------------" + listDataHeader.get(groupview).getSubCategoryList().size());
 
@@ -400,7 +360,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
             sub_category_id = "not_available";
         } else {
-            sub_category_id = listDataHeader.get(groupview).getSubCategoryList().get(childview).subCategoryId.toString();
+            sub_category_id = listDataHeader.get(groupview).getSubCategoryList().get(childview).subCategoryId;
 
         }
 
@@ -496,15 +456,16 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
                         }
                         CategoryHome categoryHome = new CategoryHome(jsonObject1.get("id").getAsString(), jsonObject1.get("name").getAsString(), jsonObject1.get("icon").getAsString(), listDataChild);
 
-                        // categoryHome.setSubCategoryList( listDataChild);
-
                         listDataHeader.add(categoryHome);
+
                         Log.e("listDataHeader_cate", categoryHome.toString());
-
-
                     }
-
-
+                    Collections.sort(listDataHeader, new Comparator<CategoryHome>() {
+                        @Override
+                        public int compare(CategoryHome o1, CategoryHome o2) {
+                            return o1.getCategoryName().compareToIgnoreCase(o2.getCategoryName());
+                        }
+                    });
                 }
                 set_recycleview_adapter();
 
@@ -519,11 +480,9 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
 
     }
 
-    private void set_recycleview_adapter()
-    {
+    private void set_recycleview_adapter() {
 
-        if (listDataHeader.size() != 0)
-        {
+        if (listDataHeader.size() != 0) {
             category_adapter = new CommonAdapter_navigation_recycleview(context, listDataHeader);
             navigation_recycleview.setAdapter(category_adapter);
 
@@ -540,24 +499,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
             Log.e("listDataHeader1", listDataHeader.toString().substring(0, (listDataHeader.toString().length() / 2)));
             Log.e("listDataHeader2", listDataHeader.toString().substring((listDataHeader.toString().length() / 2), listDataHeader.toString().length() - 1));
 
-            // setting list adapter
             expListView.setAdapter(listAdapter);
-//            for (int i = 0; i < listAdapter.getGroupCount(); i++)
-//                expListView.expandGroup(i);
-//            setListViewHeight(expListView);
-
-//            expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener()
-//            {
-//                @Override
-//                public void onGroupExpand(int groupPosition)
-//                {
-//                    if (lastExpandedPosition != -1 && groupPosition != lastExpandedPosition)
-//                    {
-//                        expListView.collapseGroup(lastExpandedPosition);
-//                    }
-//                    lastExpandedPosition = groupPosition;
-//                }
-//            });
             listAdapter.setClickListner(this);
 
 
