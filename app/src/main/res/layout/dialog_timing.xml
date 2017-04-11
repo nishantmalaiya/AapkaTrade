@@ -22,6 +22,12 @@
         android:layout_centerHorizontal="true">
 
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
 
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -39,41 +45,56 @@
             android:background="@drawable/dialogbg"
             tools:context="com.example.pat.aapkatrade.user_dashboard.associateagreement.AssociateAgreementDialog">
 
-        <LinearLayout
+            <LinearLayout
 
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_weight="4"
-
-
-
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:src="@drawable/daily_dialog_icon"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/ten_dip"
-                android:layout_weight="3"
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/dialog_daily_header"
-                android:scaleType="fitCenter"
-                android:layout_height="0dp" />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:orientation="vertical"
 
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_below="@+id/dialog_daily_header"
-    android:layout_centerHorizontal="true"
-    android:text="@string/openingclosing"
-    android:textStyle="bold"
-    android:layout_gravity="center_horizontal"
-    android:layout_weight="1"
-    android:layout_height="0dp" />
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="3"
+                    android:layout_height="0dp">
+
+                <ImageView
+                    android:id="@+id/dialog_daily_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/ten_dip"
+
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/daily_dialog_icon" />
 
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                      android:layout_marginRight="@dimen/ten_dip"
+                        android:layout_marginTop="@dimen/ten_dip"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/delete"
+                        android:id="@+id/dialog_close"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/dialog_daily_header"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:text="@string/openingclosing"
+                    android:textStyle="bold" />
+
+
+                </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/activity_my_profile"
                 android:layout_width="match_parent"
@@ -92,7 +113,7 @@
                             android:orientation="vertical"
                             android:layout_width="12dp"
                             android:layout_marginLeft="10dp"
-
+                            android:layout_marginBottom="@dimen/ten_dip"
                             android:layout_height="fill_parent"
                             android:background="@drawable/gradient_dialog"
                             >
@@ -650,6 +671,6 @@ android:textSize="@dimen/textsize_medium"
 
 
         </LinearLayout>
-
+        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

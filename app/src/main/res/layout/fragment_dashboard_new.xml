@@ -174,14 +174,25 @@
                             </android.support.v7.widget.RecyclerView>
 
                         </LinearLayout>
-
+                        <android.support.percent.PercentRelativeLayout
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="@dimen/ten_dip"
+                            android:layout_height="60dp">
                         <ImageView
                             android:id="@+id/home_ads"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/fifty_dip"
-                            android:layout_marginTop="@dimen/ten_dip"
-                            android:scaleType="fitXY" />
+                            app:layout_widthPercent="100%"
+                            app:layout_heightPercent="100%"
+                            app:layout_marginTopPercent="0%"
+                            app:layout_marginLeftPercent="0%"
 
+
+
+                            />
+</android.support.percent.PercentRelativeLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"

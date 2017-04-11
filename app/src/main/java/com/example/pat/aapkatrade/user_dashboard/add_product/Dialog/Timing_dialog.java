@@ -1,5 +1,6 @@
 package com.example.pat.aapkatrade.user_dashboard.add_product.Dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -7,6 +8,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.pat.aapkatrade.R;
@@ -34,6 +36,7 @@ View view_monday,view_tuesday,view_wednesday,view_thursday,view_friday,view_satu
             spin_thrusday_open,spin_thrusday_close,spin_friday_open,spin_friday_close,spin_saturday_open,spin_saturday_close,
             spin_sunday_open,spin_sunday_close;
     SpinnerAdapter spinnerAdapter;
+    ImageView dialog_close;
 
 String demo[]={"Opening","Closing"};
     @Override
@@ -51,6 +54,9 @@ String demo[]={"Opening","Closing"};
     }
 
     private void initView() {
+
+        dialog_close=(ImageView)findViewById(R.id.dialog_close);
+
 
         view_monday=(View)findViewById(R.id.view_monday);
         view_tuesday=(View)findViewById(R.id.view_tuesday);
@@ -87,6 +93,16 @@ String demo[]={"Opening","Closing"};
        // set_spinner_adapter
         spinnerAdapter=new SpinnerAdapter(context,demo);
         Spinner_adapter();
+
+        dialog_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               dismiss();
+            }
+        });
+
+
 
     }
 
