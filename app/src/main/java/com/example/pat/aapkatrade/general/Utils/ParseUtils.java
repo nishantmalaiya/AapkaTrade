@@ -27,10 +27,11 @@ public class ParseUtils {
             ArrayList<FilterObject> tempArrayList = (ArrayList<FilterObject>) arrayMap.get(key);
             for (int i = 0; i < tempArrayList.size(); i++){
                 FilterObject filterObject = tempArrayList.get(i);
-                arrayList.add(filterObject.name.value.toString());
+                arrayList.add(filterObject.name.value.toString().replaceAll("\\\"", "\""));
             }
             map.put(key, new Gson().toJson(arrayList));
 
+            Log.e("parsing", "OOOOOOOOOOOO@@@!!!        "+map.get(key));
         }
         return map;
     }
