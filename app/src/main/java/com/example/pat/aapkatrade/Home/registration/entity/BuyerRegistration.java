@@ -11,6 +11,7 @@ public class BuyerRegistration {
     private String address ;
     private String firstName;
     private String lastName;
+    private String pinCode;
     private String email;
     private String mobile;
     private String userName;
@@ -21,13 +22,14 @@ public class BuyerRegistration {
     public BuyerRegistration() {
     }
 
-    public BuyerRegistration(String countryId, String stateId, String cityId, String address, String firstName, String lastName, String email, String mobile, String userName, String password, String confirmPassword, String clientId) {
+    public BuyerRegistration(String countryId, String stateId, String cityId, String address, String firstName, String lastName, String pinCode, String email, String mobile, String userName, String password, String confirmPassword, String clientId) {
         this.countryId = countryId;
         this.stateId = stateId;
         this.cityId = cityId;
         this.address = address;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.pinCode = pinCode;
         this.email = email;
         this.mobile = mobile;
         this.userName = userName;
@@ -122,6 +124,14 @@ public class BuyerRegistration {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getPinCode() {
+        return pinCode;
+    }
+
+    public void setPinCode(String pinCode) {
+        this.pinCode = pinCode;
     }
 
     public String getClientId() {

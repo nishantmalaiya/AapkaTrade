@@ -138,11 +138,11 @@
                                     android:gravity="center_horizontal" />
 
                                 <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
+                                    android:layout_width="@dimen/twenty_dip"
+                                    android:layout_height="@dimen/twenty_dip"
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
-                                    android:layout_marginRight="10dp"
+                                    android:layout_marginRight="@dimen/ten_dip"
                                     android:scaleType="fitXY"
                                     android:src="@drawable/ic_arrow" />
 
@@ -223,7 +223,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/ten_dip"/>
+                            android:layout_height="@dimen/ten_dip" />
 
 
                     </LinearLayout>
@@ -344,7 +344,6 @@
                     </android.support.design.widget.TextInputLayout>
 
 
-
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/input_layout_dob"
                         android:layout_width="match_parent"
@@ -391,46 +390,23 @@
                     </android.support.design.widget.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
-                    android:id="@+id/input_layout_mobile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/twenty_dip"
-                    android:layout_marginRight="@dimen/twenty_dip"
-                    android:textColorHint="@color/hint_color">
-
-                    <EditText
-                        android:id="@+id/etMobileNo"
-                        style="@style/myedittext"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/mobile"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:paddingLeft="@dimen/ten_dip"
-                        android:textColorHint="@color/green"
-                        android:theme="@style/myedittext" />
-
-
-                </android.support.design.widget.TextInputLayout>
-
-
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/input_layout_pincode"
+                        android:id="@+id/input_layout_mobile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/twenty_dip"
                         android:layout_marginRight="@dimen/twenty_dip"
+                        android:layout_marginBottom="@dimen/ten_dip"
                         android:textColorHint="@color/hint_color">
 
                         <EditText
-                            android:id="@+id/etPincode"
+                            android:id="@+id/etMobileNo"
                             style="@style/myedittext"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="Pincode"
+                            android:hint="@string/mobile"
                             android:inputType="number"
-                            android:maxLength="6"
+                            android:maxLength="10"
                             android:paddingLeft="@dimen/ten_dip"
                             android:textColorHint="@color/green"
                             android:theme="@style/myedittext" />
@@ -438,49 +414,15 @@
 
                     </android.support.design.widget.TextInputLayout>
 
-
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/input_layout_country"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/twenty_dip"
-                        android:layout_marginRight="@dimen/twenty_dip"
-                        android:textColorHint="@color/hint_color"
-                        android:visibility="gone">
-
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <Spinner
-                                android:id="@+id/spCountryCategory"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:background="@drawable/simple_spinner_back" />
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="10dp"
-                                android:scaleType="fitXY"
-                                android:src="@drawable/ic_arrow" />
-                        </RelativeLayout>
-
-                    </android.support.design.widget.TextInputLayout>
-
-
-
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/input_layout_state"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/twenty_dip"
                         android:layout_marginRight="@dimen/twenty_dip"
+                        android:hint="State"
                         android:layout_marginTop="@dimen/ten_dip"
+                        android:layout_marginBottom="@dimen/twenty_dip"
                         android:textColorHint="@color/hint_color">
 
                         <RelativeLayout
@@ -544,7 +486,7 @@
                     <View
                         android:id="@+id/height1"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/ten_dip"/>
+                        android:layout_height="@dimen/ten_dip" />
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/input_layout_address"
@@ -571,7 +513,7 @@
                     <View
                         android:id="@+id/height2"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/ten_dip"/>
+                        android:layout_height="@dimen/ten_dip" />
 
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/input_layout_ref_no"
@@ -751,7 +693,8 @@
                             android:id="@+id/tv_agreement"
                             android:layout_width="fill_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center_horizontal|center_vertical"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/ten_dip"
                             android:text="@string/accept_t_and_c" />
 
 
@@ -767,9 +710,7 @@
                 android:layout_height="@dimen/ten_dip" />
 
 
-
         </LinearLayout>
-
 
 
     </android.support.v4.widget.NestedScrollView>

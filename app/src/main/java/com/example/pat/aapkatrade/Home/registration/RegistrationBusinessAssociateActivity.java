@@ -341,15 +341,7 @@ public class RegistrationBusinessAssociateActivity extends AppCompatActivity imp
     }
 
     private void setUpToolBar() {
-        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome) ;
-        AppCompatImageView back_imagview = (AppCompatImageView) findViewById(R.id.back_imagview);
-        back_imagview.setVisibility(View.VISIBLE);
-        back_imagview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        ImageView homeIcon = (ImageView) findViewById(R.id.iconHome);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         AndroidUtils.setImageColor(homeIcon, context, R.color.white);
         homeIcon.setOnClickListener(new View.OnClickListener() {
@@ -363,7 +355,7 @@ public class RegistrationBusinessAssociateActivity extends AppCompatActivity imp
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(null);
             getSupportActionBar().setElevation(0);
         }
@@ -987,6 +979,10 @@ public class RegistrationBusinessAssociateActivity extends AppCompatActivity imp
                     showmessage("Please Upload File");
                     step1FieldsSet++;
                 }
+                else if(!agreement_check.isChecked()){
+                    putError(20);
+                }
+
                 Log.e("hi", "step1FieldsSet=" + step1FieldsSet);
 
                 if (step1FieldsSet == 0) {
@@ -1129,6 +1125,9 @@ public class RegistrationBusinessAssociateActivity extends AppCompatActivity imp
                 showmessage("Password must be greater than or equals to 6 digits");
                 break;
 
+            case 20:
+                showmessage("Please Check the Agreement");
+                break;
             default:
                 break;
         }
