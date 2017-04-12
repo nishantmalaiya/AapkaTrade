@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,9 +19,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -44,6 +47,7 @@ import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Utils.ImageUtils;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomSimpleListAdapter;
+import com.example.pat.aapkatrade.general.entity.KeyValue;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.service_enquiry.ServiceEnquiry;
 import com.example.pat.aapkatrade.user_dashboard.add_product.Dialog.Timing_dialog;
@@ -73,7 +77,7 @@ public class AddProductActivity extends AppCompatActivity {
 
 
     private Context context;
-    private LinearLayout contentAddProduct, add_product_root_container;
+    private LinearLayout contentAddProduct, add_product_root_container,ll_dynamic_fields_step2;
     private Spinner spCompanyName, spSubCategory, spCategory, spState, spCity, spdeliverydistance, spService_type;
     private String countryID = "101", stateID, cityID, companyID, categoryID, subCategoryID, deliveryDistanceID, unit;
     private HashMap<String, String> webservice_header_type = new HashMap<>();
@@ -88,6 +92,7 @@ public class AddProductActivity extends AppCompatActivity {
     private ArrayList<String> closing_time_list = new ArrayList<>();
     private ProgressBarHandler progressBar;
     private AppSharedPreference app_sharedpreference;
+    HashMap<String, Dynamic_form_data_entity> dynamic_form_map = new HashMap<>();
     private TextView btnUpload;
     private int count = -1;
     private EditText etProductName, etDeliverLocation, etPrice, etCrossedPrice, etDescription;
@@ -98,12 +103,13 @@ public class AddProductActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ProductImages adapter;
     Bitmap imageForPreview;
+    int values_count=0;
     ArrayList<Bitmap> multiple_images;
+
     RelativeLayout rl_layout1_saveandcontinue_container;
 
     List<Part> files_image = new ArrayList();
     TextView tvTitle;
-
 
 
     @Override
@@ -118,7 +124,7 @@ public class AddProductActivity extends AppCompatActivity {
         getCategory();
 
 
-       //getState();
+        //getState();
 
 
     }
@@ -136,17 +142,17 @@ public class AddProductActivity extends AppCompatActivity {
 
     private void initview() {
 
-        context=AddProductActivity.this;
+        context = AddProductActivity.this;
         progressBar = new ProgressBarHandler(context);
         app_sharedpreference = new AppSharedPreference(context);
-        spService_type=(Spinner)findViewById(R.id.sp_service_type);
-        spCompanyName=(Spinner)findViewById(R.id.spCompanyName);
+        spService_type = (Spinner) findViewById(R.id.sp_service_type);
+        spCompanyName = (Spinner) findViewById(R.id.spCompanyName);
 
         contentAddProduct = (LinearLayout) findViewById(R.id.contentAddProduct);
-        etProductName=(EditText)findViewById(R.id.etProductName);
-        spCategory=(Spinner)findViewById(R.id.spCategory);
-        spSubCategory=(Spinner)findViewById(R.id.spSubCategory);
-        rl_layout1_saveandcontinue_container=(RelativeLayout)findViewById(R.id.rl_layout1_saveandcontinue_container);
+        etProductName = (EditText) findViewById(R.id.etProductName);
+        spCategory = (Spinner) findViewById(R.id.spCategory);
+        spSubCategory = (Spinner) findViewById(R.id.spSubCategory);
+        rl_layout1_saveandcontinue_container = (RelativeLayout) findViewById(R.id.rl_layout1_saveandcontinue_container);
 
         //container 1 save& continue click event
 
@@ -156,9 +162,21 @@ public class AddProductActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
+                if (findViewById(R.id.content_add_product_company_detail).getVisibility() == View.VISIBLE) {
 
 
+                    findViewById(R.id.content_add_product_company_detail).setVisibility(View.GONE);
+                    findViewById(R.id.content_add_product_product_location).setVisibility(View.GONE);
+                    if (findViewById(R.id.content_add_product_dynamic_form).getVisibility() == View.GONE) {
 
+                        findViewById(R.id.content_add_product_dynamic_form).setVisibility(View.VISIBLE);
+                        dynamic_view_builders();
+
+
+                    }
+
+
+                }
 
 
             }
@@ -176,6 +194,16 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+        //container 2
+
+
+
+        ll_dynamic_fields_step2= (LinearLayout) findViewById(R.id.content_add_product_dynamic_form).findViewById(R.id.ll_dynamic_fields);
+
+        ll_dynamic_fields_step2.setBackgroundColor(context.getResources().getColor(R.color.green));
     }
 
     private void initspinner() {
@@ -210,95 +238,88 @@ public class AddProductActivity extends AppCompatActivity {
 //        spService_type.setAdapter(service_type_spinner_adapter);
 
 
-spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        final String sellorservice;
+        spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                final String sellorservice;
 
-        if(position>0)
-        {
-            opening_time_list.clear();
-            closing_time_list.clear();
-            if(position==1)
-            {
-                sellorservice="0";
+                if (position > 0) {
+                    opening_time_list.clear();
+                    closing_time_list.clear();
+                    if (position == 1) {
+                        sellorservice = "0";
+                    } else {
+                        sellorservice = "1";
+                    }
+
+                    String getdailytime = getResources().getString(R.string.webservice_base_url) + "/getoctime";
+
+                    Ion.with(context)
+                            .load(getdailytime)
+                            .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                            .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                            .setBodyParameter("id", sellorservice)
+                            .asJsonObject()
+                            .setCallback(new FutureCallback<JsonObject>() {
+                                @Override
+                                public void onCompleted(Exception e, JsonObject result) {
+
+                                    Log.e(AndroidUtils.getTag(context) + "add_product" + sellorservice, result.toString());
+
+                                    String error = result.get("error").getAsString();
+                                    String message = result.get("message").getAsString();
+                                    String status = result.get("status").getAsString();
+
+
+                                    if (status.contains("1")) {
+                                        JsonObject formdata = result.get("form_data").getAsJsonObject();
+                                        JsonArray jsonarray_opening = formdata.getAsJsonArray("opening_time");
+
+
+                                        for (int l = 0; l < jsonarray_opening.size(); l++) {
+
+                                            JsonObject jsonObject_result = (JsonObject) jsonarray_opening.get(l);
+                                            String opentiming = jsonObject_result.get("timing").getAsString();
+
+                                            opening_time_list.add(opentiming);
+                                        }
+                                        Log.e("data_opening", opening_time_list.toString());
+
+                                        JsonArray jsonarray_closing = formdata.getAsJsonArray("closing_time");
+                                        for (int l = 0; l < jsonarray_closing.size(); l++) {
+
+                                            JsonObject jsonObject_result = (JsonObject) jsonarray_closing.get(l);
+                                            String closetiming = jsonObject_result.get("timing").getAsString();
+
+                                            closing_time_list.add(closetiming);
+                                        }
+                                        Log.e("data_closing", closing_time_list.toString());
+
+                                        Timing_dialog serviceEnquiry = new Timing_dialog(context, opening_time_list, closing_time_list);
+                                        serviceEnquiry.show();
+
+
+                                    }
+
+                                }
+                            });
+
+
+                }
+
             }
-            else {
-                sellorservice="1";
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
+        });
 
-            String getdailytime=getResources().getString(R.string.webservice_base_url)+"/getoctime";
-
-            Ion.with(context)
-                    .load(getdailytime)
-                    .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                    .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                    .setBodyParameter("id", sellorservice)
-                    .asJsonObject()
-                    .setCallback(new FutureCallback<JsonObject>() {
-                        @Override
-                        public void onCompleted(Exception e, JsonObject result) {
-
-                            Log.e(AndroidUtils.getTag(context)+"add_product"+sellorservice,result.toString());
-
-                            String error = result.get("error").getAsString();
-                            String message = result.get("message").getAsString();
-                            String status = result.get("status").getAsString();
-
-
-                            if(status.contains("1"))
-{
-    JsonObject formdata = result.get("form_data").getAsJsonObject();
-    JsonArray jsonarray_opening = formdata.getAsJsonArray("opening_time");
-
-
-
-    for (int l = 0; l < jsonarray_opening.size(); l++) {
-
-        JsonObject jsonObject_result = (JsonObject) jsonarray_opening.get(l);
-        String opentiming = jsonObject_result.get("timing").getAsString();
-
-        opening_time_list.add(opentiming);
-    }
-    Log.e("data_opening", opening_time_list.toString());
-
-    JsonArray jsonarray_closing = formdata.getAsJsonArray("closing_time");
-    for (int l = 0; l < jsonarray_closing.size(); l++) {
-
-        JsonObject jsonObject_result = (JsonObject) jsonarray_closing.get(l);
-        String closetiming = jsonObject_result.get("timing").getAsString();
-
-        closing_time_list.add(closetiming);
-    }
-    Log.e("data_closing", closing_time_list.toString());
-
-    Timing_dialog serviceEnquiry = new Timing_dialog(context, opening_time_list, closing_time_list);
-    serviceEnquiry.show();
-
-
-
-}
-
-                        }
-                    });
-
-
-        }
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-});
 
         // step 2 spinner_dynamic_data
 
+
     }
-
-
-
 
 
     private void setUpToolBar() {
@@ -394,9 +415,9 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
                                             companyID = companyNames.get(position).getCompanyId();
                                         } else {
                                             Log.e("hi***", String.valueOf(count));
-                                            if (count >= 0)
-                                            {}
-                                               // showMessage("Invalid Company");
+                                            if (count >= 0) {
+                                            }
+                                            // showMessage("Invalid Company");
                                         }
                                     }
 
@@ -596,6 +617,10 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                 if (position > 0) {
                                     subCategoryID = listDataChild.get(position).subCategoryId;
+
+
+                                    call_dynamic_formdata_webservice(categoryID, subCategoryID);
+
                                 }
                             }
 
@@ -621,10 +646,124 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
         });
 
     }
+
+    private void call_dynamic_formdata_webservice(String categoryID, String subCategoryID) {
+
+        Log.e(AndroidUtils.getTag(AddProductActivity.this) + "category", categoryID + "******" + subCategoryID);
+        String dynamic_formdata_addproduct = getString(R.string.webservice_base_url) + "/get_formdata";
+
+
+        Ion.with(context)
+                .load(dynamic_formdata_addproduct)
+                .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("category_id", categoryID)
+                .setBodyParameter("subcat_id", subCategoryID)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+
+                        JsonObject jsonObject = result.getAsJsonObject();
+                        JsonArray json_form_data = jsonObject.getAsJsonArray("form_data");
+
+
+                        for (int i = 0; i < json_form_data.size(); i++) {
+                            JsonObject jsonObject1 = (JsonObject) json_form_data.get(i);
+                            Dynamic_form_data_entity dynamic_form_data_entity = new Dynamic_form_data_entity();
+                            String title = jsonObject1.get("title").getAsString();
+                            String type = jsonObject1.get("type").getAsString();
+                            dynamic_form_data_entity.title.key = "title";
+                            dynamic_form_data_entity.title.value = title;
+
+                            dynamic_form_data_entity.type.key = "type";
+                            dynamic_form_data_entity.type.value = type;
+
+                            if (type.equals(context.getString(R.string.dynamic_edittext))) {
+
+
+
+
+                                 ++values_count;
+                                dynamic_form_data_entity.values_arraylist.add(new KeyValue("values", ""));
+
+                                AndroidUtils.showErrorLog(context, "1*****" + values_count);
+
+
+
+
+
+
+
+                            }
+                            else
+                                {
+
+
+                                JsonArray json_values = jsonObject1.getAsJsonArray("value");
+
+                                AndroidUtils.showErrorLog(context, "jsonvalues**" + json_values.toString() + "***" + json_values.size());
+                                for (int k = 0; k < json_values.size(); k++) {
+                                    JsonObject jsonObject_value = (JsonObject) json_values.get(k);
+                                    String values = jsonObject_value.get("value").getAsString();
+
+                                    dynamic_form_data_entity.values_arraylist.add(new KeyValue("values", values));
+
+
+                                }
+                            }
+
+                            dynamic_form_map.put(title, dynamic_form_data_entity);
+
+                        }
+                        Log.e(AndroidUtils.getTag(AddProductActivity.this), result.toString());
+
+                    }
+                });
+
+
+    }
+
+    private void dynamic_view_builders() {
+
+        for(String titleKey : dynamic_form_map.keySet()) {
+            Dynamic_form_data_entity dynamicFormDataEntity = dynamic_form_map.get(titleKey);
+            String type = dynamicFormDataEntity.type.value.toString();
+            ArrayList<KeyValue> keyValueArrayList = dynamicFormDataEntity.values_arraylist;
+            if (!type.equals(context.getString(R.string.dynamic_edittext))) {
+                for (int i = 0; i < keyValueArrayList.size(); i++) {
+                    String values = keyValueArrayList.get(i).value.toString();
+                }
+
+            }
+            else {
+
+                Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+                int width = display.getWidth()/3;
+                LinearLayout l = new LinearLayout(context);
+                EditText editText1 = new EditText(context);
+                editText1.setText("dynamic fields");
+                editText1.setHeight(50);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                editText1.setTag(titleKey.toLowerCase());
+                editText1.setBackgroundColor(getResources().getColor(R.color.color_voilet));
+                editText1.setPadding(20, 20, 20, 20);
+                lp.setMargins(20, 20, 20, 20);
+
+                l.addView(editText1,lp);
+                ll_dynamic_fields_step2.addView(l);
+            }
+
+            AndroidUtils.showErrorLog(context,"*****8"+titleKey.toLowerCase());
+        }
+
+
+
+    }
+
     private void showMessage(String message) {
         AndroidUtils.showSnackBar(contentAddProduct, message);
     }
-
 
 
     void picPhoto() {
@@ -639,18 +778,14 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
 
     }
 
-    void performImgPicAction(int which)
-    {
+    void performImgPicAction(int which) {
         Intent in;
-        if (which == 1)
-        {
+        if (which == 1) {
             in = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             in.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
             in.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(in, "Select Multiple Picture From Gallery"), 11);
-        }
-        else
-        {
+        } else {
 
             in = new Intent();
             in.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -658,29 +793,22 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
         }
 
 
-
     }
 
 
-
-
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        multiple_images=new ArrayList<>();
+        multiple_images = new ArrayList<>();
         Log.e("hi", "requestCode : " + requestCode + "result code : " + resultCode);
         try {
-            if (requestCode == 11)
-            {
-                if(data.getClipData()!=null)
-                {
+            if (requestCode == 11) {
+                if (data.getClipData() != null) {
 
                     data.getClipData().getItemCount();
 
-                    for (int k = 0; k < 4; k++)
-                    {
+                    for (int k = 0; k < 4; k++) {
 
                         Uri selectedImage = data.getClipData().getItemAt(k).getUri();
 
@@ -701,24 +829,20 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
                             Log.e("doc", " else doc file path" + docFile.getAbsolutePath());
                         }
 
-                        productImagesDatas.add(new ProductImagesData(docFile.getAbsolutePath(),""));
+                        productImagesDatas.add(new ProductImagesData(docFile.getAbsolutePath(), ""));
                         Log.e("docfile", docFile.getAbsolutePath());
 
 
                         adapter.notifyDataSetChanged();
-                        if(productImagesDatas.size()>0)
-                        {
+                        if (productImagesDatas.size() > 0) {
                             recyclerView.setVisibility(View.VISIBLE);
 
                         }
 
 
-
                     }
 
-                }
-                else
-                {
+                } else {
 
 
                     try {
@@ -729,12 +853,11 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
                         // CALL THIS METHOD TO GET THE ACTUAL PATH
                         File finalFile = new File(getRealPathFromURI(tempUri));
 
-                        productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(),""));
+                        productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(), ""));
                         Log.e("docfile", finalFile.getAbsolutePath());
 
                         adapter.notifyDataSetChanged();
-                        if(productImagesDatas.size()>0)
-                        {
+                        if (productImagesDatas.size() > 0) {
                             recyclerView.setVisibility(View.VISIBLE);
 
                         }
@@ -744,13 +867,11 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
                     }
 
 
-
                 }
             }
-            if (requestCode == 10)
-            {
+            if (requestCode == 10) {
 
-                Log.e("docfile10","Sachin sdnsdfjsd fsdjfsd fnmsdabf");
+                Log.e("docfile10", "Sachin sdnsdfjsd fsdjfsd fnmsdabf");
 
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
 
@@ -759,7 +880,7 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
                 // CALL THIS METHOD TO GET THE ACTUAL PATH
                 File finalFile = new File(getRealPathFromURI(tempUri));
 
-                productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(),""));
+                productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(), ""));
                 Log.e("docfile", finalFile.getAbsolutePath());
 
                 adapter.notifyDataSetChanged();
@@ -768,14 +889,13 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
             }
 
         } catch (Exception e) {
-            Log.e("Exception",e.toString());
+            Log.e("Exception", e.toString());
         }
 
     }
 
 
-    private File getFile(Bitmap photo)
-    {
+    private File getFile(Bitmap photo) {
         Uri tempUri = null;
         if (photo != null) {
             tempUri = getImageUri(AddProductActivity.this, photo);
@@ -786,8 +906,7 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
         return finalFile;
     }
 
-    public Uri getImageUri(Context inContext, Bitmap inImage)
-    {
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
@@ -795,8 +914,7 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
     }
 
 
-    public String getRealPathFromURI(Uri uri)
-    {
+    public String getRealPathFromURI(Uri uri) {
         Cursor cursor = null;
         int idx = 0;
         if (uri != null) {

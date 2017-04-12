@@ -2,6 +2,7 @@ package com.example.pat.aapkatrade.general.Utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
@@ -158,6 +159,11 @@ public class AndroidUtils {
     public static void sortArrayList(ArrayList<CategoryHome> arrayList){
 
     }
-
+    public static int convertPixelsToDp(float px, Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        int dp = (int) (px / (metrics.densityDpi / 160f));
+        return dp;
+    }
 
 }
