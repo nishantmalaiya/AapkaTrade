@@ -603,7 +603,7 @@
                                         android:layout_marginTop="15dp">
 
                                         <TextView
-                                            android:id="@+id/tvRating"
+                                            android:id="@+id/tvRatingAverage"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="4.8"
@@ -615,13 +615,14 @@
                                             android:layout_width="20dp"
                                             android:layout_height="20dp"
                                             android:layout_marginTop="8dp"
-                                            android:layout_toRightOf="@+id/tvRating"
+                                            android:layout_toRightOf="@+id/tvRatingAverage"
                                             android:src="@drawable/ic_star" />
 
                                     </RelativeLayout>
 
 
                                     <TextView
+                                        android:id="@+id/tvToatal_rating_review"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/relativeRatingDetails"

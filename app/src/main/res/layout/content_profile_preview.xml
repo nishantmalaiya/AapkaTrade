@@ -62,7 +62,7 @@
                         android:layout_height="30dp"
                         android:layout_margin="6dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/whatsapp_icon" />
+                        android:src="@drawable/icon_whatapp" />
 
                     <ImageView
                         android:id="@+id/imageViewGoogle"
@@ -71,7 +71,7 @@
                         android:layout_margin="6dp"
                         android:padding="3dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/google_plus_icon" />
+                        android:src="@drawable/gplus" />
 
                     <ImageView
                         android:id="@+id/imageViewSMS"

@@ -279,35 +279,11 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         }
                     });
 
 
         }
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -318,14 +294,6 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
 });
 
         // step 2 spinner_dynamic_data
-
-
-
-
-
-
-
-
 
     }
 

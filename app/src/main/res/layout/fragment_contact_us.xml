@@ -70,7 +70,7 @@
                             android:text="Customer Care"
                             android:textColor="@color/black"
                             android:textStyle="bold"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true" />
@@ -82,6 +82,7 @@
                             android:layout_height="20dp"
                             android:src="@drawable/ic_phone_orange"
                             android:layout_below="@+id/tvCustomerCareHeading"
+                            android:layout_marginTop="4dp"
                             />
 
                         <TextView
@@ -92,6 +93,7 @@
                             android:layout_toRightOf="@+id/imgPhone"
                             android:textColor="@color/black"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginTop="2dp"
                             />
 
 
@@ -101,6 +103,7 @@
                             android:layout_height="20dp"
                             android:src="@drawable/ic_email"
                             android:layout_below="@+id/imgPhone"
+                            android:layout_marginTop="4dp"
                             />
 
                         <TextView
@@ -111,6 +114,7 @@
                             android:layout_toRightOf="@+id/imgEmail"
                             android:textColor="@color/black"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginTop="2dp"
                             />
 
 
@@ -180,7 +184,7 @@
                             android:text="Follow us"
                             android:textColor="@color/black"
                             android:textStyle="bold"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             />
 
                         <LinearLayout
@@ -213,16 +217,15 @@
                                 android:layout_height="30dp"
                                 android:layout_margin="6dp"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/whatsapp_icon" />
+                                android:src="@drawable/icon_whatapp" />
 
                             <ImageView
                                 android:id="@+id/imageViewGoogle"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_margin="6dp"
-                                android:padding="3dp"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/google_plus_icon" />
+                                android:src="@drawable/gplus" />
 
 
 
@@ -298,7 +301,7 @@
                             android:text="Visit us"
                             android:textColor="@color/black"
                             android:textStyle="bold"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             />
 
 
@@ -309,7 +312,6 @@
                             android:layout_below="@+id/tvVisitHeading"
                             android:textColor="@color/black"
                             />
-
 
 
                     </RelativeLayout>

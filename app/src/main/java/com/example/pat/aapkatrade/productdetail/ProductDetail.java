@@ -42,12 +42,10 @@ import com.example.pat.aapkatrade.payment.PaymentActivity;
 import com.example.pat.aapkatrade.productdetail.open_shop.OpenShopAdapter;
 import com.example.pat.aapkatrade.productdetail.open_shop.OpenShopData;
 import com.example.pat.aapkatrade.productdetail.reviewlist.ReviewListAdapter;
+
 import com.example.pat.aapkatrade.productdetail.reviewlist.ReviewListData;
 import com.example.pat.aapkatrade.rateus.RateusActivity;
 import com.example.pat.aapkatrade.service_enquiry.ServiceEnquiry;
-import com.example.pat.aapkatrade.user_dashboard.address.add_address.AddAddressActivity;
-import com.example.pat.aapkatrade.user_dashboard.companylist.CompanyList;
-import com.example.pat.aapkatrade.user_dashboard.companylist.CompanyListAdapter;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -93,7 +91,7 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     String productlocation, categoryName;
     LinearLayout linearLayoutQuantity;
     EditText firstName, quantity, price, mobile, email, etEndDate, etStatDate, description, editText;
-    TextView tvServiceBuy, textViewQuantity;
+    TextView tvServiceBuy, textViewQuantity,tvRatingAverage,tvToatal_rating_review;
     // TextView tvDurationHeading,tvDuration;
     Dialog dialog;
     private Context context;
@@ -107,6 +105,8 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     ArrayList<OpenShopData> openShopDatas = new ArrayList<>();
     ArrayList<ReviewListData> reviewListDatas = new ArrayList<>();
     ArrayList<Integer> color_openshop = new ArrayList<>();
+
+
 
 
 
@@ -232,18 +232,20 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         relativeBuyNow.setVisibility(View.INVISIBLE);
         linearProductDetail.setVisibility(View.INVISIBLE);
         progress_handler.show();
-        Log.e("data_productdeatil", getResources().getString(R.string.webservice_base_url) + product_id);
+        Log.e("data_productdeatil", getResources().getString(R.string.webservice_base_url) + "     "+product_id);
 
         Ion.with(getApplicationContext())
                 .load(getResources().getString(R.string.webservice_base_url) + "/product_detail/" + product_id)
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
                 .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("id","0")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
 
-                        if (result != null) {
+                        if (result != null)
+                        {
 
                             Log.e("result---------", result.toString());
 
@@ -251,21 +253,75 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
                             JsonObject json_result = jsonObject.getAsJsonObject("result");
 
+                            JsonObject json_total_rating = jsonObject.getAsJsonObject("total_rating");
+
+                            String avg_rating = json_total_rating.get("avg_rating").getAsString();
+
+                            tvRatingAverage.setText(avg_rating);
+
+                            String total_review = json_total_rating.get("countreviews").getAsString();
+
+                            tvToatal_rating_review.setText(total_review +" rating and "+"review "+total_review);
+
                             JsonArray jsonArray_image = json_result.getAsJsonArray("product_images");
 
-                            System.out.println("jsonArray_image------" + jsonArray_image.toString());
+                           /* JsonArray jsonArray_openshop = result.getAsJsonArray("");
 
-                            for (int i = 0; i < jsonArray_image.size(); i++) {
+                            for (int k= 0; k<jsonArray_openshop.size(); k++)
+                            {
+                                JsonObject jsonopenshop_data = (JsonObject) jsonArray_openshop.get(k);
+                            }*/
+
+
+                            JsonArray jsonArray_review = result.getAsJsonArray("reviews");
+
+                            if (jsonArray_review.size()==0){
+
+
+                            }
+                            else
+                                {
+                                for (int j = 0; j < jsonArray_review.size(); j++) {
+
+                                    JsonObject jsonreview_data = (JsonObject) jsonArray_review.get(j);
+
+                                    String email = jsonreview_data.get("email").getAsString();
+
+                                    String name = jsonreview_data.get("name").getAsString();
+
+                                    String message = jsonreview_data.get("message").getAsString();
+
+                                    String rating = jsonreview_data.get("rating").getAsString();
+
+                                    String title = jsonreview_data.get("title").getAsString();
+
+                                    String created_date = jsonreview_data.get("created_at").getAsString();
+
+                                    Log.e("jsonreview---", title.toString());
+
+                                    reviewListDatas.add(new ReviewListData(email, name, message, rating, title, created_date));
+
+
+                                }
+
+                                reviewListAdapter = new ReviewListAdapter(ProductDetail.this, reviewListDatas);
+                                reviewList.setAdapter(reviewListAdapter);
+                            }
+
+                            System.out.println("jsonArray_image------" + jsonArray_review.toString());
+
+                            for (int i = 0; i < jsonArray_image.size(); i++)
+                            {
                                 JsonObject jsonimage = (JsonObject) jsonArray_image.get(i);
 
                                 String image_url = jsonimage.get("image_url").getAsString();
 
                                 System.out.println("image_url---------" + image_url);
-
                                 imageList.add(image_url);
-                            }
 
+                            }
                             product_name = json_result.get("name").getAsString();
+
                             categoryName = json_result.get("catname").getAsString();
 
                             String product_price = json_result.get("price").getAsString();
@@ -280,16 +336,14 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
                             productlocation = json_result.get("city_name").getAsString() + "," + json_result.get("state_name").getAsString() + "," + json_result.get("country_name").getAsString();
 
-                            if (enquiry.equals("1")) {
-
+                            if (enquiry.equals("1"))
+                            {
                                 tvServiceBuy.setText("Buy Now");
-
-
-                            } else {
-
+                            }
+                            else
+                            {
                                 tvServiceBuy.setText("Service Enquiry");
                             }
-
 
                             tvProductName.setText(product_name);
                             tvProPrice.setText("\u20A8" + "." + " " + product_price);
@@ -303,14 +357,12 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
                             relativeBuyNow.setVisibility(View.VISIBLE);
 
 
-                        } else {
-
-
+                        }
+                        else
+                        {
                             progress_handler.hide();
                             linearProductDetail.setVisibility(View.INVISIBLE);
                             relativeBuyNow.setVisibility(View.INVISIBLE);
-
-
                         }
 
 
@@ -411,6 +463,7 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     {
         context = ProductDetail.this;
 
+
         linearLayoutQuantity = (LinearLayout) findViewById(R.id.linearlayoutQuantity);
 
         textViewQuantity = (TextView) findViewById(R.id.textViewQuantity);
@@ -425,14 +478,17 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
         linearlayoutLocation = (LinearLayout) findViewById(R.id.linearlayoutLocation);
 
+        tvRatingAverage = (TextView) findViewById(R.id.tvRatingAverage);
+
+        tvToatal_rating_review = (TextView) findViewById(R.id.tvToatal_rating_review);
+
         tvServiceBuy = (TextView) findViewById(R.id.tvServiceBuy);
 
         reviewList = (RecyclerView) findViewById(R.id.reviewList);
 
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
+
         reviewList.setLayoutManager(mLayoutManager);
-        reviewListAdapter = new ReviewListAdapter(ProductDetail.this, reviewListDatas);
-        reviewList.setAdapter(reviewListAdapter);
 
         openShopList = (RecyclerView) findViewById(R.id.openShopList);
 
@@ -448,27 +504,23 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
             @Override
             public void onClick(View v)
             {
-
                 if (app_sharedpreference.getsharedpref("username", "not").contains("not"))
                 {
                     startActivity(new Intent(ProductDetail.this, LoginDashboard.class));
                 }
                 else
                 {
-
                     Intent rate_us = new Intent(ProductDetail.this,RateusActivity.class);
                     rate_us.putExtra("product_id",product_id);
                     rate_us.putExtra("product_name",tvProductName.getText().toString());
                     rate_us.putExtra("product_price",tvProPrice.getText().toString());
                     rate_us.putExtra("product_image",imageList.get(0).toString());
                     startActivity(rate_us);
-
                 }
-
-
-
             }
         });
+
+
 
         linearlayoutLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -501,8 +553,6 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
                 share.setType("text/plain");
                 share.putExtra(Intent.EXTRA_TEXT, message);
                 startActivity(Intent.createChooser(share, "Title of the dialog the system will open"));
-
-
 
             }
         });
@@ -581,6 +631,8 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
             }
         });
+
+
 
     }
 

@@ -61,7 +61,11 @@ public class OpenShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         System.out.println("home holder------------" + days_color.size());
 
+
+        // AndroidUtils.setBackgroundSolid(viewHolder.relativeOpenShop,context,days_color.get(position),2);
+
         AndroidUtils.setBackgroundSolid(viewHolder.relativeOpenShop, context, days_color.get(position), 2, GradientDrawable.RECTANGLE);
+
 
 
     }
