@@ -7,14 +7,16 @@ package com.example.pat.aapkatrade.productdetail.reviewlist;
 public class ReviewListData
 {
 
-    String title, message_description, username, deliver_date;
+    String email,title, message_description, username,rating,created_date;
 
-    ReviewListData(String title, String message_description, String username,String deliver_date)
+    public ReviewListData(String email,String username, String message_description, String rating, String title,String created_date)
     {
-        this.title = title;
-        this.message_description = message_description;
+        this.email = email;
         this.username = username;
-        this.deliver_date = deliver_date;
+        this.message_description = message_description;
+        this.rating = rating;
+        this.title = title;
+        this.created_date = created_date;
     }
 
 }

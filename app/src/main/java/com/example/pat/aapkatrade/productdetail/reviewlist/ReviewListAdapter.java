@@ -2,6 +2,7 @@ package com.example.pat.aapkatrade.productdetail.reviewlist;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class ReviewListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     ProgressBarHandler progress_handler;
 
 
+
     public ReviewListAdapter(Context context, List<ReviewListData> itemList)
     {
         this.itemList = itemList;
@@ -39,6 +41,7 @@ public class ReviewListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         progress_handler = new ProgressBarHandler(context);
 
     }
+
 
 
     @Override
@@ -56,11 +59,24 @@ public class ReviewListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position)
     {
         final ReviewListHolder homeHolder = (ReviewListHolder) holder;
+
+        Log.e("size----------",String.valueOf(itemList.size()));
+
+        homeHolder.title.setText(itemList.get(position).title);
+
+        homeHolder.message_description.setText(itemList.get(position).message_description);
+
+        homeHolder.username.setText(itemList.get(position).username);
+
+        homeHolder.tvRating.setText(itemList.get(position).rating);
+
+        homeHolder.deliver_date.setText(itemList.get(position).created_date);
+
+
 
     }
 
@@ -70,11 +86,10 @@ public class ReviewListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-
     @Override
     public int getItemCount()
     {
-        return 5;
+        return itemList.size();
         //return itemList.size();
     }
 

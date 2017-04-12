@@ -223,7 +223,7 @@ public class RateusActivity extends AppCompatActivity
         if (ConnetivityCheck.isNetworkAvailable(RateusActivity.this))
         {
 
-            System.out.println("sachin-----------"+String.valueOf(rating_count));
+            System.out.println("sachin-----------"+product_id+ user_id);
 
             Ion.with(RateusActivity.this)
                     .load(getResources().getString(R.string.webservice_base_url)+"/write_review")

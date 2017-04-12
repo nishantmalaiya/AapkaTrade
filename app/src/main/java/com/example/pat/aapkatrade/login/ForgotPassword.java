@@ -118,14 +118,13 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         switch (v.getId()) {
 
             case R.id.btn_send_otp:
 
-
                 Validatefields();
-
 
                 break;
         }

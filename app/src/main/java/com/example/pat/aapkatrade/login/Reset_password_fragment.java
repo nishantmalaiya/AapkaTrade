@@ -147,14 +147,14 @@ LinearLayout reset_password_container;
 
 
 
-        else {
-
+       /* else
+        {
 
             showmessage(getResources().getString(R.string.password_validing_text));
 
         }
 
-
+*/
     }
 
     private void showmessage(String message) {
@@ -166,7 +166,7 @@ LinearLayout reset_password_container;
         progressBarHandler.show();
 
           user_id=app_sharedpreference.getsharedpref("userid","notlogin");
-        String webservice_reset_password = getResources().getString(R.string.webservice_base_url) + "/resetPwd";
+         String webservice_reset_password = getResources().getString(R.string.webservice_base_url) + "/resetPwd";
 
 
         if (app_sharedpreference.shared_pref != null) {
@@ -184,7 +184,7 @@ LinearLayout reset_password_container;
             Log.e("null_sharedPreferences", "sharedPreferences");
         }
 
-Log.e("user_id",user_id);
+        Log.e("user_id",user_id);
 
         Ion.with(getActivity())
                 .load(webservice_reset_password)
@@ -223,28 +223,8 @@ Log.e("user_id",user_id);
 
                 });
 
-
-
-
-
-
-
     }
 
-
-
-
-
-
-
-
-
-
-
     // TODO: Rename method, update argument and hook method into UI event
-
-
-
-
 
 }
