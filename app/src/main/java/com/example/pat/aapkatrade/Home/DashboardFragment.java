@@ -170,7 +170,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         coordinatorLayout.setVisibility(View.INVISIBLE);
 
         home_ads = (ImageView) v.findViewById(R.id.home_ads);
-       // home_ads.setImageResource(R.drawable.ic_home_ads2);
+//        home_ads.setImageResource(R.drawable.ic_home_ads2);
 
 
 

@@ -144,7 +144,7 @@ public class CategoryListActivity extends AppCompatActivity {
         State state = new State("-1", "Select State", "0");
         productAvailableStateList.add(state);
 
-        Log.e(AndroidUtils.getTag(context), "called categorylist webservice");
+        Log.e(AndroidUtils.getTag(context), "called categorylist webservice for category_id : "+category_id);
         progress_handler.show();
         Ion.with(CategoryListActivity.this)
                 .load(getResources().getString(R.string.webservice_base_url) + "/productlist")
