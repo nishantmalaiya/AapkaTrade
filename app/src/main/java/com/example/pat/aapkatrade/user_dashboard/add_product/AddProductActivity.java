@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -98,6 +99,7 @@ public class AddProductActivity extends AppCompatActivity {
     ProductImages adapter;
     Bitmap imageForPreview;
     ArrayList<Bitmap> multiple_images;
+    RelativeLayout rl_layout1_saveandcontinue_container;
 
     List<Part> files_image = new ArrayList();
     TextView tvTitle;
@@ -109,6 +111,7 @@ public class AddProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         setUpToolBar();
+        setupRecyclerView();
         initview();
         initspinner();
         getCompany();
@@ -116,6 +119,17 @@ public class AddProductActivity extends AppCompatActivity {
 
 
        //getState();
+
+
+    }
+
+
+    private void setupRecyclerView() {
+        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        adapter = new ProductImages(AddProductActivity.this, productImagesDatas);
+        layoutManager = new LinearLayoutManager(AddProductActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
 
     }
@@ -132,6 +146,35 @@ public class AddProductActivity extends AppCompatActivity {
         etProductName=(EditText)findViewById(R.id.etProductName);
         spCategory=(Spinner)findViewById(R.id.spCategory);
         spSubCategory=(Spinner)findViewById(R.id.spSubCategory);
+        rl_layout1_saveandcontinue_container=(RelativeLayout)findViewById(R.id.rl_layout1_saveandcontinue_container);
+
+        //container 1 save& continue click event
+
+
+        rl_layout1_saveandcontinue_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+
+
+
+            }
+        });
+
+
+        uploadButton = (ImageView) findViewById(R.id.uploadButton);
+
+
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picPhoto();
+
+            }
+        });
 
     }
 
@@ -159,9 +202,12 @@ public class AddProductActivity extends AppCompatActivity {
         serviceTypes.add("Select Service Type");
         serviceTypes.add("Service Enquiry");
         serviceTypes.add("Sell");
-        ArrayAdapter<String> service_type_spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, serviceTypes);
-        service_type_spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spService_type.setAdapter(service_type_spinner_adapter);
+
+        CustomSimpleListAdapter adapter_spinner_service_type = new CustomSimpleListAdapter(context, serviceTypes);
+        spService_type.setAdapter(adapter_spinner_service_type);
+//        ArrayAdapter<String> service_type_spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, serviceTypes);
+//        service_type_spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spService_type.setAdapter(service_type_spinner_adapter);
 
 
 spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -581,6 +627,186 @@ spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(
 
 
 
+    void picPhoto() {
+        String str[] = new String[]{"Camera", "Gallery"};
+        new AlertDialog.Builder(this).setItems(str,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        performImgPicAction(which);
+                    }
+                }).show();
+
+    }
+
+    void performImgPicAction(int which)
+    {
+        Intent in;
+        if (which == 1)
+        {
+            in = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            in.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+            in.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(in, "Select Multiple Picture From Gallery"), 11);
+        }
+        else
+        {
+
+            in = new Intent();
+            in.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(Intent.createChooser(in, "Capture Image from Camera"), 10);
+        }
+
+
+
+    }
+
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        multiple_images=new ArrayList<>();
+        Log.e("hi", "requestCode : " + requestCode + "result code : " + resultCode);
+        try {
+            if (requestCode == 11)
+            {
+                if(data.getClipData()!=null)
+                {
+
+                    data.getClipData().getItemCount();
+
+                    for (int k = 0; k < 4; k++)
+                    {
+
+                        Uri selectedImage = data.getClipData().getItemAt(k).getUri();
+
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                        multiple_images.add(bitmap);
+
+
+                        Log.e("doc", "***START.****** ");
+                        if (ImageUtils.sizeOf(bitmap) > 2048) {
+                            Log.e("doc", "if doc file path 1");
+
+                            docFile = getFile(ImageUtils.resize(bitmap, bitmap.getHeight() / 2, bitmap.getWidth() / 2));
+                            Log.e("doc", "if doc file path" + docFile.getAbsolutePath());
+                        } else {
+
+                            Log.e("doc", " else doc file path 1");
+                            docFile = getFile(bitmap);
+                            Log.e("doc", " else doc file path" + docFile.getAbsolutePath());
+                        }
+
+                        productImagesDatas.add(new ProductImagesData(docFile.getAbsolutePath(),""));
+                        Log.e("docfile", docFile.getAbsolutePath());
+
+
+                        adapter.notifyDataSetChanged();
+                        if(productImagesDatas.size()>0)
+                        {
+                            recyclerView.setVisibility(View.VISIBLE);
+
+                        }
+
+
+
+                    }
+
+                }
+                else
+                {
+
+
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(data.getData());
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        Uri tempUri = getImageUri(AddProductActivity.this, bitmap);
+
+                        // CALL THIS METHOD TO GET THE ACTUAL PATH
+                        File finalFile = new File(getRealPathFromURI(tempUri));
+
+                        productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(),""));
+                        Log.e("docfile", finalFile.getAbsolutePath());
+
+                        adapter.notifyDataSetChanged();
+                        if(productImagesDatas.size()>0)
+                        {
+                            recyclerView.setVisibility(View.VISIBLE);
+
+                        }
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                }
+            }
+            if (requestCode == 10)
+            {
+
+                Log.e("docfile10","Sachin sdnsdfjsd fsdjfsd fnmsdabf");
+
+                Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+                Uri tempUri = getImageUri(AddProductActivity.this, photo);
+
+                // CALL THIS METHOD TO GET THE ACTUAL PATH
+                File finalFile = new File(getRealPathFromURI(tempUri));
+
+                productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(),""));
+                Log.e("docfile", finalFile.getAbsolutePath());
+
+                adapter.notifyDataSetChanged();
+                recyclerView.setVisibility(View.VISIBLE);
+
+            }
+
+        } catch (Exception e) {
+            Log.e("Exception",e.toString());
+        }
+
+    }
+
+
+    private File getFile(Bitmap photo)
+    {
+        Uri tempUri = null;
+        if (photo != null) {
+            tempUri = getImageUri(AddProductActivity.this, photo);
+        }
+        File finalFile = new File(getRealPathFromURI(tempUri));
+        Log.e("data", getRealPathFromURI(tempUri));
+
+        return finalFile;
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage)
+    {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+
+    public String getRealPathFromURI(Uri uri)
+    {
+        Cursor cursor = null;
+        int idx = 0;
+        if (uri != null) {
+            cursor = AddProductActivity.this.getContentResolver().query(uri, null, null, null, null);
+            assert cursor != null;
+            cursor.moveToFirst();
+            idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        }
+        return cursor.getString(idx);
+    }
 
 }
 
