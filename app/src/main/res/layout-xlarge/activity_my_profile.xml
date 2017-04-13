@@ -81,6 +81,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerInParent="true"
                         android:layout_marginRight="10dp"
+                        android:layout_marginLeft="@dimen/twenty_dip"
                         app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
 
 
@@ -89,7 +90,7 @@
                         android:layout_width="@dimen/twenty_five_dip"
                         android:layout_height="@dimen/twenty_five_dip"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/ten_dip"
+                        android:layout_marginLeft="@dimen/twenty_dip"
                         android:layout_toRightOf="@+id/back_imagview"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"

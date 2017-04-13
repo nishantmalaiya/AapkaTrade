@@ -949,19 +949,16 @@ public class RegistrationBusinessAssociateActivity extends AppCompatActivity imp
                 } else if (Validation.isEmptyStr(formBusinessData.getLastName())) {
                     putError(1);
                     step1FieldsSet++;
+                }else if (!Validation.isValidDOB(formBusinessData.getDob())) {
+                    putError(6);
+                    step1FieldsSet++;
                 } else if (Validation.isEmptyStr(formBusinessData.getFatherName())) {
                     putError(10);
                     step1FieldsSet++;
                 } else if (!Validation.isValidNumber(formBusinessData.getMobile_no(), Validation.getNumberPrefix(formBusinessData.getMobile_no()))) {
                     putError(3);
                     step1FieldsSet++;
-                } else if (!Validation.isValidDOB(formBusinessData.getDob())) {
-                    putError(6);
-                    step1FieldsSet++;
-                } else if (Validation.isEmptyStr(formBusinessData.getAddress())) {
-                    putError(9);
-                    step1FieldsSet++;
-                }else if (!(Validation.isNonEmptyStr(formBusinessData.getStateID()) &&
+                }  else if (!(Validation.isNonEmptyStr(formBusinessData.getStateID()) &&
                         Integer.parseInt(formBusinessData.getStateID()) > 0)) {
                     AndroidUtils.showSnackBar(registrationLayout, "Please Select State");
                     step1FieldsSet++;
@@ -969,11 +966,14 @@ public class RegistrationBusinessAssociateActivity extends AppCompatActivity imp
                         Integer.parseInt(formBusinessData.getCityID()) > 0)) {
                     AndroidUtils.showSnackBar(registrationLayout, "Please Select City");
                     step1FieldsSet++;
-                } else if (!Validation.isPincode(formBusinessData.getPinCode())) {
+                } else if (Validation.isEmptyStr(formBusinessData.getAddress())) {
+                    putError(9);
+                    step1FieldsSet++;
+                }else if (!Validation.isPincode(formBusinessData.getPinCode())) {
                     putError(11);
                     step1FieldsSet++;
                 } else if (!formBusinessData.isAgreementAccepted()) {
-                    putError(7);
+                    putError(20);
                     step1FieldsSet++;
                 } else if (step1PhotoFile.getAbsolutePath().equals("/")) {
                     showmessage("Please Upload File");

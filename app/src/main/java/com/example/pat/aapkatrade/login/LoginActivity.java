@@ -156,14 +156,14 @@ public class LoginActivity extends AppCompatActivity {
                                 callwebservice_login(login_url, input_email, input_password);
 
 
-                            } else if (app_sharedpreference.getsharedpref("usertype", "0").equals("2")) {
+                            } else if (AndroidUtils.getUserType(app_sharedpreference.getsharedpref("usertype", "0")).equals("2")) {
 
                                 String login_url = getResources().getString(R.string.webservice_base_url) + "/buyerlogin";
 
                                 callwebservice_login(login_url, input_email, input_password);
 
 
-                            } else if (app_sharedpreference.getsharedpref("usertype", "0").equals("1")) {
+                            } else if (AndroidUtils.getUserType(app_sharedpreference.getsharedpref("usertype", "0")).equals("1")) {
 
                                 String login_url = getResources().getString(R.string.webservice_base_url) + "/sellerlogin";
 
