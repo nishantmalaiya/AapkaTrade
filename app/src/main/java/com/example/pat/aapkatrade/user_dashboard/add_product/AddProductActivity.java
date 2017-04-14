@@ -7,12 +7,14 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
@@ -51,6 +53,7 @@ import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Utils.ImageUtils;
+import com.example.pat.aapkatrade.general.Utils.adapter.CustomMultipleCheckBoxAdapter;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomSimpleListAdapter;
 import com.example.pat.aapkatrade.general.entity.KeyValue;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
@@ -230,26 +233,12 @@ public class AddProductActivity extends AppCompatActivity {
         spCompanyName.setAdapter(adapter);
 
 
-//        State stateEntity_init = new State("-1", "Please Select State");
-//        stateList.add(stateEntity_init);
-//        SpStateAdapter spStateAdapter = new SpStateAdapter(context, stateList);
-//        spState.setAdapter(spStateAdapter);
-
-//        City cityEntity_init = new City("-1", "Please Select City");
-//        cityList.add(cityEntity_init);
-//        SpCityAdapter spCityAdapter = new SpCityAdapter(context, cityList);
-//        spCity.setAdapter(spCityAdapter);
-
-
         serviceTypes.add("Select Service Type");
         serviceTypes.add("Service Enquiry");
         serviceTypes.add("Sell");
 
         CustomSimpleListAdapter adapter_spinner_service_type = new CustomSimpleListAdapter(context, serviceTypes);
         spService_type.setAdapter(adapter_spinner_service_type);
-//        ArrayAdapter<String> service_type_spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, serviceTypes);
-//        service_type_spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spService_type.setAdapter(service_type_spinner_adapter);
 
 
         spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -258,6 +247,7 @@ public class AddProductActivity extends AppCompatActivity {
                 final String sellorservice;
 
                 if (position > 0) {
+                    progressBar.show();
                     opening_time_list.clear();
                     closing_time_list.clear();
                     if (position == 1) {
@@ -308,13 +298,14 @@ public class AddProductActivity extends AppCompatActivity {
                                             closing_time_list.add(closetiming);
                                         }
                                         Log.e("data_closing", closing_time_list.toString());
-
-                                        Timing_dialog serviceEnquiry = new Timing_dialog(context, opening_time_list, closing_time_list);
-                                        serviceEnquiry.show();
+                                        Intent goto_dialog_timing = new Intent(AddProductActivity.this, Timing_dialog.class);
+//                                        goto_dialog_timing.putStringArrayListExtra("opening_time_list", opening_time_list);
+//                                        goto_dialog_timing.putStringArrayListExtra("closing_time_list", closing_time_list);
+                                        startActivity(goto_dialog_timing);
 
 
                                     }
-
+                                    progressBar.hide();
                                 }
                             });
 
@@ -626,10 +617,11 @@ public class AddProductActivity extends AppCompatActivity {
                     if (listDataChild.size() > 0) {
                         CustomSimpleListAdapter adapter = new CustomSimpleListAdapter(context, listDataChild);
                         spSubCategory.setAdapter(adapter);
+                        findViewById(R.id.text_input_subcategory).setVisibility(View.VISIBLE);
                         spSubCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                if (position > 0) {
+                                if (position >= 0) {
                                     subCategoryID = listDataChild.get(position).subCategoryId;
 
 
@@ -663,10 +655,11 @@ public class AddProductActivity extends AppCompatActivity {
 
     private void call_dynamic_formdata_webservice(String categoryID, String subCategoryID) {
 
+
         Log.e(AndroidUtils.getTag(AddProductActivity.this) + "category", categoryID + "******" + subCategoryID);
         String dynamic_formdata_addproduct = getString(R.string.webservice_base_url) + "/get_formdata";
 
-
+        progressBar.show();
         Ion.with(context)
                 .load(dynamic_formdata_addproduct)
                 .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
@@ -677,94 +670,98 @@ public class AddProductActivity extends AppCompatActivity {
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-
-                        JsonObject jsonObject = result.getAsJsonObject();
-                        JsonArray json_form_data = jsonObject.getAsJsonArray("form_data");
-
-
-                        for (int i = 0; i < json_form_data.size(); i++) {
-                            JsonObject jsonObject1 = (JsonObject) json_form_data.get(i);
-                            Dynamic_form_data_entity dynamic_form_data_entity = new Dynamic_form_data_entity();
-                            String title = jsonObject1.get("title").getAsString();
-                            String type = jsonObject1.get("type").getAsString();
-                            dynamic_form_data_entity.title.key = "title";
-                            dynamic_form_data_entity.title.value = title;
-
-                            dynamic_form_data_entity.type.key = "type";
-                            dynamic_form_data_entity.type.value = type;
-
-                            if (type.equals(context.getString(R.string.dynamic_edittext))) {
+                        if (result != null) {
+                            if (result.get("error").getAsString().contains("false")) {
 
 
-                                ++values_count;
-                                dynamic_form_data_entity.values_arraylist.add(new KeyValue("values", ""));
-
-                                AndroidUtils.showErrorLog(context, "1*****" + values_count);
-                                dynamic_form_map_single_text.put(title, dynamic_form_data_entity);
-
-                            } else if (type.equals(context.getString(R.string.dynamic_spinner))) {
+                                JsonObject jsonObject = result.getAsJsonObject();
+                                JsonArray json_form_data = jsonObject.getAsJsonArray("form_data");
 
 
-                                JsonArray json_values = jsonObject1.getAsJsonArray("value");
+                                for (int i = 0; i < json_form_data.size(); i++) {
+                                    JsonObject jsonObject1 = (JsonObject) json_form_data.get(i);
+                                    Dynamic_form_data_entity dynamic_form_data_entity = new Dynamic_form_data_entity();
+                                    String title = jsonObject1.get("title").getAsString();
+                                    String type = jsonObject1.get("type").getAsString();
+                                    dynamic_form_data_entity.title.key = "title";
+                                    dynamic_form_data_entity.title.value = title;
 
-                                AndroidUtils.showErrorLog(context, "jsonvalues**" + json_values.toString() + "***" + json_values.size());
-                                dynamic_form_data_entity.values_arraylist.add(new KeyValue("values", "Please Select "+title));
-                                for (int k = 0; k < json_values.size(); k++) {
-                                    JsonObject jsonObject_value = (JsonObject) json_values.get(k);
-                                    String values = jsonObject_value.get("value").getAsString();
+                                    dynamic_form_data_entity.type.key = "type";
+                                    dynamic_form_data_entity.type.value = type;
 
-                                    dynamic_form_data_entity.values_arraylist.add(new KeyValue("values", values));
+                                    if (type.equals(context.getString(R.string.dynamic_edittext))) {
+
+
+                                        ++values_count;
+                                        dynamic_form_data_entity.values_arraylist.add(new KeyValue("values", ""));
+
+                                        AndroidUtils.showErrorLog(context, "1*****" + values_count);
+                                        dynamic_form_map_single_text.put(title, dynamic_form_data_entity);
+
+                                    } else if (type.equals(context.getString(R.string.dynamic_spinner))) {
+
+
+                                        JsonArray json_values = jsonObject1.getAsJsonArray("value");
+
+                                        AndroidUtils.showErrorLog(context, "jsonvalues**" + json_values.toString() + "***" + json_values.size());
+                                        dynamic_form_data_entity.values_arraylist.add(new KeyValue("values", "Please Select " + title));
+                                        for (int k = 0; k < json_values.size(); k++) {
+                                            JsonObject jsonObject_value = (JsonObject) json_values.get(k);
+                                            String values = jsonObject_value.get("value").getAsString();
+
+                                            dynamic_form_data_entity.values_arraylist.add(new KeyValue("values", values));
+
+
+                                        }
+                                        dynamic_form_map_spinner.put(title, dynamic_form_data_entity);
+                                    } else if (type.equals(context.getString(R.string.dynamic_multiplechoice_checkbox))) {
+                                        JsonArray json_values = jsonObject1.getAsJsonArray("value");
+
+                                        AndroidUtils.showErrorLog(context, "jsonvalues**" + json_values.toString() + "***" + json_values.size());
+                                        for (int k = 0; k < json_values.size(); k++) {
+                                            JsonObject jsonObject_value = (JsonObject) json_values.get(k);
+                                            String values = jsonObject_value.get("value").getAsString();
+
+                                            dynamic_form_data_entity.values_arraylist.add(new KeyValue("values", values));
+
+
+                                        }
+                                        dynamic_form_map_checkbox.put(title, dynamic_form_data_entity);
+
+
+                                    } else if (type.equals(context.getString(R.string.dynamic_radio_group))) {
+                                        JsonArray json_values = jsonObject1.getAsJsonArray("value");
+
+                                        AndroidUtils.showErrorLog(context, "jsonvalues**" + json_values.toString() + "***" + json_values.size());
+                                        for (int k = 0; k < json_values.size(); k++) {
+                                            JsonObject jsonObject_value = (JsonObject) json_values.get(k);
+                                            String values = jsonObject_value.get("value").getAsString();
+
+                                            dynamic_form_data_entity.values_arraylist.add(new KeyValue("values", values));
+
+
+                                        }
+                                        dynamic_form_map_radiogroup.put(title, dynamic_form_data_entity);
+
+
+                                    }
 
 
                                 }
-                                dynamic_form_map_spinner.put(title, dynamic_form_data_entity);
-                            } else if (type.equals(context.getString(R.string.dynamic_multiplechoice_checkbox))) {
-                                JsonArray json_values = jsonObject1.getAsJsonArray("value");
 
-                                AndroidUtils.showErrorLog(context, "jsonvalues**" + json_values.toString() + "***" + json_values.size());
-                                for (int k = 0; k < json_values.size(); k++) {
-                                    JsonObject jsonObject_value = (JsonObject) json_values.get(k);
-                                    String values = jsonObject_value.get("value").getAsString();
-
-                                    dynamic_form_data_entity.values_arraylist.add(new KeyValue("values", values));
-
-
-                                }
-                                dynamic_form_map_checkbox.put(title, dynamic_form_data_entity);
-
-
-                            } else if (type.equals(context.getString(R.string.dynamic_radio_group))) {
-                                JsonArray json_values = jsonObject1.getAsJsonArray("value");
-
-                                AndroidUtils.showErrorLog(context, "jsonvalues**" + json_values.toString() + "***" + json_values.size());
-                                for (int k = 0; k < json_values.size(); k++) {
-                                    JsonObject jsonObject_value = (JsonObject) json_values.get(k);
-                                    String values = jsonObject_value.get("value").getAsString();
-
-                                    dynamic_form_data_entity.values_arraylist.add(new KeyValue("values", values));
-
-
-                                }
-                                dynamic_form_map_radiogroup.put(title, dynamic_form_data_entity);
-
-
+                                dynamic_form_map_parent.putAll(dynamic_form_map_single_text);
+                                dynamic_form_map_parent.putAll(dynamic_form_map_checkbox);
+                                dynamic_form_map_parent.putAll(dynamic_form_map_radiogroup);
+                                dynamic_form_map_parent.putAll(dynamic_form_map_spinner);
+                                progressBar.hide();
+                            } else {
+                                AndroidUtils.showErrorLog(context, result.get("message").getAsString());
+                                progressBar.hide();
                             }
-
-
+                        } else {
+                            AndroidUtils.showErrorLog(context, "Null Data Found in " + AndroidUtils.getTag(context));
+                            progressBar.hide();
                         }
-
-                        dynamic_form_map_parent.putAll(dynamic_form_map_single_text);
-                        dynamic_form_map_parent.putAll(dynamic_form_map_checkbox);
-                        dynamic_form_map_parent.putAll(dynamic_form_map_radiogroup);
-                        dynamic_form_map_parent.putAll(dynamic_form_map_spinner);
-                        for (String key : dynamic_form_map_parent.keySet()) {
-
-                            AndroidUtils.showErrorLog(context, "*********" + key);
-
-
-                        }
-
-                        Log.e(AndroidUtils.getTag(AddProductActivity.this), result.toString());
 
                     }
                 });
@@ -774,7 +771,13 @@ public class AddProductActivity extends AppCompatActivity {
 
     private void dynamic_view_builders() {
 
+        LinearLayoutManager layoutManager_checkbox = new LinearLayoutManager(context);
+        LinearLayoutManager layoutManager_radiobutton = new LinearLayoutManager(context);
 
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        layoutParams.setMargins(30, 20, 30, 0);
         for (String titleKey : dynamic_form_map_single_text.keySet()) {
             Dynamic_form_data_entity dynamicFormDataEntity = dynamic_form_map_single_text.get(titleKey);
 
@@ -782,14 +785,11 @@ public class AddProductActivity extends AppCompatActivity {
             View view_edittext = LayoutInflater.from(this).inflate(R.layout.custom_edit_text_layout, null);
 //
 
-            TextInputLayout dynamic_single_textinput_layout=(TextInputLayout)view_edittext.findViewById(R.id.dynamic_single_texinputlayout);
+            TextInputLayout dynamic_single_textinput_layout = (TextInputLayout) view_edittext.findViewById(R.id.dynamic_single_texinputlayout);
             EditText dynamic_single_edittext = (EditText) view_edittext.findViewById(R.id.dynamic_single_edittext);
 
             dynamic_single_edittext.setTag(titleKey);
             dynamic_single_textinput_layout.setHint(titleKey);
-
-
-
 
 
             ll_dynamic_fields_step2.addView(view_edittext);
@@ -813,14 +813,7 @@ public class AddProductActivity extends AppCompatActivity {
             dynamicSpinner.setSelection(0);
 
 
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-            layoutParams.setMargins(30, 20, 30, 0);
-
-
-
-            ll_dynamic_fields_step2.addView(view_spinner,layoutParams);
+            ll_dynamic_fields_step2.addView(view_spinner, layoutParams);
         }
 
 
@@ -830,11 +823,31 @@ public class AddProductActivity extends AppCompatActivity {
             ArrayList<KeyValue> keyValueArrayList = dynamicFormDataEntity.values_arraylist;
 
 
-            View view_radiogroup = LayoutInflater.from(this).inflate(R.layout.custom_radio_button_layout, null);
 //
+            View view_Textview = LayoutInflater.from(this).inflate(R.layout.custom_text_view_layout, null, false);
+
+            TextView tv_checkbox_header = (TextView) view_Textview.findViewById(R.id.customTextView);
+            tv_checkbox_header.setTextColor(ContextCompat.getColor(context, R.color.black));
+            tv_checkbox_header.setTypeface(Typeface.DEFAULT_BOLD);
+
+            tv_checkbox_header.setTag(titleKey);
+            tv_checkbox_header.setText(titleKey);
 
 
-            ll_dynamic_fields_step2.addView(view_radiogroup);
+            ll_dynamic_fields_step2.addView(tv_checkbox_header);
+            View view_checked_container = LayoutInflater.from(this).inflate(R.layout.custom_check_box_layout, null, false);
+
+            RecyclerView recyclerView_checkboxes = (RecyclerView) view_checked_container.findViewById(R.id.custom_recycleview_formbuilder);
+
+
+            CustomMultipleCheckBoxAdapter customMultipleCheckBoxAdapter = new CustomMultipleCheckBoxAdapter(context, keyValueArrayList, true);
+            recyclerView_checkboxes.setLayoutManager(layoutManager_checkbox);
+            recyclerView_checkboxes.setAdapter(customMultipleCheckBoxAdapter);
+
+
+            ll_dynamic_fields_step2.addView(view_checked_container);
+
+
         }
 
 
@@ -843,36 +856,32 @@ public class AddProductActivity extends AppCompatActivity {
 
             ArrayList<KeyValue> keyValueArrayList = dynamicFormDataEntity.values_arraylist;
 
-for(int i=0;i<keyValueArrayList.size();i++)
-{
-    View view_checked_textview = LayoutInflater.from(this).inflate(R.layout.row_filter_column2, null);
 
-    CheckBox dynamic_check_box_layout=(CheckBox)view_checked_textview.findViewById(R.id.check_filter_value);
+            View view_Textview = LayoutInflater.from(this).inflate(R.layout.custom_text_view_layout, null, false);
 
+            TextView tv_checkbox_header = (TextView) view_Textview.findViewById(R.id.customTextView);
+            tv_checkbox_header.setTextColor(ContextCompat.getColor(context, R.color.black));
+            tv_checkbox_header.setTypeface(Typeface.DEFAULT_BOLD);
 
-
-    dynamic_check_box_layout.setText(keyValueArrayList.get(i).value.toString());
-
-
-
-    TextView textview_checeked=(TextView) view_checked_textview.findViewById(R.id.filter_value);
-    textview_checeked.setText(keyValueArrayList.get(i).value.toString());
+            tv_checkbox_header.setTag(titleKey);
+            tv_checkbox_header.setText(titleKey);
 
 
+            ll_dynamic_fields_step2.addView(tv_checkbox_header);
+            View view_checked_container = LayoutInflater.from(this).inflate(R.layout.custom_check_box_layout, null, false);
+
+            RecyclerView recyclerView_checkboxes = (RecyclerView) view_checked_container.findViewById(R.id.custom_recycleview_formbuilder);
 
 
+            CustomMultipleCheckBoxAdapter customMultipleCheckBoxAdapter = new CustomMultipleCheckBoxAdapter(context, keyValueArrayList, false);
+            recyclerView_checkboxes.setLayoutManager(layoutManager_radiobutton);
+            recyclerView_checkboxes.setAdapter(customMultipleCheckBoxAdapter);
 
-    //CustomSpinnerAdapter customSpinnerAdapter = new CustomSpinnerAdapter(context, keyValueArrayList);
 
+            ll_dynamic_fields_step2.addView(view_checked_container);
 
-    ll_dynamic_fields_step2.addView(dynamic_check_box_layout);
-
-}
 
         }
-
-
-
 
 
     }
