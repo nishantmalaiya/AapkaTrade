@@ -1,13 +1,16 @@
 package com.example.pat.aapkatrade.user_dashboard.add_product;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.pat.aapkatrade.R;
+import com.example.pat.aapkatrade.general.entity.KeyValue;
 
 import java.util.ArrayList;
 
@@ -27,6 +30,16 @@ public class CustomSpinnerAdapter extends BaseAdapter {
         this.id=id;
         inflter = (LayoutInflater.from(applicationContext));
     }
+
+    public CustomSpinnerAdapter(Context applicationContext, ArrayList Names) {
+        this.context = applicationContext;
+
+        this.Names = Names;
+
+        inflter = (LayoutInflater.from(applicationContext));
+    }
+
+
 
     @Override
     public int getCount() {
@@ -49,7 +62,12 @@ public class CustomSpinnerAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.row_spinner, null);
         TextView names = (TextView) view.findViewById(R.id.tvSpCategory);
-        names.setText(Names.get(i).toString());
+        if(Names.get(i) instanceof KeyValue){
+            names.setText(((KeyValue) Names.get(i)).value.toString());
+            names.setTextColor(ContextCompat.getColor(context,R.color.black));
+        } else{
+            names.setText(Names.get(i).toString());
+        }
         return view;
     }
 }

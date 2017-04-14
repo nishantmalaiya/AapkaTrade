@@ -36,7 +36,7 @@ public class FilterColumn2RecyclerAdapter extends RecyclerView.Adapter<FilterCol
 
     @Override
     public FilterColumn2ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new FilterColumn2ViewHolder(inflater.inflate(R.layout.row_filter_column2, parent, false));
+        return new FilterColumn2ViewHolder(inflater.inflate(R.layout.custom_check_box_layout, parent, false));
     }
 
     @Override
