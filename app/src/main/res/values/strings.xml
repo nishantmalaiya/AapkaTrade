@@ -286,7 +286,7 @@
     <string name="dynamic_edittext">element-single-line-text</string>
     <string name="dynamic_multiplechoice_checkbox">element-checkboxes</string>
 
-    <string name="dynamic_single_choice_checkbox">element-multiple-choice</string>
+    <string name="dynamic_radio_group">element-multiple-choice</string>
     <string name="dynamic_spinner">element-dropdown</string>
 
 
