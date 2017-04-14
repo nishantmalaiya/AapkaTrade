@@ -2,26 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/ten_dip"
-    android:orientation="horizontal">
+    android:id="@+id/ll_filter_coloumn2_container"
+    android:orientation="horizontal"
+    android:padding="@dimen/ten_dip">
 
     <CheckBox
         android:id="@+id/check_filter_value"
-        android:layout_width="@dimen/twenty_five_dip"
+        style="@style/myedittext"
+        android:layout_width="wrap_content"
+
         android:layout_height="@dimen/twenty_five_dip"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:theme="@style/customCheckBoxStyle"
-        style="@style/myedittext"
-        />
+        android:theme="@style/customCheckBoxStyle" />
+
+    <include
+        android:id="@+id/radio_button"
+        layout="@layout/custom_radio_button_layout"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/filter_value"
         android:layout_width="fill_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/ten_dip"
         android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginLeft="@dimen/ten_dip"
         android:text="@string/filter_text"
 
         />
+
 
 </LinearLayout>
