@@ -12,10 +12,13 @@ import com.example.pat.aapkatrade.R;
 public class OrderDetailsActivity extends AppCompatActivity
 {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_order_details);
 
         setuptoolbar();
@@ -30,15 +33,17 @@ public class OrderDetailsActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(null);
         //getSupportActionBar().setIcon(R.drawable.home_logo);
-
     }
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         getMenuInflater().inflate(R.menu.user, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)

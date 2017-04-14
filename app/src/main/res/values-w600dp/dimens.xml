@@ -35,4 +35,5 @@
     <dimen name="twenty_five_dip">25dp</dimen>
     <dimen name="two_dip">2dp</dimen>
     <dimen name="one_hundred_twenty_dip">150dp</dimen>
+    <dimen name="fifteen_dip">20dp</dimen>
 </resources>

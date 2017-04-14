@@ -8,13 +8,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import com.alihafizji.library.CreditCardEditText;
 import com.example.pat.aapkatrade.R;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class CreditDebitFragment extends Fragment
+
+public class CreditDebitFragment extends Fragment implements CreditCardEditText.CreditCartEditTextInterface
 {
 
-    EditText edtfirst,edtsecond,edtthree, edtfour,edtfive,edtsix,edtseven,edteight,edtnine,edtten,edteleven,edttwelve,edtthirteen,edtfourteen,edtfifteen,edtsixteen;
+
+    EditText cardNumberEditText,cardDateEditText,cardCVCEditText;
+    private static final int CARD_DATE_TOTAL_SYMBOLS = 5; // size of pattern MM/YY
+    private static final int CARD_DATE_TOTAL_DIGITS = 4; // max numbers of digits in pattern: MM + YY
+    private static final int CARD_DATE_DIVIDER_MODULO = 3; // means divider position is every 3rd symbol beginning with 1
+    private static final int CARD_DATE_DIVIDER_POSITION = CARD_DATE_DIVIDER_MODULO - 1; // means divider position is every 2nd symbol beginning with 0
+    private static final char CARD_DATE_DIVIDER = '/';
+    private static final int CARD_CVC_TOTAL_SYMBOLS = 3;
+
+
+
 
 
     @Override
@@ -25,422 +40,160 @@ public class CreditDebitFragment extends Fragment
 
         setup_layout(view);
 
-
         return view;
     }
 
     private void setup_layout(View v)
     {
 
-        edtfirst = (EditText) v.findViewById(R.id.edtFirst);
+        cardNumberEditText = (EditText) v.findViewById(R.id.creditcardEditText);
 
-        edtsecond = (EditText) v.findViewById(R.id.edtSecond);
+        cardDateEditText = (EditText) v.findViewById(R.id.cardDateEditText);
 
-        edtthree = (EditText) v.findViewById(R.id.edtThird);
-
-        edtfour = (EditText) v.findViewById(R.id.edtFour);
-
-        edtfive =(EditText) v.findViewById(R.id.edtFive);
-
-        edtsix = (EditText) v.findViewById(R.id.edtSix);
-
-        edtseven = (EditText) v.findViewById(R.id.edtSeven);
-
-        edteight = (EditText) v.findViewById(R.id.edtEight);
-
-        edtnine = (EditText) v.findViewById(R.id.edtNine);
-
-        edtten =  (EditText) v.findViewById(R.id.edtTen);
-
-        edteleven = (EditText) v.findViewById(R.id.edtEleven);
-
-        edttwelve = (EditText) v.findViewById(R.id.edtTwelve);
-
-        edtthirteen = (EditText) v.findViewById(R.id.edtThirteen);
-
-        edtfourteen = (EditText) v.findViewById(R.id.edtFourteen);
-
-        edtfifteen = (EditText) v.findViewById(R.id.edtFifteen);
-
-        edtsixteen = (EditText) v.findViewById(R.id.edtSixteen);
+        cardCVCEditText = (EditText) v.findViewById(R.id.cardCVCEditText);
 
 
-        edtfirst.addTextChangedListener(new TextWatcher()
+        cardCVCEditText.addTextChangedListener(new TextWatcher()
         {
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                // TODO Auto-generated method stub
-                if (edtfirst.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edtsecond.requestFocus();
-                }
-            }
+            @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-                // TODO Auto-generated method stub
+
             }
 
-            public void afterTextChanged(Editable s)
-            {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-
-
-        edtsecond.addTextChangedListener(new TextWatcher() {
-
+            @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (edtsecond.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edtthree.requestFocus();
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > CARD_CVC_TOTAL_SYMBOLS) {
+                    s.delete(CARD_CVC_TOTAL_SYMBOLS, s.length());
                 }
             }
 
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-
-                edtfirst.requestFocus();
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
 
         });
 
-        edtthree.addTextChangedListener(new TextWatcher() {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (edtthree.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edtfour.requestFocus();
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-                edtsecond.requestFocus();
-
-
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-
-        edtfour.addTextChangedListener(new TextWatcher() {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (edtfour.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edtfive.requestFocus();
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-                edtthree.requestFocus();
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-
-
-        edtfive.addTextChangedListener(new TextWatcher() {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (edtfive.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edtsix.requestFocus();
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-                edtfour.requestFocus();
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-        edtsix.addTextChangedListener(new TextWatcher() {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (edtsix.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edtseven.requestFocus();
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-                edtfive.requestFocus();
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-
-
-        edtseven.addTextChangedListener(new TextWatcher() {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (edtseven.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edteight.requestFocus();
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-                edtsix.requestFocus();
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-
-        edteight.addTextChangedListener(new TextWatcher() {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (edteight.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edtnine.requestFocus();
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-                edtseven.requestFocus();
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-
-        edtnine.addTextChangedListener(new TextWatcher() {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (edtnine.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edtten.requestFocus();
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-                edteight.requestFocus();
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-
-        edtten.addTextChangedListener(new TextWatcher() {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (edtten.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edteleven.requestFocus();
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-                edtnine.requestFocus();
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-
-        edteleven.addTextChangedListener(new TextWatcher() {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (edteleven.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edttwelve.requestFocus();
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-                edtten.requestFocus();
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-
-
-        edttwelve.addTextChangedListener(new TextWatcher() {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (edttwelve.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edtthirteen.requestFocus();
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-                edteleven.requestFocus();
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-        edtthirteen.addTextChangedListener(new TextWatcher() {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (edtthirteen.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edtfourteen.requestFocus();
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-                edttwelve.requestFocus();
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-
-        edtfourteen.addTextChangedListener(new TextWatcher() {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (edtfourteen.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edtfifteen.requestFocus();
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-                edtthirteen.requestFocus();
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-        edtfifteen.addTextChangedListener(new TextWatcher()
+        cardDateEditText.addTextChangedListener(new TextWatcher()
         {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                // TODO Auto-generated method stub
-                if (edtfifteen.getText().toString().length() == 1)     //size as per your requirement
-                {
-                    edtsixteen.requestFocus();
-                }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-                // TODO Auto-generated method stub
-                edtfourteen.requestFocus();
-            }
-
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-            }
-
-        });
-
-        edtsixteen.addTextChangedListener(new TextWatcher()
-        {
-
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                // TODO Auto-generated method stub
-
-            }
-
+            @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-                // TODO Auto-generated method stub
-                edtfifteen.requestFocus();
+
             }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+
+            }
+
+            @Override
             public void afterTextChanged(Editable s)
             {
-                // TODO Auto-generated method stub
+                if (!isInputCorrect(s, CARD_DATE_TOTAL_SYMBOLS, CARD_DATE_DIVIDER_MODULO, CARD_DATE_DIVIDER))
+                {
+                    s.replace(0, s.length(), buildCorrecntString(getDigitArray(s, CARD_DATE_TOTAL_DIGITS), CARD_DATE_DIVIDER_POSITION, CARD_DATE_DIVIDER));
+                }
             }
+
+
 
         });
 
+        cardNumberEditText.addTextChangedListener(new TextWatcher() {
 
+            private static final int TOTAL_SYMBOLS = 19; // size of pattern 0000-0000-0000-0000
+            private static final int TOTAL_DIGITS = 16; // max numbers of digits in pattern: 0000 x 4
+            private static final int DIVIDER_MODULO = 5; // means divider position is every 5th symbol beginning with 1
+            private static final int DIVIDER_POSITION = DIVIDER_MODULO - 1; // means divider position is every 4th symbol beginning with 0
+            private static final char DIVIDER = '-';
 
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // noop
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // noop
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!isInputCorrect(s, TOTAL_SYMBOLS, DIVIDER_MODULO, DIVIDER)) {
+                    s.replace(0, s.length(), buildCorrecntString(getDigitArray(s, TOTAL_DIGITS), DIVIDER_POSITION, DIVIDER));
+                }
+            }
+
+        });
 
 
     }
+
+    private String buildCorrecntString(char[] digits, int dividerPosition, char divider) {
+        final StringBuilder formatted = new StringBuilder();
+
+        for (int i = 0; i < digits.length; i++) {
+            if (digits[i] != 0) {
+                formatted.append(digits[i]);
+                if ((i > 0) && (i < (digits.length - 1)) && (((i + 1) % dividerPosition) == 0)) {
+                    formatted.append(divider);
+                }
+            }
+        }
+
+        return formatted.toString();
+    }
+
+    private char[] getDigitArray(final Editable s, final int size) {
+        char[] digits = new char[size];
+        int index = 0;
+        for (int i = 0; i < s.length() && index < size; i++) {
+            char current = s.charAt(i);
+            if (Character.isDigit(current)) {
+                digits[index] = current;
+                index++;
+            }
+        }
+        return digits;
+    }
+
+
+    private boolean isInputCorrect(Editable s, int totalSymbols, int dividerModulo, char divider)
+    {
+        boolean isCorrect = s.length() <= totalSymbols; // check size of entered string
+        for (int i = 0; i < s.length(); i++)
+        { // chech that every element is right
+            if (i > 0 && (i + 1) % dividerModulo == 0)
+            {
+                isCorrect &= divider == s.charAt(i);
+            }
+            else
+            {
+                isCorrect &= Character.isDigit(s.charAt(i));
+            }
+        }
+        return isCorrect;
+    }
+
+
+    @Override
+    public List<CreditCardEditText.CreditCard> mapOfRegexStringAndImageResourceForCreditCardEditText(CreditCardEditText creditCardEditText)
+    {
+
+        List<CreditCardEditText.CreditCard> listOfPatterns = new ArrayList<CreditCardEditText.CreditCard>();
+
+        CreditCardEditText.CreditCard newCard = new CreditCardEditText.CreditCard("^4[0-9]{12}(?:[0-9]{3})?$", getActivity().getResources().getDrawable(R.drawable.ic_card), "newcard");
+
+        listOfPatterns.add(newCard);
+
+        return listOfPatterns;
+
+    }
+
 
 
 

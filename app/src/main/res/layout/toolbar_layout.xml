@@ -27,7 +27,6 @@
 
 
         <ImageView
-
             android:id="@+id/iconHome"
             android:layout_width="@dimen/twenty_five_dip"
             android:layout_height="@dimen/twenty_five_dip"
@@ -35,6 +34,7 @@
             android:layout_toRightOf="@+id/back_imagview"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
+            android:layout_marginLeft="@dimen/five_dip"
             android:src="@drawable/ic_navigation_home" />
 
         <ImageView

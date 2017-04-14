@@ -535,16 +535,15 @@
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/openShopList"
                             android:layout_width="match_parent"
-                            android:layout_height="110dp"
+                            android:layout_height="105dp"
                             android:layout_below="@+id/tvOpenShopheading"
                             android:layout_marginTop="15dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="2dp"
                             >
 
                         </android.support.v7.widget.RecyclerView>
-
 
                     </RelativeLayout>
 
@@ -697,7 +696,7 @@
                                         android:layout_below="@+id/imgFiveStar"
                                         android:layout_marginTop="13dp"
                                         android:layout_toRightOf="@+id/imgFourStar"
-                                        android:progressDrawable="@drawable/progrees_five_back" />
+                                        android:progressDrawable="@drawable/progress_four_back" />
 
                                     <TextView
                                         android:id="@+id/tvthreeStar"
@@ -727,7 +726,7 @@
                                         android:layout_below="@+id/imgFourStar"
                                         android:layout_marginTop="13dp"
                                         android:layout_toRightOf="@+id/imgthreeStar"
-                                        android:progressDrawable="@drawable/progrees_five_back" />
+                                        android:progressDrawable="@drawable/progress_three_back" />
 
 
                                     <TextView
@@ -757,7 +756,7 @@
                                         android:layout_below="@+id/imgthreeStar"
                                         android:layout_marginTop="13dp"
                                         android:layout_toRightOf="@+id/imgtwoStar"
-                                        android:progressDrawable="@drawable/progrees_five_back" />
+                                        android:progressDrawable="@drawable/progress_two_back" />
 
 
                                     <TextView
@@ -779,8 +778,6 @@
                                         android:layout_toRightOf="@+id/tvOneStar"
                                         android:src="@drawable/ic_star" />
 
-
-
                                     <github.nisrulz.stackedhorizontalprogressbar.StackedHorizontalProgressBar
                                         android:id="@+id/progressbarOne"
                                         style="?android:attr/progressBarStyleHorizontal"
@@ -789,7 +786,7 @@
                                         android:layout_below="@+id/imgtwoStar"
                                         android:layout_marginTop="13dp"
                                         android:layout_toRightOf="@+id/imgOneStar"
-                                        android:progressDrawable="@drawable/progrees_five_back" />
+                                        android:progressDrawable="@drawable/progress_one_back" />
 
 
                                 </RelativeLayout>
@@ -844,9 +841,7 @@
 
                         </android.support.v7.widget.RecyclerView>
 
-
                     </RelativeLayout>
-
 
             </LinearLayout>
         </ScrollView>

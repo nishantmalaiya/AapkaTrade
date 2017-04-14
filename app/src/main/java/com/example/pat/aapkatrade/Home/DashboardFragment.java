@@ -405,18 +405,19 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     }
 
 
-    private void replaceFragment(Fragment newFragment, String tag) {
+    private void replaceFragment(Fragment newFragment, String tag)
+    {
 
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.drawer_layout, newFragment, tag).addToBackStack(null);
         transaction.commit();
+
     }
 
 
     @Override
     public void onClick(View v)
     {
-
         switch (v.getId())
         {
             case R.id.rl_viewall_latest_post:
@@ -449,17 +450,18 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
 
 
-    private void go_to_latest_update_list_activity() {
+    private void go_to_latest_update_list_activity()
+    {
         if(home_result!=null)
-
         {
             Intent go_to_product_listactivity = new Intent(getActivity(), PurticularActivity.class);
             go_to_product_listactivity.putExtra("url",getResources().getString(R.string.webservice_base_url)+"/latestupdate");
-
             startActivity(go_to_product_listactivity);
             ((AppCompatActivity) context).overridePendingTransition(R.anim.enter, R.anim.exit);
         }
-        else{
+        else
+        {
+
 
         }
     }

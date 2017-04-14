@@ -32,11 +32,8 @@ public class NetBankingFragment extends Fragment
     private ArrayList<State> stateList = new ArrayList<>();
     public  ArrayList<BankData> bankdatas = new ArrayList<>();
     private ProgressBarHandler progressBar;
-    LinearLayoutManager layoutManager;
-    RelativeLayout relativeCompanylist;
     RecyclerView recyclerBankList;
     BankAdapter companyListAdapter;
-
 
 
     @Override
@@ -48,7 +45,6 @@ public class NetBankingFragment extends Fragment
         progressBar = new ProgressBarHandler(getActivity());
 
         setup_layout(view);
-
 
         return view;
     }
@@ -69,8 +65,6 @@ public class NetBankingFragment extends Fragment
         recyclerBankList.setAdapter(companyListAdapter);
 
         recyclerBankList.setLayoutManager(layoutManager);
-
-
 
     }
 

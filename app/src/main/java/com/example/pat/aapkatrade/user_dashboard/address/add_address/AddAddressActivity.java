@@ -35,7 +35,6 @@ public class AddAddressActivity extends AppCompatActivity
 {
 
     ArrayList<String> stateList = new ArrayList<>();
-    TextView tvTitle;
     AppSharedPreference app_sharedpreference;
     String userid,firstName,lastName,address,mobile,state_id;
     EditText etFirstName,etLastName,etMobileNo,etAddress;
@@ -43,8 +42,6 @@ public class AddAddressActivity extends AppCompatActivity
     Spinner spState;
     RelativeLayout activity_add_address;
     ProgressBarHandler progress_handler;
-
-
 
 
     @Override
@@ -76,7 +73,6 @@ public class AddAddressActivity extends AppCompatActivity
 
         setup_layout();
 
-
     }
 
     private void setup_layout()
@@ -84,7 +80,6 @@ public class AddAddressActivity extends AppCompatActivity
         activity_add_address = (RelativeLayout)  findViewById(R.id.activity_add_address);
 
         spState = (Spinner) findViewById(R.id.spStateCategory);
-
 
         spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
@@ -96,18 +91,18 @@ public class AddAddressActivity extends AppCompatActivity
                 state_id= app_sharedpreference.getsharedpref("state_id", "");
                 spState.setSelection(Integer.valueOf(state_id));
 
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
-
             }
 
         });
 
-        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(AddAddressActivity.this,R.layout.white_textcolor_spinner,stateList);
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.white_textcolor_spinner);
+        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(AddAddressActivity.this,R.layout.black_textcolor_spinner,stateList);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.black_textcolor_spinner);
         spState.setAdapter(spinnerArrayAdapter);
 
         spState.setSelection(Integer.valueOf(state_id));
@@ -140,6 +135,8 @@ public class AddAddressActivity extends AppCompatActivity
         });
 
 
+
+
     }
 
     private void callAddCompanyWebService(String userId, final String firstName,final String lName , final String address)
@@ -162,12 +159,15 @@ public class AddAddressActivity extends AppCompatActivity
                     public void onCompleted(Exception e, JsonObject result)
                     {
 
+                        Intent checkout = new Intent(AddAddressActivity.this, CartCheckoutActivity.class);
+                        checkout.putExtra("fname",etFirstName.getText().toString());
+                        checkout.putExtra("lname",etLastName.getText().toString());
+                        checkout.putExtra("mobile",etMobileNo.getText().toString());
+                        checkout.putExtra("state_id",String.valueOf(spState.getSelectedItemPosition()));
+                        checkout.putExtra("address",etAddress.getText().toString());
+                        startActivity(checkout);
 
-                        Intent companylist = new Intent(AddAddressActivity.this, CartCheckoutActivity.class);
-                        startActivity(companylist);
-
-
-                      /*  if (result == null){
+                       /*  if (result == null){
 
 
                             progress_handler.hide();
@@ -209,33 +209,47 @@ public class AddAddressActivity extends AppCompatActivity
     {
 
         ImageView homeIcon = (ImageView) findViewById(R.id.iconHome) ;
-        findViewById(R.id.logoWord).setVisibility(View.GONE); ;
+        findViewById(R.id.logoWord).setVisibility(View.GONE);
+
         TextView header_name = (TextView) findViewById(R.id.header_name);
         header_name.setVisibility(View.VISIBLE);
+
         header_name.setText(getResources().getString(R.string.add_address_heading));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         AndroidUtils.setImageColor(homeIcon, this, R.color.white);
-        homeIcon.setOnClickListener(new View.OnClickListener() {
+
+        homeIcon.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+
                 Intent intent = new Intent(AddAddressActivity.this, HomeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+
+
             }
         });
+
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
+
+        if (getSupportActionBar() != null)
+        {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(null);
             getSupportActionBar().setElevation(0);
         }
 
+
     }
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         getMenuInflater().inflate(R.menu.menu_map, menu);
         return true;
     }
@@ -306,8 +320,6 @@ public class AddAddressActivity extends AppCompatActivity
                         public void onNothingSelected(AdapterView<?> parent)
                         {
 
-
-
                         }
 
                     });
@@ -322,9 +334,6 @@ public class AddAddressActivity extends AppCompatActivity
         };
 
         System.out.println("Data is actualy--------"+stateList.size());
-
-
-
     }
 */
 }

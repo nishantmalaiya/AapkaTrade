@@ -36,6 +36,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="one_hundred_twenty_dip">120dp</dimen>
+    <dimen name="fifteen_dip">15dp</dimen>
 
 
 </resources>
