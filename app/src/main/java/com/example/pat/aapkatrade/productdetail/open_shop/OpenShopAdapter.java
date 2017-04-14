@@ -22,7 +22,8 @@ import java.util.List;
  * Created by PPC16 on 4/10/2017.
  */
 
-public class OpenShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class OpenShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+{
 
     final LayoutInflater inflater;
     List<OpenShopData> itemList;
@@ -31,21 +32,26 @@ public class OpenShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     AppSharedPreference app_sharedpreference;
     ProgressBarHandler progress_handler;
     ArrayList<Integer> days_color = new ArrayList<>();
+    ArrayList<Integer> color_openshop = new ArrayList<>();
 
 
-    public OpenShopAdapter(Context context, List<OpenShopData> itemList, ArrayList<Integer> days_color) {
+
+
+    public OpenShopAdapter(Context context, List<OpenShopData> itemList, ArrayList<Integer> days_color)
+    {
         this.itemList = itemList;
         this.context = context;
         this.days_color = days_color;
         inflater = LayoutInflater.from(context);
         app_sharedpreference = new AppSharedPreference(context);
         progress_handler = new ProgressBarHandler(context);
-
     }
 
 
+
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         View view = inflater.inflate(R.layout.row_open_shop, parent, false);
 
         viewHolder = new OpenShopHolder(view);
@@ -56,31 +62,41 @@ public class OpenShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position)
+    {
         final OpenShopHolder homeHolder = (OpenShopHolder) holder;
 
         System.out.println("home holder------------" + days_color.size());
 
+        color_openshop.add(R.color.open_shop_day_color1);
+        color_openshop.add(R.color.open_shop_day_color2);
+        color_openshop.add(R.color.open_shop_day_color3);
+        color_openshop.add(R.color.open_shop_day_color4);
+        color_openshop.add(R.color.open_shop_day_color5);
+        color_openshop.add(R.color.open_shop_day_color6);
+        color_openshop.add(R.color.open_shop_day_color7);
+
 
         // AndroidUtils.setBackgroundSolid(viewHolder.relativeOpenShop,context,days_color.get(position),2);
 
-        AndroidUtils.setBackgroundSolid(viewHolder.relativeOpenShop, context, days_color.get(position), 2, GradientDrawable.RECTANGLE);
-
-
+        AndroidUtils.setBackgroundSolid(viewHolder.relativeOpenShop, context, color_openshop.get(position), 2, GradientDrawable.RECTANGLE);
 
     }
 
-    private void showMessage(String s) {
+    private void showMessage(String s)
+    {
         Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return 7;
         //return itemList.size();
     }
 
-    public String getCurrentTimeStamp() {
+    public String getCurrentTimeStamp()
+    {
         return new SimpleDateFormat("dd MMM yyyy HH:mm").format(new Date());
     }
 

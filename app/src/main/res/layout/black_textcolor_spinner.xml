@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvSpCategory"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/thirty_five_dip"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/ten_dip"
+    android:text="Electronics"
+    android:textSize="@dimen/textsize_medium" />
+
+

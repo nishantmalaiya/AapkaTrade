@@ -46,6 +46,7 @@ import com.example.pat.aapkatrade.productdetail.reviewlist.ReviewListAdapter;
 import com.example.pat.aapkatrade.productdetail.reviewlist.ReviewListData;
 import com.example.pat.aapkatrade.rateus.RateusActivity;
 import com.example.pat.aapkatrade.service_enquiry.ServiceEnquiry;
+import com.example.pat.aapkatrade.user_dashboard.address.add_address.AddAddressActivity;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -64,7 +65,6 @@ import github.nisrulz.stackedhorizontalprogressbar.StackedHorizontalProgressBar;
 
 public class ProductDetail extends AppCompatActivity implements DatePickerDialog.OnDateSetListener
 {
-
 
     LinearLayout viewpagerindicator, linearlayoutShare, linearlayoutLocation;
     Spinner spinner;
@@ -91,7 +91,7 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     String productlocation, categoryName;
     LinearLayout linearLayoutQuantity;
     EditText firstName, quantity, price, mobile, email, etEndDate, etStatDate, description, editText;
-    TextView tvServiceBuy, textViewQuantity,tvRatingAverage,tvToatal_rating_review;
+    TextView tvServiceBuy, textViewQuantity,tvRatingAverage,tvTotal_rating_review;
     // TextView tvDurationHeading,tvDuration;
     Dialog dialog;
     private Context context;
@@ -105,7 +105,6 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     ArrayList<OpenShopData> openShopDatas = new ArrayList<>();
     ArrayList<ReviewListData> reviewListDatas = new ArrayList<>();
     ArrayList<Integer> color_openshop = new ArrayList<>();
-
 
 
 
@@ -145,7 +144,6 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
         color_openshop.add(R.color.open_shop_day_color5);
         color_openshop.add(R.color.open_shop_day_color6);
         color_openshop.add(R.color.open_shop_day_color7);
-
 
         initView();
 
@@ -261,7 +259,7 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
                             String total_review = json_total_rating.get("countreviews").getAsString();
 
-                            tvToatal_rating_review.setText(total_review +" rating and "+"review "+total_review);
+                            tvTotal_rating_review.setText(total_review +" rating and "+"review "+total_review);
 
                             JsonArray jsonArray_image = json_result.getAsJsonArray("product_images");
 
@@ -275,13 +273,14 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
                             JsonArray jsonArray_review = result.getAsJsonArray("reviews");
 
-                            if (jsonArray_review.size()==0){
-
+                            if (jsonArray_review.size()==0)
+                            {
 
                             }
                             else
+                            {
+                                for (int j = 0; j < jsonArray_review.size(); j++)
                                 {
-                                for (int j = 0; j < jsonArray_review.size(); j++) {
 
                                     JsonObject jsonreview_data = (JsonObject) jsonArray_review.get(j);
 
@@ -300,7 +299,6 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
                                     Log.e("jsonreview---", title.toString());
 
                                     reviewListDatas.add(new ReviewListData(email, name, message, rating, title, created_date));
-
 
                                 }
 
@@ -374,7 +372,8 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     }
 
 
-    private void setUiPageViewController() {
+    private void setUiPageViewController()
+    {
 
         dotsCount = viewpageradapter.getCount();
         dots = new ImageView[dotsCount];
@@ -437,7 +436,6 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
             @Override
             public void onPageSelected(int position)
             {
-
                 try {
                     for (int i = 0; i < dotsCount; i++) {
                         dots[i].setImageDrawable(getResources().getDrawable(R.drawable.nonselected_item));
@@ -446,12 +444,13 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
                     dots[position].setImageDrawable(getResources().getDrawable(R.drawable.selecteditem_dot));
                 } catch (Exception e) {
                 }
-
-
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onPageScrollStateChanged(int state)
+            {
+
+
 
             }
         });
@@ -462,7 +461,6 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     private void initView()
     {
         context = ProductDetail.this;
-
 
         linearLayoutQuantity = (LinearLayout) findViewById(R.id.linearlayoutQuantity);
 
@@ -480,7 +478,7 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
         tvRatingAverage = (TextView) findViewById(R.id.tvRatingAverage);
 
-        tvToatal_rating_review = (TextView) findViewById(R.id.tvToatal_rating_review);
+        tvTotal_rating_review = (TextView) findViewById(R.id.tvToatal_rating_review);
 
         tvServiceBuy = (TextView) findViewById(R.id.tvServiceBuy);
 
@@ -504,6 +502,8 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
             @Override
             public void onClick(View v)
             {
+
+
                 if (app_sharedpreference.getsharedpref("username", "not").contains("not"))
                 {
                     startActivity(new Intent(ProductDetail.this, LoginDashboard.class));
@@ -517,6 +517,9 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
                     rate_us.putExtra("product_image",imageList.get(0).toString());
                     startActivity(rate_us);
                 }
+
+
+
             }
         });
 
@@ -540,13 +543,17 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
                         locationManagerCheck.createLocationServiceError(ProductDetail.this);
                         progress_handler.hide();
+
+
                     }
                 }
             }
         });
-        linearlayoutShare.setOnClickListener(new View.OnClickListener() {
+        linearlayoutShare.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
                 String message = "Text I want to share.";
                 Intent share = new Intent(Intent.ACTION_SEND);
@@ -598,35 +605,49 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
         progressbarFour = (StackedHorizontalProgressBar) findViewById(R.id.progressbarFour);
         progressbarFour.setMax(max);
-        progressbarFour.setProgress(6);
-        progressbarFour.setSecondaryProgress(4);
+        progressbarFour.setProgress(7);
+        progressbarFour.setSecondaryProgress(3);
 
         progressbarThree = (StackedHorizontalProgressBar) findViewById(R.id.progressbarThree);
         progressbarThree.setMax(max);
-        progressbarThree.setProgress(3);
-        progressbarThree.setSecondaryProgress(7);
+        progressbarThree.setProgress(5);
+        progressbarThree.setSecondaryProgress(5);
 
         progressbarTwo = (StackedHorizontalProgressBar) findViewById(R.id.progressbarTwo);
         progressbarTwo.setMax(max);
-        progressbarTwo.setProgress(8);
-        progressbarTwo.setSecondaryProgress(2);
+        progressbarTwo.setProgress(4);
+        progressbarTwo.setSecondaryProgress(6);
 
         progressbarOne = (StackedHorizontalProgressBar) findViewById(R.id.progressbarOne);
         progressbarOne.setMax(max);
-        progressbarOne.setProgress(7);
-        progressbarOne.setSecondaryProgress(3);
+        progressbarOne.setProgress(3);
+        progressbarOne.setSecondaryProgress(7);
 
-        relativeBuyNow.setOnClickListener(new View.OnClickListener() {
+        relativeBuyNow.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
-                if (tvServiceBuy.getText().toString().equals("Buy Now")) {
+                if (tvServiceBuy.getText().toString().equals("Buy Now"))
+                {
 
-                    Intent i = new Intent(ProductDetail.this, PaymentActivity.class);
-                    startActivity(i);
+                    if (app_sharedpreference.getsharedpref("username", "not").contains("not"))
+                    {
+                        startActivity(new Intent(ProductDetail.this, LoginDashboard.class));
+                    }
+                    else
+                    {
+                        Intent i = new Intent(ProductDetail.this, AddAddressActivity.class);
+                        startActivity(i);
+                    }
 
-                } else {
+                }
+                else
+                {
+
                     ServiceEnquiry serviceEnquiry = new ServiceEnquiry(context, product_name, categoryName);
                     serviceEnquiry.show();
+
+
                 }
 
             }
@@ -698,11 +719,9 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     }
 
 
-    private void showMessage(String s) {
+    private void showMessage(String s)
+    {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
-
-
-
 
 }

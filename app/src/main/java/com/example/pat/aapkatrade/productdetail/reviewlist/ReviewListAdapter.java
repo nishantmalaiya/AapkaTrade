@@ -11,7 +11,10 @@ import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +33,6 @@ public class ReviewListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     ProgressBarHandler progress_handler;
 
 
-
     public ReviewListAdapter(Context context, List<ReviewListData> itemList)
     {
         this.itemList = itemList;
@@ -41,8 +43,6 @@ public class ReviewListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         progress_handler = new ProgressBarHandler(context);
 
     }
-
-
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
@@ -74,7 +74,25 @@ public class ReviewListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         homeHolder.tvRating.setText(itemList.get(position).rating);
 
-        homeHolder.deliver_date.setText(itemList.get(position).created_date);
+        SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        java.util.Date date = null;
+
+        try
+        {
+            date = form.parse(itemList.get(position).created_date);
+
+        }
+        catch (ParseException e)
+        {
+
+            e.printStackTrace();
+        }
+
+        SimpleDateFormat postFormater = new SimpleDateFormat("MMMM dd, yyyy");
+        String newDateStr = postFormater.format(date);
+
+        homeHolder.deliver_date.setText(newDateStr);
+
 
 
 

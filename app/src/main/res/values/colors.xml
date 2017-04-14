@@ -24,7 +24,7 @@
     <color name="blue_gradient">#415673</color>
     <color name="blue_gradient_dark">#FF212B39</color>
     <color name="aquamarine">#7AE1CC</color>
-    <color name="bg_product_title">#DAD7CC</color>
+    <color name="bg_product_title">#F2F2F2</color>
     <color name="bg_product_title_separator">#333333</color>
     <color name="grey">#B0B0B0</color>
     <color name="grey_light">#EEEEEE</color>
@@ -86,6 +86,12 @@
     <color name="open_shop_day_color6">#ff6b6b</color>
     <color name="open_shop_day_color7">#012f6a</color>
 
+    <color name="color_progress1">#88d365</color>
+    <color name="color_progress2">#ffcd42</color>
+    <color name="color_progress3">#ff6500</color>
+    <color name="color_progress4">#0088dc</color>
+    <color name="color_progress5">#909090</color>
+    <color name="color_progress_default">#e8e7e7</color>
 
 
 </resources>

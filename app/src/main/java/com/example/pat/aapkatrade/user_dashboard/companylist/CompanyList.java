@@ -48,15 +48,18 @@ public class CompanyList extends AppCompatActivity implements SwipeRefreshLayout
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_company_list);
 
         context = CompanyList.this;
 
         app_sharedpreference = new AppSharedPreference(getApplicationContext());
+
         user_id = app_sharedpreference.getsharedpref("userid", "");
 
         setUpToolBar();
@@ -160,7 +163,7 @@ public class CompanyList extends AppCompatActivity implements SwipeRefreshLayout
         get_company_list_data();
 
 
-        recyclerViewcompanylist.setOnScrollListener(new RecyclerView.OnScrollListener()
+      /*  recyclerViewcompanylist.setOnScrollListener(new RecyclerView.OnScrollListener()
         {
 
             public void onScrollStateChanged(RecyclerView view, int scrollState)
@@ -183,8 +186,8 @@ public class CompanyList extends AppCompatActivity implements SwipeRefreshLayout
                 {
                     if ((totalItemCount - 1) == lastVisibleItemCount)
                     {
-                       /* page = page + 1;
-                        get_web_data2(page);*/
+                       *//* page = page + 1;
+                        get_web_data2(page);*//*
                         get_company_list_more_data();
 
                     }
@@ -196,17 +199,12 @@ public class CompanyList extends AppCompatActivity implements SwipeRefreshLayout
             }
 
         });
-
-
-
-
-
+      */
 
     }
 
     private void setUpToolBar()
     {
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         AppCompatImageView back_imagview = (AppCompatImageView) findViewById(R.id.back_imagview);
         back_imagview.setVisibility(View.VISIBLE);
@@ -238,8 +236,6 @@ public class CompanyList extends AppCompatActivity implements SwipeRefreshLayout
             getSupportActionBar().setTitle(null);
             getSupportActionBar().setElevation(0);
         }
-
-
 
     }
 

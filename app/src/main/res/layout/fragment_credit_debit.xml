@@ -15,7 +15,7 @@
        android:id="@+id/relativeRupeesDetails"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:padding="15dp"
+       android:padding="@dimen/fifteen_dip"
        android:background="@color/bg_product_title"
        >
 
@@ -34,7 +34,7 @@
            android:text="Rs. 255"
            android:textSize="18sp"
            android:layout_toRightOf="@+id/tvRupeesheading"
-           android:layout_marginLeft="10dp"
+           android:layout_marginLeft="@dimen/ten_dip"
            android:textColor="@color/black"
            />
 
@@ -47,9 +47,9 @@
         android:layout_height="wrap_content"
         android:text="We Accepted"
         android:layout_below="@+id/relativeRupeesDetails"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:textSize="18sp"
+        android:layout_marginLeft="@dimen/ten_dip"
+        android:layout_marginTop="@dimen/twenty_dip"
+        android:textSize="16sp"
         />
 
 
@@ -59,12 +59,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@+id/tvAccepted"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/ten_dip"
+        android:layout_marginTop="@dimen/ten_dip"
         >
 
         <RelativeLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp">
+            android:layout_width="@dimen/fifty_dip"
+            android:layout_height="@dimen/fifty_dip">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -75,8 +76,8 @@
 
 
         <RelativeLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp">
+            android:layout_width="@dimen/fifty_dip"
+            android:layout_height="@dimen/fifty_dip">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,8 +87,8 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp">
+            android:layout_width="@dimen/fifty_dip"
+            android:layout_height="@dimen/fifty_dip">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,8 +98,8 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp">
+            android:layout_width="@dimen/fifty_dip"
+            android:layout_height="@dimen/fifty_dip">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -111,354 +112,116 @@
     </LinearLayout>
 
 
+
+
     <RelativeLayout
         android:id="@+id/relativeCardDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayoutCard"
-
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/ten_dip"
+        android:layout_marginTop="@dimen/twenty_dip"
         >
 
-
-        <TextView
-            android:id="@+id/tvCardNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Card Number"
-            android:textSize="18sp"
-            />
-
-        <LinearLayout
-            android:id="@+id/linearCardDetail"
+        <RelativeLayout
+            android:id="@+id/relativecardNumber"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:weightSum="10"
-            android:layout_below="@+id/tvCardNumber"
-            android:layout_marginTop="20dp"
-            >
+            android:layout_height="@dimen/fifty_dip"
+             >
 
             <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/ic_card"
+                android:id="@+id/imgCard"
+                android:layout_width="@dimen/thirty_five_dip"
+                android:layout_height="@dimen/thirty_five_dip"
+                android:src="@drawable/ic_exp_card"
+                android:layout_centerVertical="true"
                 />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:orientation="horizontal"
-                android:layout_weight="2"
-                android:layout_marginLeft="10dp"
-                >
-                
-                <EditText
-                    android:id="@+id/edtFirst"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/green"
-                    android:background="@android:color/transparent"
 
-                    />
-                <EditText
-                    android:id="@+id/edtSecond"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:textColor="@color/green"
-                    android:imeOptions="actionNext"
-                    android:background="@android:color/transparent"
-                    />
-
-
-                <EditText
-                android:id="@+id/edtThird"
-                android:layout_width="15dp"
-                android:layout_height="35dp"
-                android:hint="."
-                android:textColorHint="@color/green"
-                android:inputType="number"
-                android:maxLength="1"
-                android:imeOptions="actionNext"
-                android:textColor="@color/green"
+            <EditText
+                android:id="@+id/creditcardEditText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fifty_dip"
                 android:background="@android:color/transparent"
+                android:hint="Card number"
+                android:inputType="phone"
+                android:layout_toRightOf="@+id/imgCard"
+                android:layout_marginLeft="@dimen/five_dip"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/green"
+                android:textSize="16sp"
+                tools:ignore="LabelFor,NegativeMargin" />
+
+
+            <ImageView
+                android:id="@+id/imgCardType"
+                android:layout_width="@dimen/fifty_dip"
+                android:layout_height="@dimen/thirty_five_dip"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_visa"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/ten_dip"
                 />
 
-                <EditText
-                    android:id="@+id/edtFour"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/green"
-                    android:background="@android:color/transparent"
-                    />
-                
 
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:orientation="horizontal"
-                android:layout_weight="2"
-                android:layout_marginLeft="10dp"
-                >
-
-                <EditText
-                    android:id="@+id/edtFive"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/green"
-                    android:background="@android:color/transparent"
-                    />
-                <EditText
-                    android:id="@+id/edtSix"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/green"
-                    android:background="@android:color/transparent"
-                    />
-                <EditText
-                    android:id="@+id/edtSeven"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/green"
-                    android:background="@android:color/transparent"
-                    />
-
-                <EditText
-                    android:id="@+id/edtEight"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/green"
-                    android:background="@android:color/transparent"
-                    />
-
-
-            </LinearLayout>
-
-
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:orientation="horizontal"
-                android:layout_weight="2"
-                android:layout_marginLeft="10dp"
-                >
-
-                <EditText
-                    android:id="@+id/edtNine"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/green"
-                    android:background="@android:color/transparent"
-                    />
-                <EditText
-                    android:id="@+id/edtTen"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/green"
-                    android:background="@android:color/transparent"
-                    />
-                <EditText
-                    android:id="@+id/edtEleven"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/green"
-                    android:background="@android:color/transparent"
-                    />
-
-                <EditText
-                    android:id="@+id/edtTwelve"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/green"
-                    android:background="@android:color/transparent"
-                    />
-
-
-
-            </LinearLayout>
-
-
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:orientation="horizontal"
-                android:layout_weight="2"
-                android:layout_marginLeft="10dp"
-                >
-
-                <EditText
-                    android:id="@+id/edtThirteen"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/green"
-                    android:background="@android:color/transparent"
-                    />
-                <EditText
-                    android:id="@+id/edtFourteen"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:imeOptions="actionNext"
-                    android:textColorHighlight="@color/green"
-                    android:textColor="@color/green"
-                    android:background="@android:color/transparent"
-                    />
-                <EditText
-                    android:id="@+id/edtFifteen"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:imeOptions="actionNext"
-                    android:textColorHighlight="@color/green"
-                    android:textColor="@color/green"
-                    android:background="@android:color/transparent"
-                    />
-
-                <EditText
-                    android:id="@+id/edtSixteen"
-                    android:layout_width="15dp"
-                    android:layout_height="35dp"
-                    android:hint="."
-                    android:textColorHint="@color/green"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:background="@android:color/transparent"
-                    android:textColor="@color/green"
-                    />
-
-            </LinearLayout>
-
-
-
-
-        </LinearLayout>
+        </RelativeLayout>
 
 
         <View
             android:id="@+id/View1"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_below="@+id/linearCardDetail"
+            android:layout_height="@dimen/two_dip"
+            android:layout_below="@+id/relativecardNumber"
             android:background="@color/green"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="@dimen/five_dip"
             ></View>
+
+
 
         <RelativeLayout
             android:id="@+id/relativeExpirationDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/View1"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/twenty_dip"
             android:layout_alignParentLeft="true"
             android:orientation="vertical"
             >
 
-            <TextView
-                android:id="@+id/tvExpirationHeading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Expiration Date"
-                android:textSize="18sp"
-                />
 
 
             <RelativeLayout
                 android:id="@+id/relativeExpirationInput"
-                android:layout_width="120dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/tvExpirationHeading"
+                android:layout_width="@dimen/one_hundred_twenty_dip"
+                android:layout_height="@dimen/fifty_dip"
+
                 >
 
                 <ImageView
                     android:id="@+id/imgExpiration"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="@dimen/thirty_five_dip"
+                    android:layout_height="@dimen/thirty_five_dip"
                     android:src="@drawable/ic_exp_card"
                     android:layout_centerVertical="true"
                     />
 
 
                 <EditText
-                    android:id="@+id/tvDate"
+                    android:id="@+id/cardDateEditText"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:text="10/17"
-                    android:layout_toRightOf="@+id/imgExpiration"
-                    android:clickable="false"
-                    android:textSize="18sp"
-                    android:textColor="@color/green"
+                    android:layout_height="@dimen/fifty_dip"
+                    android:layout_weight="1"
+                    android:hint="MM/YY"
+                    android:inputType="date"
+                    android:layout_marginLeft="@dimen/five_dip"
                     android:background="@android:color/transparent"
-                    android:layout_centerVertical="true"
-                    />
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/green"
+                    android:textSize="16sp"
+                    tools:ignore="LabelFor,RtlHardcoded"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/imgExpiration"
+                    android:layout_toEndOf="@+id/imgExpiration" />
 
 
 
@@ -466,12 +229,11 @@
 
             <View
                 android:id="@+id/View2"
-                android:layout_width="120dp"
-                android:layout_height="2dp"
+                android:layout_width="@dimen/one_hundred_twenty_dip"
+                android:layout_height="@dimen/two_dip"
                 android:layout_below="@+id/relativeExpirationInput"
                 android:background="@color/green"
-                android:layout_marginRight="10dp"
-
+                android:layout_marginRight="@dimen/ten_dip"
                 ></View>
 
         </RelativeLayout>
@@ -479,52 +241,40 @@
 
         <RelativeLayout
             android:id="@+id/relativeCvDetail"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/one_hundred_twenty_dip"
             android:layout_height="wrap_content"
             android:layout_below="@+id/View1"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/twenty_dip"
             android:layout_alignParentRight="true"
             android:orientation="vertical"
             >
-
-            <TextView
-                android:id="@+id/tvCvvHeading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CVV"
-                android:textSize="18sp"
-                />
 
 
             <RelativeLayout
                 android:id="@+id/relativeCvvDetail"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_below="@+id/tvCvvHeading"
+                android:layout_height="@dimen/fifty_dip"
                 >
 
                 <ImageView
                     android:id="@+id/imgCvv"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="@dimen/thirty_five_dip"
+                    android:layout_height="@dimen/thirty_five_dip"
                     android:src="@drawable/ic_cvv_card"
                     android:layout_centerVertical="true"
                     />
 
                 <EditText
-                    android:id="@+id/edt"
+                    android:id="@+id/cardCVCEditText"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:text="117"
-                    android:layout_toRightOf="@+id/imgCvv"
-                    android:textSize="18sp"
-                    android:textColor="@color/green"
-                    android:maxLength="3"
+                    android:layout_height="@dimen/fifty_dip"
+                    android:hint="CVC"
                     android:inputType="number"
-                    android:layout_centerVertical="true"
-                    android:background="@android:color/transparent"
-                    />
-
+                    android:layout_toRightOf="@+id/imgCvv"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/green"
+                    android:textSize="16sp"
+                    tools:ignore="LabelFor,RtlHardcoded" />
 
 
             </RelativeLayout>
@@ -532,11 +282,11 @@
 
             <View
                 android:id="@+id/View3"
-                android:layout_width="120dp"
-                android:layout_height="2dp"
+                android:layout_width="@dimen/one_hundred_twenty_dip"
+                android:layout_height="@dimen/two_dip"
                 android:layout_below="@+id/relativeCvvDetail"
                 android:background="@color/green"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="@dimen/ten_dip"
                 android:layout_alignParentRight="true"
 
                 ></View>
@@ -548,48 +298,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relativeExpirationDate"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/twenty_dip"
             >
 
-            <TextView
-                android:id="@+id/relativeCardAlias"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Card Alias (Optional)"
-                android:textSize="18sp"
-                />
+
 
 
             <RelativeLayout
                 android:id="@+id/realativeAlias"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_below="@+id/relativeCardAlias"
+                android:layout_height="@dimen/fifty_dip"
                 >
 
                 <ImageView
                     android:id="@+id/imgCardAlias"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="@dimen/thirty_five_dip"
+                    android:layout_height="@dimen/thirty_five_dip"
                     android:src="@drawable/ic_alise_card"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/ten_dip"
                     android:layout_centerVertical="true"
                     />
 
                 <EditText
                     android:id="@+id/edtCardAlias"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/fifty_dip"
                     android:hint="Enter Alias"
                     android:layout_toRightOf="@+id/imgCardAlias"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:maxLength="3"
-                    android:inputType="number"
-                    android:layout_marginRight="10dp"
+                    android:inputType="text"
+                    android:layout_marginRight="@dimen/ten_dip"
                     android:textColor="@color/green"
                     android:textColorHint="@color/green"
                     android:background="@android:color/transparent"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/ten_dip"
                     android:layout_centerVertical="true"
                     />
 
@@ -599,11 +342,11 @@
             <View
                 android:id="@+id/View4"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="@dimen/two_dip"
                 android:layout_below="@+id/realativeAlias"
                 android:background="@color/green"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginRight="@dimen/ten_dip"
+
                 ></View>
 
 
@@ -619,35 +362,32 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/relativeCardDetail"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="@dimen/fourty_dip"
+        android:layout_marginBottom="@dimen/twenty_dip"
         >
-
-
 
         <Button
             android:id="@+id/buttonCancel"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/fifty_dip"
+            android:layout_height="@dimen/thirty_five_dip"
             android:text="CANCEL"
             android:background="@drawable/orange_background"
             android:textColor="@color/white"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
+            android:paddingLeft="@dimen/five_dip"
+            android:paddingRight="@dimen/five_dip"
             />
-
 
         <Button
             android:id="@+id/buttonContinuePay"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/fifty_dip"
+            android:layout_height="@dimen/thirty_five_dip"
             android:text="CONTINUE TO PAY"
             android:background="@drawable/orange_background"
             android:textColor="@color/white"
             android:layout_toRightOf="@+id/buttonCancel"
-            android:layout_marginLeft="15dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
+            android:layout_marginLeft="@dimen/fifteen_dip"
+            android:paddingLeft="@dimen/five_dip"
+            android:paddingRight="@dimen/five_dip"
             />
 
 

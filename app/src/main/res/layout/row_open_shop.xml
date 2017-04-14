@@ -4,11 +4,12 @@
     android:id="@+id/relativeOpenShop"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="105dp"
     android:background="@drawable/orange_background"
     android:padding="5dp"
     android:layout_marginRight="2dp"
     >
+
     <TextView
         android:id="@+id/tvdays"
         android:layout_width="wrap_content"
@@ -17,6 +18,7 @@
         android:textSize="30sp"
         android:textColor="@color/white"
         />
+
 
     <TextView
         android:id="@+id/tvopentime"

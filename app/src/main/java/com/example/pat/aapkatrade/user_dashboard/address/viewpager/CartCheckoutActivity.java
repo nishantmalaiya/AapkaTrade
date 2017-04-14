@@ -41,8 +41,8 @@ public class CartCheckoutActivity extends AppCompatActivity
     RelativeLayout relativeBuyNow;
     RadioButton addressRadioButton;
     RelativeLayout relativePayment;
-    TextView tvTitle;
     LinearLayout linearLayoutEditDelete;
+    String fname,lname,mobile,state_id,address;
 
 
 
@@ -55,9 +55,22 @@ public class CartCheckoutActivity extends AppCompatActivity
 
         setuptoolbar();
 
+        Bundle bundle = getIntent().getExtras();
+
+        fname = bundle.getString("fname");
+
+        lname = bundle.getString("lname");
+
+        mobile= bundle.getString("mobile");
+
+        state_id = bundle.getString("state_id");
+
+        address = bundle.getString("address");
+
         setup_layout();
 
         setupviewpager();
+
 
     }
 
@@ -84,7 +97,6 @@ public class CartCheckoutActivity extends AppCompatActivity
         addressRadioButton = (RadioButton)  findViewById(R.id.addressRadioButton);
 
         addressRadioButton.setVisibility(View.INVISIBLE);
-
 
     }
 
@@ -126,10 +138,10 @@ public class CartCheckoutActivity extends AppCompatActivity
 
         vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
 
             }
-
             @Override
             public void onPageSelected(int position)
             {
@@ -144,9 +156,9 @@ public class CartCheckoutActivity extends AppCompatActivity
                 }
                 catch (Exception e)
                 {
+
                 }
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
 
@@ -175,7 +187,6 @@ public class CartCheckoutActivity extends AppCompatActivity
 
     }
 
-
     private void setuptoolbar()
     {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -193,6 +204,9 @@ public class CartCheckoutActivity extends AppCompatActivity
         return true;
     }
 
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -206,6 +220,8 @@ public class CartCheckoutActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 
 

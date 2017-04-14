@@ -45,7 +45,7 @@ public class RateusActivity extends AppCompatActivity
     ProgressBarHandler progress_handler;
     CoordinatorLayout coordinationRateus;
     ImageView imgProduct;
-   public static float rating_count;
+    public static float rating_count;
 
 
 
@@ -264,6 +264,8 @@ public class RateusActivity extends AppCompatActivity
                                 else
                                 {
                                     progress_handler.hide();
+                                    edtWriteMessage.setText("");
+                                    edtWriteTitleReview.setText("");
                                     //showMessage(message);
                                     Toast.makeText(RateusActivity.this,message,Toast.LENGTH_SHORT).show();
 

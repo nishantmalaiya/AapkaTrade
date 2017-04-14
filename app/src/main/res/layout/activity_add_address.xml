@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cardElevation="4dp"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/ten_dip"
                 >
 
 
@@ -39,8 +39,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="@dimen/twenty_dip"
+                    android:layout_marginLeft="@dimen/twenty_dip"
                     android:layout_marginTop="40dp"
                     >
 
@@ -50,11 +50,11 @@
                         android:id="@+id/etFirstName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="@dimen/twenty_dip"
+                        android:layout_marginRight="@dimen/twenty_dip"
                         android:hint="First Name"
                         android:background="@drawable/edit_text_green_back"
-                        android:padding="10dp"
+                        android:padding="@dimen/ten_dip"
                         android:inputType="text"
                         android:maxLines="1"
                         android:textColorHint="@color/hint_color"
@@ -65,17 +65,17 @@
                         android:id="@+id/etLastName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="@dimen/twenty_dip"
+                        android:layout_marginRight="@dimen/twenty_dip"
                         android:hint="Last Name"
                         android:background="@drawable/edit_text_green_back"
-                        android:padding="10dp"
+                        android:padding="@dimen/ten_dip"
                         android:inputType="text"
                         android:maxLines="1"
                         android:textColorHint="@color/hint_color"
                         android:textSize="14sp"
                         android:layout_below="@+id/etFirstName"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="@dimen/twenty_dip"
                         />
 
 
@@ -83,17 +83,17 @@
                         android:id="@+id/etMobileNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="@dimen/twenty_dip"
+                        android:layout_marginRight="@dimen/twenty_dip"
                         android:hint="Mobile No"
                         android:background="@drawable/edit_text_green_back"
-                        android:padding="10dp"
+                        android:padding="@dimen/ten_dip"
                         android:inputType="number"
                         android:maxLines="1"
                         android:textColorHint="@color/hint_color"
                         android:textSize="14sp"
                         android:layout_below="@+id/etLastName"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="@dimen/twenty_dip"
                         android:editable="false"
                         />
 
@@ -102,12 +102,12 @@
                         android:id="@+id/etPincode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="@dimen/twenty_dip"
+                        android:layout_marginRight="@dimen/twenty_dip"
+                        android:layout_marginTop="@dimen/twenty_dip"
                         android:hint="Pincode"
                         android:background="@drawable/edit_text_green_back"
-                        android:padding="10dp"
+                        android:padding="@dimen/ten_dip"
                         android:inputType="number"
                         android:layout_below="@+id/etMobileNo"
                         android:maxLines="1"
@@ -123,9 +123,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/five_dip"
                     android:layout_below="@+id/etPincode"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginRight="@dimen/twenty_dip"
+                    android:padding="@dimen/two_dip"
+                    android:layout_marginTop="@dimen/twenty_dip"
+                    android:background="@drawable/edit_text_green_back"
                     >
 
                     <Spinner
@@ -137,11 +139,11 @@
                         android:gravity="center_horizontal" />
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="@dimen/twenty_dip"
+                        android:layout_height="@dimen/twenty_dip"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginRight="@dimen/ten_dip"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_arrow" />
 
@@ -151,17 +153,17 @@
                         android:id="@+id/etAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="@dimen/twenty_dip"
+                        android:layout_marginRight="@dimen/twenty_dip"
                         android:hint="Address"
                         android:background="@drawable/edit_text_green_back"
-                        android:padding="10dp"
+                        android:padding="@dimen/ten_dip"
                         android:inputType="text"
                         android:layout_below="@+id/spBussinessCategoryLayout"
                         android:maxLines="1"
                         android:textColorHint="@color/hint_color"
                         android:textSize="14sp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="@dimen/twenty_dip"
                         />
 
 
@@ -184,7 +186,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/twenty_dip"
             android:text="Submit"
             android:background="@drawable/orange_back"
             android:textColor="@color/white"

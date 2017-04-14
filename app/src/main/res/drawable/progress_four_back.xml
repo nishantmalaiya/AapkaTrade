@@ -21,7 +21,7 @@
         <shape>
             <corners android:radius="2dip"/>
 
-            <solid android:color="@color/color_progress1"/>
+            <solid android:color="@color/color_progress4"/>
         </shape>
     </item>
     <item android:id="@android:id/secondaryProgress">
@@ -36,7 +36,7 @@
         <clip>
             <shape>
                 <corners android:radius="2dip"/>
-                <solid android:color="@color/color_progress1"/>
+                <solid android:color="@color/color_progress4"/>
             </shape>
         </clip>
     </item>
