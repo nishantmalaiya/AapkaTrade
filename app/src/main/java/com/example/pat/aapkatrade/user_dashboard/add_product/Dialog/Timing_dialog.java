@@ -3,16 +3,22 @@ package com.example.pat.aapkatrade.user_dashboard.add_product.Dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.pat.aapkatrade.Home.HomeActivity;
+import com.example.pat.aapkatrade.MainActivity;
 import com.example.pat.aapkatrade.R;
+import com.example.pat.aapkatrade.general.ConnectivityNotFound;
+import com.example.pat.aapkatrade.general.ConnetivityCheck;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.user_dashboard.add_product.SpinnerAdapter;
@@ -29,6 +35,7 @@ public class Timing_dialog extends AppCompatActivity {
     ArrayList<String> closing_time_list;
     Context context;
     ProgressBarHandler progressbar;
+    private final int SPLASH_DISPLAY_LENGTH = 3000;
 //    public Timing_dialog( Context context, ArrayList<String> opening_time_list, ArrayList<String> closing_time_list) {
 //
 //        this.context=context;
@@ -50,21 +57,38 @@ String demo[]={"Opening","Closing"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getWindow() != null)
-            getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         setContentView(R.layout.dialog_timing);
-//        opening_time_list=getIntent().getStringArrayListExtra("opening_time_list");
-//        closing_time_list=getIntent().getStringArrayListExtra("closing_time_list");
+        opening_time_list=getIntent().getStringArrayListExtra("opening_time_list");
+        closing_time_list=getIntent().getStringArrayListExtra("closing_time_list");
         context=this;
-        //initView();
+        progressbar=new ProgressBarHandler(context);
+        progressbar.show();
+
+
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                initView();
+
+                /* Create an Intent that will start the Menu-Activity. */
+
+            }
+        }, SPLASH_DISPLAY_LENGTH);
+
+
+
+
 
 
 
     }
 
     private void initView() {
-        progressbar=new ProgressBarHandler(context);
-        progressbar.show();
+
+
         dialog_close=(ImageView)findViewById(R.id.dialog_close);
 
 

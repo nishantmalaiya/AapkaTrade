@@ -2,10 +2,8 @@ package com.example.pat.aapkatrade.categories_tab.PurticularDataActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,18 +17,17 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.example.pat.aapkatrade.Home.CommomData;
 import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.categories_tab.CategoriesListAdapter;
 import com.example.pat.aapkatrade.categories_tab.CategoriesListData;
-import com.example.pat.aapkatrade.categories_tab.CategoryListActivity;
 import com.example.pat.aapkatrade.general.CheckPermission;
 import com.example.pat.aapkatrade.general.LocationManager_check;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.general.recycleview_custom.MyRecyclerViewEffect;
-import com.example.pat.aapkatrade.location.Geocoder;
+import com.example.pat.aapkatrade.location.AddressEnum;
+import com.example.pat.aapkatrade.location.GeoCoderAddress;
 import com.example.pat.aapkatrade.location.Mylocation;
 import com.example.pat.aapkatrade.search.Search;
 import com.google.gson.JsonArray;
@@ -112,8 +109,8 @@ public class PurticularActivity extends AppCompatActivity
 
                             double latitude = mylocation.getLatitude();
                             double longitude = mylocation.getLongitude();
-                            Geocoder geocoder_statename = new Geocoder(PurticularActivity.this, latitude, longitude);
-                            String state_name = geocoder_statename.get_state_name();
+                            GeoCoderAddress geoCoderAddress_statename = new GeoCoderAddress(PurticularActivity.this, latitude, longitude);
+                            String state_name = geoCoderAddress_statename.get_state_name().get(AddressEnum.STATE);
                         if(state_name!=null) {
                             Intent goto_search = new Intent(PurticularActivity.this, Search.class);
                             goto_search.putExtra("latitude", latitude);

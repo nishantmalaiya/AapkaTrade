@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.directions.route.AbstractRouting;
 import com.example.pat.aapkatrade.Home.CommomData;
 import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.Home.navigation.entity.CategoryHome;
@@ -51,20 +53,32 @@ import com.example.pat.aapkatrade.Home.registration.spinner_adapter.SpCityAdapte
 import com.example.pat.aapkatrade.Home.registration.spinner_adapter.SpStateAdapter;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
+import com.example.pat.aapkatrade.general.Call_webservice;
+import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Utils.ImageUtils;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomMultipleCheckBoxAdapter;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomSimpleListAdapter;
 import com.example.pat.aapkatrade.general.entity.KeyValue;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
+import com.example.pat.aapkatrade.location.AddressEnum;
+import com.example.pat.aapkatrade.location.GeoCoderAddress;
+import com.example.pat.aapkatrade.map.GoogleMapActivity;
 import com.example.pat.aapkatrade.service_enquiry.ServiceEnquiry;
 import com.example.pat.aapkatrade.user_dashboard.add_product.Dialog.Timing_dialog;
 import com.example.pat.aapkatrade.user_dashboard.addcompany.CompanyData;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.async.http.body.FilePart;
 import com.koushikdutta.async.http.body.Part;
+import com.koushikdutta.async.http.body.StringBody;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.ProgressCallback;
 
@@ -77,12 +91,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.UUID;
 
 
 public class AddProductActivity extends AppCompatActivity {
@@ -95,7 +112,7 @@ public class AddProductActivity extends AppCompatActivity {
     private HashMap<String, String> webservice_header_type = new HashMap<>();
     private ArrayList<CategoryHome> listDataHeader = new ArrayList<>();
     private ArrayList<SubCategory> listDataChild = new ArrayList<>();
-    private ArrayList<State> stateList = new ArrayList<>();
+    private ArrayList<String> stateList = new ArrayList<>();
     private ArrayList<City> cityList = new ArrayList<>(), unitList = new ArrayList<>();
     private ArrayList<String> deliveryDistanceList = new ArrayList<>();
     private ArrayList<CompanyData> companyNames = new ArrayList<>();
@@ -114,7 +131,7 @@ public class AddProductActivity extends AppCompatActivity {
 
     private TextView btnUpload;
     private int count = -1;
-    private EditText etProductName, etDeliverLocation, etPrice, etCrossedPrice, etDescription;
+    private EditText etProductName, etDeliverLocation, etPrice, etCrossedPrice, etDescription,etDiscount,etarea_location,etpincode,etaddress;
     ImageView uploadButton;
     File docFile = new File("");
     public ArrayList<ProductImagesData> productImagesDatas = new ArrayList<>();
@@ -130,21 +147,21 @@ public class AddProductActivity extends AppCompatActivity {
     List<Part> files_image = new ArrayList();
     TextView tvTitle;
     private Spinner dynamicSpinner;
+    private GeoCoderAddress GeocoderAsync;
+    private int current_state_index;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+        AndroidUtils.showErrorLog(AddProductActivity.this, "onCreate");
         setUpToolBar();
         setupRecyclerView();
         initview();
         initspinner();
         getCompany();
         getCategory();
-
-
-        //getState();
 
 
     }
@@ -167,11 +184,50 @@ public class AddProductActivity extends AppCompatActivity {
         app_sharedpreference = new AppSharedPreference(context);
         spService_type = (Spinner) findViewById(R.id.sp_service_type);
         spCompanyName = (Spinner) findViewById(R.id.spCompanyName);
+        spCategory = (Spinner) findViewById(R.id.spCategory);
+        spSubCategory = (Spinner) findViewById(R.id.spSubCategory);
+        spState = (Spinner) findViewById(R.id.spState);
+        spCity = (Spinner) findViewById(R.id.spCity);
 
         contentAddProduct = (LinearLayout) findViewById(R.id.contentAddProduct);
         etProductName = (EditText) findViewById(R.id.etProductName);
-        spCategory = (Spinner) findViewById(R.id.spCategory);
-        spSubCategory = (Spinner) findViewById(R.id.spSubCategory);
+        etPrice=(EditText)findViewById(R.id.etPrice);
+        etDiscount=(EditText)findViewById(R.id.etDiscount);
+
+        etarea_location=(EditText)findViewById(R.id.etAreaLocation);
+        etpincode=(EditText)findViewById(R.id.et_pincode);
+        etaddress=(EditText)findViewById(R.id.et_Address);
+
+
+        etarea_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    progressBar.show();
+                    Intent intent =
+                            new PlaceAutocomplete
+                                    .IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .build(AddProductActivity.this);
+                    startActivityForResult(intent, 1);
+
+
+                } catch (GooglePlayServicesRepairableException e) {
+
+                    progressBar.hide();
+                    Log.e("GooglePlayServices", e.toString());
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    progressBar.hide();
+                    Log.e("GooglePlayServices_not", e.toString());
+                    // TODO: Handle the error.
+                }
+
+
+            }
+
+
+        });
+
         rl_layout1_saveandcontinue_container = (RelativeLayout) findViewById(R.id.rl_layout1_saveandcontinue_container);
 
         //container 1 save& continue click event
@@ -241,6 +297,9 @@ public class AddProductActivity extends AppCompatActivity {
         spService_type.setAdapter(adapter_spinner_service_type);
 
 
+        getState();
+
+
         spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -299,8 +358,8 @@ public class AddProductActivity extends AppCompatActivity {
                                         }
                                         Log.e("data_closing", closing_time_list.toString());
                                         Intent goto_dialog_timing = new Intent(AddProductActivity.this, Timing_dialog.class);
-//                                        goto_dialog_timing.putStringArrayListExtra("opening_time_list", opening_time_list);
-//                                        goto_dialog_timing.putStringArrayListExtra("closing_time_list", closing_time_list);
+                                        goto_dialog_timing.putStringArrayListExtra("opening_time_list", opening_time_list);
+                                        goto_dialog_timing.putStringArrayListExtra("closing_time_list", closing_time_list);
                                         startActivity(goto_dialog_timing);
 
 
@@ -316,7 +375,7 @@ public class AddProductActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                AndroidUtils.showErrorLog(context, "called");
             }
         });
 
@@ -445,113 +504,6 @@ public class AddProductActivity extends AppCompatActivity {
 
     }
 
-    public void getState() {
-        Log.e("state result ", "getState started");
-        progressBar.show();
-
-        Ion.with(context)
-                .load("http://aapkatrade.com/slim/dropdown")
-                .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                .setBodyParameter("type", "state")
-                .setBodyParameter("id", countryID)
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonObject result) {
-                        progressBar.hide();
-                        Log.e("state result ", result == null ? "state data found" : result.toString());
-
-                        if (result != null) {
-
-                            JsonArray jsonResultArray = result.getAsJsonArray("result");
-                            stateList = new ArrayList<>();
-                            State stateEntity_init = new State("-1", "Please Select State");
-                            stateList.add(stateEntity_init);
-
-                            for (int i = 0; i < jsonResultArray.size(); i++) {
-                                JsonObject jsonObject1 = (JsonObject) jsonResultArray.get(i);
-                                State stateEntity = new State(jsonObject1.get("id").getAsString(), jsonObject1.get("name").getAsString());
-                                stateList.add(stateEntity);
-                            }
-                            SpStateAdapter spStateAdapter = new SpStateAdapter(context, stateList);
-                            spState.setAdapter(spStateAdapter);
-                            spStateAdapter.notifyDataSetChanged();
-                            spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                    stateID = stateList.get(position).stateId;
-                                    cityList = new ArrayList<>();
-                                    if (position > 0) {
-                                        getCity(stateList.get(position).stateId);
-                                    }
-                                }
-
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
-
-                                }
-                            });
-                        } else {
-                            showMessage("State Not Found");
-                        }
-                    }
-                });
-    }
-
-    public void getCity(String stateId) {
-        progressBar.show();
-        Ion.with(context)
-                .load("http://aapkatrade.com/slim/dropdown")
-                .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
-                .setBodyParameter("type", "city")
-                .setBodyParameter("id", stateId)
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonObject result) {
-                        progressBar.hide();
-                        Log.e("city result ", result == null ? "null" : result.toString());
-
-                        if (result != null) {
-                            JsonArray jsonResultArray = result.getAsJsonArray("result");
-
-                            City cityEntity_init = new City("-1", "Please Select City");
-                            cityList.add(cityEntity_init);
-
-                            for (int i = 0; i < jsonResultArray.size(); i++) {
-                                JsonObject jsonObject1 = (JsonObject) jsonResultArray.get(i);
-                                City cityEntity = new City(jsonObject1.get("id").getAsString(), jsonObject1.get("name").getAsString());
-                                cityList.add(cityEntity);
-                            }
-
-                            SpCityAdapter spCityAdapter = new SpCityAdapter(context, cityList);
-                            spCity.setAdapter(spCityAdapter);
-
-                            spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                    cityID = cityList.get(position).cityId;
-//                        if (!(Integer.parseInt(cityID) > 0)) {
-//                            showmessage("Please Select City");
-//                        }
-                                }
-
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
-
-                                }
-                            });
-                        } else {
-                            showMessage("No City Found");
-                        }
-                    }
-
-                });
-
-    }
 
     private void getCategory() {
         listDataChild.clear();
@@ -769,6 +721,93 @@ public class AddProductActivity extends AppCompatActivity {
 
     }
 
+
+    private void getState() {
+        findViewById(R.id.input_layout_city).setVisibility(View.GONE);
+        stateList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.state_list)));
+
+        CustomSimpleListAdapter stateAdapter = new CustomSimpleListAdapter(context, stateList);
+//        spSubCategory.setAdapter(adapter);
+//        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context, R.layout.white_textcolor_spinner, stateList);
+//        spinnerArrayAdapter.setDropDownViewResource(R.layout.white_textcolor_spinner);
+
+        spState.setAdapter(stateAdapter);
+
+
+        spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                cityList = new ArrayList<>();
+                AndroidUtils.showErrorLog(context, "State Id is ::::::::  "+position);
+                if(position>0)
+                getCity(String.valueOf(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void getCity(String stateId) {
+        findViewById(R.id.input_layout_city).setVisibility(View.VISIBLE);
+        progressBar.show();
+        Ion.with(context)
+                .load("http://aapkatrade.com/slim/dropdown")
+                .setHeader("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("authorization", "xvfdbgfdhbfdhtrh54654h54ygdgerwer3")
+                .setBodyParameter("type", "city")
+                .setBodyParameter("id", stateId)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        progressBar.hide();
+                        Log.e("city result ", result == null ? "null" : result.toString());
+
+                        if (result != null) {
+                            JsonArray jsonResultArray = result.getAsJsonArray("result");
+
+                            City cityEntity_init = new City("-1", "Please Select City");
+                            cityList.add(cityEntity_init);
+
+                            for (int i = 0; i < jsonResultArray.size(); i++) {
+                                JsonObject jsonObject1 = (JsonObject) jsonResultArray.get(i);
+                                City cityEntity = new City(jsonObject1.get("id").getAsString(), jsonObject1.get("name").getAsString());
+                                cityList.add(cityEntity);
+                            }
+
+                            SpCityAdapter spCityAdapter = new SpCityAdapter(context, cityList);
+                            spCity.setAdapter(spCityAdapter);
+
+                            spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    cityID = cityList.get(position).cityId;
+//                        if (!(Integer.parseInt(cityID) > 0)) {
+//                            showmessage("Please Select City");
+//                        }
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+                        } else {
+                            showMessage("No City Found");
+                        }
+                    }
+
+                });
+
+    }
+
+
     private void dynamic_view_builders() {
 
         LinearLayoutManager layoutManager_checkbox = new LinearLayoutManager(context);
@@ -923,6 +962,15 @@ public class AddProductActivity extends AppCompatActivity {
 
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+
+        spService_type.setSelection(0);
+        AndroidUtils.showErrorLog(context, "onResume");
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -1014,6 +1062,59 @@ public class AddProductActivity extends AppCompatActivity {
 
             }
 
+
+            if (requestCode == 1) {
+                if (resultCode == RESULT_OK) {
+                    progressBar.hide();
+                    // retrive the data by using getPlace() method.
+                    Place place = PlaceAutocomplete.getPlace(this, data);
+
+                    GeocoderAsync = new GeoCoderAddress(context, place.getLatLng().latitude, place.getLatLng().longitude);
+
+                    try {
+
+
+                      String  AddressAsync = GeocoderAsync.get_state_name().get(AddressEnum.STATE);
+                        String  AddressCity = GeocoderAsync.get_state_name().get(AddressEnum.CITY);
+                        String  Pincode = GeocoderAsync.get_state_name().get(AddressEnum.PINCODE);
+                        String  Address = GeocoderAsync.get_state_name().get(AddressEnum.ADDRESS);
+
+
+
+                        etpincode.setText(Pincode);
+                        etaddress.setText(Address);
+
+                        set_state_selection(AddressAsync);
+                        Log.e("AddressAsync", AddressAsync+"**"+AddressCity+"**"+Pincode+"**"+Address);
+                    } catch (Exception e) {
+                        Log.e("Exception_geocoder", e.toString());
+
+                    }
+
+                    etarea_location.setText(place.getAddress());
+
+
+
+                    Log.e("Tag", place.toString());
+
+
+                } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                    progressBar.hide();
+                    Status status = PlaceAutocomplete.getStatus(this, data);
+                    // TODO: Handle the error.
+                    Log.e("Tag", status.getStatusMessage());
+
+                } else if (resultCode == RESULT_CANCELED) {
+                    progressBar.hide();
+                    // The user canceled the operation.
+                }
+            }
+
+
+
+
+
+
         } catch (Exception e) {
             Log.e("Exception", e.toString());
         }
@@ -1051,6 +1152,36 @@ public class AddProductActivity extends AppCompatActivity {
         }
         return cursor.getString(idx);
     }
+
+    private void set_state_selection( String a) {
+
+        progressBar.show();
+        Log.e("statelist_state", stateList.toString() + "" + a);
+
+
+
+
+
+        for (int i = 0; i < stateList.size(); i++) {
+
+            if (a.equals(stateList.get(i))) {
+
+                current_state_index = i;
+                Log.e("current_state_index", current_state_index + "");
+            }
+        }
+        Log.e("current_state_index2", current_state_index + "");
+        spState.setSelection(current_state_index);
+        progressBar.hide();
+
+
+    }
+
+
+
+
+
+
 
 
 }

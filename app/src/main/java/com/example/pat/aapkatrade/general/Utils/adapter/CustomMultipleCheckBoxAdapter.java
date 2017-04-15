@@ -101,32 +101,12 @@ public class CustomMultipleCheckBoxAdapter extends RecyclerView.Adapter<Recycler
                     onRadioClickListener(dynamic_radio_button);
                 }
             });
-//            viewHolder2.ll_filter_coloumn2_container.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    onRadioClickListener(dynamic_radio_button);
-//                }
-//            });
-//            dynamic_form_textview.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    AndroidUtils.showErrorLog(context, "CLICKEDDDDDDDDDD");
-//                }
-//            });
+
 
         } else {
             dynamic_form_checked.setChecked(false);
             dynamic_form_checked.setText(arrayList.get(position).value.toString());
-//            dynamic_form_textview.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (dynamic_form_checked.isChecked()) {
-//                        dynamic_form_checked.setChecked(false);
-//                    } else {
-//                        dynamic_form_checked.setChecked(true);
-//                    }
-//                }
-//            });
+//
             dynamic_form_checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
