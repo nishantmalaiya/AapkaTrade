@@ -3,7 +3,6 @@ package com.example.pat.aapkatrade.location;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -37,7 +36,7 @@ public class MyAsyncTask_location extends AsyncTask<Void, Void, Void> implements
     String thikanaAsync = "Scan sms for location";
 
 
-    Geocoder GeocoderAsync;
+    GeoCoderAddress geoCoderAddressAsync;
 
 
 String AddressAsync;
@@ -166,12 +165,12 @@ String AddressAsync;
 
                 Log.e("latlng_asynctask", latitude + "**" + longitude + "");
                 List<Address> addresses = null;
-                GeocoderAsync = new Geocoder(ContextAsync, latitude, longitude);
+                geoCoderAddressAsync = new GeoCoderAddress(ContextAsync, latitude, longitude);
 
                 try {
 
 
-                    AddressAsync = GeocoderAsync.get_state_name();
+                    AddressAsync = geoCoderAddressAsync.get_state_name().get(AddressEnum.STATE);
                     Log.e("AddressAsync", AddressAsync);
                 } catch (Exception e) {
                     Log.e("Exception_geocoder", e.toString());
@@ -256,10 +255,10 @@ String AddressAsync;
 //
 //        Log.e("latlng_asynctask",latAsync+"**"+lonAsync+"");
 //        List<Address> addresses = null;
-//        GeocoderAsync = new Geocoder(ContextAsync, latAsync,lonAsync);
+//        geoCoderAddressAsync = new GeoCoderAddress(ContextAsync, latAsync,lonAsync);
 //
 //        try {
-//            String AddressAsync=GeocoderAsync.get_state_name();
+//            String AddressAsync=geoCoderAddressAsync.get_state_name();
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //            AddressAsync = "Refresh for the address";

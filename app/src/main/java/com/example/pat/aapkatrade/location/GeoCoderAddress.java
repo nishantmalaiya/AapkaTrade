@@ -4,10 +4,13 @@ import android.content.Context;
 import android.location.Address;
 import android.util.Log;
 
+import com.example.pat.aapkatrade.general.entity.KeyValue;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -15,13 +18,14 @@ import java.util.Locale;
  * Created by PPC17 on 17-Mar-17.
  */
 
-public class Geocoder {
+public class GeoCoderAddress {
 
     Context c;
     public double latitude, longitude;
     String result ;
+    HashMap<Object,String > geocoder_address_list=new HashMap<>();
    // ProgressBarHandler progressBarHandler;
-    public Geocoder(Context c, double latitude, double longitude) {
+    public GeoCoderAddress(Context c, double latitude, double longitude) {
         this.c = c;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -33,7 +37,7 @@ public class Geocoder {
 
 
 
-    public String get_state_name() {
+    public HashMap<Object,String > get_state_name() {
        // progressBarHandler.show();
         android.location.Geocoder geocoder = new android.location.Geocoder(c, Locale.getDefault());
 
@@ -48,6 +52,14 @@ public class Geocoder {
 
 
                 result = address.getAdminArea();
+
+
+
+                geocoder_address_list.put(AddressEnum.STATE, address.getAdminArea());
+                geocoder_address_list.put(AddressEnum.CITY, address.getLocality());
+                geocoder_address_list.put(AddressEnum.ADDRESS, address.getCountryName());
+                geocoder_address_list.put(AddressEnum.PINCODE, address.getPostalCode());
+
                // progressBarHandler.hide();
 
             }
@@ -61,7 +73,7 @@ public class Geocoder {
             e.printStackTrace();
            // progressBarHandler.hide();
         }
-        return result;
+        return geocoder_address_list;
     }
 
 
