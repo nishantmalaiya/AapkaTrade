@@ -59,6 +59,7 @@ import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Utils.ImageUtils;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomMultipleCheckBoxAdapter;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomSimpleListAdapter;
+import com.example.pat.aapkatrade.general.Validation;
 import com.example.pat.aapkatrade.general.entity.KeyValue;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.location.AddressEnum;
@@ -131,7 +132,7 @@ public class AddProductActivity extends AppCompatActivity {
 
     private TextView btnUpload;
     private int count = -1;
-    private EditText etProductName, etDeliverLocation, etPrice, etCrossedPrice, etDescription,etDiscount,etarea_location,etpincode,etaddress;
+    private EditText etProductName, etDeliverLocation, etPrice, etCrossedPrice, etDescription, etDiscount, etarea_location, etpincode, etaddress;
     ImageView uploadButton;
     File docFile = new File("");
     public ArrayList<ProductImagesData> productImagesDatas = new ArrayList<>();
@@ -149,6 +150,7 @@ public class AddProductActivity extends AppCompatActivity {
     private Spinner dynamicSpinner;
     private GeoCoderAddress GeocoderAsync;
     private int current_state_index;
+    private int step1FieldsSet=-1;
 
 
     @Override
@@ -191,12 +193,12 @@ public class AddProductActivity extends AppCompatActivity {
 
         contentAddProduct = (LinearLayout) findViewById(R.id.contentAddProduct);
         etProductName = (EditText) findViewById(R.id.etProductName);
-        etPrice=(EditText)findViewById(R.id.etPrice);
-        etDiscount=(EditText)findViewById(R.id.etDiscount);
+        etPrice = (EditText) findViewById(R.id.etPrice);
+        etDiscount = (EditText) findViewById(R.id.etDiscount);
 
-        etarea_location=(EditText)findViewById(R.id.etAreaLocation);
-        etpincode=(EditText)findViewById(R.id.et_pincode);
-        etaddress=(EditText)findViewById(R.id.et_Address);
+        etarea_location = (EditText) findViewById(R.id.etAreaLocation);
+        etpincode = (EditText) findViewById(R.id.et_pincode);
+        etaddress = (EditText) findViewById(R.id.et_Address);
 
 
         etarea_location.setOnClickListener(new View.OnClickListener() {
@@ -236,7 +238,7 @@ public class AddProductActivity extends AppCompatActivity {
         rl_layout1_saveandcontinue_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //validateFields(1);
 
                 if (findViewById(R.id.content_add_product_company_detail).getVisibility() == View.VISIBLE) {
 
@@ -278,6 +280,209 @@ public class AddProductActivity extends AppCompatActivity {
 
 //        ll_dynamic_fields_step2.setBackgroundColor(context.getResources().getColor(R.color.green));
     }
+
+//    private void validateFields(int stepNo) {
+//
+//        if (stepNo == 1) {
+//            step1FieldsSet = 0;
+//            if (productImagesDatas.size()!=0) {
+//                putError(2);
+//                step1FieldsSet++;
+//            } else if (!Validation.isEmptyStr(etProductName.getText().toString()))) {
+//                putError(4);
+//                step1FieldsSet++;
+//            } else if (!Validation.isValidPassword(formBusinessData.getConfirmPassword())) {
+//                putError(19);
+//                step1FieldsSet++;
+//            } else if (!Validation.isPasswordMatching(formBusinessData.getPassword(), formBusinessData.getConfirmPassword())) {
+//                putError(5);
+//                step1FieldsSet++;
+//            } else if (Validation.isEmptyStr(formBusinessData.getFirstName())) {
+//                putError(0);
+//                step1FieldsSet++;
+//            } else if (Validation.isEmptyStr(formBusinessData.getLastName())) {
+//                putError(1);
+//                step1FieldsSet++;
+//            } else if (!Validation.isValidDOB(formBusinessData.getDob())) {
+//                putError(6);
+//                step1FieldsSet++;
+//            } else if (Validation.isEmptyStr(formBusinessData.getFatherName())) {
+//                putError(10);
+//                step1FieldsSet++;
+//            } else if (!Validation.isValidNumber(formBusinessData.getMobile_no(), Validation.getNumberPrefix(formBusinessData.getMobile_no()))) {
+//                putError(3);
+//                step1FieldsSet++;
+//            } else if (!(Validation.isNonEmptyStr(formBusinessData.getStateID()) &&
+//                    Integer.parseInt(formBusinessData.getStateID()) > 0)) {
+//                AndroidUtils.showSnackBar(registrationLayout, "Please Select State");
+//                step1FieldsSet++;
+//            } else if (!(Validation.isNonEmptyStr(formBusinessData.getCityID()) &&
+//                    Integer.parseInt(formBusinessData.getCityID()) > 0)) {
+//                AndroidUtils.showSnackBar(registrationLayout, "Please Select City");
+//                step1FieldsSet++;
+//            } else if (Validation.isEmptyStr(formBusinessData.getAddress())) {
+//                putError(9);
+//                step1FieldsSet++;
+//            } else if (!Validation.isPincode(formBusinessData.getPinCode())) {
+//                putError(11);
+//                step1FieldsSet++;
+//            } else if (!formBusinessData.isAgreementAccepted()) {
+//                putError(20);
+//                step1FieldsSet++;
+//            } else if (step1PhotoFile.getAbsolutePath().equals("/")) {
+//                showmessage("Please Upload File");
+//                step1FieldsSet++;
+//            } else if (!agreement_check.isChecked()) {
+//                putError(20);
+//            }
+//
+//            Log.e("hi", "step1FieldsSet=" + step1FieldsSet);
+//
+//            if (step1FieldsSet == 0) {
+//                stepNumber = 2;
+//            }
+//        } else if (stepNo == 2) {
+//            step2FieldsSet = 0;
+//            if (Validation.isEmptyStr(formBusinessData.getQualification()) ||
+//                    formBusinessData.getQualification().equals(qualificationList.get(0))) {
+//                AndroidUtils.showSnackBar(registrationLayout, "Please Select Qualification");
+//                step2FieldsSet++;
+//            } else if (Validation.isEmptyStr(formBusinessData.getTotalExperience()) ||
+//                    formBusinessData.getTotalExperience().equals(totalExpList.get(0))) {
+//                AndroidUtils.showSnackBar(registrationLayout, "Please Select Total Experience");
+//                step2FieldsSet++;
+//            } else if (Validation.isEmptyStr(formBusinessData.getRelaventExperience()) ||
+//                    formBusinessData.getRelaventExperience().equals(relaventExpList.get(0))) {
+//                AndroidUtils.showSnackBar(registrationLayout, "Please Select Relavent Experience");
+//                step2FieldsSet++;
+//            } else if ((step2PhotoFile == null) || step2PhotoFile.getAbsolutePath().equals("/")) {
+//                showmessage("Please Upload File");
+//                step2FieldsSet++;
+//            }
+//            if (step2FieldsSet == 0) {
+//                stepNumber = 3;
+//            }
+//
+//        } else if (stepNo == 3) {
+//            step3FieldsSet = 0;
+//            if (Validation.isEmptyStr(formBusinessData.getBankName())) {
+//                AndroidUtils.showSnackBar(registrationLayout, "Please Select Bank Name");
+//                step3FieldsSet++;
+//            } else if (!(Validation.isNonEmptyStr(formBusinessData.getAccountNumber()) &&
+//                    Validation.isNumber(formBusinessData.getAccountNumber()))) {
+//                putError(12);
+//                step3FieldsSet++;
+//            } else if (Validation.isEmptyStr(formBusinessData.getBranchCode())) {
+//                putError(13);
+//                step3FieldsSet++;
+//            } else if (Validation.isEmptyStr(formBusinessData.getBranchName())) {
+//                putError(14);
+//                step3FieldsSet++;
+//            } else if (Validation.isEmptyStr(formBusinessData.getIfscCode())) {
+//                putError(15);
+//                step3FieldsSet++;
+//            } else if (Validation.isEmptyStr(formBusinessData.getMicrCode())) {
+//                putError(16);
+//                step3FieldsSet++;
+//            } else if (Validation.isEmptyStr(formBusinessData.getAccountHolderName())) {
+//                putError(17);
+//                step3FieldsSet++;
+//            } else if (!Validation.isValidNumber(formBusinessData.getRegisteredMobileWithBank(), Validation.getNumberPrefix(formBusinessData.getRegisteredMobileWithBank()))) {
+//                putError(18);
+//                step3FieldsSet++;
+//            }
+//
+//        }
+//
+//    }
+//
+//    private void putError(int id) {
+//        Log.e("reach", "       )))))))))" + id);
+//        switch (id) {
+//            case 0:
+//                et_first_name.setError("First Name Can't be empty");
+//                showmessage("First Name Can't be empty");
+//                break;
+//            case 1:
+//                et_last_name.setError("Last Name Can't be empty");
+//                showmessage("Last Name Can't be empty");
+//                break;
+//            case 2:
+//                et_email.setError("Please Enter Valid Email");
+//                showmessage("Please Enter Valid Email");
+//                break;
+//            case 3:
+//                et_mobile.setError("Please Enter Valid Mobile Number");
+//                showmessage("Please Enter Valid Mobile Number");
+//                break;
+//            case 4:
+//                et_password.setError("Password must be greater than or equals to 6 digits");
+//                showmessage("Password must be greater than or equals to 6 digits");
+//                break;
+//            case 5:
+//                et_confirm_password.setError("Password did not matched");
+//                showmessage("Password did not matched");
+//                break;
+//            case 6:
+//                etDOB.setError("Please Select Date");
+//                showmessage("Please Select Date");
+//                break;
+//            case 7:
+//                ((TextView) findViewById(R.id.tv_agreement)).setError("Please Accept Terms & Conditions");
+//                showmessage("Please Accept Terms & Conditions");
+//                break;
+//            case 9:
+//                et_address.setError("Address Can't be empty");
+//                showmessage("Address Can't be empty");
+//                break;
+//            case 10:
+//                et_father_name.setError("Father's Name Can't be empty");
+//                showmessage("Father's Name Can't be empty");
+//                break;
+//            case 11:
+//                et_pincode.setError("Please Enter Valid PINCODE");
+//                showmessage("Please Enter Valid PINCODE");
+//                break;
+//            case 12:
+//                et_account_no.setError("Please Enter Valid Account Number");
+//                showmessage("Please Enter Valid Account Number");
+//                break;
+//            case 13:
+//                et_branch_code.setError("Please Enter Branch Code");
+//                showmessage("Please Enter Branch Code");
+//                break;
+//            case 14:
+//                et_branch_name.setError("Please Enter Branch Name");
+//                showmessage("Please Enter Branch Name");
+//                break;
+//            case 15:
+//                et_ifsc_code.setError("Please Enter IFSC Code");
+//                showmessage("Please Enter IFSC Code");
+//                break;
+//            case 16:
+//                et_micr_code.setError("Please Enter MICR Code");
+//                showmessage("Please Enter MICR Code");
+//                break;
+//            case 17:
+//                et_account_holder_name.setError("Please Enter Account Holder Name");
+//                showmessage("Please Enter Account Holder Name");
+//                break;
+//            case 18:
+//                et_registered_mobile_with_bank.setError("Please Enter Your Registered mobile number");
+//                showmessage("Please Enter Your Registered mobile number");
+//                break;
+//            case 19:
+//                et_confirm_password.setError("Password must be greater than or equals to 6 digits");
+//                showmessage("Password must be greater than or equals to 6 digits");
+//                break;
+//
+//            case 20:
+//                showmessage("Please Check the Agreement");
+//                break;
+//            default:
+//                break;
+//        }
+//    }
 
     private void initspinner() {
 
@@ -741,9 +946,9 @@ public class AddProductActivity extends AppCompatActivity {
                                        int position, long id) {
 
                 cityList = new ArrayList<>();
-                AndroidUtils.showErrorLog(context, "State Id is ::::::::  "+position);
-                if(position>0)
-                getCity(String.valueOf(position));
+                AndroidUtils.showErrorLog(context, "State Id is ::::::::  " + position);
+                if (position > 0)
+                    getCity(String.valueOf(position));
             }
 
             @Override
@@ -1074,25 +1279,23 @@ public class AddProductActivity extends AppCompatActivity {
                     try {
 
 
-                      String  AddressAsync = GeocoderAsync.get_state_name().get(AddressEnum.STATE);
-                        String  AddressCity = GeocoderAsync.get_state_name().get(AddressEnum.CITY);
-                        String  Pincode = GeocoderAsync.get_state_name().get(AddressEnum.PINCODE);
-                        String  Address = GeocoderAsync.get_state_name().get(AddressEnum.ADDRESS);
-
+                        String AddressAsync = GeocoderAsync.get_state_name().get(AddressEnum.STATE);
+                        String AddressCity = GeocoderAsync.get_state_name().get(AddressEnum.CITY);
+                        String Pincode = GeocoderAsync.get_state_name().get(AddressEnum.PINCODE);
+                        String Address = GeocoderAsync.get_state_name().get(AddressEnum.ADDRESS);
 
 
                         etpincode.setText(Pincode);
                         etaddress.setText(Address);
 
                         set_state_selection(AddressAsync);
-                        Log.e("AddressAsync", AddressAsync+"**"+AddressCity+"**"+Pincode+"**"+Address);
+                        Log.e("AddressAsync", AddressAsync + "**" + AddressCity + "**" + Pincode + "**" + Address);
                     } catch (Exception e) {
                         Log.e("Exception_geocoder", e.toString());
 
                     }
 
                     etarea_location.setText(place.getAddress());
-
 
 
                     Log.e("Tag", place.toString());
@@ -1109,10 +1312,6 @@ public class AddProductActivity extends AppCompatActivity {
                     // The user canceled the operation.
                 }
             }
-
-
-
-
 
 
         } catch (Exception e) {
@@ -1153,13 +1352,10 @@ public class AddProductActivity extends AppCompatActivity {
         return cursor.getString(idx);
     }
 
-    private void set_state_selection( String a) {
+    private void set_state_selection(String a) {
 
         progressBar.show();
         Log.e("statelist_state", stateList.toString() + "" + a);
-
-
-
 
 
         for (int i = 0; i < stateList.size(); i++) {
@@ -1176,12 +1372,6 @@ public class AddProductActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
-
-
 
 
 }
