@@ -39,5 +39,10 @@
     <dimen name="activity_horizontal_margin">64dp</dimen>
     <dimen name="one_hundred_twenty_dip">200dp</dimen>
     <dimen name="fifteen_dip">30dp</dimen>
+    <dimen name="seven_dip">14dp</dimen>
+    <dimen name="ninety_dip">180dp</dimen>
+    <dimen name="two_hundred_dip">400dp</dimen>
+    <dimen name="one_hundred_five_dip">210dp</dimen>
+
 
 </resources>

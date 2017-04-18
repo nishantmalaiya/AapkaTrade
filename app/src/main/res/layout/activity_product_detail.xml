@@ -37,9 +37,9 @@
 
                 <!--<android.support.v7.widget.CardView-->
                 <!--android:layout_width="match_parent"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginTop="@dimen/ten_dip"-->
+                <!--android:layout_marginLeft="@dimen/ten_dip"-->
+                <!--android:layout_marginRight="@dimen/ten_dip"-->
                 <!--android:layout_height="match_parent"-->
                 <!--&gt;-->
 
@@ -54,7 +54,7 @@
                     <android.support.v4.view.ViewPager
                         android:id="@+id/viewpager_custom"
                         android:layout_width="match_parent"
-                        android:layout_height="180dp"
+                        android:layout_height="@dimen/two_hundred_dip"
                         android:layout_marginTop="@dimen/ten_dip"
 
                         />
@@ -63,10 +63,10 @@
                     <LinearLayout
                         android:id="@+id/viewpagerindicator"
                         android:layout_width="40dp"
-                        android:layout_height="20dp"
+                        android:layout_height="@dimen/twenty_dip"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="@dimen/ten_dip"
                         android:orientation="horizontal">
 
                     </LinearLayout>
@@ -77,9 +77,9 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="@dimen/ten_dip"
+                    android:layout_marginRight="@dimen/ten_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
 
                     >
 
@@ -124,8 +124,8 @@
 
                                         <ImageView
                                             android:id="@+id/imgEdtCompanyName"
-                                            android:layout_width="25dp"
-                                            android:layout_height="20dp"
+                                            android:layout_width="@dimen/twenty_five_dip"
+                                            android:layout_height="@dimen/twenty_dip"
                                             android:layout_centerHorizontal="true"
                                             android:layout_centerVertical="true"
                                             android:layout_weight="0.3"
@@ -177,8 +177,8 @@
 
                                         <ImageView
                                             android:id="@+id/imgDeleteCompany"
-                                            android:layout_width="25dp"
-                                            android:layout_height="20dp"
+                                            android:layout_width="@dimen/twenty_five_dip"
+                                            android:layout_height="@dimen/twenty_dip"
                                             android:layout_centerHorizontal="true"
                                             android:layout_centerVertical="true"
                                             android:layout_weight="0.3"
@@ -215,7 +215,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentTop="true"
-                            android:padding="10dp">
+                            android:padding="@dimen/ten_dip">
 
                             <TextView
                                 android:id="@+id/tvProductName"
@@ -233,20 +233,18 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/tvProductName"
-                                android:layout_marginTop="5dp"
+                                android:layout_marginTop="@dimen/five_dip"
                                 android:text="@string/rupees_deatils"
                                 android:textColor="@color/orange"
                                 android:textStyle="bold" />
-
-
 
                             <TextView
                                 android:id="@+id/tvCrossPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/tvProductName"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="6dp"
+                                android:layout_marginLeft="@dimen/ten_dip"
+                                android:layout_marginTop="5dp"
                                 android:layout_toRightOf="@+id/tvProPrice"
                                 android:text="\u20A8 200"
                                 android:textColor="@color/black"
@@ -254,89 +252,48 @@
 
                             <RelativeLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="@dimen/thirty_five_dip"
                                 android:layout_alignParentRight="true"
                                 android:layout_below="@+id/tvProductName"
                                 android:layout_marginTop="6dp">
-
-                                <LinearLayout
-                                    android:id="@+id/linearlayoutQuantity"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_above="@+id/relativeLayout"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_marginRight="16dp"
-                                    android:background="@drawable/border_bg_grey"
-                                    android:gravity="center"
-                                    android:padding="3dp"
-                                    android:visibility="gone">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="3dp"
-                                        android:text="Qty:"
-                                        android:textSize="14sp" />
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="4dp"
-                                        android:background="@drawable/border_white_bg"
-                                        android:gravity="center"
-                                        android:orientation="horizontal">
-
-                                        <TextView
-                                            android:id="@+id/textViewQuantity"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginLeft="3dp"
-                                            android:layout_marginRight="3dp"
-                                            android:padding="3dp"
-                                            android:text="1"
-                                            android:textSize="14sp" />
-
-                                        <ImageView
-                                            android:layout_width="20dp"
-                                            android:layout_height="25dp"
-                                            android:background="@color/green"
-                                            android:src="@drawable/ic_chevron_white" />
-                                    </LinearLayout>
-                                </LinearLayout>
 
 
                                 <TextView
                                     android:id="@+id/tvQtyHeading"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:gravity="left"
+                                    android:layout_centerVertical="true"
                                     android:text="Qty."
                                     android:textColor="@color/orange"
                                     android:textStyle="bold" />
 
 
-                                <RelativeLayout
-                                    android:layout_width="90dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginBottom="3dp"
-                                    android:layout_marginLeft="5dp"
+                                <LinearLayout
+                                    android:layout_width="@dimen/one_hundred_twenty_dip"
+                                    android:layout_height="@dimen/thirty_five_dip"
+                                    android:layout_marginBottom="@dimen/three_dip"
+                                    android:layout_marginLeft="@dimen/five_dip"
                                     android:layout_toRightOf="@+id/tvQtyHeading"
-                                    android:background="@drawable/spinner_black_border">
+                                    android:orientation="horizontal"
+                                    android:background="@drawable/spinner_black_border"
+                                    android:weightSum="3"
+                                    >
 
 
                                     <ImageView
                                         android:id="@+id/imgViewPlus"
-                                        android:layout_width="30dp"
-                                        android:layout_height="30dp"
+                                        android:layout_weight="1"
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/thirty_five_dip"
                                         android:scaleType="fitXY"
                                         android:src="@drawable/ic_plus" />
 
 
                                     <RelativeLayout
                                         android:id="@+id/relativeQuantity"
-                                        android:layout_width="30dp"
-                                        android:layout_height="30dp"
+                                        android:layout_weight="1"
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/thirty_five_dip"
                                         android:layout_toRightOf="@+id/imgViewPlus">
 
 
@@ -346,24 +303,24 @@
                                             android:layout_height="wrap_content"
                                             android:layout_centerHorizontal="true"
                                             android:layout_centerVertical="true"
-                                            android:layout_marginLeft="5dp"
                                             android:text="1"
                                             android:textColor="@color/black" />
 
                                     </RelativeLayout>
 
-
                                     <ImageView
                                         android:id="@+id/imgViewMinus"
-                                        android:layout_width="30dp"
-                                        android:layout_height="30dp"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_toRightOf="@+id/relativeQuantity"
+                                        android:layout_weight="1"
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/thirty_five_dip"
                                         android:scaleType="fitXY"
-                                        android:src="@drawable/ic_minus" />
+                                        android:src="@drawable/ic_minus"
+                                        android:layout_toRightOf="@+id/relativeQuantity"
+                                        />
 
 
-                                </RelativeLayout>
+
+                                </LinearLayout>
 
 
                             </RelativeLayout>
@@ -374,7 +331,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/tvProPrice"
                                     android:text="Duration :"
-                                    android:layout_marginTop="5dp"
+                                    android:layout_marginTop="@dimen/five_dip"
                                     android:textColor="@color/black"
                                     />
 
@@ -384,10 +341,10 @@
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/tvProPrice"
                                     android:text="1-2"
-                                    android:layout_marginTop="5dp"
+                                    android:layout_marginTop="@dimen/five_dip"
                                     android:layout_toRightOf="@+id/tvDurationHeading"
                                     android:textColor="@color/black"
-                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginLeft="@dimen/five_dip"
                                     />
         -->
 
@@ -396,7 +353,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/tvProPrice"
-                                android:layout_marginTop="15dp"
+                                android:layout_marginTop="@dimen/fifteen_dip"
                                 android:text="@string/delivery_area_heading"
                                 android:textColor="@color/orange" />
 
@@ -406,8 +363,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/tvProPrice"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginTop="15dp"
+                                android:layout_marginLeft="@dimen/five_dip"
+                                android:layout_marginTop="@dimen/fifteen_dip"
                                 android:layout_toRightOf="@+id/tvDeliveryAreaHeading"
                                 android:text="Sector 45, Chandigarh,"
                                 android:textColor="@color/black" />
@@ -424,15 +381,15 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginLeft="@dimen/ten_dip"
+                    android:layout_marginRight="@dimen/ten_dip"
+                    android:layout_marginTop="@dimen/ten_dip">
 
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp">
+                        android:padding="@dimen/ten_dip">
 
                         <TextView
                             android:id="@+id/tvDiscriptionHeading"
@@ -448,7 +405,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvDiscriptionHeading"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="@dimen/ten_dip"
                             android:text="@string/description"
                             android:textColor="@color/black" />
 
@@ -462,16 +419,16 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="@dimen/ten_dip"
+                    android:layout_marginRight="@dimen/ten_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
                     android:visibility="gone">
 
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp">
+                        android:padding="@dimen/ten_dip">
 
                         <TextView
                             android:id="@+id/tvSpecificationHeading"
@@ -486,7 +443,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvSpecificationHeading"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="@dimen/ten_dip"
                             android:text="@string/description"
                             android:textColor="@color/black" />
 
@@ -500,9 +457,9 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:layout_marginLeft="@dimen/ten_dip"
+                    android:layout_marginRight="@dimen/ten_dip"
                     >
 
                     <RelativeLayout
@@ -516,7 +473,7 @@
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_open_shop"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="@dimen/ten_dip"
                             />
 
                         <TextView
@@ -527,7 +484,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/imgOpenShop"
                             android:textColor="@color/black"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="@dimen/fifteen_dip"
                             android:textSize="18sp"
                             />
 
@@ -535,9 +492,9 @@
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/openShopList"
                             android:layout_width="match_parent"
-                            android:layout_height="105dp"
+                            android:layout_height="@dimen/one_hundred_five_dip"
                             android:layout_below="@+id/tvOpenShopheading"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="@dimen/fifteen_dip"
                             android:layout_marginLeft="2dp"
                             android:layout_marginRight="2dp"
                             android:layout_marginBottom="2dp"
@@ -554,9 +511,9 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="@dimen/ten_dip"
+                    android:layout_marginRight="@dimen/ten_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
                     >
 
                     <LinearLayout
@@ -569,7 +526,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:padding="10dp">
+                            android:padding="@dimen/ten_dip">
 
                             <TextView
                                 android:id="@+id/tvReviewHeading"
@@ -591,7 +548,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.8"
-                                    android:padding="10dp">
+                                    android:padding="@dimen/ten_dip">
 
 
                                     <RelativeLayout
@@ -599,7 +556,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerHorizontal="true"
-                                        android:layout_marginTop="15dp">
+                                        android:layout_marginTop="@dimen/fifteen_dip">
 
                                         <TextView
                                             android:id="@+id/tvRatingAverage"
@@ -607,12 +564,12 @@
                                             android:layout_height="wrap_content"
                                             android:text="4.8"
                                             android:textColor="@color/black"
-                                            android:textSize="25dp"
+                                            android:textSize="@dimen/twenty_five_dip"
                                             android:textStyle="bold" />
 
                                         <ImageView
-                                            android:layout_width="20dp"
-                                            android:layout_height="20dp"
+                                            android:layout_width="@dimen/twenty_dip"
+                                            android:layout_height="@dimen/twenty_dip"
                                             android:layout_marginTop="8dp"
                                             android:layout_toRightOf="@+id/tvRatingAverage"
                                             android:src="@drawable/ic_star" />
@@ -625,7 +582,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/relativeRatingDetails"
-                                        android:layout_marginTop="10dp"
+                                        android:layout_marginTop="@dimen/ten_dip"
                                         android:text="32 rating and 12 review" />
 
                                 </RelativeLayout>
@@ -641,7 +598,7 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginLeft="@dimen/five_dip"
                                     android:layout_weight="1.19">
 
                                     <TextView
@@ -654,8 +611,8 @@
 
                                     <ImageView
                                         android:id="@+id/imgFiveStar"
-                                        android:layout_width="15dp"
-                                        android:layout_height="15dp"
+                                        android:layout_width="@dimen/fifteen_dip"
+                                        android:layout_height="@dimen/fifteen_dip"
                                         android:layout_marginTop="2dp"
                                         android:layout_toRightOf="@+id/tvfiveStar"
                                         android:src="@drawable/ic_star" />
@@ -674,16 +631,16 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/imgFiveStar"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginTop="@dimen/five_dip"
                                         android:text="4"
                                         android:textColor="@color/black" />
 
                                     <ImageView
                                         android:id="@+id/imgFourStar"
-                                        android:layout_width="15dp"
-                                        android:layout_height="15dp"
+                                        android:layout_width="@dimen/fifteen_dip"
+                                        android:layout_height="@dimen/fifteen_dip"
                                         android:layout_below="@+id/imgFiveStar"
-                                        android:layout_marginTop="7dp"
+                                        android:layout_marginTop="@dimen/seven_dip"
                                         android:layout_toRightOf="@+id/tvfourStar"
                                         android:src="@drawable/ic_star" />
 
@@ -703,15 +660,15 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/imgFourStar"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginTop="@dimen/five_dip"
                                         android:text="3"
                                         android:textColor="@color/black" />
 
 
                                     <ImageView
                                         android:id="@+id/imgthreeStar"
-                                        android:layout_width="15dp"
-                                        android:layout_height="15dp"
+                                        android:layout_width="@dimen/fifteen_dip"
+                                        android:layout_height="@dimen/fifteen_dip"
                                         android:layout_below="@+id/imgFourStar"
                                         android:layout_marginTop="7dp"
                                         android:layout_toRightOf="@+id/tvthreeStar"
@@ -734,14 +691,14 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/imgthreeStar"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginTop="@dimen/five_dip"
                                         android:text="2"
                                         android:textColor="@color/black" />
 
                                     <ImageView
                                         android:id="@+id/imgtwoStar"
-                                        android:layout_width="15dp"
-                                        android:layout_height="15dp"
+                                        android:layout_width="@dimen/fifteen_dip"
+                                        android:layout_height="@dimen/fifteen_dip"
                                         android:layout_below="@+id/imgthreeStar"
                                         android:layout_marginTop="7dp"
                                         android:layout_toRightOf="@+id/tvtwoStar"
@@ -764,15 +721,15 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/imgtwoStar"
-                                        android:layout_marginTop="5dp"
+                                        android:layout_marginTop="@dimen/five_dip"
                                         android:text="1"
                                         android:textColor="@color/black" />
 
 
                                     <ImageView
                                         android:id="@+id/imgOneStar"
-                                        android:layout_width="15dp"
-                                        android:layout_height="15dp"
+                                        android:layout_width="@dimen/fifteen_dip"
+                                        android:layout_height="@dimen/fifteen_dip"
                                         android:layout_below="@+id/imgtwoStar"
                                         android:layout_marginTop="7dp"
                                         android:layout_toRightOf="@+id/tvOneStar"
@@ -800,14 +757,14 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="@dimen/ten_dip"
                             android:background="#BDBAB5"></View>
 
                         <RelativeLayout
                             android:id="@+id/relativeRateReview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp">
+                            android:padding="@dimen/ten_dip">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -836,7 +793,7 @@
                             android:id="@+id/reviewList"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="@dimen/ten_dip"
                             >
 
                         </android.support.v7.widget.RecyclerView>
@@ -853,7 +810,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/orange"
-            android:padding="15dp"
+            android:padding="@dimen/fifteen_dip"
             android:visibility="invisible">
 
             <TextView

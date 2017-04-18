@@ -108,7 +108,6 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
 
 
-
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -462,9 +461,9 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     {
         context = ProductDetail.this;
 
-        linearLayoutQuantity = (LinearLayout) findViewById(R.id.linearlayoutQuantity);
+        //linearLayoutQuantity = (LinearLayout) findViewById(R.id.linearlayoutQuantity);
 
-        textViewQuantity = (TextView) findViewById(R.id.textViewQuantity);
+        textViewQuantity = (TextView) findViewById(R.id.tvQuatity);
 
         progress_handler = new ProgressBarHandler(this);
 
@@ -636,8 +635,21 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
                     }
                     else
                     {
-                        Intent i = new Intent(ProductDetail.this, AddAddressActivity.class);
-                        startActivity(i);
+                        if(app_sharedpreference.getsharedpref("usertype","0").contains("2"))
+                        {
+
+                            Intent i = new Intent(ProductDetail.this, AddAddressActivity.class);
+                            startActivity(i);
+
+                        }
+                        else
+                        {
+                           // AndroidUtils.showSnackBar();
+                            Intent i = new Intent(ProductDetail.this, AddAddressActivity.class);
+                            startActivity(i);
+
+                        }
+
                     }
 
                 }
@@ -646,8 +658,6 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
 
                     ServiceEnquiry serviceEnquiry = new ServiceEnquiry(context, product_name, categoryName);
                     serviceEnquiry.show();
-
-
                 }
 
             }

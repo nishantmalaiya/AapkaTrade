@@ -44,6 +44,7 @@ public class AddAddressActivity extends AppCompatActivity
     ProgressBarHandler progress_handler;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -228,8 +229,6 @@ public class AddAddressActivity extends AppCompatActivity
                 Intent intent = new Intent(AddAddressActivity.this, HomeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-
-
             }
         });
 
