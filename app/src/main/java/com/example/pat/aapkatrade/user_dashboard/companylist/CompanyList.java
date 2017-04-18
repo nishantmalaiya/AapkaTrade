@@ -32,7 +32,6 @@ import java.util.ArrayList;
 public class CompanyList extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener
 {
 
-
     RecyclerView recyclerViewcompanylist;
     CompanyListAdapter companyListAdapter;
     ArrayList<CompanyData> companyDatas = new ArrayList<>();
@@ -44,9 +43,6 @@ public class CompanyList extends AppCompatActivity implements SwipeRefreshLayout
     private Context context;
     public LinearLayoutManager mLayoutManager;
     SwipeRefreshLayout mSwipyRefreshLayout;
-
-
-
 
 
     @Override
@@ -230,12 +226,18 @@ public class CompanyList extends AppCompatActivity implements SwipeRefreshLayout
             }
         });
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
+
+
+        if (getSupportActionBar() != null)
+        {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setTitle(null);
             getSupportActionBar().setElevation(0);
         }
+
+
+
 
     }
 
@@ -283,7 +285,6 @@ public class CompanyList extends AppCompatActivity implements SwipeRefreshLayout
                   {
                       if (result == null)
                       {
-
                           //progress_handler.hide();
                       }
                       else
