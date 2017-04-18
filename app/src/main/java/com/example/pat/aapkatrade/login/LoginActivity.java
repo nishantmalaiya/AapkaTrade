@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.Home.registration.RegistrationActivity;
 import com.example.pat.aapkatrade.Home.registration.RegistrationBusinessAssociateActivity;
@@ -26,7 +25,6 @@ import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Validation;
 import com.google.gson.JsonObject;
-
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -62,7 +60,8 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                if (appSharedpreference.shared_pref != null) {
+                if (appSharedpreference.shared_pref != null)
+                {
                     if (appSharedpreference.getsharedpref("usertype", "0").equals("3")) {
 
                         Intent registerUserActivity = new Intent(context, RegistrationBusinessAssociateActivity.class);
@@ -71,7 +70,9 @@ public class LoginActivity extends AppCompatActivity
                         Intent registerUserActivity = new Intent(context, RegistrationActivity.class);
                         startActivity(registerUserActivity);
                     }
-                } else {
+                }
+                else
+                {
                     Log.e("null_sharedPreferences", "sharedPreferences");
                 }
 
@@ -147,7 +148,7 @@ public class LoginActivity extends AppCompatActivity
                             if (appSharedpreference.getsharedpref("usertype", "0").equals("3")) {
 
                                 
-                                Log.e("login------------", app_sharedpreference.getsharedpref("usertype", "0"));
+                                Log.e("login------------", appSharedpreference.getsharedpref("usertype", "0"));
                                 AndroidUtils.showErrorLog(context, "UserType : BusinessAssociates");
 
                                 String login_url = getResources().getString(R.string.webservice_base_url) + "/businesslogin";
@@ -155,7 +156,7 @@ public class LoginActivity extends AppCompatActivity
                                 callwebservice_login(login_url, input_email, input_password);
 
 
-                            } else if (app_sharedpreference.getsharedpref("usertype", "0").equals("2")) {
+                            } else if (appSharedpreference.getsharedpref("usertype", "0").equals("2")) {
                                 AndroidUtils.showErrorLog(context, "UserType : Buyer");
 
                                 String login_url = getResources().getString(R.string.webservice_base_url) + "/buyerlogin";
@@ -163,7 +164,7 @@ public class LoginActivity extends AppCompatActivity
                                 callwebservice_login(login_url, input_email, input_password);
 
 
-                            } else if (app_sharedpreference.getsharedpref("usertype", "0").equals("1")) {
+                            } else if (appSharedpreference.getsharedpref("usertype", "0").equals("1")) {
                                 AndroidUtils.showErrorLog(context, "UserType : Seller");
 
                                 String login_url = getResources().getString(R.string.webservice_base_url) + "/sellerlogin";

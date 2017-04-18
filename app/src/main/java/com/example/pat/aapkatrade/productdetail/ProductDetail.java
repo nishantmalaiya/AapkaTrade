@@ -107,7 +107,6 @@ public class ProductDetail extends AppCompatActivity implements DatePickerDialog
     ArrayList<Integer> color_openshop = new ArrayList<>();
 
 
-
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
