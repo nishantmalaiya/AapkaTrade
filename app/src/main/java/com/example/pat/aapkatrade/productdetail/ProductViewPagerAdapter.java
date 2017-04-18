@@ -27,6 +27,8 @@ import com.example.pat.aapkatrade.ZoomImage.ZoomViewPagerAdapter;
 import com.example.pat.aapkatrade.general.CustomImageVIew;
 import com.example.pat.aapkatrade.general.Tabletsize;
 import com.koushikdutta.ion.Ion;
+import com.theartofdev.fastimageloader.target.TargetImageView;
+
 import java.util.ArrayList;
 
 /**
@@ -68,7 +70,8 @@ public class ProductViewPagerAdapter extends PagerAdapter
     public Object instantiateItem(final ViewGroup container, int position) {
         View itemView = LayoutInflater.from(mContext).inflate(R.layout.viewpager_product_detail, container, false);
 
-        final ImageView imageView = (ImageView) itemView.findViewById(R.id.img_viewpager_detail);
+//        final ImageView imageView = (ImageView) itemView.findViewById(R.id.img_viewpager_detail);
+        final TargetImageView imageView = (TargetImageView) itemView.findViewById(R.id.img_viewpager_detail);
 
         System.out.println("position============" + position);
         if(Tabletsize.isTablet(mContext))
@@ -86,10 +89,11 @@ public class ProductViewPagerAdapter extends PagerAdapter
         {
             String product_imageurl=imageurl.get(position).replace("small","medium");
 
-            Ion.with(imageView)
-                    .error(ContextCompat.getDrawable(mContext, R.drawable.ic_applogo1))
-                    .placeholder(ContextCompat.getDrawable(mContext, R.drawable.ic_applogo1))
-                    .load(product_imageurl);
+//            Ion.with(imageView)
+//                    .error(ContextCompat.getDrawable(mContext, R.drawable.ic_applogo1))
+//                    .placeholder(ContextCompat.getDrawable(mContext, R.drawable.ic_applogo1))
+//                    .load(product_imageurl);
+
             Log.e("image_medium","image_medium");
 
         }

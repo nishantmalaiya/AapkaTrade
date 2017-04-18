@@ -6,13 +6,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.location.Geocoder;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
@@ -23,38 +19,25 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.directions.route.AbstractRouting;
-import com.example.pat.aapkatrade.Home.CommomData;
 import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.Home.navigation.entity.CategoryHome;
 import com.example.pat.aapkatrade.Home.navigation.entity.SubCategory;
 import com.example.pat.aapkatrade.Home.registration.entity.City;
-import com.example.pat.aapkatrade.Home.registration.entity.State;
 import com.example.pat.aapkatrade.Home.registration.spinner_adapter.SpCityAdapter;
-import com.example.pat.aapkatrade.Home.registration.spinner_adapter.SpStateAdapter;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.general.AppSharedPreference;
-import com.example.pat.aapkatrade.general.Call_webservice;
-import com.example.pat.aapkatrade.general.TaskCompleteReminder;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Utils.ImageUtils;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomMultipleCheckBoxAdapter;
@@ -64,8 +47,6 @@ import com.example.pat.aapkatrade.general.entity.KeyValue;
 import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.location.AddressEnum;
 import com.example.pat.aapkatrade.location.GeoCoderAddress;
-import com.example.pat.aapkatrade.map.GoogleMapActivity;
-import com.example.pat.aapkatrade.service_enquiry.ServiceEnquiry;
 import com.example.pat.aapkatrade.user_dashboard.add_product.Dialog.Timing_dialog;
 import com.example.pat.aapkatrade.user_dashboard.addcompany.CompanyData;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -73,34 +54,20 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.async.http.body.FilePart;
 import com.koushikdutta.async.http.body.Part;
-import com.koushikdutta.async.http.body.StringBody;
 import com.koushikdutta.ion.Ion;
-import com.koushikdutta.ion.ProgressCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.UUID;
 
 
 public class AddProductActivity extends AppCompatActivity {
@@ -108,7 +75,7 @@ public class AddProductActivity extends AppCompatActivity {
 
     private Context context;
     private LinearLayout contentAddProduct, add_product_root_container, ll_dynamic_fields_step2;
-    private Spinner spCompanyName, spSubCategory, spCategory, spState, spCity, spdeliverydistance, spService_type;
+    private Spinner spCompanyName, spSubCategory, spCategory, spState, spCity, spdeliverydistance, spServiceType;
     private String countryID = "101", stateID, cityID, companyID, categoryID, subCategoryID, deliveryDistanceID, unit;
     private HashMap<String, String> webservice_header_type = new HashMap<>();
     private ArrayList<CategoryHome> listDataHeader = new ArrayList<>();
@@ -132,10 +99,10 @@ public class AddProductActivity extends AppCompatActivity {
 
     private TextView btnUpload;
     private int count = -1;
-    private EditText etProductName, etDeliverLocation, etPrice, etCrossedPrice, etDescription, etDiscount, etarea_location, etpincode, etaddress;
+    private EditText etProductName, etDeliverLocation, etPrice, etCrossedPrice, etDescription, etDiscount, etAreaLocation, etPinCode, etAddress;
     ImageView uploadButton;
     File docFile = new File("");
-    public ArrayList<ProductImagesData> productImagesDatas = new ArrayList<>();
+    public ArrayList<ProductImagesData> productImageArrayList = new ArrayList<>();
     LinearLayoutManager layoutManager;
     RecyclerView recyclerView;
     ProductImages adapter;
@@ -150,7 +117,7 @@ public class AddProductActivity extends AppCompatActivity {
     private Spinner dynamicSpinner;
     private GeoCoderAddress GeocoderAsync;
     private int current_state_index;
-    private int step1FieldsSet=-1;
+    private int step1FieldsSet = -1;
 
 
     @Override
@@ -171,7 +138,7 @@ public class AddProductActivity extends AppCompatActivity {
 
     private void setupRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
-        adapter = new ProductImages(AddProductActivity.this, productImagesDatas);
+        adapter = new ProductImages(AddProductActivity.this, productImageArrayList);
         layoutManager = new LinearLayoutManager(AddProductActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -184,7 +151,7 @@ public class AddProductActivity extends AppCompatActivity {
         context = AddProductActivity.this;
         progressBar = new ProgressBarHandler(context);
         app_sharedpreference = new AppSharedPreference(context);
-        spService_type = (Spinner) findViewById(R.id.sp_service_type);
+        spServiceType = (Spinner) findViewById(R.id.sp_service_type);
         spCompanyName = (Spinner) findViewById(R.id.spCompanyName);
         spCategory = (Spinner) findViewById(R.id.spCategory);
         spSubCategory = (Spinner) findViewById(R.id.spSubCategory);
@@ -192,16 +159,17 @@ public class AddProductActivity extends AppCompatActivity {
         spCity = (Spinner) findViewById(R.id.spCity);
 
         contentAddProduct = (LinearLayout) findViewById(R.id.contentAddProduct);
+        add_product_root_container = (LinearLayout) findViewById(R.id.add_product_root_container);
         etProductName = (EditText) findViewById(R.id.etProductName);
         etPrice = (EditText) findViewById(R.id.etPrice);
         etDiscount = (EditText) findViewById(R.id.etDiscount);
 
-        etarea_location = (EditText) findViewById(R.id.etAreaLocation);
-        etpincode = (EditText) findViewById(R.id.et_pincode);
-        etaddress = (EditText) findViewById(R.id.et_Address);
+        etAreaLocation = (EditText) findViewById(R.id.etAreaLocation);
+        etPinCode = (EditText) findViewById(R.id.et_pincode);
+        etAddress = (EditText) findViewById(R.id.et_Address);
 
 
-        etarea_location.setOnClickListener(new View.OnClickListener() {
+        etAreaLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -238,23 +206,24 @@ public class AddProductActivity extends AppCompatActivity {
         rl_layout1_saveandcontinue_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //validateFields(1);
+                AndroidUtils.showErrorLog(context, "*******validateFields");
+                validateFields(1);
 
-                if (findViewById(R.id.content_add_product_company_detail).getVisibility() == View.VISIBLE) {
-
-
-                    findViewById(R.id.content_add_product_company_detail).setVisibility(View.GONE);
-                    findViewById(R.id.content_add_product_product_location).setVisibility(View.GONE);
-                    if (findViewById(R.id.content_add_product_dynamic_form).getVisibility() == View.GONE) {
-
-                        findViewById(R.id.content_add_product_dynamic_form).setVisibility(View.VISIBLE);
-                        dynamic_view_builders();
-
-
-                    }
-
-
-                }
+//                if (findViewById(R.id.content_add_product_company_detail).getVisibility() == View.VISIBLE) {
+//
+//
+//                    findViewById(R.id.content_add_product_company_detail).setVisibility(View.GONE);
+//                    findViewById(R.id.content_add_product_product_location).setVisibility(View.GONE);
+//                    if (findViewById(R.id.content_add_product_dynamic_form).getVisibility() == View.GONE) {
+//
+//                        findViewById(R.id.content_add_product_dynamic_form).setVisibility(View.VISIBLE);
+//                        dynamic_view_builders();
+//
+//
+//                    }
+//
+//
+//                }
 
 
             }
@@ -273,221 +242,112 @@ public class AddProductActivity extends AppCompatActivity {
         });
 
 
-        //container 2
-
-
         ll_dynamic_fields_step2 = (LinearLayout) findViewById(R.id.content_add_product_dynamic_form).findViewById(R.id.ll_dynamic_fields);
-
-//        ll_dynamic_fields_step2.setBackgroundColor(context.getResources().getColor(R.color.green));
     }
 
-//    private void validateFields(int stepNo) {
-//
-//        if (stepNo == 1) {
-//            step1FieldsSet = 0;
-//            if (productImagesDatas.size()!=0) {
-//                putError(2);
-//                step1FieldsSet++;
-//            } else if (!Validation.isEmptyStr(etProductName.getText().toString()))) {
-//                putError(4);
-//                step1FieldsSet++;
-//            } else if (!Validation.isValidPassword(formBusinessData.getConfirmPassword())) {
-//                putError(19);
-//                step1FieldsSet++;
-//            } else if (!Validation.isPasswordMatching(formBusinessData.getPassword(), formBusinessData.getConfirmPassword())) {
-//                putError(5);
-//                step1FieldsSet++;
-//            } else if (Validation.isEmptyStr(formBusinessData.getFirstName())) {
-//                putError(0);
-//                step1FieldsSet++;
-//            } else if (Validation.isEmptyStr(formBusinessData.getLastName())) {
-//                putError(1);
-//                step1FieldsSet++;
-//            } else if (!Validation.isValidDOB(formBusinessData.getDob())) {
-//                putError(6);
-//                step1FieldsSet++;
-//            } else if (Validation.isEmptyStr(formBusinessData.getFatherName())) {
-//                putError(10);
-//                step1FieldsSet++;
-//            } else if (!Validation.isValidNumber(formBusinessData.getMobile_no(), Validation.getNumberPrefix(formBusinessData.getMobile_no()))) {
-//                putError(3);
-//                step1FieldsSet++;
-//            } else if (!(Validation.isNonEmptyStr(formBusinessData.getStateID()) &&
-//                    Integer.parseInt(formBusinessData.getStateID()) > 0)) {
-//                AndroidUtils.showSnackBar(registrationLayout, "Please Select State");
-//                step1FieldsSet++;
-//            } else if (!(Validation.isNonEmptyStr(formBusinessData.getCityID()) &&
-//                    Integer.parseInt(formBusinessData.getCityID()) > 0)) {
-//                AndroidUtils.showSnackBar(registrationLayout, "Please Select City");
-//                step1FieldsSet++;
-//            } else if (Validation.isEmptyStr(formBusinessData.getAddress())) {
-//                putError(9);
-//                step1FieldsSet++;
-//            } else if (!Validation.isPincode(formBusinessData.getPinCode())) {
-//                putError(11);
-//                step1FieldsSet++;
-//            } else if (!formBusinessData.isAgreementAccepted()) {
-//                putError(20);
-//                step1FieldsSet++;
-//            } else if (step1PhotoFile.getAbsolutePath().equals("/")) {
-//                showmessage("Please Upload File");
-//                step1FieldsSet++;
-//            } else if (!agreement_check.isChecked()) {
-//                putError(20);
-//            }
-//
-//            Log.e("hi", "step1FieldsSet=" + step1FieldsSet);
-//
-//            if (step1FieldsSet == 0) {
-//                stepNumber = 2;
-//            }
-//        } else if (stepNo == 2) {
-//            step2FieldsSet = 0;
-//            if (Validation.isEmptyStr(formBusinessData.getQualification()) ||
-//                    formBusinessData.getQualification().equals(qualificationList.get(0))) {
-//                AndroidUtils.showSnackBar(registrationLayout, "Please Select Qualification");
-//                step2FieldsSet++;
-//            } else if (Validation.isEmptyStr(formBusinessData.getTotalExperience()) ||
-//                    formBusinessData.getTotalExperience().equals(totalExpList.get(0))) {
-//                AndroidUtils.showSnackBar(registrationLayout, "Please Select Total Experience");
-//                step2FieldsSet++;
-//            } else if (Validation.isEmptyStr(formBusinessData.getRelaventExperience()) ||
-//                    formBusinessData.getRelaventExperience().equals(relaventExpList.get(0))) {
-//                AndroidUtils.showSnackBar(registrationLayout, "Please Select Relavent Experience");
-//                step2FieldsSet++;
-//            } else if ((step2PhotoFile == null) || step2PhotoFile.getAbsolutePath().equals("/")) {
-//                showmessage("Please Upload File");
-//                step2FieldsSet++;
-//            }
-//            if (step2FieldsSet == 0) {
-//                stepNumber = 3;
-//            }
-//
-//        } else if (stepNo == 3) {
-//            step3FieldsSet = 0;
-//            if (Validation.isEmptyStr(formBusinessData.getBankName())) {
-//                AndroidUtils.showSnackBar(registrationLayout, "Please Select Bank Name");
-//                step3FieldsSet++;
-//            } else if (!(Validation.isNonEmptyStr(formBusinessData.getAccountNumber()) &&
-//                    Validation.isNumber(formBusinessData.getAccountNumber()))) {
-//                putError(12);
-//                step3FieldsSet++;
-//            } else if (Validation.isEmptyStr(formBusinessData.getBranchCode())) {
-//                putError(13);
-//                step3FieldsSet++;
-//            } else if (Validation.isEmptyStr(formBusinessData.getBranchName())) {
-//                putError(14);
-//                step3FieldsSet++;
-//            } else if (Validation.isEmptyStr(formBusinessData.getIfscCode())) {
-//                putError(15);
-//                step3FieldsSet++;
-//            } else if (Validation.isEmptyStr(formBusinessData.getMicrCode())) {
-//                putError(16);
-//                step3FieldsSet++;
-//            } else if (Validation.isEmptyStr(formBusinessData.getAccountHolderName())) {
-//                putError(17);
-//                step3FieldsSet++;
-//            } else if (!Validation.isValidNumber(formBusinessData.getRegisteredMobileWithBank(), Validation.getNumberPrefix(formBusinessData.getRegisteredMobileWithBank()))) {
-//                putError(18);
-//                step3FieldsSet++;
-//            }
-//
-//        }
-//
-//    }
-//
-//    private void putError(int id) {
-//        Log.e("reach", "       )))))))))" + id);
-//        switch (id) {
-//            case 0:
-//                et_first_name.setError("First Name Can't be empty");
-//                showmessage("First Name Can't be empty");
-//                break;
-//            case 1:
-//                et_last_name.setError("Last Name Can't be empty");
-//                showmessage("Last Name Can't be empty");
-//                break;
-//            case 2:
-//                et_email.setError("Please Enter Valid Email");
-//                showmessage("Please Enter Valid Email");
-//                break;
-//            case 3:
-//                et_mobile.setError("Please Enter Valid Mobile Number");
-//                showmessage("Please Enter Valid Mobile Number");
-//                break;
-//            case 4:
-//                et_password.setError("Password must be greater than or equals to 6 digits");
-//                showmessage("Password must be greater than or equals to 6 digits");
-//                break;
-//            case 5:
-//                et_confirm_password.setError("Password did not matched");
-//                showmessage("Password did not matched");
-//                break;
-//            case 6:
-//                etDOB.setError("Please Select Date");
-//                showmessage("Please Select Date");
-//                break;
-//            case 7:
-//                ((TextView) findViewById(R.id.tv_agreement)).setError("Please Accept Terms & Conditions");
-//                showmessage("Please Accept Terms & Conditions");
-//                break;
-//            case 9:
-//                et_address.setError("Address Can't be empty");
-//                showmessage("Address Can't be empty");
-//                break;
-//            case 10:
-//                et_father_name.setError("Father's Name Can't be empty");
-//                showmessage("Father's Name Can't be empty");
-//                break;
-//            case 11:
-//                et_pincode.setError("Please Enter Valid PINCODE");
-//                showmessage("Please Enter Valid PINCODE");
-//                break;
-//            case 12:
-//                et_account_no.setError("Please Enter Valid Account Number");
-//                showmessage("Please Enter Valid Account Number");
-//                break;
-//            case 13:
-//                et_branch_code.setError("Please Enter Branch Code");
-//                showmessage("Please Enter Branch Code");
-//                break;
-//            case 14:
-//                et_branch_name.setError("Please Enter Branch Name");
-//                showmessage("Please Enter Branch Name");
-//                break;
-//            case 15:
-//                et_ifsc_code.setError("Please Enter IFSC Code");
-//                showmessage("Please Enter IFSC Code");
-//                break;
-//            case 16:
-//                et_micr_code.setError("Please Enter MICR Code");
-//                showmessage("Please Enter MICR Code");
-//                break;
-//            case 17:
-//                et_account_holder_name.setError("Please Enter Account Holder Name");
-//                showmessage("Please Enter Account Holder Name");
-//                break;
-//            case 18:
-//                et_registered_mobile_with_bank.setError("Please Enter Your Registered mobile number");
-//                showmessage("Please Enter Your Registered mobile number");
-//                break;
-//            case 19:
-//                et_confirm_password.setError("Password must be greater than or equals to 6 digits");
-//                showmessage("Password must be greater than or equals to 6 digits");
-//                break;
-//
-//            case 20:
-//                showmessage("Please Check the Agreement");
-//                break;
-//            default:
-//                break;
-//        }
-//    }
+    private void validateFields(int stepNo) {
+
+        if (stepNo == 1) {
+            step1FieldsSet = 0;
+            if (productImageArrayList.size() <= 0) {
+                putError(0);
+                AndroidUtils.showErrorLog(context, "*******validateFields2");
+                step1FieldsSet++;
+            } else if (Validation.isEmptyStr(etProductName.getText().toString())) {
+                putError(1);
+                step1FieldsSet++;
+            } else if (spCompanyName.getSelectedItemPosition() == 0) {
+                putError(2);
+                step1FieldsSet++;
+            } else if (spServiceType.getSelectedItemPosition() == 0) {
+                putError(3);
+                step1FieldsSet++;
+            }else if (spCategory.getSelectedItemPosition() == 0) {
+                putError(4);
+                step1FieldsSet++;
+            }else if (Validation.isEmptyStr(etPrice.getText().toString()) || Integer.valueOf(etPrice.getText().toString())<=0) {
+                putError(5);
+                step1FieldsSet++;
+            } else if (Validation.isEmptyStr(etDiscount.getText().toString()) || Integer.valueOf(etDiscount.getText().toString())<=0 || Integer.valueOf(etDiscount.getText().toString())>=100) {
+                putError(6);
+                step1FieldsSet++;
+            }else if (Validation.isEmptyStr(etAreaLocation.getText().toString())) {
+                putError(7);
+                step1FieldsSet++;
+            } else if (spState.getSelectedItemPosition() == 0) {
+                putError(8);
+                step1FieldsSet++;
+            } else if (spCity.getSelectedItemPosition() == 0) {
+                putError(9);
+                step1FieldsSet++;
+            } else if (!Validation.isPincode(etPinCode.getText().toString())) {
+                putError(10);
+                step1FieldsSet++;
+            } else if (Validation.isEmptyStr(etAddress.getText().toString())) {
+                putError(11);
+                step1FieldsSet++;
+            }
+
+        }
+
+    }
+
+    private void putError(int id) {
+        Log.e("reach", "       )))))))))" + id);
+        switch (id) {
+            case 0:
+                showMessage("Please Upload Product Images.");
+                break;
+            case 1:
+                etProductName.setError("Product name can't be empty.");
+                showMessage("Product name can't be empty.");
+                break;
+            case 2:
+                showMessage("Please Select Company Name.");
+                break;
+            case 3:
+                showMessage("Please Select Service Type.");
+                break;
+            case 4:
+                showMessage("Please Select Categorye.");
+                break;
+            case 5:
+                etPrice.setError("Please Enter Price. Should be > 0.");
+                showMessage("Please Enter Price.");
+                break;
+            case 6:
+                etDiscount.setError("Please Enter Discount in [0%-100%].");
+                showMessage("Please Enter Discount in [0%-100%].");
+                break;
+            case 7:
+                etAreaLocation.setError("Area/Location can't be empty.");
+                showMessage("Area/Location can't be empty.");
+                break;
+            case 8:
+                showMessage("Please Select State.");
+                break;
+            case 9:
+                showMessage("Please Select City.");
+                break;
+            case 10:
+                etPinCode.setError("Please Enter Valid PinCode.");
+                showMessage("Please Enter Valid PinCode.");
+                break;
+            case 11:
+                etAddress.setError("Address can't be empty.");
+                showMessage("Address can't be empty.");
+                break;
+            case 12:
+                etDescription.setError("Description can't be empty.");
+                showMessage("Description can't be empty.");
+                break;
+
+            default:
+                break;
+        }
+    }
 
     private void initspinner() {
-
-//step 1 data spinner
-
         CompanyData companyData = new CompanyData("Please Select Company", "-1");
         companyNames.add(companyData);
         CustomSimpleListAdapter adapter = new CustomSimpleListAdapter(context, companyNames);
@@ -499,13 +359,13 @@ public class AddProductActivity extends AppCompatActivity {
         serviceTypes.add("Sell");
 
         CustomSimpleListAdapter adapter_spinner_service_type = new CustomSimpleListAdapter(context, serviceTypes);
-        spService_type.setAdapter(adapter_spinner_service_type);
+        spServiceType.setAdapter(adapter_spinner_service_type);
 
 
         getState();
 
 
-        spService_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spServiceType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 final String sellorservice;
@@ -680,13 +540,13 @@ public class AddProductActivity extends AppCompatActivity {
                                 spCompanyName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                                         if (position > 0) {
                                             companyID = companyNames.get(position).getCompanyId();
                                         } else {
                                             Log.e("hi***", String.valueOf(count));
                                             if (count >= 0) {
                                             }
-                                            // showMessage("Invalid Company");
                                         }
                                     }
 
@@ -932,10 +792,6 @@ public class AddProductActivity extends AppCompatActivity {
         stateList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.state_list)));
 
         CustomSimpleListAdapter stateAdapter = new CustomSimpleListAdapter(context, stateList);
-//        spSubCategory.setAdapter(adapter);
-//        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(context, R.layout.white_textcolor_spinner, stateList);
-//        spinnerArrayAdapter.setDropDownViewResource(R.layout.white_textcolor_spinner);
-
         spState.setAdapter(stateAdapter);
 
 
@@ -1132,7 +988,7 @@ public class AddProductActivity extends AppCompatActivity {
 
 
     private void showMessage(String message) {
-        AndroidUtils.showSnackBar(contentAddProduct, message);
+        AndroidUtils.showSnackBar(add_product_root_container, message);
     }
 
 
@@ -1171,7 +1027,7 @@ public class AddProductActivity extends AppCompatActivity {
         super.onResume();
 
 
-        spService_type.setSelection(0);
+        spServiceType.setSelection(0);
         AndroidUtils.showErrorLog(context, "onResume");
     }
 
@@ -1208,12 +1064,12 @@ public class AddProductActivity extends AppCompatActivity {
                             Log.e("doc", " else doc file path" + docFile.getAbsolutePath());
                         }
 
-                        productImagesDatas.add(new ProductImagesData(docFile.getAbsolutePath(), ""));
+                        productImageArrayList.add(new ProductImagesData(docFile.getAbsolutePath(), ""));
                         Log.e("docfile", docFile.getAbsolutePath());
 
 
                         adapter.notifyDataSetChanged();
-                        if (productImagesDatas.size() > 0) {
+                        if (productImageArrayList.size() > 0) {
                             recyclerView.setVisibility(View.VISIBLE);
 
                         }
@@ -1232,11 +1088,11 @@ public class AddProductActivity extends AppCompatActivity {
                         // CALL THIS METHOD TO GET THE ACTUAL PATH
                         File finalFile = new File(getRealPathFromURI(tempUri));
 
-                        productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(), ""));
+                        productImageArrayList.add(new ProductImagesData(finalFile.getAbsolutePath(), ""));
                         Log.e("docfile", finalFile.getAbsolutePath());
 
                         adapter.notifyDataSetChanged();
-                        if (productImagesDatas.size() > 0) {
+                        if (productImageArrayList.size() > 0) {
                             recyclerView.setVisibility(View.VISIBLE);
 
                         }
@@ -1259,7 +1115,7 @@ public class AddProductActivity extends AppCompatActivity {
                 // CALL THIS METHOD TO GET THE ACTUAL PATH
                 File finalFile = new File(getRealPathFromURI(tempUri));
 
-                productImagesDatas.add(new ProductImagesData(finalFile.getAbsolutePath(), ""));
+                productImageArrayList.add(new ProductImagesData(finalFile.getAbsolutePath(), ""));
                 Log.e("docfile", finalFile.getAbsolutePath());
 
                 adapter.notifyDataSetChanged();
@@ -1285,8 +1141,8 @@ public class AddProductActivity extends AppCompatActivity {
                         String Address = GeocoderAsync.get_state_name().get(AddressEnum.ADDRESS);
 
 
-                        etpincode.setText(Pincode);
-                        etaddress.setText(Address);
+                        etPinCode.setText(Pincode);
+                        etAddress.setText(Address);
 
                         set_state_selection(AddressAsync);
                         Log.e("AddressAsync", AddressAsync + "**" + AddressCity + "**" + Pincode + "**" + Address);
@@ -1295,7 +1151,7 @@ public class AddProductActivity extends AppCompatActivity {
 
                     }
 
-                    etarea_location.setText(place.getAddress());
+                    etAreaLocation.setText(place.getAddress());
 
 
                     Log.e("Tag", place.toString());
