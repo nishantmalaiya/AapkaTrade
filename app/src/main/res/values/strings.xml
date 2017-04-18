@@ -112,7 +112,7 @@
     <string name="otp_data_2" translatable="false">correct before continuing</string>
     <string name="verify" translatable="false">VERIFY</string>
     <string name="otp_not_recived" translatable="false">OTP Not Received?</string>
-    <string name="price" translatable="false">price</string>
+    <string name="price" translatable="false">Price</string>
     <string name="cross_price" translatable="false">Cross Price</string>
     <string name="company_profile_heading" translatable="false">Company Profile</string>
     <string name="company_profile_data1" translatable="false">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speciman book.</string>
@@ -288,8 +288,9 @@
 
     <string name="dynamic_radio_group">element-multiple-choice</string>
     <string name="dynamic_spinner">element-dropdown</string>
-
-
+    <string name="discount_percent">Discount ( % )</string>
+    <string name="area_location">Area / Location*</string>
+    <string name="description_about_shop_heading">Description About Shop*</string>
 
 
 </resources>

@@ -13,6 +13,7 @@
 
 
     <string-array name="state_list" >
+        <item>Please Select State</item>
         <item>Andaman and Nicobar Islands</item>
         <item>Andhra Pradesh</item>
         <item>Arunachal Pradesh</item>

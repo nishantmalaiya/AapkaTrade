@@ -3,16 +3,24 @@ package com.example.pat.aapkatrade.user_dashboard.add_product.Dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.pat.aapkatrade.Home.HomeActivity;
+import com.example.pat.aapkatrade.MainActivity;
 import com.example.pat.aapkatrade.R;
+import com.example.pat.aapkatrade.general.ConnectivityNotFound;
+import com.example.pat.aapkatrade.general.ConnetivityCheck;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
+import com.example.pat.aapkatrade.general.progressbar.ProgressBarHandler;
 import com.example.pat.aapkatrade.user_dashboard.add_product.SpinnerAdapter;
 
 import java.util.ArrayList;
@@ -21,14 +29,21 @@ import java.util.ArrayList;
  * Created by PPC17 on 07-Apr-17.
  */
 
-public class Timing_dialog extends Dialog {
+public class Timing_dialog extends AppCompatActivity {
 
-
+    ArrayList<String> opening_time_list;
+    ArrayList<String> closing_time_list;
     Context context;
-    public Timing_dialog( Context context, ArrayList<String> opening_time_list, ArrayList<String> closing_time_list) {
-        super(context);
-        this.context=context;
-    }
+    ProgressBarHandler progressbar;
+    private final int SPLASH_DISPLAY_LENGTH = 3000;
+//    public Timing_dialog( Context context, ArrayList<String> opening_time_list, ArrayList<String> closing_time_list) {
+//
+//        this.context=context;
+//        this.opening_time_list=opening_time_list;
+//        this.closing_time_list=closing_time_list;
+//        progressbar=new ProgressBarHandler(context);
+//        progressbar.show();
+//    }
 View view_monday,view_tuesday,view_wednesday,view_thursday,view_friday,view_saturday,view_sunday;
 
 
@@ -42,18 +57,37 @@ String demo[]={"Opening","Closing"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getWindow() != null)
-            getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         setContentView(R.layout.dialog_timing);
+        opening_time_list=getIntent().getStringArrayListExtra("opening_time_list");
+        closing_time_list=getIntent().getStringArrayListExtra("closing_time_list");
+        context=this;
+        progressbar=new ProgressBarHandler(context);
+        progressbar.show();
 
 
-        initView();
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                initView();
+
+                /* Create an Intent that will start the Menu-Activity. */
+
+            }
+        }, SPLASH_DISPLAY_LENGTH);
+
+
+
+
 
 
 
     }
 
     private void initView() {
+
 
         dialog_close=(ImageView)findViewById(R.id.dialog_close);
 
@@ -98,7 +132,7 @@ String demo[]={"Opening","Closing"};
             @Override
             public void onClick(View v) {
 
-               dismiss();
+               finish();
             }
         });
 
@@ -107,26 +141,28 @@ String demo[]={"Opening","Closing"};
     }
 
     private void Spinner_adapter() {
-        ArrayAdapter<String> open_close_spinner_adapter = new ArrayAdapter<String>(context,R.layout.spinner_dialog_layout, demo);
+        ArrayAdapter<String> open_close_spinner_adapter = new ArrayAdapter<String>(context,R.layout.spinner_dialog_layout, opening_time_list);
         open_close_spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin_monday_open.setAdapter(open_close_spinner_adapter);
+        ArrayAdapter<String> close_spinner_adapter = new ArrayAdapter<String>(context,R.layout.spinner_dialog_layout, closing_time_list);
+        close_spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin_monday_close.setAdapter(close_spinner_adapter);
 
 
-        spin_monday_open.setAdapter(open_close_spinner_adapter);
-        spin_monday_close.setAdapter(open_close_spinner_adapter);
+
         spin_tuesday_open.setAdapter(open_close_spinner_adapter);
-        spin_tuesday_close.setAdapter(open_close_spinner_adapter);
+        spin_tuesday_close.setAdapter(close_spinner_adapter);
         spin_wednesday_open.setAdapter(open_close_spinner_adapter);
-        spin_wednesday_close.setAdapter(open_close_spinner_adapter);
+        spin_wednesday_close.setAdapter(close_spinner_adapter);
         spin_thrusday_open.setAdapter(open_close_spinner_adapter);
-        spin_thrusday_close.setAdapter(open_close_spinner_adapter);
+        spin_thrusday_close.setAdapter(close_spinner_adapter);
         spin_friday_open.setAdapter(open_close_spinner_adapter);
-        spin_friday_close.setAdapter(open_close_spinner_adapter);
+        spin_friday_close.setAdapter(close_spinner_adapter);
         spin_saturday_open.setAdapter(open_close_spinner_adapter);
-        spin_saturday_close.setAdapter(open_close_spinner_adapter);
+        spin_saturday_close.setAdapter(close_spinner_adapter);
         spin_sunday_open.setAdapter(open_close_spinner_adapter);
-        spin_sunday_close.setAdapter(open_close_spinner_adapter);
-
+        spin_sunday_close.setAdapter(close_spinner_adapter);
+        progressbar.hide();
     }
 
     private void apply_spinner_background() {
