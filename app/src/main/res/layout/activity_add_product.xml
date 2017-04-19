@@ -1,49 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/add_product_root_container"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    >
+    android:weightSum="15"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="13"
+        android:layout_weight="13.5"
         android:orientation="vertical">
 
-        <include
-            layout="@layout/toolbar_layout" />
-
-
-        <include
-            android:id="@+id/content_add_product_company_detail"
-            layout="@layout/content_add_product_company_detail"
-
-
-            />
-        <include   android:id="@+id/content_add_product_dynamic_form"
-            layout="@layout/content_add_product_dynamic_form"
-            android:visibility="gone"
-            />
-        <include
-
-            android:id="@+id/content_add_product_product_location"
-            layout="@layout/content_add_product_product_location"
-            android:visibility="gone"
-      />
-
-        <include
-            android:id="@+id/content_add_product"
-            layout="@layout/content_add_product"
-            android:visibility="gone"/>
+        <include layout="@layout/toolbar_layout" />
 
 
 
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/green"
+            app:tabIndicatorColor="@color/text_order_tab"
+            app:tabIndicatorHeight="@dimen/two_dip"
+            app:tabMode="scrollable" />
 
-
-
+        <android.support.v4.view.ViewPager
+            android:id="@+id/htab_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
 
@@ -52,15 +41,12 @@
     </LinearLayout>
 
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/relativeAddress"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_alignParentBottom="true"
-        android:layout_weight="1"
-        android:visibility="gone"
-        android:background="@color/orange"
-        >
+        android:layout_weight="1.5"
+        android:background="@color/orange">
 
         <TextView
             android:id="@+id/btnUpload"
@@ -71,7 +57,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/textsize_medium" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

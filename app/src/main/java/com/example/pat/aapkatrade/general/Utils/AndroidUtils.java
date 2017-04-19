@@ -89,7 +89,7 @@ public class AndroidUtils {
         layout.setBackground(shape);
     }
 
-    public static void setBackgroundSolid(View layout, Context context, int bgColor, int cornerRadius, int oval,int border_width,int border_color) {
+    public static void setBackgroundSolid(View layout, Context context, int bgColor, int cornerRadius, int oval, int border_width, int border_color) {
         GradientDrawable shape = new GradientDrawable();
         shape.setCornerRadius(cornerRadius);
         shape.setStroke(border_width, ContextCompat.getColor(context, border_color));
@@ -97,7 +97,6 @@ public class AndroidUtils {
         shape.setShape(oval);
         layout.setBackground(shape);
     }
-
 
 
     public static void setBackgroundStroke(View layout, Context context, int bgColor, int cornerRadius, int strokeWidth) {
@@ -109,8 +108,7 @@ public class AndroidUtils {
     }
 
 
-
-    public static void setBackgroundStroke(View layout, Context context, int bgColor, int cornerRadius, int strokeWidth,int backgroundcolor) {
+    public static void setBackgroundStroke(View layout, Context context, int bgColor, int cornerRadius, int strokeWidth, int backgroundcolor) {
         GradientDrawable shape = new GradientDrawable();
         shape.setStroke(strokeWidth, ContextCompat.getColor(context, bgColor));
 
@@ -119,7 +117,6 @@ public class AndroidUtils {
         layout.setBackground(shape);
 
     }
-
 
 
     public static void setImageColor(ImageView imageView, Context context, int color) {
@@ -151,15 +148,21 @@ public class AndroidUtils {
 
     }
 
-    public static void showErrorLog(Context context, Object message){
+    public static void showErrorLog(Context context, Object message) {
         Log.e(getTag(context), message.toString());
     }
 
 
-    public static void sortArrayList(ArrayList<CategoryHome> arrayList){
+    public static void showErrorLog(Context context, Object addIdentifierText, Object message) {
+        Log.e(getTag(context) + addIdentifierText.toString(), message.toString());
+    }
+
+
+    public static void sortArrayList(ArrayList<CategoryHome> arrayList) {
 
     }
-    public static int convertPixelsToDp(float px, Context context){
+
+    public static int convertPixelsToDp(float px, Context context) {
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
         int dp = (int) (px / (metrics.densityDpi / 160f));
