@@ -123,6 +123,7 @@
     <string name="item_price" translatable="false">18,941</string>
     <string name="item_subtotal_price" translatable="false">19,689</string>
     <string name="product_detail" translatable="false">Product Detail:</string>
+    <string name="product_details_heading" translatable="false">Product Details</string>
     <string name="express_delivery" translatable="false">Express Delivery:   99</string>
     <string name="delivery_date" translatable="false">Delivery date: 19 Jan to 20 Jan</string>
     <string name="subtotal" translatable="false">Subtotal:</string>
@@ -162,10 +163,10 @@
     <string name="stock_heading" translatable="false">Stock:</string>
     <string name="stock_availability" translatable="false">Availabilty</string>
     <string name="duration" translatable="false">Duration: 1-2</string>
-    <string name="description_heading" translatable="false">Description</string>
+    <string name="description_heading" translatable="false">Description*</string>
     <string name="description" translatable="false">Department Stores, Chocolate Retailers, Soft Drink Retailers,Grocery Stores, Beverage Dealers, General Stores, Deparmental Stores Home Delivery</string>
     <string name="specification_heading" translatable="false">Specification</string>
-    <string name="review_heading" translatable="false">Ratings &amp; Review</string>
+    <string name="review_heading" translatable="false">Ratings &amp;amp; Review</string>
     <string name="country" translatable="false">Country</string>
     <string name="state" translatable="false">State</string>
     <string name="rupees_deatils" translatable="false">\u20A8 600</string>
@@ -179,8 +180,8 @@
     <string name="share" translatable="false">Share</string>
     <string name="about_us" translatable="false">About Us</string>
     <string name="uploadPDFFile" translatable="false">Company Incorporation</string>
-    <string name="terms" translatable="false">Terms &amp; Conditions</string>white
-    <string name="invite" translatable="false">Invite &amp; Share</string>
+    <string name="terms" translatable="false">Terms &amp;amp; Conditions</string>white
+    <string name="invite" translatable="false">Invite &amp;amp; Share</string>
     <string name="tan_number" translatable="false">TAN Number</string>
     <string name="tin_number" translatable="false">TIN Number</string>
     <string name="bussiness_details" translatable="false">Bussiness Details</string>
@@ -221,7 +222,7 @@
     <string name="payout_report_heading">Payout Report</string>
     <string name="s_data">SData</string>
     <string name="bussiness_associate_details">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n\n Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
-    <string name="business_associate_heading">Business Associate and Term &amp; Conditions</string>
+    <string name="business_associate_heading">Business Associate and Term &amp;amp; Conditions</string>
     <string name="greenMark">Doing Great                       </string>
     <string name="yellowMark">Need to catch-up with the target</string>
     <string name="redMark">Danger Zone</string>
@@ -280,7 +281,7 @@
     <string name="friday">Fri </string>
     <string name="saturday">Sat </string>
     <string name="sunday">Sun </string>
-    <string name="openingclosing"><![CDATA[Opening & Closing Time]]></string>
+    <string name="openingclosing">Opening &amp; Closing Time</string>
 
 
     <string name="dynamic_edittext">element-single-line-text</string>
@@ -291,6 +292,14 @@
     <string name="discount_percent">Discount ( % )</string>
     <string name="area_location">Area / Location*</string>
     <string name="description_about_shop_heading">Description About Shop*</string>
+    <string name="general_info_heading">General Info</string>
+    <string name="shop_and_product_image">Shop &amp; Product Image</string>
+    <string name="phone_number_heading">Phone Number*</string>
+    <string name="facebook_url_heading">Facebook URL</string>
+    <string name="web_url_heading">Web URL</string>
+    <string name="twitter_url_heading">Twitter URL</string>
+    <string name="google_plus_url_heading">G+ URL</string>
+    <string name="youtube_url_heading">Youtube URL</string>
 
 
 </resources>

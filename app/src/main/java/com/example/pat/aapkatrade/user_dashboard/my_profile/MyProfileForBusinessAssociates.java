@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.pat.aapkatrade.Home.HomeActivity;
 import com.example.pat.aapkatrade.R;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
+import com.example.pat.aapkatrade.general.Utils.adapter.CustomPagerAdapter;
 import com.example.pat.aapkatrade.general.Validation;
 
 public class MyProfileForBusinessAssociates extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
@@ -68,7 +69,7 @@ public class MyProfileForBusinessAssociates extends AppCompatActivity implements
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        MyProfilePagerAdapter adapter = new MyProfilePagerAdapter(getSupportFragmentManager());
+        CustomPagerAdapter adapter = new CustomPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(MyProfileFragment.newInstance(1, false), getResources().getString(R.string.personalInfo));
         adapter.addFrag(MyProfileFragment.newInstance(2, false), getResources().getString(R.string.professionalDetails));
         adapter.addFrag(MyProfileFragment.newInstance(3, true), getResources().getString(R.string.bank_details));

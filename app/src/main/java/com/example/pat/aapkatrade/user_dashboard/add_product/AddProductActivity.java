@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
@@ -41,6 +44,7 @@ import com.example.pat.aapkatrade.general.AppSharedPreference;
 import com.example.pat.aapkatrade.general.Utils.AndroidUtils;
 import com.example.pat.aapkatrade.general.Utils.ImageUtils;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomMultipleCheckBoxAdapter;
+import com.example.pat.aapkatrade.general.Utils.adapter.CustomPagerAdapter;
 import com.example.pat.aapkatrade.general.Utils.adapter.CustomSimpleListAdapter;
 import com.example.pat.aapkatrade.general.Validation;
 import com.example.pat.aapkatrade.general.entity.KeyValue;
@@ -70,10 +74,12 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class AddProductActivity extends AppCompatActivity {
+public class AddProductActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
 
     private Context context;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
     private LinearLayout contentAddProduct, add_product_root_container, ll_dynamic_fields_step2;
     private Spinner spCompanyName, spSubCategory, spCategory, spState, spCity, spdeliverydistance, spServiceType;
     private String countryID = "101", stateID, cityID, companyID, categoryID, subCategoryID, deliveryDistanceID, unit;
@@ -126,11 +132,18 @@ public class AddProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_product);
         AndroidUtils.showErrorLog(AddProductActivity.this, "onCreate");
         setUpToolBar();
-        setupRecyclerView();
+
         initview();
-        initspinner();
-        getCompany();
-        getCategory();
+        setupViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.addOnTabSelectedListener(this);
+        tabLayout.setTabTextColors(Color.parseColor("#066C57"), Color.parseColor("#ffffff"));
+
+
+//        setupRecyclerView();
+//        initspinner();
+//        getCompany();
+//        getCategory();
 
 
     }
@@ -149,6 +162,8 @@ public class AddProductActivity extends AppCompatActivity {
     private void initview() {
 
         context = AddProductActivity.this;
+        viewPager = (ViewPager) findViewById(R.id.htab_viewpager);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
         progressBar = new ProgressBarHandler(context);
         app_sharedpreference = new AppSharedPreference(context);
         spServiceType = (Spinner) findViewById(R.id.sp_service_type);
@@ -169,45 +184,45 @@ public class AddProductActivity extends AppCompatActivity {
         etAddress = (EditText) findViewById(R.id.et_Address);
 
 
-        etAreaLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    progressBar.show();
-                    Intent intent =
-                            new PlaceAutocomplete
-                                    .IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
-                                    .build(AddProductActivity.this);
-                    startActivityForResult(intent, 1);
-
-
-                } catch (GooglePlayServicesRepairableException e) {
-
-                    progressBar.hide();
-                    Log.e("GooglePlayServices", e.toString());
-                    // TODO: Handle the error.
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    progressBar.hide();
-                    Log.e("GooglePlayServices_not", e.toString());
-                    // TODO: Handle the error.
-                }
-
-
-            }
-
-
-        });
+//        etAreaLocation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                try {
+//                    progressBar.show();
+//                    Intent intent =
+//                            new PlaceAutocomplete
+//                                    .IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+//                                    .build(AddProductActivity.this);
+//                    startActivityForResult(intent, 1);
+//
+//
+//                } catch (GooglePlayServicesRepairableException e) {
+//
+//                    progressBar.hide();
+//                    Log.e("GooglePlayServices", e.toString());
+//                    // TODO: Handle the error.
+//                } catch (GooglePlayServicesNotAvailableException e) {
+//                    progressBar.hide();
+//                    Log.e("GooglePlayServices_not", e.toString());
+//                    // TODO: Handle the error.
+//                }
+//
+//
+//            }
+//
+//
+//        });
 
         rl_layout1_saveandcontinue_container = (RelativeLayout) findViewById(R.id.rl_layout1_saveandcontinue_container);
 
         //container 1 save& continue click event
 
 
-        rl_layout1_saveandcontinue_container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AndroidUtils.showErrorLog(context, "*******validateFields");
-                validateFields(1);
+//        rl_layout1_saveandcontinue_container.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                AndroidUtils.showErrorLog(context, "*******validateFields");
+//                validateFields(1);
 
 //                if (findViewById(R.id.content_add_product_company_detail).getVisibility() == View.VISIBLE) {
 //
@@ -224,26 +239,37 @@ public class AddProductActivity extends AppCompatActivity {
 //
 //
 //                }
-
-
-            }
-        });
+//
+//
+//            }
+//        });
 
 
         uploadButton = (ImageView) findViewById(R.id.uploadButton);
 
 
-        uploadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                picPhoto();
+//        uploadButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                picPhoto();
+//
+//            }
+//        });
 
-            }
-        });
 
-
-        ll_dynamic_fields_step2 = (LinearLayout) findViewById(R.id.content_add_product_dynamic_form).findViewById(R.id.ll_dynamic_fields);
+//        ll_dynamic_fields_step2 = (LinearLayout) findViewById(R.id.content_add_product_dynamic_form).findViewById(R.id.ll_dynamic_fields);
     }
+
+
+    private void setupViewPager(ViewPager viewPager) {
+        CustomPagerAdapter adapter = new CustomPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(AddProductFragment.newInstance(1, false), getResources().getString(R.string.general_info_heading));
+        adapter.addFrag(AddProductFragment.newInstance(2, false), getResources().getString(R.string.shop_and_product_image));
+        adapter.addFrag(AddProductFragment.newInstance(3, true), getResources().getString(R.string.product_detail));
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(0);
+    }
+
 
     private void validateFields(int stepNo) {
 
@@ -262,16 +288,16 @@ public class AddProductActivity extends AppCompatActivity {
             } else if (spServiceType.getSelectedItemPosition() == 0) {
                 putError(3);
                 step1FieldsSet++;
-            }else if (spCategory.getSelectedItemPosition() == 0) {
+            } else if (spCategory.getSelectedItemPosition() == 0) {
                 putError(4);
                 step1FieldsSet++;
-            }else if (Validation.isEmptyStr(etPrice.getText().toString()) || Integer.valueOf(etPrice.getText().toString())<=0) {
+            } else if (Validation.isEmptyStr(etPrice.getText().toString()) || Integer.valueOf(etPrice.getText().toString()) <= 0) {
                 putError(5);
                 step1FieldsSet++;
-            } else if (Validation.isEmptyStr(etDiscount.getText().toString()) || Integer.valueOf(etDiscount.getText().toString())<=0 || Integer.valueOf(etDiscount.getText().toString())>=100) {
+            } else if (Validation.isEmptyStr(etDiscount.getText().toString()) || Integer.valueOf(etDiscount.getText().toString()) <= 0 || Integer.valueOf(etDiscount.getText().toString()) >= 100) {
                 putError(6);
                 step1FieldsSet++;
-            }else if (Validation.isEmptyStr(etAreaLocation.getText().toString())) {
+            } else if (Validation.isEmptyStr(etAreaLocation.getText().toString())) {
                 putError(7);
                 step1FieldsSet++;
             } else if (spState.getSelectedItemPosition() == 0) {
@@ -1027,7 +1053,7 @@ public class AddProductActivity extends AppCompatActivity {
         super.onResume();
 
 
-        spServiceType.setSelection(0);
+//        spServiceType.setSelection(0);
         AndroidUtils.showErrorLog(context, "onResume");
     }
 
@@ -1230,6 +1256,22 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        if(tab.getPosition() == 0){
+
+        }
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
 }
 
 

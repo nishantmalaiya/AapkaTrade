@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contentAddProduct"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/ten_dip"
+        android:background="@color/cardview_background">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginRight="@dimen/twenty_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:textColorHint="@color/hint_color">
+
+                    <EditText
+                        android:id="@+id/et_Address"
+                        style="@style/myedittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/ten_dip"
+                        android:hint="@string/address1"
+                        android:inputType="text"
+                        android:paddingLeft="@dimen/ten_dip"
+                        android:textColorHint="@color/green"
+                        android:theme="@style/myedittext" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_mobile_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginRight="@dimen/twenty_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:textColorHint="@color/hint_color">
+
+                    <EditText
+                        android:id="@+id/etMobileNo"
+                        style="@style/myedittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/ten_dip"
+                        android:hint="@string/mobile"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingLeft="@dimen/ten_dip"
+                        android:textColorHint="@color/green"
+                        android:theme="@style/myedittext" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginRight="@dimen/twenty_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:textColorHint="@color/hint_color">
+
+                    <EditText
+                        android:id="@+id/etDescription"
+                        style="@style/myedittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/ten_dip"
+                        android:hint="@string/description_heading"
+                        android:inputType="text"
+                        android:paddingLeft="@dimen/ten_dip"
+                        android:textColorHint="@color/green"
+                        android:theme="@style/myedittext" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_phone_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginRight="@dimen/twenty_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:textColorHint="@color/hint_color">
+
+                    <EditText
+                        android:id="@+id/etPhoneNo"
+                        style="@style/myedittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/ten_dip"
+                        android:hint="@string/phone_number_heading"
+                        android:inputType="number"
+                        android:maxLength="13"
+                        android:paddingLeft="@dimen/ten_dip"
+                        android:textColorHint="@color/green"
+                        android:theme="@style/myedittext" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginRight="@dimen/twenty_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:textColorHint="@color/hint_color">
+
+                    <EditText
+                        android:id="@+id/etEmail"
+                        style="@style/myedittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/ten_dip"
+                        android:hint="@string/emailId"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="@dimen/ten_dip"
+                        android:textColorHint="@color/green"
+                        android:theme="@style/myedittext" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_fb_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginRight="@dimen/twenty_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:textColorHint="@color/hint_color">
+
+                    <EditText
+                        android:id="@+id/etFbUrl"
+                        style="@style/myedittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/ten_dip"
+                        android:hint="@string/facebook_url_heading"
+                        android:inputType="text"
+                        android:paddingLeft="@dimen/ten_dip"
+                        android:textColorHint="@color/green"
+                        android:theme="@style/myedittext" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_web_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginRight="@dimen/twenty_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:textColorHint="@color/hint_color">
+
+                    <EditText
+                        android:id="@+id/etWebUrl"
+                        style="@style/myedittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/ten_dip"
+                        android:hint="@string/web_url_heading"
+                        android:inputType="text"
+                        android:paddingLeft="@dimen/ten_dip"
+                        android:textColorHint="@color/green"
+                        android:theme="@style/myedittext" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_twitter_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginRight="@dimen/twenty_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:textColorHint="@color/hint_color">
+
+                    <EditText
+                        android:id="@+id/etTwitterUrl"
+                        style="@style/myedittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/ten_dip"
+                        android:hint="@string/twitter_url_heading"
+                        android:inputType="text"
+                        android:paddingLeft="@dimen/ten_dip"
+                        android:textColorHint="@color/green"
+                        android:theme="@style/myedittext" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_google_plus_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginRight="@dimen/twenty_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:textColorHint="@color/hint_color">
+
+                    <EditText
+                        android:id="@+id/etGooglePlusUrl"
+                        style="@style/myedittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/ten_dip"
+                        android:hint="@string/google_plus_url_heading"
+                        android:inputType="text"
+                        android:paddingLeft="@dimen/ten_dip"
+                        android:textColorHint="@color/green"
+                        android:theme="@style/myedittext" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_youtube_plus_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/twenty_dip"
+                    android:layout_marginRight="@dimen/twenty_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:textColorHint="@color/hint_color">
+
+                    <EditText
+                        android:id="@+id/etYoutubeUrl"
+                        style="@style/myedittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/ten_dip"
+                        android:hint="@string/youtube_url_heading"
+                        android:inputType="text"
+                        android:paddingLeft="@dimen/ten_dip"
+                        android:textColorHint="@color/green"
+                        android:theme="@style/myedittext" />
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

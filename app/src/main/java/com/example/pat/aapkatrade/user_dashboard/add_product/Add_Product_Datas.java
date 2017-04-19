@@ -10,9 +10,8 @@ import java.util.ArrayList;
 public class Add_Product_Datas {
 
 
-
-    String productname,category,subcategory,unit,deliver_duration,deliver_time,product_description;
-ArrayList<File> imagesfile=new ArrayList<File>();
+    String productname, category, subcategory, unit, deliver_duration, deliver_time, product_description;
+    ArrayList<File> imagesfile = new ArrayList<File>();
 
     public Add_Product_Datas(String productname, String category, String subcategory, String unit, String deliver_duration, String deliver_time, String product_description, ArrayList<File> imagesfile) {
         this.productname = productname;
@@ -25,6 +24,7 @@ ArrayList<File> imagesfile=new ArrayList<File>();
         this.imagesfile = imagesfile;
 
     }
+
     public String getProductname() {
         return productname;
     }
